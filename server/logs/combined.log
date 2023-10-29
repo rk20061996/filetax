@@ -1,0 +1,25 @@
+{"level":"error","message":"ER_PARSE_ERROR: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'database-name' at line 1"}
+{"level":"info","message":"DB created!"}
+{"level":"info","message":"Database connected"}
+{"level":"info","message":"Table users created!"}
+{"level":"info","message":"Running on PORT 3000"}
+{"level":"info","message":"Database connected"}
+{"level":"info","message":"Running on PORT 3000"}
+{"level":"info","message":"Database connected"}
+{"level":"info","message":"Running on PORT 3000"}
+{"level":"info","message":"Database connected"}
+{"level":"info","message":"Running on PORT 3000"}
+{"level":"info","message":"Database connected"}
+{"level":"info","message":"Running on PORT 3000"}
+{"level":"info","message":"Database connected"}
+{"level":"info","message":"Running on PORT 3000"}
+{"level":"info","message":"Database connected"}
+{"level":"error","message":"invalid token","name":"JsonWebTokenError"}
+{"level":"info","message":"Running on PORT 3000"}
+{"level":"info","message":"Database connected"}
+{"level":"info","message":"Running on PORT 3000"}
+{"level":"error","message":"connect ECONNREFUSED 127.0.0.1:3306"}
+{"level":"info","message":"Running on PORT 3000"}
+{"level":"info","message":"Database connected"}
+{"level":"info","message":"Running on PORT 3000"}
+{"level":"info","message":"Database connected"}

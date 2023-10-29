@@ -1,0 +1,3 @@
+{"level":"error","message":"ER_PARSE_ERROR: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'database-name' at line 1"}
+{"level":"error","message":"invalid token","name":"JsonWebTokenError"}
+{"level":"error","message":"connect ECONNREFUSED 127.0.0.1:3306"}
