@@ -6,11 +6,11 @@ exports.signup = (req, res) => {
     const { firstname, lastname, email, password, phone } = req.body;
     const hashedPassword = hashPassword(password.trim());
 
-    const user = new User(firstname.trim(), lastname.trim(), email.trim(), hashedPassword,phone);
+    const user = new User(firstname.trim(), lastname.trim(), email.trim(), hashedPassword, phone);
     console.log(req.body)
 
     User.create(user, (err, data) => {
-        console.log("user---?1",user)
+        console.log("user---?1", user)
         if (err) {
             res.status(500).send({
                 status: "error",
@@ -31,7 +31,22 @@ exports.signup = (req, res) => {
 
 exports.check = (req, res) => {
     var authorization = req.headers.authorization;
-console.log( decode('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjk3NjkzNTA1LCJleHAiOjE2OTc3Nzk5MDV9.jbGtAZ3FX7V0636HMkftRZoRVq8Q9mWn9leqFz1Ea8E'))
+    // console.log("authorization++++",authorization)
+    var data = decode(authorization)
+    console.log("data", data)
+    if (data) {
+        res.status(200).send({
+            status: 200,
+            message: data
+        });
+    } else {
+        res.status(200).send({
+            status: 500,
+            message: "session expired"
+        });
+    }
+
+
 };
 
 exports.signin = (req, res) => {

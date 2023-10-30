@@ -1,8 +1,25 @@
-import React from "react"
+import React, { useEffect, useState } from "react"
 import { Link } from 'react-router-dom';
 import { NavLink } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 
-function header() {
+function Header(props) {
+    const [loggedIn, setloggedIn] = useState(true)
+    // alert(props.isLoggedIn)
+    let navigate = useNavigate();
+
+    useEffect(() => {
+        let localSession = localStorage.getItem('token')
+        console.log("props.isLoggedIn", props.isLoggedIn)
+        if (localSession) {
+            setloggedIn(true)
+            // alert("here")
+        }else{
+            // alert("there")
+            setloggedIn(false)
+        }
+    }, [props.isLoggedIn]);
+    
     return (
         <header>
             <div className="topHeader">
@@ -47,12 +64,32 @@ function header() {
                                 <li className="nav-item">
                                     <a className="nav-link" href="#">Contact Us</a>
                                 </li>
-                                <li className="nav-item">
-                                    <Link to="/login" className="btn btn-primary">Login</Link>
-                                </li>
-                                <li className="nav-item">
+                                {!loggedIn &&
+                                    <li className="nav-item">
+                                        <Link to="/login" className="btn btn-primary">Login</Link>
+                                    </li>}
+                                {!loggedIn && <li className="nav-item">
                                     <Link to="/signup" className="btn btn-outline-primary"> Register Now</Link>
+                                </li>}
+                                {loggedIn &&
+                                    <li className="nav-item dropdown">
+                                    <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        Profile
+                                    </a>
+                                    <ul className="dropdown-menu">
+                                        <li><a className="dropdown-item" href="#"> My Profile </a> </li>
+                                        <li><a className="dropdown-item" onClick={() => {
+                                            localStorage.removeItem('token');
+                                            navigate('/')
+                                            setloggedIn(false)
+                                            props.setloggedIn(false)
+                                        }}> LogOut</a> </li>
+                                        
+                                    </ul>
                                 </li>
+                                }
+                                
+
                             </ul>
                         </div>
                     </div>
@@ -63,4 +100,4 @@ function header() {
     );
 }
 
-export default header;
+export default Header;

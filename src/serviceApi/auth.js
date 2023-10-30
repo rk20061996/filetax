@@ -26,9 +26,23 @@ const login = async (data) => {
 
 };
 
+const tokenCheck = async (data) => {
+    try {
+        const config = {
+            headers: { Authorization: `${data}` }
+        };
+        const result = await Axios.post(apiUrl + "auth/check", {}, config)
+        return result
+    } catch (err) {
+        return err
+    }
+
+};
+
 const authFunc = {
     signup,
-    login
+    login,
+    tokenCheck
     
 }
 export default authFunc

@@ -3,10 +3,10 @@ import { Link } from 'react-router-dom';
 import Header from '../layout/header'
 import Footer from '../layout/footer'
 
-function about() {
+function about(props) {
     return (
         <>
-            <Header />
+            <Header isLoggedIn={props.isLoggedIn} />
             <section className="taxServices">
                 <div className="container">
                     <div className="mainHeading">

@@ -4,10 +4,10 @@ import Footer from'../layout/footer'
 
 import { Link } from 'react-router-dom';
 
-function home() {
+function home(props) {
     return (
         <>
-        <Header/>
+        <Header isLoggedIn={props.isLoggedIn} />
             <section className="bannerWrap">
                 <div className="container">
                     <div className="row">

@@ -3,8 +3,11 @@ import { Link } from 'react-router-dom';
 import Header from '../layout/header'
 import Footer from '../layout/footer'
 import authFunc from '../serviceApi/auth'
+import { useNavigate } from "react-router-dom";
 
-function Login() {
+function Login(props) {
+    let navigate = useNavigate();
+
     const [formData, setFormData] = useState({
         password: "",
         email: "",
@@ -24,8 +27,10 @@ function Login() {
                 setValidataion(errorMsg)
             }
             else {
-                console.log("formData-->success", submitInfo.data.data.data)
-                // navigate("/login")s;
+                localStorage.setItem("token",submitInfo.data.data.token)
+                console.log("formData-->success", submitInfo.data.data.token)
+                props.setisLoggedIn(true)
+                navigate("/");
             }
 
         // }
