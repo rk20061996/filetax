@@ -5,6 +5,8 @@ const morgan = require('morgan');
 const cors = require('cors');
 
 const authRoute = require('./server/src/routes/auth.route');
+const dataRoute = require('./server/src/routes/dataRoute.route');
+
 
 const { httpLogStream } = require('./server/src/utils/logger');
 
@@ -23,6 +25,8 @@ app.use(morgan('combined', { stream: httpLogStream }));
 app.use(cors());
 
 app.use('/api/auth', authRoute);
+app.use('/api/data', dataRoute);
+
 
 app.use((err, req, res, next) => {
     res.status(err.statusCode || 500).send({
