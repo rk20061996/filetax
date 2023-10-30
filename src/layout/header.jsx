@@ -14,12 +14,12 @@ function Header(props) {
         if (localSession) {
             setloggedIn(true)
             // alert("here")
-        }else{
+        } else {
             // alert("there")
             setloggedIn(false)
         }
     }, [props.isLoggedIn]);
-    
+
     return (
         <header>
             <div className="topHeader">
@@ -73,22 +73,24 @@ function Header(props) {
                                 </li>}
                                 {loggedIn &&
                                     <li className="nav-item dropdown">
-                                    <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                        Profile
-                                    </a>
-                                    <ul className="dropdown-menu">
-                                        <li><a className="dropdown-item" href="#"> My Profile </a> </li>
-                                        <li><a className="dropdown-item" onClick={() => {
-                                            localStorage.removeItem('token');
-                                            navigate('/')
-                                            setloggedIn(false)
-                                            props.setloggedIn(false)
-                                        }}> LogOut</a> </li>
-                                        
-                                    </ul>
-                                </li>
+                                        <a className="nav-link dropdown-toggle"  role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                            Profile
+                                        </a>
+                                        <ul className="dropdown-menu">
+                                            {/* profile/home */}
+                                            <li> <Link to="/profile/home" className="dropdown-item">My Profile</Link></li>
+                                            {/* <li><a className="dropdown-item" href="#">  </a> </li> */}
+                                            <li><a className="dropdown-item" onClick={() => {
+                                                localStorage.removeItem('token');
+                                                navigate('/')
+                                                setloggedIn(false)
+                                                props.setisLoggedIn(false)
+                                            }}> LogOut</a> </li>
+
+                                        </ul>
+                                    </li>
                                 }
-                                
+
 
                             </ul>
                         </div>

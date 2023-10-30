@@ -6,7 +6,7 @@ import Footer from '../layout/footer'
 function about(props) {
     return (
         <>
-            <Header isLoggedIn={props.isLoggedIn} />
+            <Header isLoggedIn={props.isLoggedIn} setisLoggedIn={props.setisLoggedIn}/>
             <section className="taxServices">
                 <div className="container">
                     <div className="mainHeading">

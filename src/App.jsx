@@ -1,13 +1,18 @@
 import React, { useEffect, useState } from "react"
 import './App.css';
-import 'bootstrap/dist/css/bootstrap.min.css'
-import 'jquery/dist/jquery.min.js'
-import 'bootstrap/dist/js/bootstrap.min.js'
+// import 'bootstrap/dist/css/bootstrap.min.css'
+// import 'jquery/dist/jquery.min.js'
+// import 'bootstrap/dist/js/bootstrap.min.js'
 import Signup from './auth/signup'
 import Login from './auth/Login'
 import Forgot from './auth/forgot-password'
 import Home from './pages/home'
 import About from './pages/about'
+import HomeProfile from './userProfile/home-profile'
+import UploadDocument from './userProfile/upload-document'
+import TaxReturn from './userProfile/tax-return'
+import Profile from './userProfile/profile'
+
 import authFunc from './serviceApi/auth'
 import { useNavigate } from "react-router-dom";
 
@@ -29,7 +34,7 @@ function App() {
         console.log("tokenCheckApi", tokenCheckApi.data)
         if(tokenCheckApi.data.status === 200){
           setisLoggedIn(true)
-          navigate("/");
+          // navigate("/");
         }
         else{
           setisLoggedIn(false)
@@ -52,7 +57,7 @@ function App() {
     <Routes>
       <Route
         path="/"
-        element={<Home isLoggedIn={isLoggedIn} />} // <-- passed as JSX
+        element={<Home isLoggedIn={isLoggedIn} setisLoggedIn={setisLoggedIn}/>} // <-- passed as JSX
       />
       <Route
         path="/signup"
@@ -70,8 +75,26 @@ function App() {
       />
       <Route
         path="/about-us"
-        element={<About isLoggedIn={isLoggedIn} />} // <-- passed as JSX
+        element={<About isLoggedIn={isLoggedIn} setisLoggedIn={setisLoggedIn}/>} // <-- passed as JSX
       />
+      <Route
+        path="/profile/home"
+        element={<HomeProfile isLoggedIn={isLoggedIn} setisLoggedIn={setisLoggedIn}/>} // <-- passed as JSX
+      />
+      <Route
+        path="/profile/upload-document"
+        element={<UploadDocument isLoggedIn={isLoggedIn} setisLoggedIn={setisLoggedIn}/>} // <-- passed as JSX
+      />
+      <Route
+        path="/profile/tax-return"
+        element={<TaxReturn isLoggedIn={isLoggedIn} setisLoggedIn={setisLoggedIn}/>} // <-- passed as JSX
+      />
+      <Route
+        path="/profile/Profile"
+        element={<Profile isLoggedIn={isLoggedIn} setisLoggedIn={setisLoggedIn}/>} // <-- passed as JSX
+      />
+      
+      
     </Routes>
 
   )

@@ -17,7 +17,7 @@ function Login(props) {
         email: "",
     })
     const submitForm = async () => {
-       
+    //    alert("Sd")
             const submitInfo = await authFunc.login(formData)
             console.log("formData-->", submitInfo)
             let errorMsg = {}
@@ -60,7 +60,7 @@ function Login(props) {
                         }
                     </div>
                     <div className="d-flex">
-                        <button onClick={() => submitForm()} type="submit" className="btn btn-primary">Login</button>
+                        <button onClick={() => submitForm()} type="button" className="btn btn-primary">Login</button>
                         <Link to="/forgot-password"> Forgot Password?</Link>
                     </div>
                     <p className="text-start">Don't Have an Account? <Link to="/signup"> Create an account</Link></p>

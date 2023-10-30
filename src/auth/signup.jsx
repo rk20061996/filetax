@@ -128,7 +128,7 @@ function Signup() {
                         }
                     </div>
                     <div className="d-flex">
-                        <button onClick={() => submitForm()} className="btn btn-primary">Register</button>
+                        <button type="button" onClick={() => submitForm()} className="btn btn-primary">Register</button>
                     </div>
                     <p className="text-start">Already have an account? <Link to="/login"> Login</Link></p>
                 </form>

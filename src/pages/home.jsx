@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 function home(props) {
     return (
         <>
-        <Header isLoggedIn={props.isLoggedIn} />
+        <Header isLoggedIn={props.isLoggedIn} setisLoggedIn={props.setisLoggedIn}/>
             <section className="bannerWrap">
                 <div className="container">
                     <div className="row">

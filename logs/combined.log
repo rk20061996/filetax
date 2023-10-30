@@ -84,3 +84,9 @@
 {"level":"error","message":"invalid signature","name":"JsonWebTokenError"}
 {"level":"error","message":"invalid signature","name":"JsonWebTokenError"}
 {"level":"error","message":"invalid signature","name":"JsonWebTokenError"}
+{"level":"info","message":"Database connected"}
+{"level":"info","message":"Database connected"}
+{"level":"info","message":"Database connected"}
+{"level":"info","message":"Database connected"}
+{"level":"info","message":"Database connected"}
+{"level":"info","message":"Database connected"}
