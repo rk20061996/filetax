@@ -11,9 +11,14 @@ const deleteDocument=`
 Update document_upload set is_deleted = 1 where id = ?`;
 
 
+const getUserDataByToken=`
+select firstname,lastname,email,phone from users  where id = ?`;
+
+
 module.exports = {
     getDcoumentData,
     uploadDocument,
     getUploAdedDocument,
-    deleteDocument
+    deleteDocument,
+    getUserDataByToken
 };

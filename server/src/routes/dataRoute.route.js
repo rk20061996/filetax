@@ -18,5 +18,10 @@ console.log("here we come")
     router.route('/deleteDocument')
     .post(asyncHandler(checkUserauth),asyncHandler(documentController.deleteDocument));
     
+    router.route('/getUserDataByToken')
+    .post(asyncHandler(checkUserauth),asyncHandler(documentController.getUserDataByToken));
+    
+
+    
     
 module.exports = router;

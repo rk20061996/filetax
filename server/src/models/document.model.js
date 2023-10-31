@@ -1,5 +1,5 @@
 const db = require('../config/db.config');
-const { getDcoumentData: getDcoumentData, uploadDocument: uploadDocument, getUploAdedDocument:getUploAdedDocument, deleteDocument:deleteDocument } = require('../database/documentqueries');
+const { getDcoumentData: getDcoumentData, uploadDocument: uploadDocument, getUploAdedDocument:getUploAdedDocument, deleteDocument:deleteDocument ,getUserDataByToken:getUserDataByToken} = require('../database/documentqueries');
 const { logger } = require('../utils/logger');
 
 class Document {
@@ -64,6 +64,21 @@ class Document {
         db.query(deleteDocument,
             [
                 data.id,
+            ], (err, res) => {
+                if (err) {
+                    logger.error(err.message);
+                    cb(err, null);
+                    return;
+                }
+                cb(null, res);
+            })
+    }
+
+    static getUserDataByToken(data, cb){
+        console.log("hererererdde", data)
+        db.query(getUserDataByToken,
+            [
+                data.user_id,
             ], (err, res) => {
                 if (err) {
                     logger.error(err.message);

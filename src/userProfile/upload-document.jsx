@@ -9,17 +9,26 @@ function UploadDocument(props) {
   const [uploadedDocument, setuploadedDocument] = useState([]); // New state for selected tax type
 
 
-  useEffect(() => {
+  useEffect( () => {
+    const getAllDocumentName = async () => {
+      try {
+        const getAllData = await userProfile.getAllDocument();
+        setDocumentData(getAllData?.data?.data);
+      } catch (error) {
+        // Handle errors here
+        console.error('Error fetching document data:', error);
+      }
+    };
+
+    getAllDocumentName();
     fetchData();
   }, []);
 
   const fetchData = async () => {
     try {
-      const getAllData = await userProfile.getAllDocument();
       const getAllUploadedDocument = await userProfile.getAllUploadedDocument();
-      setDocumentData(getAllData?.data?.data);
       setuploadedDocument(getAllUploadedDocument?.data?.data);
-      console.log("getAllData", getAllData);
+      // console.log("getAllData", getAllData);
     } catch (error) {
       console.error("Error fetching data:", error);
     }

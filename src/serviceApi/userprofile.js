@@ -2,8 +2,8 @@
 
 import Axios from "axios"
 
-const apiUrl = "http://localhost:9000/api/"
-// const apiUrl = "http://195.35.45.11:9000/api/"
+// const apiUrl = "http://localhost:9000/api/"
+const apiUrl = "http://195.35.45.11:9000/api/"
 
 const getAllDocument = async (data) => {
     try {
@@ -53,6 +53,32 @@ const deleteDocument = async (data) => {
 
 };
 
+const getUserDataByToken = async () => {
+    const config = {
+        headers: { Authorization: `${localStorage.getItem('token')}` }
+    };
+    try {
+        const result = await Axios.post(apiUrl + "data/getUserDataByToken", {}, config)
+        return result
+    } catch (err) {
+        return err
+    }
+
+};
+
+const updateProfile = async () => {
+    const config = {
+        headers: { Authorization: `${localStorage.getItem('token')}` }
+    };
+    try {
+        const result = await Axios.post(apiUrl + "data/updateProfile", {}, config)
+        return result
+    } catch (err) {
+        return err
+    }
+
+};
+
 
 
 
@@ -60,6 +86,8 @@ const userProfile = {
     getAllDocument,
     uploadDocument,
     getAllUploadedDocument,
-    deleteDocument
+    deleteDocument,
+    getUserDataByToken,
+    updateProfile
 }
 export default userProfile

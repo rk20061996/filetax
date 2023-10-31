@@ -102,3 +102,22 @@ exports.deleteDocument = (req, res) => {
     });
 };
 
+exports.getUserDataByToken = (req, res) => {
+    document.getUserDataByToken({ user_id: req.user_id },(err, data) => {
+        // console.log("user---?1", user)
+        if(err) {
+            res.status(200).send({
+                status: 500,
+                message: err.message
+            });
+        } else {
+            res.status(201).send({
+                status: 200,
+                data: data
+            });
+        }
+    });
+};
+
+
+

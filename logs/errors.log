@@ -54,3 +54,4 @@
 {"level":"error","message":"ER_BAD_FIELD_ERROR: Unknown column '4' in 'where clause'"}
 {"level":"error","message":"ER_BAD_FIELD_ERROR: Unknown column '8' in 'where clause'"}
 {"level":"error","message":"ER_PARSE_ERROR: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '?' at line 1"}
+{"level":"error","message":"ER_BAD_FIELD_ERROR: Unknown column 'user_id' in 'where clause'"}
