@@ -75,7 +75,8 @@ exports.signin = (req, res) => {
                         token,
                         firstname: data.firstname,
                         lastname: data.lastname,
-                        email: data.email
+                        email: data.email,
+                        image: data.image
                     }
                 });
                 return;

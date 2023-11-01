@@ -3,10 +3,13 @@ import { Link } from 'react-router-dom';
 import { NavLink } from 'react-router-dom';
 
 import { useNavigate } from "react-router-dom";
+import { useSelector } from 'react-redux';
 
 function Sidebar(props) {
     const [loggedIn, setloggedIn] = useState(true)
-    // alert(props.isLoggedIn)
+    const user = useSelector(state => state.user); // Assuming 'user' is a slice of your Redux state
+    const [userData, setuserData] = useState([])
+
     let navigate = useNavigate();
 
     useEffect(() => {
@@ -20,6 +23,8 @@ function Sidebar(props) {
             navigate('/')
             setloggedIn(false)
         }
+        setuserData(user)
+        console.log("useruseruseruser", user)
     }, [props.isLoggedIn]);
     return (
         <div className="SlideNav">
@@ -27,7 +32,10 @@ function Sidebar(props) {
                 <img src="images/footer-logo.png" alt="" className="w-100" />
             </div>
             <div className="prfileWrap">
-                <p>Hii Minii <NavLink  to="/profile/profile"> <span className="material-symbols-outlined"> person </span> </NavLink> </p>
+                <p>Hello {" "}
+                    {userData?.userData?.firstname}
+                    {userData?.userData?.image && userData?.userData?.image != '' ? <NavLink to="/profile/profile"> <span className="material-symbols-outlined"> person </span> </NavLink>:<NavLink to="/profile/profile"> <span className="material-symbols-outlined"> person </span> </NavLink>}
+                </p>
             </div>
             <ul className="list-unstyled">
                 <li className="bgColorChange" >

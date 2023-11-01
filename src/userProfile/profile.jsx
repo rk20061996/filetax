@@ -120,7 +120,7 @@ function Profile(props) {
     event.preventDefault();
 
     if (validateForm()) {
-      const getAllData = await userProfile.updateProfile();
+      const getAllData = await userProfile.updateProfile(formData);
 
       try {
         // updateProfile

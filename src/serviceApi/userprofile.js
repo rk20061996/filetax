@@ -66,12 +66,12 @@ const getUserDataByToken = async () => {
 
 };
 
-const updateProfile = async () => {
+const updateProfile = async (data) => {
     const config = {
         headers: { Authorization: `${localStorage.getItem('token')}` }
     };
     try {
-        const result = await Axios.post(apiUrl + "data/updateProfile", {}, config)
+        const result = await Axios.post(apiUrl + "data/updateProfile", data, config)
         return result
     } catch (err) {
         return err

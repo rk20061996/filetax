@@ -1,41 +1,51 @@
-import React, { useEffect, useState } from "react"
+import React, { useState } from "react";
 import { Link } from 'react-router-dom';
-import Header from '../layout/header'
-import Footer from '../layout/footer'
-import authFunc from '../serviceApi/auth'
+import Header from '../layout/header';
+import Footer from '../layout/footer';
+import authFunc from '../serviceApi/auth';
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from 'react-redux';
+import { setUser } from '../reducers/userSlice';
 
 function Login(props) {
     let navigate = useNavigate();
+    const dispatch = useDispatch();
 
     const [formData, setFormData] = useState({
         password: "",
         email: "",
-    })
-    const [validation, setValidataion] = useState({
+    });
+
+    const [validation, setValidation] = useState({
         password: "",
         email: "",
-    })
+    });
+
     const submitForm = async () => {
-    //    alert("Sd")
-            const submitInfo = await authFunc.login(formData)
-            console.log("formData-->", submitInfo)
-            let errorMsg = {}
-            if (submitInfo.response && submitInfo.response.status != 200) {
-                errorMsg[submitInfo.response.data.type] = submitInfo.response.data.message
-                console.log("errorMsg", errorMsg)
-                setValidataion(errorMsg)
-            }
-            else {
-                localStorage.setItem("token",submitInfo.data.data.token)
-                console.log("formData-->success", submitInfo.data.data.token)
-                props.setisLoggedIn(true)
-                navigate("/");
-            }
+        const submitInfo = await authFunc.login(formData);
+        let errorMsg = { ...validation };
 
-        // }
+        if (submitInfo.response && submitInfo.response.status !== 200) {
+            errorMsg[submitInfo.response.data.type] = submitInfo.response.data.message;
+            setValidation(errorMsg);
+        } else {
+            localStorage.setItem("token", submitInfo.data.data.token);
+            console.log("token--->",submitInfo,submitInfo.data.data.token,submitInfo)
+            props.setisLoggedIn(true);
+            dispatch(setUser(submitInfo.data.data)); // Dispatch action to save user details
 
-    }
+            navigate("/profile/home");
+        }
+    };
+
+    const handleEmailChange = (e) => {
+        setFormData(prevData => ({ ...prevData, email: e.target.value }));
+    };
+
+    const handlePasswordChange = (e) => {
+        setFormData(prevData => ({ ...prevData, password: e.target.value }));
+    };
+
     return (
         <>
             <Header />
@@ -43,24 +53,20 @@ function Login(props) {
                 <form>
                     <div className="form-label mb-3">
                         <label>Email </label>
-                        <input type="text" onChange={(e) => {
-                            setFormData({ ...formData, email: e.target.value })
-                        }} value={formData.email}/>
+                        <input type="text" onChange={handleEmailChange} value={formData.email}/>
                         {validation.email && validation.email !== '' &&
                             <span style={{ color: "red" }}>{validation.email}</span>
                         }
                     </div>
                     <div className="form-label mb-3">
                         <label>Password</label>
-                        <input type="password" onChange={(e) => {
-                            setFormData({ ...formData, password: e.target.value })
-                        }} value={formData.password}/>
+                        <input type="password" onChange={handlePasswordChange} value={formData.password}/>
                         {validation.password && validation.password !== '' &&
                             <span style={{ color: "red" }}>{validation.password}</span>
                         }
                     </div>
                     <div className="d-flex">
-                        <button onClick={() => submitForm()} type="button" className="btn btn-primary">Login</button>
+                        <button onClick={submitForm} type="button" className="btn btn-primary">Login</button>
                         <Link to="/forgot-password"> Forgot Password?</Link>
                     </div>
                     <p className="text-start">Don't Have an Account? <Link to="/signup"> Create an account</Link></p>
