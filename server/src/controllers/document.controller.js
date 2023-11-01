@@ -5,7 +5,12 @@ const multer = require('multer');
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
         // Set the destination folder where uploaded files will be stored
-        cb(null, 'public/uploads/');
+        const build_type = process.env.build
+        if(build_type === 'dev'){
+            cb(null, 'public/uploads/');
+        }else{
+            cb(null, 'build/uploads/');
+        }
     },
     filename: function (req, file, cb) {
         // Set the file name after upload (you can customize this)
