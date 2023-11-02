@@ -23,10 +23,16 @@ function Login(props) {
 
     const submitForm = async () => {
         const submitInfo = await authFunc.login(formData);
-        let errorMsg = { ...validation };
+        let errorMsg = {  };
 
         if (submitInfo.response && submitInfo.response.status !== 200) {
-            errorMsg[submitInfo.response.data.type] = submitInfo.response.data.message;
+            if(errorMsg[submitInfo.response.data.type]){
+                errorMsg[submitInfo.response.data.type] = submitInfo.response.data.message;
+            }else{
+                errorMsg["password"] = submitInfo.response.data.message;
+            }
+            
+            console.log(" submitInfo.response.data.message-->0", submitInfo.response.data)
             setValidation(errorMsg);
         } else {
             localStorage.setItem("token", submitInfo.data.data.token);

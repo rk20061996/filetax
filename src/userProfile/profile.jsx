@@ -1,8 +1,15 @@
 import React, { useState, useEffect } from "react";
 import Sidebar from "../../src/layout/sidebar";
 import userProfile from '../serviceApi/userprofile';
+import { useDispatch } from 'react-redux';
+import { setUser } from '../reducers/userSlice';
+import { Modal, Button } from 'react-bootstrap';
+import { useNavigate } from "react-router-dom";
 
 function Profile(props) {
+  const dispatch = useDispatch();
+  let navigate = useNavigate();
+
   const [formData, setFormData] = useState({
     firstName: { value: "", error: "" },
     lastName: { value: "", error: "" },
@@ -15,30 +22,15 @@ function Profile(props) {
 
   const [isEditing, setIsEditing] = useState(false);
   const [isChangingPassword, setIsChangingPassword] = useState(false);
-  const [profileDetails, setprofileDetails] = useState([false]);
+  const [profileDetails, setProfileDetails] = useState(null);
+  const [updatedUserData, setupdatedUserData] = useState([]);
+  const [updatedImage, SetupdatedImage] = useState('');
+  const [showModal, setShowModal] = useState(false);
 
+  // ... (other state variables and functions)
   const validateEmail = (email) => {
     return /\S+@\S+\.\S+/.test(email); // Basic email validation
   };
-  useEffect(() => {
-    const getProfileDetails = async () => {
-      try {
-        const getAllData = await userProfile.getUserDataByToken();
-        setprofileDetails(getAllData?.data?.data);
-        const updatedFormData = { ...formData };
-
-        updatedFormData.firstName.value = getAllData?.data?.data[0].firstname;
-        updatedFormData.lastName.value = getAllData?.data?.data[0].lastname;
-        updatedFormData.email.value = getAllData?.data?.data[0].email;
-        updatedFormData.mobileNumber.value = getAllData?.data?.data[0].phone;
-        setFormData(updatedFormData);
-      } catch (error) {
-        // Handle errors here
-        console.error('Error fetching document data:', error);
-      }
-    };
-    getProfileDetails();
-  }, []);
 
   const validateForm = () => {
     let valid = true;
@@ -104,6 +96,39 @@ function Profile(props) {
     return valid;
   };
 
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+
+    if (validateForm()) {
+      const updatedFormData = { ...formData };
+
+      const data = new FormData();
+      data.append('firstName', updatedFormData.firstName.value);
+      data.append('lastName', updatedFormData.lastName.value);
+      data.append('email', updatedFormData.email.value);
+      data.append('mobileNumber', updatedFormData.mobileNumber.value);
+      if (updatedFormData.profilePicture) {
+        data.append('profilePicture', updatedFormData.profilePicture);
+      }
+      data.append('type', "updateProfile");
+
+      try {
+        const response = await userProfile.updateProfile(data);
+        // Handle response as needed
+        console.log("reponsecheck", response)
+        event.preventDefault();
+        let obj = response.data.data.data
+        setupdatedUserData({ obj, profileupdate: true })
+        // // const [updatedImage, SetupdatedImage] = useState('');
+        // SetupdatedImage(obj.profilePic)
+        dispatch(setUser(response.data.data.data)); // Dispatch action to save user details
+        handleShowModal(); 
+      } catch (error) {
+        console.error("Error:", error);
+      }
+    }
+  };
+
   const handleChange = (event) => {
     const { name, value } = event.target;
     setFormData({
@@ -116,19 +141,24 @@ function Profile(props) {
     setFormData({ ...formData, profilePicture: event.target.files[0] });
   };
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-
-    if (validateForm()) {
-      const getAllData = await userProfile.updateProfile(formData);
-
+  useEffect(() => {
+    const getProfileDetails = async () => {
       try {
-        // updateProfile
+        const getAllData = await userProfile.getUserDataByToken();
+        setProfileDetails(getAllData?.data?.data);
+        const updatedFormData = { ...formData };
+
+        updatedFormData.firstName.value = getAllData?.data?.data[0].firstname;
+        updatedFormData.lastName.value = getAllData?.data?.data[0].lastname;
+        updatedFormData.email.value = getAllData?.data?.data[0].email;
+        updatedFormData.mobileNumber.value = getAllData?.data?.data[0].phone;
+        setFormData(updatedFormData);
       } catch (error) {
-        console.error("Error:", error);
+        console.error('Error fetching document data:', error);
       }
-    }
-  };
+    };
+    getProfileDetails();
+  }, []);
 
   const handleEditClick = () => {
     setIsEditing(!isEditing);
@@ -159,9 +189,33 @@ function Profile(props) {
     setFormData(updatedFormData);
   };
 
+
+
+  // Function to show the modal
+  const handleShowModal = () => setShowModal(true);
+
+  // Function to close the modal
+  const handleCloseModal = () => {setShowModal(false)
+    navigate('/profile/home')
+
+  };
   return (
+
     <div className="main d-flex w-100 h-100">
-      <Sidebar isLoggedIn={props.isLoggedIn} setisLoggedIn={props.setisLoggedIn} />
+      <Modal show={showModal} onHide={handleCloseModal}>
+        <Modal.Header closeButton>
+          <Modal.Title>Success!</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <p>Congrats! Your profile has been updated.</p>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleCloseModal}>
+            OK
+          </Button>
+        </Modal.Footer>
+      </Modal>
+      <Sidebar updatedImage={updatedImage} isLoggedIn={props.isLoggedIn} setisLoggedIn={props.setisLoggedIn} updatedUserData={updatedUserData} />
       <div className="mainContent container-fluid">
         <div className="card">
           <h3>My Profile</h3>
@@ -176,7 +230,7 @@ function Profile(props) {
               Change Password
             </a>
           </div>
-          <form onSubmit={handleSubmit} style={{ display: isEditing ? "block" : "none" }}>
+          <form style={{ display: isEditing ? "block" : "none" }}>
             <div className="row">
               <div className="col-sm-12 col-md-6">
                 <div className="form-group">
@@ -235,15 +289,15 @@ function Profile(props) {
                     onChange={handleFileChange}
                   />
                 </div>
-                <button type="submit" className="btn btn-green mt-2">
+                <button onClick={handleSubmit} type="button" className="btn btn-green mt-2">
                   Submit
                 </button>
               </div>
             </div>
           </form>
-          <form 
-          // onSubmit={handleSubmit} 
-          style={{ display: isChangingPassword ? "block" : "none" }}>
+          <form
+            // onSubmit={handleSubmit} 
+            style={{ display: isChangingPassword ? "block" : "none" }}>
             <div className="row">
               <div className="col-sm-12 col-md-6">
                 <div className="form-group">

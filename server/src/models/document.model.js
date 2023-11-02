@@ -1,5 +1,5 @@
 const db = require('../config/db.config');
-const { getDcoumentData: getDcoumentData, uploadDocument: uploadDocument, getUploAdedDocument:getUploAdedDocument, deleteDocument:deleteDocument ,getUserDataByToken:getUserDataByToken} = require('../database/documentqueries');
+const { getDcoumentData: getDcoumentData, uploadDocument: uploadDocument, getUploAdedDocument:getUploAdedDocument, deleteDocument:deleteDocument ,getUserDataByToken:getUserDataByToken, updateProfile:updateProfile} = require('../database/documentqueries');
 const { logger } = require('../utils/logger');
 
 class Document {
@@ -89,6 +89,28 @@ class Document {
             })
     }
 
+    static updateProfile(data, cb){
+        console.log("herererere--->updateprofile", data)
+        db.query(updateProfile,
+            [
+                data.firstname,
+                data.lastname,
+                data.phone,
+                data.image,
+                data.user_id
+            ], (err, res) => {
+                if (err) {
+                    logger.error(err.message);
+                    cb(err, null);
+                    return;
+                }
+                cb(null, {
+                    data,
+                    
+                });
+                // cb({ kind: "not_found" }, null);
+            })
+    }
     
 
 }

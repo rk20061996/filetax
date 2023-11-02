@@ -57,12 +57,14 @@ exports.signin = (req, res) => {
                 res.status(404).send({
                     status: 'error',
                     message: `User with email ${email} was not found`
+                    , type: "email"
                 });
                 return;
             }
             res.status(500).send({
                 status: 'error',
-                message: err.message
+                message: err.message,
+                type: "email"
             });
             return;
         }

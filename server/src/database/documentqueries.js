@@ -14,11 +14,13 @@ Update document_upload set is_deleted = 1 where id = ?`;
 const getUserDataByToken=`
 select firstname,lastname,email,phone from users  where id = ?`;
 
+updateProfile=`Update users set firstname=?, lastname=?, phone= ?, image=?  where id = ?`;
 
 module.exports = {
     getDcoumentData,
     uploadDocument,
     getUploAdedDocument,
     deleteDocument,
-    getUserDataByToken
+    getUserDataByToken,
+    updateProfile
 };

@@ -2,23 +2,50 @@ const document = require('../models/document.model');
 const multer = require('multer');
 
 
-const storage = multer.diskStorage({
-    destination: function (req, file, cb) {
-        // Set the destination folder where uploaded files will be stored
-        const build_type = process.env.build
-        if(build_type === 'dev'){
-            cb(null, 'public/uploads/');
-        }else{
-            cb(null, 'build/uploads/');
-        }
-    },
-    filename: function (req, file, cb) {
-        // Set the file name after upload (you can customize this)
-        cb(null, Date.now() + '-' + file.originalname);
-    }
-});
+// const storage = multer.diskStorage({
+//     destination: function (req, file, cb) {
+//         // Set the destination folder where uploaded files will be stored
+//         const build_type = process.env.build
+//         if(build_type === 'dev'){
+//             cb(null, 'public/uploads/');
+//         }else{
+//             cb(null, 'build/uploads/');
+//         }
+//     },
+//     filename: function (req, file, cb) {
+//         // Set the file name after upload (you can customize this)
+//         cb(null, Date.now() + '-' + file.originalname);
+//     }
+// });
 
-const upload = multer({ storage: storage });
+const generateStorage = (type) => {
+    return multer.diskStorage({
+        destination: function (req, file, cb) {
+            const build_type = process.env.build;
+            let destinationFolder = 'public/uploads/'; // Default destination
+
+            if (build_type === 'prod') {
+                destinationFolder = 'build/uploads/';
+            }
+            // console.log("type---check.",type)
+            if (type === 'profilePicture') {
+                    destinationFolder = 'public/uploads/profile/'; // Default destination
+
+                if (build_type === 'prod') {
+                    destinationFolder = 'build/uploads/profile/';
+                }
+            }
+
+            cb(null, destinationFolder);
+        },
+        filename: function (req, file, cb) {
+            cb(null, Date.now() + '-' + file.originalname);
+        }
+    });
+};
+
+const upload = multer({ storage: generateStorage('file') });
+const uploadProfile = multer({ storage: generateStorage('profilePicture') });
 
 exports.getDocumentName = (req, res) => {
     document.getAllData((err, data) => {
@@ -74,9 +101,9 @@ exports.uploadDocument = (req, res) => {
 };
 
 exports.getUploadedDocument = (req, res) => {
-    document.getUploAdedDocumentApi({ user_id: req.user_id },(err, data) => {
+    document.getUploAdedDocumentApi({ user_id: req.user_id }, (err, data) => {
         // console.log("user---?1", user)
-        if(err) {
+        if (err) {
             res.status(200).send({
                 status: 500,
                 message: err.message
@@ -91,9 +118,9 @@ exports.getUploadedDocument = (req, res) => {
 };
 
 exports.deleteDocument = (req, res) => {
-    document.deleteDocument({ id: req.body.id },(err, data) => {
+    document.deleteDocument({ id: req.body.id }, (err, data) => {
         // console.log("user---?1", user)
-        if(err) {
+        if (err) {
             res.status(200).send({
                 status: 500,
                 message: err.message
@@ -108,9 +135,9 @@ exports.deleteDocument = (req, res) => {
 };
 
 exports.getUserDataByToken = (req, res) => {
-    document.getUserDataByToken({ user_id: req.user_id },(err, data) => {
+    document.getUserDataByToken({ user_id: req.user_id }, (err, data) => {
         // console.log("user---?1", user)
-        if(err) {
+        if (err) {
             res.status(200).send({
                 status: 500,
                 message: err.message
@@ -125,4 +152,42 @@ exports.getUserDataByToken = (req, res) => {
 };
 
 
+exports.updateProfile = (req, res) => {
+    uploadProfile.single('profilePicture')(req, res, function (err) {
+        if (err instanceof multer.MulterError) {
+            return res.status(400).send(err.message);
+        } else if (err) {
+            return res.status(500).send(err.message);
+        }
 
+        // if (!req.file) {
+        //     return res.status(400).send('No file uploaded.');
+        // }
+        // console.log("req.file.originalname", req.file.originalname, req.file.filename)
+        // console.log("reqData",req.body.taxType,req.user_id)
+        // const { taxType, user_id, email, password, phone } = req.body;
+        const profilePic = req?.file?.filename?req?.file?.filename:"" 
+        const user_id = req.user_id
+        const firstname = req.body.firstName
+        const lastname = req.body.firstName
+        const phone = req.body.mobileNumber
+        console.log("profilePic----", profilePic)
+        const data = {"image":profilePic,user_id,firstname,lastname,phone}
+
+        document.updateProfile(data, (err, dat) => {
+            // console.log("user---?1", user)
+            if (err) {
+                res.status(200).send({
+                    status: 500,
+                    message: err.message
+                });
+            } else {
+                // console.log("reqData",req.body)
+                res.status(200).send({
+                    status: 200,
+                    data: dat
+                });
+            }
+        });
+    });
+};

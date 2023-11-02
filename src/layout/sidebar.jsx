@@ -9,6 +9,7 @@ function Sidebar(props) {
     const [loggedIn, setloggedIn] = useState(true)
     const user = useSelector(state => state.user); // Assuming 'user' is a slice of your Redux state
     const [userData, setuserData] = useState([])
+    const [updatedImage, SetupdatedImage] = useState('');
 
     let navigate = useNavigate();
 
@@ -26,6 +27,14 @@ function Sidebar(props) {
         setuserData(user)
         console.log("useruseruseruser", user)
     }, [props.isLoggedIn]);
+    useEffect(() => {
+        if(props?.updatedUserData?.profileupdate ){
+            setuserData({userData:props.updatedUserData.obj})
+            console.log("props.updatedUserData", props.updatedUserData.obj)
+        }
+        console.log("props.updatedUserData-->",props.updatedUserData)
+    }, [props.updatedUserData,props.updatedImage]);
+    
     return (
         <div className="SlideNav">
             <div className="logo">
@@ -34,7 +43,7 @@ function Sidebar(props) {
             <div className="prfileWrap">
                 <p>Hello {" "}
                     {userData?.userData?.firstname}
-                    {userData?.userData?.image && userData?.userData?.image != '' ? <NavLink to="/profile/profile"> <span className="material-symbols-outlined"> person </span> </NavLink>:<NavLink to="/profile/profile"> <span className="material-symbols-outlined"> person </span> </NavLink>}
+                    {userData?.userData?.image && userData?.userData?.image != '' ? <NavLink to="/profile/profile"><img src={'uploads/profile/'+userData?.userData?.image} alt="Profile" style={{ width: '20px',marginLeft: '70px' }} /></NavLink>:<NavLink to="/profile/profile"> <span className="material-symbols-outlined"> person </span> </NavLink>}
                 </p>
             </div>
             <ul className="list-unstyled">

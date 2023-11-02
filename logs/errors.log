@@ -56,3 +56,8 @@
 {"level":"error","message":"ER_PARSE_ERROR: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '?' at line 1"}
 {"level":"error","message":"ER_BAD_FIELD_ERROR: Unknown column 'user_id' in 'where clause'"}
 {"level":"error","message":"ER_WRONG_VALUE_COUNT_ON_ROW: Column count doesn't match value count at row 1"}
+{"level":"error","message":"jwt malformed","name":"JsonWebTokenError"}
+{"level":"error","message":"jwt malformed","name":"JsonWebTokenError"}
+{"level":"error","message":"jwt malformed","name":"JsonWebTokenError"}
+{"level":"error","message":"UNKNOWN_CODE_PLEASE_REPORT: Table 'taxsystem.users' doesn't exist in engine"}
+{"level":"error","message":"UNKNOWN_CODE_PLEASE_REPORT: Table 'taxsystem.users' doesn't exist in engine"}

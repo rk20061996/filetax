@@ -21,7 +21,9 @@ console.log("here we come")
     router.route('/getUserDataByToken')
     .post(asyncHandler(checkUserauth),asyncHandler(documentController.getUserDataByToken));
     
-
+    router.route('/updateProfile')
+    .post(asyncHandler(checkUserauth),asyncHandler(documentController.updateProfile));
+    
     
     
 module.exports = router;
