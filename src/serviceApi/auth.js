@@ -40,10 +40,20 @@ const tokenCheck = async (data) => {
 
 };
 
+const confirmAccount = async (data) => {
+    try {
+        const result = await Axios.get(apiUrl + "auth/confirmAccount?id="+data, {}, {})
+        return result
+    } catch (err) {
+        return err
+    }
+}
+
 const authFunc = {
     signup,
     login,
-    tokenCheck
+    tokenCheck,
+    confirmAccount
     
 }
 export default authFunc

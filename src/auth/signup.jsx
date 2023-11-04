@@ -4,11 +4,14 @@ import Header from '../layout/header'
 import Footer from '../layout/footer'
 import authFunc from '../serviceApi/auth'
 import { useNavigate } from "react-router-dom";
+import { Modal, Button } from 'react-bootstrap';
 
 // var env = require('../../.env');
 
 function Signup() {
     let navigate = useNavigate();
+    const [showModal, setShowModal] = useState(false);
+
     // console.log("baseUri-->", baseUri)
     const [formData, setFormData] = useState({
         firstname: "",
@@ -42,16 +45,37 @@ function Signup() {
             }
             else {
                 console.log("formData-->success", submitInfo.data.data.data)
-                navigate("/login");
+                // navigate("/login");
+                handleShowModal()
             }
 
         }
 
     }
+    const handleShowModal = () => setShowModal(!showModal);
+
+    // Function to close the modal
+    const handleCloseModal = () => {
+        setShowModal(false)
+        navigate('/login')
+    }
     return (
         <>
             <Header />
             <div className="formWrapper marginTopBottom" >
+                <Modal show={showModal} onHide={handleCloseModal}>
+                    <Modal.Header closeButton>
+                        <Modal.Title>Confirm Your Email.</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                        <p>We've sent a confirmation email to your address. Click the confirmation link in the email to activate your account.</p>
+                    </Modal.Body>
+                    <Modal.Footer>
+                        <Button variant="secondary" onClick={handleCloseModal}>
+                            OK
+                        </Button>
+                    </Modal.Footer>
+                </Modal>
                 <form >
                     <div className="form-label mb-3">
                         <label>First Name</label>

@@ -14,4 +14,7 @@ router.route('/signin')
     router.route('/check')
     .post(asyncHandler(authController.check));
 
+    router.route('/confirmAccount')
+    .get(asyncHandler(authController.confirmAccount));
+
 module.exports = router;

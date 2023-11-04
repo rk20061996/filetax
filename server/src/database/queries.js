@@ -16,17 +16,22 @@ CREATE TABLE IF NOT EXISTS users (
 `;
 
 const createNewUser = `
-INSERT INTO users VALUES(null, ?, ?, ?, ?,?, NOW(),'')
+INSERT INTO users VALUES(null, ?, ?, ?, ?,?, NOW(),'',0,?)
 `;
 
 const findUserByEmail = `
 SELECT * FROM users WHERE email = ?
 `;
-
+const checkConfirmToken = `
+SELECT * FROM users WHERE email_confirmation_id = ?
+`;
+const updateConfirmToken = `Update users set email_confirmation_id='' , status = 1 where email_confirmation_id = ?`
 module.exports = {
     createDB,
     dropDB,
     createTableUSers,
     createNewUser,
-    findUserByEmail
+    findUserByEmail,
+    checkConfirmToken,
+    updateConfirmToken
 };

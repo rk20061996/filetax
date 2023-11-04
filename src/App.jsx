@@ -6,6 +6,7 @@ import './App.css';
 import Signup from './auth/signup'
 import Login from './auth/Login'
 import Forgot from './auth/forgot-password'
+import Confirmaccount from './auth/confirm-account'
 import Home from './pages/home'
 import About from './pages/about'
 import HomeProfile from './userProfile/home-profile'
@@ -15,6 +16,7 @@ import Profile from './userProfile/profile'
 
 import authFunc from './serviceApi/auth'
 import { useNavigate } from "react-router-dom";
+import { useLocation } from 'react-router-dom'
 
 // import '../public/css/style.css'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
@@ -23,6 +25,7 @@ function App() {
   const [sessionCheck, setsessionCheck] = useState('')
   const [isLoggedIn, setisLoggedIn] = useState(false)
   let navigate = useNavigate();
+  const location = useLocation();  
 
   useEffect(() => {
     // alert("rk")
@@ -46,9 +49,14 @@ function App() {
       fetchData()
     } 
     else {
+      // const location = useLocation();
+      console.log(location.pathname);
+
       localStorage.removeItem('token')
       setisLoggedIn(false)
-      navigate("/");
+      if(location.pathname !== '/confirm-account'){
+        navigate("/");
+      }
     }
     // console.log("tokenCheckApi", tokenCheckApi)
 
@@ -68,6 +76,10 @@ function App() {
         path="/login"
         element={!isLoggedIn ? <Login isLoggedIn={isLoggedIn}
           setisLoggedIn={setisLoggedIn} /> : <Home isLoggedIn={isLoggedIn} />} // <-- passed as JSX
+      />
+      <Route
+        path="/confirm-account"
+        element={<Confirmaccount />} // <-- passed as JSX
       />
       <Route
         path="/forgot-password"
@@ -93,6 +105,7 @@ function App() {
         path="/profile/Profile"
         element={<Profile isLoggedIn={isLoggedIn} setisLoggedIn={setisLoggedIn}/>} // <-- passed as JSX
       />
+      
       
       
     </Routes>

@@ -6,6 +6,7 @@ const cors = require('cors');
 
 const authRoute = require('./server/src/routes/auth.route');
 const dataRoute = require('./server/src/routes/dataRoute.route');
+// const confirmRoute = require('./server/src/routes/confirmRoute.route');
 
 
 const { httpLogStream } = require('./server/src/utils/logger');
@@ -26,6 +27,7 @@ app.use(cors());
 
 app.use('/api/auth', authRoute);
 app.use('/api/data', dataRoute);
+// app.use('/api/confirm-password', confirmRoute);
 
 
 app.use((err, req, res, next) => {

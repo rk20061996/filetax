@@ -166,7 +166,13 @@ exports.updateProfile = (req, res) => {
         // console.log("req.file.originalname", req.file.originalname, req.file.filename)
         // console.log("reqData",req.body.taxType,req.user_id)
         // const { taxType, user_id, email, password, phone } = req.body;
-        const profilePic = req?.file?.filename?req?.file?.filename:"" 
+        let profilePic
+        if(req.file && req.file.filename){
+            profilePic = req.file.filename
+        }else{
+            profilePic = ""
+        }
+         
         const user_id = req.user_id
         const firstname = req.body.firstName
         const lastname = req.body.firstName
