@@ -12,6 +12,10 @@ console.log("here we come")
     router.route('/uploadDocument')
     .post(asyncHandler(checkUserauth),asyncHandler(documentController.uploadDocument));
 
+    router.route('/updateDocument')
+    .post(asyncHandler(checkUserauth),asyncHandler(documentController.updateDocument));
+
+
     router.route('/getUploadedDocument')
     .post(asyncHandler(checkUserauth),asyncHandler(documentController.getUploadedDocument));
 

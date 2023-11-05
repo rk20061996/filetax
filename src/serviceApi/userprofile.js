@@ -27,6 +27,19 @@ const uploadDocument = async (data) => {
     }
 
 };
+
+const updateDocument = async (data) => {
+    const config = {
+        headers: { Authorization: `${localStorage.getItem('token')}` }
+    };
+    try {
+        const result = await Axios.post(apiUrl + "data/updateDocument", data, config)
+        return result
+    } catch (err) {
+        return err
+    }
+
+};
 const getAllUploadedDocument = async (data) => {
     const config = {
         headers: { Authorization: `${localStorage.getItem('token')}` }
@@ -88,6 +101,7 @@ const userProfile = {
     getAllUploadedDocument,
     deleteDocument,
     getUserDataByToken,
-    updateProfile
+    updateProfile,
+    updateDocument
 }
 export default userProfile

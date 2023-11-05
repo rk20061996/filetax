@@ -80,7 +80,8 @@ exports.uploadDocument = (req, res) => {
         const document_type_id = req.body.taxType
         const user_id = req.user_id
         const filename = req.file.filename
-        const data = new document(document_type_id.trim(), user_id, filename.trim());
+        const selectedTaxcomment = req.body.selectedTaxcomment
+        const data = new document(document_type_id.trim(), user_id, filename.trim(), selectedTaxcomment);
 
         document.uploadDocumentQuery(data, (err, dat) => {
             // console.log("user---?1", user)
@@ -99,6 +100,48 @@ exports.uploadDocument = (req, res) => {
         });
     });
 };
+
+exports.updateDocument = (req, res) => {
+    upload.single('file')(req, res, function (err) {
+        if (err instanceof multer.MulterError) {
+            return res.status(400).send(err.message);
+        } else if (err) {
+            return res.status(500).send(err.message);
+        }
+
+        if (!req.file) {
+            return res.status(400).send('No file uploaded.');
+        }
+        console.log("req.file.originalname", req.file.originalname, req.file.filename)
+        // console.log("reqData",req.body.taxType,req.user_id)
+        // const { taxType, user_id, email, password, phone } = req.body;
+        // const document_type_id = req.body.taxType
+        const user_id = req.user_id
+        const filename = req.file.filename
+        // const selectedTaxcomment = req.body.selectedTaxcomment
+        const document_id = req.body.id
+
+        const data = {filename, document_id};
+
+        document.updateDocumentQuery(data, (err, dat) => {
+            // console.log("user---?1", user)
+            if (err) {
+                res.status(200).send({
+                    status: 500,
+                    message: err.message
+                });
+            } else {
+                // console.log("reqData",req.body)
+                res.status(200).send({
+                    status: 200,
+                    data: dat
+                });
+            }
+        });
+    });
+};
+
+
 
 exports.getUploadedDocument = (req, res) => {
     document.getUploAdedDocumentApi({ user_id: req.user_id }, (err, data) => {

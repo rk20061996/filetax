@@ -1,12 +1,13 @@
 const db = require('../config/db.config');
-const { getDcoumentData: getDcoumentData, uploadDocument: uploadDocument, getUploAdedDocument:getUploAdedDocument, deleteDocument:deleteDocument ,getUserDataByToken:getUserDataByToken, updateProfile:updateProfile} = require('../database/documentqueries');
+const { getDcoumentData: getDcoumentData, uploadDocument: uploadDocument, getUploAdedDocument:getUploAdedDocument, deleteDocument:deleteDocument ,getUserDataByToken:getUserDataByToken, updateProfile:updateProfile, updateDocumentQuery:updateDocumentQuery} = require('../database/documentqueries');
 const { logger } = require('../utils/logger');
 
 class Document {
-    constructor(document_type_id, user_id, filename) {
+    constructor(document_type_id, user_id, filename,selectedTaxcomment) {
         this.document_type_id = document_type_id;
         this.user_id = user_id;
         this.filename = filename;
+        this.selectedTaxcomment = selectedTaxcomment
     }
     static getAllData(cb) {
         db.query(getDcoumentData, (err, res) => {
@@ -29,7 +30,8 @@ class Document {
             [
                 data.user_id,
                 parseInt(data.document_type_id),
-                data.filename
+                data.filename,
+                data.selectedTaxcomment
             ], (err, res) => {
                 if (err) {
                     logger.error(err.message);
@@ -43,6 +45,28 @@ class Document {
                 // cb({ kind: "not_found" }, null);
             })
     }
+
+    static updateDocumentQuery(data, cb) {
+        // console.log("herererere", data)
+        db.query(updateDocumentQuery,
+            [
+                data.filename,
+                data.document_id
+            ], (err, res) => {
+                if (err) {
+                    logger.error(err.message);
+                    cb(err, null);
+                    return;
+                }
+                cb(null, {
+                    data,
+                    
+                });
+                // cb({ kind: "not_found" }, null);
+            })
+    }
+
+    
 
     static getUploAdedDocumentApi(data, cb){
         console.log("herererere", data)

@@ -2,7 +2,7 @@ const getDcoumentData = `
 Select * from document_type`;
 
 const uploadDocument = `
-INSERT INTO document_upload VALUES(null, ?, ?, ?,NOW(),0)`;
+INSERT INTO document_upload VALUES(null, ?, ?, ?,?,NOW(),0)`;
 
 const getUploAdedDocument=`
 SELECT *,document_upload.id as document_id  FROM document_upload left JOIN document_type ON document_upload.document_type_id = document_type.id where  document_upload.is_deleted = 0 AND document_upload.user_id = ?`;
@@ -14,7 +14,10 @@ Update document_upload set is_deleted = 1 where id = ?`;
 const getUserDataByToken=`
 select firstname,lastname,email,phone from users  where id = ?`;
 
-updateProfile=`Update users set firstname=?, lastname=?, phone= ?, image=?  where id = ?`;
+const updateProfile=`Update users set firstname=?, lastname=?, phone= ?, image=?  where id = ?`;
+
+const updateDocumentQuery=`
+Update document_upload set filename = ? where id = ?`;
 
 module.exports = {
     getDcoumentData,
@@ -22,5 +25,6 @@ module.exports = {
     getUploAdedDocument,
     deleteDocument,
     getUserDataByToken,
-    updateProfile
+    updateProfile,
+    updateDocumentQuery
 };
