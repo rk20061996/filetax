@@ -11,10 +11,15 @@ router.route('/signup')
 router.route('/signin')
     .post(signinValidator, asyncHandler(authController.signin));
 
-    router.route('/check')
+router.route('/check')
     .post(asyncHandler(authController.check));
 
-    router.route('/confirmAccount')
+router.route('/confirmAccount')
     .get(asyncHandler(authController.confirmAccount));
+
+router.route('/forgotPassword')
+    .post(asyncHandler(authController.forgotPassword));
+
+    
 
 module.exports = router;

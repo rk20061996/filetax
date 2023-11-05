@@ -7,6 +7,7 @@ import Signup from './auth/signup'
 import Login from './auth/Login'
 import Forgot from './auth/forgot-password'
 import Confirmaccount from './auth/confirm-account'
+import Resetpassword from './auth/reset-password'
 import Home from './pages/home'
 import About from './pages/about'
 import HomeProfile from './userProfile/home-profile'
@@ -25,7 +26,7 @@ function App() {
   const [sessionCheck, setsessionCheck] = useState('')
   const [isLoggedIn, setisLoggedIn] = useState(false)
   let navigate = useNavigate();
-  const location = useLocation();  
+  const location = useLocation();
 
   useEffect(() => {
     // alert("rk")
@@ -35,26 +36,26 @@ function App() {
       const fetchData = async () => {
         const tokenCheckApi = await authFunc.tokenCheck(localSession);
         console.log("tokenCheckApi", tokenCheckApi.data)
-        if(tokenCheckApi.data.status === 200){
+        if (tokenCheckApi.data.status === 200) {
           setisLoggedIn(true)
           // navigate("/");
         }
-        else{
+        else {
           setisLoggedIn(false)
           localStorage.removeItem('token')
-          navigate("/login");  
+          navigate("/login");
         }
-        
+
       }
       fetchData()
-    } 
+    }
     else {
       // const location = useLocation();
       console.log(location.pathname);
 
       localStorage.removeItem('token')
       setisLoggedIn(false)
-      if(location.pathname !== '/confirm-account'){
+      if (location.pathname !== '/confirm-account' && location.pathname !== '/reset-password') {
         navigate("/");
       }
     }
@@ -65,7 +66,7 @@ function App() {
     <Routes>
       <Route
         path="/"
-        element={<Home isLoggedIn={isLoggedIn} setisLoggedIn={setisLoggedIn}/>} // <-- passed as JSX
+        element={<Home isLoggedIn={isLoggedIn} setisLoggedIn={setisLoggedIn} />} // <-- passed as JSX
       />
       <Route
         path="/signup"
@@ -86,28 +87,33 @@ function App() {
         element={<Forgot isLoggedIn={isLoggedIn} />} // <-- passed as JSX
       />
       <Route
+        path="/reset-password"
+        element={<Resetpassword isLoggedIn={isLoggedIn} />} // <-- passed as JSX
+      />
+
+      <Route
         path="/about-us"
-        element={<About isLoggedIn={isLoggedIn} setisLoggedIn={setisLoggedIn}/>} // <-- passed as JSX
+        element={<About isLoggedIn={isLoggedIn} setisLoggedIn={setisLoggedIn} />} // <-- passed as JSX
       />
       <Route
         path="/profile/home"
-        element={<HomeProfile isLoggedIn={isLoggedIn} setisLoggedIn={setisLoggedIn}/>} // <-- passed as JSX
+        element={<HomeProfile isLoggedIn={isLoggedIn} setisLoggedIn={setisLoggedIn} />} // <-- passed as JSX
       />
       <Route
         path="/profile/upload-document"
-        element={<UploadDocument isLoggedIn={isLoggedIn} setisLoggedIn={setisLoggedIn}/>} // <-- passed as JSX
+        element={<UploadDocument isLoggedIn={isLoggedIn} setisLoggedIn={setisLoggedIn} />} // <-- passed as JSX
       />
       <Route
         path="/profile/tax-return"
-        element={<TaxReturn isLoggedIn={isLoggedIn} setisLoggedIn={setisLoggedIn}/>} // <-- passed as JSX
+        element={<TaxReturn isLoggedIn={isLoggedIn} setisLoggedIn={setisLoggedIn} />} // <-- passed as JSX
       />
       <Route
         path="/profile/Profile"
-        element={<Profile isLoggedIn={isLoggedIn} setisLoggedIn={setisLoggedIn}/>} // <-- passed as JSX
+        element={<Profile isLoggedIn={isLoggedIn} setisLoggedIn={setisLoggedIn} />} // <-- passed as JSX
       />
-      
-      
-      
+
+
+
     </Routes>
 
   )
