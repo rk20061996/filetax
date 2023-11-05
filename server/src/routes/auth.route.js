@@ -20,6 +20,11 @@ router.route('/confirmAccount')
 router.route('/forgotPassword')
     .post(asyncHandler(authController.forgotPassword));
 
-    
+router.route('/checkForgotToken')
+    .get(asyncHandler(authController.checkForgotToken));
 
+router.route('/resetPassword')
+    .post(asyncHandler(authController.resetPassword));
+
+    
 module.exports = router;

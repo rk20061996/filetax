@@ -243,3 +243,62 @@ exports.confirmAccount = (req, res) => {
 
 };
 
+exports.checkForgotToken= (req, res) => {
+    const id = req.query.id;
+    console.log("id-->", id)
+    User.checkForgotToken(id, (err, data) => {
+        if (err) {
+            if (err.kind === "not_found") {
+                res.status(404).send({
+                    status: 'error',
+                    message: `Token expired or invalid`
+                    , type: "email"
+                });
+                return;
+            }
+            res.status(500).send({
+                status: 'error',
+                message: err.message,
+                type: "email"
+            });
+            return;
+        }
+        console.log("data-->", data)
+        if (data) {
+            console.log("id-->158", id)
+            res.status(201).send({
+                status: 200,
+                data: {
+                    data
+                }
+            });
+        }else{
+            res.status(400).send({
+                status: 'error',
+                message: `Token expired or invalid`
+                , type: "email"
+            });
+        }
+    })
+}
+
+exports.resetPassword= (req,res) =>{
+    const { email, id, password } = req.body;
+    const hashedPassword = hashPassword(password.trim());
+    User.resetPassword({hashedPassword,email}, (err, data) => {
+        // console.log("user---?1", user)
+        if (err) {
+            res.status(500).send({
+                status: "error",
+                message: err.message
+            });
+        } else {
+            res.status(201).send({
+                status: 200,
+                data: {
+                    data
+                }
+            });
+        }
+    });
+}

@@ -67,6 +67,14 @@ const checkForgotToken = async (data) => {
     }
 }
 
+const resetPassword = async (data) => {
+    try {
+        const result = await Axios.post(apiUrl + "auth/resetPassword", data, {})
+        return result
+    } catch (err) {
+        return err
+    }
+}
 
 const authFunc = {
     signup,
@@ -74,7 +82,8 @@ const authFunc = {
     tokenCheck,
     confirmAccount,
     forgotPassword,
-    checkForgotToken
+    checkForgotToken,
+    resetPassword
     
 }
 export default authFunc

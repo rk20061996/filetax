@@ -30,6 +30,14 @@ const updateConfirmToken = `Update users set email_confirmation_id='' , status =
 const createForgotToken = `
 INSERT INTO forgot_password VALUES(null, ?, ?)
 `;
+
+
+const checkForgotToken = `SELECT * FROM forgot_password WHERE token_key = ?`
+
+const resetPassword = `Update users set password= ?  where email = ?`
+
+const resetForgotPasswordKey = `delete from forgot_password where email = ?`
+
 module.exports = {
     createDB,
     dropDB,
@@ -38,5 +46,8 @@ module.exports = {
     findUserByEmail,
     checkConfirmToken,
     updateConfirmToken,
-    createForgotToken
+    createForgotToken,
+    checkForgotToken,
+    resetPassword,
+    resetForgotPasswordKey
 };

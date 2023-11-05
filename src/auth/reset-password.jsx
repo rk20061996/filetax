@@ -2,13 +2,18 @@ import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import Header from '../layout/header';
 import Footer from '../layout/footer';
+import authFunc from '../serviceApi/auth'
+import { useNavigate } from "react-router-dom";
 
 function ResetPassword() {
   const [newPassword, setNewPassword] = useState('');
   const [confirmNewPassword, setConfirmNewPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
   const [successMessage, setSuccessMessage] = useState('');
+  const [email, setemail] = useState('');
+
   const search = useLocation().search;
+  let navigate = useNavigate();
 
 
   useEffect(() => {
@@ -20,9 +25,11 @@ function ResetPassword() {
 
 const checkForgotToken = async (id) => {
     const submitInfo = await authFunc.checkForgotToken(id);
+    console.log("submitInfo--->",submitInfo,submitInfo?.data?.data?.data?.email)
     if(submitInfo?.response?.data?.message){
         setErrorMessage(submitInfo?.response?.data?.message)
     }
+    setemail(submitInfo?.data?.data?.data?.email)
     
 }
 
@@ -51,16 +58,16 @@ const checkForgotToken = async (id) => {
     return true;
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
     e.preventDefault();
     if (validatePasswords()) {
       const id = new URLSearchParams(search).get('id');
-      // Call the reset password API here with newPassword and confirmation code
-      // For example: resetPassword(newPassword, id)
-      // On API success, display success message or redirect
-      setSuccessMessage('Password reset successfully!');
-      // Redirect to login or other pages
-      // history.push('/login');
+      const submitInfo = await authFunc.resetPassword({password:newPassword,id,email});
+        // if(submitInfo)
+        navigate("/login");
+
+
+        console.log("submitInfo-->0",submitInfo)
     }
   };
 
@@ -86,10 +93,10 @@ const checkForgotToken = async (id) => {
               value={confirmNewPassword}
               onChange={handleConfirmPasswordChange}
             />
-                      {errorMessage && <span style={{ color: "red" }}>{errorMessage}</span>}
+            {errorMessage && <span style={{ color: "red" }}>{errorMessage}</span>}
 
           </div>
-          <button className="btn btn-primary" type="submit">
+          <button disabled={errorMessage.length} className="btn btn-primary" type="submit">
             Reset Password
           </button>
         </form>
