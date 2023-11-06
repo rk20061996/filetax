@@ -1,0 +1,308 @@
+:root{
+    --primary-color: #ea4335;
+    --yellow-color: #ff9900;
+    --grey-color: #666666;
+    --text-color: #333333;
+    --bg-color: #f2f2f2;
+    --blue-gradient: linear-gradient(180deg, #04153A 0%, #122348 100%);
+    --green-color: #198754;
+    --blue-color: #0e1f44;
+}
+body{
+    font-family: 'Lato', sans-serif;
+    background-color: #f3f6f9;
+}
+h1{
+    font-size: 54px;
+    line-height: 60px;
+    font-weight: 800;
+}
+h2{
+    font-size: 40px;
+    line-height: 50px;
+    font-weight: 700;
+}
+h3 {
+    font-size: 26px;
+    font-weight: 700;
+}
+h4 {
+    font-size: 22px;
+    font-weight: 600;
+}
+h6 {
+    font-size: 18px;
+    font-weight: 700;
+}
+a{
+    color: var(--text-color);
+    text-decoration: none;
+}
+p {
+    font-size: 16px;
+    color: var(--text-color);
+    margin: 0;
+}
+.btn-primary, .btn-primary:hover, .btn-primary:focus {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+.btn-green{
+    background-color: var(--green-color);
+    color: var(--bg-color);
+}
+.btn-green:hover{
+    border: 1px solid var(--green-color);
+}
+.btn-outline-primary{
+    border: 1px solid var(--primary-color) !important;
+    color: var(--primary-color);
+}
+.btn{
+    border: 0;
+    height: 40px;
+    line-height: 38px;
+    padding: 0 30px;
+    border-radius: 4px;
+    border: 1px solid transparent;
+    font-size: 16px;
+}
+form a, form a:hover{
+    color: var(--yellow-color);
+}
+.SlideNav {
+    width: 300px;
+    background: var(--blue-gradient);
+    padding: 30px;
+    position: fixed;
+    left: 0;
+    z-index: 1;
+    height: 100%;
+}
+.SlideNav .logo {
+    width: 165px;
+    margin-bottom: 30px;
+}
+.SlideNav ul {
+    padding-top: 10px;
+}
+.SlideNav li a {
+    color: var(--bs-white);
+    padding: 10px 10px;
+    display: block;
+    border-radius: 4px;
+}
+.SlideNav li a span {
+    vertical-align: sub;
+    margin-right: 8px;
+}
+.SlideNav li {
+    margin: 5px 0;    
+}
+.SlideNav li a.active{
+    background-color: var(--primary-color);
+}
+.prfileWrap {
+    border-bottom: 1px solid var(--grey-color);
+    padding-bottom: 15px;
+}
+.prfileWrap span {
+    vertical-align: middle;
+    background-color: #f3f6f9;
+    width: 40px;
+    height: 40px;
+    display: inline-block;
+    line-height: 40px;
+    text-align: center;
+    border-radius: 100px;
+    margin-left: 10px;
+    color: var(--blue-color);
+}
+.prfileWrap p {
+    color: var(--bg-color);
+}
+.mainContent {
+    padding: 20px;
+    margin-left: 300px;
+}
+.card {
+    padding: 40px;
+}
+
+form .form-group {
+    margin-bottom: 8px;
+}
+form label {
+    display: block;
+    margin-bottom: 2px;
+    color: var(--text-color);
+}
+input, select, textarea {
+    height: 40px;
+    line-height: 40px;
+    padding: 0 10px;
+    border-radius: 5px;
+    border: 1px solid var(--grey-color);
+}
+form input{
+    width: 100%;
+}
+.mainContent form {
+    padding-top: 20px;
+}
+.btnWrapper .btn {
+    margin-right: 10px;
+}
+table th {
+    background-color: #f5f5f5;
+}
+table th, table td {
+    border: 1px solid #ccc;
+    padding: 10px;
+}
+table td span {
+    vertical-align: middle;
+}
+table td a {
+    font-weight: 600;
+    color: #0a1b40;
+}
+.mainContent table {
+    margin-top: 30px;
+}
+.centerWrap .form-group {
+    margin: 0 auto;
+}
+
+
+.input-file {
+    padding: 0;
+}
+.input-file::file-selector-button{
+    border: none;
+    color: var(--bg-color);
+    background-color: var(--blue-color);
+    height: 40px;
+    cursor: pointer;
+    transition: all .25s ease-in;
+    cursor: pointer;
+    padding: 0 20px;
+}
+.input-file::file-selector-button:hover{
+    background-color: #fff;
+    color: #565A90;
+    transition: all .25s ease-in;
+}
+.navWrap {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 30px;
+}
+.navWrap p a {
+    padding-left: 20px;
+}
+.navWrap ul {
+    display: flex;
+    margin: 0;
+}
+.navWrap li {
+    padding-left: 10px;
+}
+.topWrap {
+    justify-content: space-between;
+    padding-top: 20px;
+}
+.topWrap select, .topWrap input {
+    height: 30px;
+    margin: 0 5px;
+}
+.topWrap input:last-child {
+    margin-right: 0;
+}
+input[type="search"] {
+    outline-offset: 0;
+}
+.progressWrap {
+    margin-top: 30px;
+}
+.progressWrap h3{
+    margin-bottom: 30px;
+}
+.progressWrap li span {
+    width: 65px;
+    height: 65px;
+    background-color: var(--blue-color);
+    line-height: 65px;
+    text-align: center;
+    font-size: 34px;
+    color: var(--bs-white);
+    border-radius: 11px;
+    margin: 10px 0;
+}
+.progressWrap li {
+    text-align: center;
+    width: 19%;
+    display: inline-block;
+    padding: 20px 10px;
+    background-color: #f3f6f9;
+    margin: 0 4px;
+    border-radius: 5px;
+}
+.progressWrap li:first-child{
+    margin-left: 0;
+}
+.progressWrap li:last-child{
+    margin-right: 0;
+}
+.progressWrap li p{
+    color: var(--text-color);
+    font-weight: 600;
+}
+.formWrapper input, select, textarea {
+    width: 100%;
+    outline: 0;
+}
+.formWrapper textarea {
+    height: 100px;
+}
+.tagDocumentation .nav-tabs .nav-item button {
+    background: #0d1e43;
+    border: 0;
+    border-radius: 2px;
+    margin: 0 5px;
+    color: #ffffff;
+}
+.tagDocumentation .nav-tabs .nav-item .nav-link.active{
+    background-color: var(--primary-color);
+    color: var(--bs-white);
+}
+.tagDocumentation .nav-tabs{
+    border: 0;
+    margin-bottom: 30px;
+}
+.columntax {
+    column-count: 2;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 8px;
+}
+.mainContent input, .mainContent label {
+    height: 30px;
+    border-radius: 3px;
+    line-height: 30px;
+    margin-bottom: 0px;
+    font-size: 16px;
+    color: #333333;
+}
+.residencyform .row {
+    background: #f3f6f9;
+    padding: 15px 10px;
+    border-radius: 3px;
+}
+.mainContent .form-group label {
+    height: auto;
+    line-height: normal;
+    margin-bottom: 4px;
+}
