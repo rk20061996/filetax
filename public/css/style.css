@@ -1,5 +1,5 @@
 :root{
-    --primary-color: #ea4335;
+    --primary-color: #292759;
     --yellow-color: #ff9900;
     --grey-color: #666666;
     --text-color: #333333;
@@ -29,6 +29,12 @@ h3 {
 }
 h4 {
     font-size: 22px;
+    font-weight: 600;
+    line-height: 30px;
+}
+h5{
+    font-size: 20px;
+    line-height: 26px;
     font-weight: 600;
 }
 a{
@@ -94,18 +100,15 @@ form a, form a:hover{
     outline: none;
 }
 /* Header Section */
-.topHeader{
-    padding: 15px 0;
-}
 .topHeader p{
-    color: var(--text-color);
+    color: var(--bs-white);
     margin-right: 20px;
 }
 .topHeader p:last-child{
     margin-right: 0;
 }
 .topHeader p a{
-    color: var(--grey-color);
+    color: var(--bs-white);
     padding-left: 4px;
 }
 .sticky-nav .navbar {
@@ -116,7 +119,7 @@ form a, form a:hover{
     padding: 20px 0;
     z-index: 1;
     left: 0;
-    box-shadow: 0px 6px 20px 9px #ea43351f;
+    box-shadow: rgba(41 39 89 / 4%);
 }
 .logo{
     width: 200px;
@@ -125,14 +128,18 @@ form a, form a:hover{
     margin-left: 10px;
 }
 header {
-    background-color: rgb(234 67 53 / 4%);
+    background-color: rgba(41 39 89 / 4%)
     /* box-shadow: 0 0 25px 0px #00000042; */
+}
+.innertopHeader {
+    padding: 15px 0;
+    background-color: var(--primary-color);
 }
 header .navbar {
     background: transparent !important;
     justify-content: space-between;
-    padding: 20px 0 0;
     transition: 600ms ease;
+    padding: 15px 0;
 }
 header .collapse {
     justify-content: flex-end;
@@ -312,12 +319,12 @@ footer p, footer a{
 .aboutSection ul {
     column-count: 3;
 }
-.aboutSection li {
+.listWrap li {
     padding: 5px 0;
     position: relative;
     padding-left: 20px;
 }
-.aboutSection li:before {
+.listWrap li:before {
     content: '';
     width: 8px;
     height: 8px;
@@ -340,10 +347,10 @@ footer li a {
     transition: 600ms ease;
 }
 footer li a span{
-    color: var(--primary-color);
+    color: var(--bs-white);
 }
 footer li a:hover {
-    color: var(--primary-color);
+    color: var(--bs-white);
 }
 footer li a span{
     margin-right: 5px;
@@ -363,4 +370,74 @@ footer li a span{
     color: #ffffff;
     text-align: center;
     margin-bottom: 0;
-}   
+}
+.outerTaxReturn {
+    padding-bottom: 60px;
+}
+.taxReturn {
+    padding-bottom: 60px;
+}
+.taxReturn p {
+    font-size: 16px;
+    font-weight: 800;
+    text-align: center;
+}
+.taxReturn ul {
+    gap: 10px;
+    display: flex;
+}
+.taxReturn li {
+    display: inline-block;
+    text-align: center;
+    width: 19%;
+}
+.taxReturn h2 {
+    margin-bottom: 40px;
+}
+.areaWrapper {
+    background-color: #FBFBFB;
+    padding: 60px 0;
+}
+.areaWrapper ul{
+    column-count: 2;
+    padding-top: 30px;
+}
+.areaWrapper ul li {
+    padding-bottom: 10px;
+}
+.itinWrap{
+    padding-bottom: 60px;
+}
+.itinWrap p {
+    margin-bottom: 15px;
+}
+.fbarWrap {
+    padding-bottom: 60px;
+}
+.financialWrap {
+    margin-top: 50px;
+}
+.fbarWrap p {
+    margin-bottom: 15px;
+}
+.fbarWrap h3 {
+    margin-bottom: 15px;
+}
+.contactWrap .form-group{
+    flex-direction: column;
+}
+.contactWrap .form-group label {
+    color: #ffffff;
+    margin-bottom: 5px;
+}
+.contactSection{
+    margin: 60px 0;
+}
+.contactSection form {
+    position: relative;
+    border: 6px solid var(--primary-color);
+    padding: 30px;
+    background: #000000;
+    width: 60%;
+    margin: 0 auto;
+}

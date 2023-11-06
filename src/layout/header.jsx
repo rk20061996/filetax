@@ -23,10 +23,12 @@ function Header(props) {
     return (
         <header>
             <div className="topHeader">
-                <div className="container">
-                    <div className="d-flex justify-content-end">
-                        <p>Email Us: <a href="mailto:contact@filetax.us">contact@filetax.us</a></p>
-                        <p>Call Us: <a href="tel:475 FILETAX">475 FILETAX</a></p>
+                <div className="innertopHeader">
+                    <div className="container">
+                        <div className="d-flex justify-content-end">
+                            <p>Email Us: <a href="mailto:contact@filetax.us">contact@filetax.us</a></p>
+                            <p>Call Us: <a href="tel:475 FILETAX">475 FILETAX</a></p>
+                        </div>
                     </div>
                 </div>
                 <nav className="navbar navbar-expand-lg bg-light">

@@ -2,8 +2,8 @@
 
 import Axios from "axios"
 
-const apiUrl = "http://localhost:9000/api/"
-// const apiUrl = "http://195.35.45.11:9000/api/"
+// const apiUrl = "http://localhost:9000/api/"
+const apiUrl = "http://195.35.45.11:9000/api/"
 
 const getAllDocument = async (data) => {
     try {
