@@ -1,6 +1,6 @@
-import React from "react"
+import React from "react";
 import { Link } from 'react-router-dom';
-import Sidebar from'../../src/layout/sidebar'
+import Sidebar from '../../src/layout/sidebar';
 
 function TaxReturn(props) {
     return (

@@ -7,6 +7,7 @@ import { Modal, Button } from 'react-bootstrap';
 import { useNavigate } from "react-router-dom";
 
 function Profile(props) {
+  
   const dispatch = useDispatch();
   let navigate = useNavigate();
 

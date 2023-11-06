@@ -5,6 +5,7 @@ import Sidebar from'../../src/layout/sidebar'
 function HomeProfile(props) {
     return (
       <div className="main d-flex w-100 h-100">
+        
       <Sidebar isLoggedIn={props.isLoggedIn} setisLoggedIn={props.setisLoggedIn}/>
       <div className="mainContent container-fluid">
         <div className="card">

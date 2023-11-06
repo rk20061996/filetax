@@ -135,21 +135,32 @@ function App() {
 
 
 
+
       <Route
         path="/profile/home"
-        element={<HomeProfile isLoggedIn={isLoggedIn} setisLoggedIn={setisLoggedIn} />} // <-- passed as JSX
+        element={
+          <><link rel="stylesheet" href="css/profile.css" />
+            <HomeProfile isLoggedIn={isLoggedIn} setisLoggedIn={setisLoggedIn} /></>} // <-- passed as JSX
       />
       <Route
         path="/profile/upload-document"
-        element={<UploadDocument isLoggedIn={isLoggedIn} setisLoggedIn={setisLoggedIn} />} // <-- passed as JSX
+        element={
+          <><link rel="stylesheet" href="css/profile.css" />
+            <UploadDocument isLoggedIn={isLoggedIn} setisLoggedIn={setisLoggedIn} /></>} // <-- passed as JSX
       />
       <Route
         path="/profile/tax-return"
-        element={<TaxReturn isLoggedIn={isLoggedIn} setisLoggedIn={setisLoggedIn} />} // <-- passed as JSX
+        element={
+          <><link rel="stylesheet" href="css/profile.css" />
+
+            <TaxReturn isLoggedIn={isLoggedIn} setisLoggedIn={setisLoggedIn} /></>} // <-- passed as JSX
       />
       <Route
         path="/profile/Profile"
-        element={<Profile isLoggedIn={isLoggedIn} setisLoggedIn={setisLoggedIn} />} // <-- passed as JSX
+        element={
+          <><link rel="stylesheet" href="css/profile.css" />
+
+            <Profile isLoggedIn={isLoggedIn} setisLoggedIn={setisLoggedIn} /></>} // <-- passed as JSX
       />
     </Routes>
 

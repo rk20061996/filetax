@@ -4,6 +4,7 @@ import userProfile from '../serviceApi/userprofile';
 import { Modal, Button } from 'react-bootstrap';
 
 function UploadDocument(props) {
+
   const [documentData, setDocumentData] = useState([]);
   const [selectedFile, setSelectedFile] = useState(null);
   const [selectedTaxType, setSelectedTaxType] = useState(""); // New state for selected tax type
@@ -116,6 +117,7 @@ function UploadDocument(props) {
 
   return (
     <div className="main d-flex w-100 h-100">
+      
       <Modal show={show} onHide={() => { setShow(!show) }}>
         <Modal.Header closeButton>
           <Modal.Title>File Updated Successful</Modal.Title>
