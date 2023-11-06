@@ -10,6 +10,15 @@ import Confirmaccount from './auth/confirm-account'
 import Resetpassword from './auth/reset-password'
 import Home from './pages/home'
 import About from './pages/about'
+import Contactus from './pages/contact-us'
+import Pricing from './pages/pricing'
+import Studenttax from './pages/student-tax'
+import Taxplanning from './pages/tax-planning'
+import Taxreturnhome from './pages/tax-return'
+import Itinprocessing from './pages/itin-processing'
+import Taxconsulting from './pages/tax-consulting'
+
+
 import HomeProfile from './userProfile/home-profile'
 import UploadDocument from './userProfile/upload-document'
 import TaxReturn from './userProfile/tax-return'
@@ -96,6 +105,37 @@ function App() {
         element={<About isLoggedIn={isLoggedIn} setisLoggedIn={setisLoggedIn} />} // <-- passed as JSX
       />
       <Route
+        path="/contact-us"
+        element={<Contactus isLoggedIn={isLoggedIn} setisLoggedIn={setisLoggedIn} />} // <-- passed as JSX
+      />
+      <Route
+        path="/pricing"
+        element={<Pricing isLoggedIn={isLoggedIn} setisLoggedIn={setisLoggedIn} />} // <-- passed as JSX
+      />
+      <Route
+        path="/student-tax"
+        element={<Studenttax isLoggedIn={isLoggedIn} setisLoggedIn={setisLoggedIn} />} // <-- passed as JSX
+      />
+      <Route
+        path="/tax-planning"
+        element={<Taxplanning isLoggedIn={isLoggedIn} setisLoggedIn={setisLoggedIn} />} // <-- passed as JSX
+      />
+      <Route
+        path="/tax-return"
+        element={<Taxreturnhome isLoggedIn={isLoggedIn} setisLoggedIn={setisLoggedIn} />} // <-- passed as JSX
+      />
+      <Route
+        path="/itin-processing"
+        element={<Itinprocessing isLoggedIn={isLoggedIn} setisLoggedIn={setisLoggedIn} />} // <-- passed as JSX
+      />
+      <Route
+        path="/tax-consulting"
+        element={<Taxconsulting isLoggedIn={isLoggedIn} setisLoggedIn={setisLoggedIn} />} // <-- passed as JSX
+      />
+
+
+
+      <Route
         path="/profile/home"
         element={<HomeProfile isLoggedIn={isLoggedIn} setisLoggedIn={setisLoggedIn} />} // <-- passed as JSX
       />
@@ -111,9 +151,6 @@ function App() {
         path="/profile/Profile"
         element={<Profile isLoggedIn={isLoggedIn} setisLoggedIn={setisLoggedIn} />} // <-- passed as JSX
       />
-
-
-
     </Routes>
 
   )
