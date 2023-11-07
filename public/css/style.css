@@ -101,14 +101,14 @@ form a, form a:hover{
 }
 /* Header Section */
 .topHeader p{
-    color: var(--bs-white);
+    color: var(--text-color);
     margin-right: 20px;
 }
 .topHeader p:last-child{
     margin-right: 0;
 }
 .topHeader p a{
-    color: var(--bs-white);
+    color: var(--text-color);
     padding-left: 4px;
 }
 .sticky-nav .navbar {
@@ -133,7 +133,6 @@ header {
 }
 .innertopHeader {
     padding: 15px 0;
-    background-color: var(--primary-color);
 }
 header .navbar {
     background: transparent !important;
@@ -177,7 +176,7 @@ header .dropdown-item:hover {
 }
 /* Banner Section */
 .bannerWrap {
-    background: #ccc;
+    background-image: url(../images/bannerImg.jpg);
     padding: 50px 0;
 }
 .bannerWrap p {
@@ -205,6 +204,10 @@ header .dropdown-item:hover {
     line-height: 40px;
     font-weight: 800;
     color: var(--text-color);
+}
+.w-80 {
+    width: 80%;
+    margin: 0 auto;
 }
 .taxServices {
     padding: 60px 0;

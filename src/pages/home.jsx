@@ -25,15 +25,18 @@ function home(props) {
             </section>
             <section className="taxServices">
                 <div className="container">
-                    <div className="mainHeading">
-                        <h6>WELCOME TO FILETAX</h6>
-                        <h2>We provide you the best tax services in most<br/> convenient & affordable way.</h2>
-                    </div>
-                    <p>Our team of experts with 15 plus years of experience provide you the best solutions for all your
-                        tax compliance including Individual & Business tax returns. Individual tax services include ITIN
-                        application FBAR & FATCA filings. Our process is 100% online, secured, convenient & affordable.</p>
-                    <div className="text-center mt-4">
-                        <a href="#" className="btn btn-primary">Read More</a>
+                    <div className="w-80">
+                        <div className="mainHeading">
+                            <h2>Who we are</h2>
+                        </div>
+                        <p>Welcome to File Tax, our company is a trusted partner in international tax compliance.
+                            We specialize in ITIN application, FBAR (Foreign Bank Account Report) filing, and FATCA
+                            (Foreign Account Tax Compliance Act) reporting. Our expert team simplifies the complexities
+                            of global tax obligations, ensuring efficient, accurate, and hassle-free solutions. With us,
+                            you're in capable hands for seamless international tax compliance.</p>
+                        <div className="text-center mt-5">
+                            <img src="https://qxglobalgroup.com/wp-content/uploads/2023/07/QX-GTPL-2023.jpg" alt="" class="w-100" />
+                        </div>
                     </div>
                 </div>
             </section>
@@ -84,8 +87,8 @@ function home(props) {
                                 <span className="material-symbols-outlined">
                                     account_tree
                                 </span>
-                                <h4>Tax Planning</h4>
-                                <p>The global economy drives growth. But every market presents complex planning <a href="#">...Read more</a></p>
+                                <h4>Tax Planning Advisory</h4>
+                                <p>Our expert advisors provide strategic guidance to optimize your financial decisions and minimize your tax liability.<a href="#">...Read more</a></p>
                             </div>
                         </div>
                         <div className="col-sm-6 col-md-4">
@@ -93,8 +96,8 @@ function home(props) {
                                 <span className="material-symbols-outlined">
                                     account_tree
                                 </span>
-                                <h4>Tax Return</h4>
-                                <p>A business tax return is filed annually by all companies that conduct business in the US. <a href="#">...Read more</a></p>
+                                <h4>Student Tax Filing</h4>
+                                <p>We specialize in assisting students with their tax returns, ensuring they take advantage of applicable deductions and credits.<a href="#">...Read more</a></p>
                             </div>
                         </div>
                         <div className="col-sm-6 col-md-4">
@@ -102,28 +105,8 @@ function home(props) {
                                 <span className="material-symbols-outlined">
                                     account_tree
                                 </span>
-                                <h4>Tax Extension</h4>
-                                <p>Though filing taxes can be complicated for expats, we have some good news. <a href="#">...Read more</a></p>
-                            </div>
-                        </div>
-                        <div className="col-sm-6 col-md-4">
-                            <div className="item">
-                                <span className="material-symbols-outlined">
-                                    account_tree
-                                </span>
-                                <h4>Tax Consulting</h4>
-                                <p>FILETAX is a leading professional Tax
-                                    Consulting firm specializing in the delivery
-                                    of world className. <a href="#">...Read more</a></p>
-                            </div>
-                        </div>
-                        <div className="col-sm-6 col-md-4">
-                            <div className="item">
-                                <span className="material-symbols-outlined">
-                                    account_tree
-                                </span>
-                                <h4>Student Tax filing</h4>
-                                <p>Taxes can be tricky for any taxpayer. Filing taxes as a college student can make things all the more intimidating. <a href="#">...Read more</a></p>
+                                <h4>Tax Return Services</h4>
+                                <p>Our team ensures accurate and timely filing of your tax returns, simplifying the process for individuals and businesses.<a href="#">...Read more</a></p>
                             </div>
                         </div>
                         <div className="col-sm-6 col-md-4">
@@ -132,7 +115,25 @@ function home(props) {
                                     account_tree
                                 </span>
                                 <h4>ITIN Processing</h4>
-                                <p>FILETAX are approved Certifying Acceptance Agents and specialise in obtaining US <a href="#">...Read more</a></p>
+                                <p>We help individuals obtain an Individual Taxpayer Identification Number (ITIN) for tax compliance. <a href="#">...Read more</a></p>
+                            </div>
+                        </div>
+                        <div className="col-sm-6 col-md-4">
+                            <div className="item">
+                                <span className="material-symbols-outlined">
+                                    account_tree
+                                </span>
+                                <h4>FBAR (Foreign Bank Account Report)</h4>
+                                <p>Ensure compliance with FBAR reporting requirements for foreign financial accounts.<a href="#">...Read more</a></p>
+                            </div>
+                        </div>
+                        <div className="col-sm-6 col-md-4">
+                            <div className="item">
+                                <span className="material-symbols-outlined">
+                                    account_tree
+                                </span>
+                                <h4>FATCA (Foreign Account Tax Compliance Act)</h4>
+                                <p>We offer expertise in FATCA reporting, helping you navigate international tax regulations. <a href="#">...Read more</a></p>
                             </div>
                         </div>
                     </div>
