@@ -23,6 +23,7 @@ import HomeProfile from './userProfile/home-profile'
 import UploadDocument from './userProfile/upload-document'
 import TaxReturn from './userProfile/tax-return'
 import Profile from './userProfile/profile'
+import TaxDocument from './userProfile/tax-documentation'
 
 import authFunc from './serviceApi/auth'
 import { useNavigate } from "react-router-dom";
@@ -162,6 +163,14 @@ function App() {
 
             <Profile isLoggedIn={isLoggedIn} setisLoggedIn={setisLoggedIn} /></>} // <-- passed as JSX
       />
+            <Route
+        path="/profile/tax-documentaion"
+        element={
+          <><link rel="stylesheet" href="css/profile.css" />
+
+            <TaxDocument isLoggedIn={isLoggedIn} setisLoggedIn={setisLoggedIn} /></>} // <-- passed as JSX
+      />
+      
     </Routes>
 
   )

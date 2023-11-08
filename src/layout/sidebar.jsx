@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import { NavLink } from 'react-router-dom';
 import { useNavigate } from "react-router-dom";
 import { useSelector } from 'react-redux';
-import { Modal, Button } from 'react-bootstrap';
 
 function Sidebar(props) {
     const [loggedIn, setLoggedIn] = useState(true);
@@ -62,7 +61,7 @@ function Sidebar(props) {
                     </NavLink>
                 </li>
                 <li className="bgColorChange">
-                    <Link to="/profile/upload-document">
+                    <Link to="/profile/tax-documentaion" activeClassName="active">
                         <span className="material-symbols-outlined"> upload_file </span> Tax Documents
                     </Link>
                 </li>

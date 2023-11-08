@@ -6,6 +6,8 @@ const cors = require('cors');
 
 const authRoute = require('./server/src/routes/auth.route');
 const dataRoute = require('./server/src/routes/dataRoute.route');
+const taxInformation = require('./server/src/routes/taxInformation.route');
+
 // const confirmRoute = require('./server/src/routes/confirmRoute.route');
 
 
@@ -27,6 +29,7 @@ app.use(cors());
 
 app.use('/api/auth', authRoute);
 app.use('/api/data', dataRoute);
+app.use('/api/taxInformation', taxInformation);
 // app.use('/api/confirm-password', confirmRoute);
 
 
