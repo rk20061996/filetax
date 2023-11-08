@@ -29,7 +29,7 @@ function ChangePassword(props) {
   };
 
   const isStrongPassword = (password) => {
-    const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+    const passwordRegex = /^[a-zA-Z0-9]{6,30}$/;
     return passwordRegex.test(password);
   };
 

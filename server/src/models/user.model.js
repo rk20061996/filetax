@@ -1,5 +1,5 @@
 const db = require('../config/db.config');
-const { createNewUser: createNewUserQuery, findUserByEmail: findUserByEmailQuery,checkConfirmToken:checkConfirmToken,updateConfirmToken:updateConfirmToken,createForgotToken:createForgotToken,checkForgotToken:checkForgotToken,resetPassword:resetPassword,resetForgotPasswordKey:resetForgotPasswordKey } = require('../database/queries');
+const { createNewUser: createNewUserQuery, findUserByEmail: findUserByEmailQuery,checkConfirmToken:checkConfirmToken,updateConfirmToken:updateConfirmToken,createForgotToken:createForgotToken,checkForgotToken:checkForgotToken,resetPassword:resetPassword,resetForgotPasswordKey:resetForgotPasswordKey,findById:findById } = require('../database/queries');
 const { logger } = require('../utils/logger');
 
 class User {
@@ -53,7 +53,21 @@ class User {
             cb({ kind: "not_found" }, null);
         })
     }
-
+    static findById(id, cb) {
+        db.query(findById, id, (err, res) => {
+            if (err) {
+                logger.error(err.message);
+                cb(err, null);
+                return;
+            }
+            if (res.length) {
+                cb(null, res[0]);
+                return;
+            }
+            cb({ kind: "not_found" }, null);
+        })
+    }
+    
     static checkConfirmToken(id,cb){
         console.log("id-->58",id)
         db.query(checkConfirmToken, id, (err, res) => {

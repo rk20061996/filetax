@@ -2,8 +2,8 @@
 
 import Axios from "axios"
 
-// const apiUrl = "http://localhost:9000/api/"
-const apiUrl = "http://195.35.45.11:9000/api/"
+const apiUrl = "http://localhost:9000/api/"
+// const apiUrl = "http://195.35.45.11:9000/api/"
 const signup = async (data) => {
     // alert(API_URL)
     // console.log("baseUri",baseUri)
@@ -78,7 +78,10 @@ const resetPassword = async (data) => {
 
 const updatePassword = async (data) => {
     try {
-        const result = await Axios.post(apiUrl + "auth/updatePassword", data, {})
+        const config = {
+            headers: { Authorization: `${localStorage.getItem('token')}` }
+        };
+        const result = await Axios.post(apiUrl + "auth/updatePassword", data, config)
         return result
     } catch (err) {
         return err

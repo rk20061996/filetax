@@ -305,13 +305,13 @@ exports.resetPassword= (req,res) =>{
 
 
 exports.updatePassword= (req,res) =>{
-    const { email, password } = req.body;
+    const { oldPassword, newPassword } = req.body;
     User.findById(req.user_id, (err, data) => {
         if (err) {
             if (err.kind === "not_found") {
                 res.status(404).send({
                     status: 'error',
-                    message: `User with email ${email} was not found`
+                    message: `User with id ${req.user_id} was not found`
                     , type: "email"
                 });
                 return;
@@ -324,18 +324,23 @@ exports.updatePassword= (req,res) =>{
             return;
         }
         if (data) {
-            if (comparePassword(password.trim(), data.password)) {
-                const token = generateToken(data.id);
-                res.status(200).send({
-                    status: 'success',
-                    data: {
-                        token,
-                        firstname: data.firstname,
-                        lastname: data.lastname,
-                        email: data.email,
-                        image: data.image,
-                        status: data.status,
-                        // unique: data.status
+            if (comparePassword(oldPassword.trim(), data.password)) {
+                const hashedPassword = hashPassword(newPassword.trim());
+                const email = data.email
+                User.resetPassword({hashedPassword,email}, (err, dat) => {
+                    // console.log("user---?1", user)
+                    if (err) {
+                        res.status(500).send({
+                            status: "error",
+                            message: err.message
+                        });
+                    } else {
+                        res.status(201).send({
+                            status: 200,
+                            data: {
+                                data
+                            }
+                        });
                     }
                 });
                 return;
