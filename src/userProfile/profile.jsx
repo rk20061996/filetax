@@ -5,6 +5,7 @@ import { useDispatch } from 'react-redux';
 import { setUser } from '../reducers/userSlice';
 import { Modal, Button } from 'react-bootstrap';
 import { useNavigate } from "react-router-dom";
+import { ChangePassword } from "./components/changepassword"
 
 function Profile(props) {
   
@@ -296,41 +297,7 @@ function Profile(props) {
               </div>
             </div>
           </form>
-          <form
-            // onSubmit={handleSubmit} 
-            style={{ display: isChangingPassword ? "block" : "none" }}>
-            <div className="row">
-              <div className="col-sm-12 col-md-6">
-                <div className="form-group">
-                  <label>Old Password</label>
-                  <input
-                    type="password"
-                    name="oldPassword"
-                    placeholder="Old Password"
-                    value={formData.oldPassword.value}
-                    onChange={handleChange}
-                  />
-                  <div style={{ color: "red", marginTop: "5px" }}>{formData.oldPassword.error}</div>
-                </div>
-                <div className="form-group">
-                  <label>New Password</label>
-                  <input
-                    type="password"
-                    name="newPassword"
-                    placeholder="New Password"
-                    value={formData.newPassword.value}
-                    onChange={handleChange}
-                  />
-                  <div style={{ color: "red", marginTop: "5px" }}>{formData.newPassword.error}</div>
-                </div>
-              </div>
-              <div className="col-sm-6">
-                <button type="submit" className="btn btn-green mt-2">
-                  Change Password
-                </button>
-              </div>
-            </div>
-          </form>
+          <ChangePassword isChangingPassword={isChangingPassword}/>
         </div>
       </div>
     </div>

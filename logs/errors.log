@@ -74,3 +74,58 @@
 {"level":"error","message":"ER_WRONG_VALUE_COUNT_ON_ROW: Column count doesn't match value count at row 1"}
 {"level":"error","message":"ER_PARSE_ERROR: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '?' at line 1"}
 {"level":"error","message":"ER_PARSE_ERROR: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '?' at line 1"}
+{"expiredAt":"2023-11-07T17:39:28.000Z","level":"error","message":"jwt expired","name":"TokenExpiredError"}
+{"level":"error","message":"ER_WRONG_VALUE_COUNT_ON_ROW: Column count doesn't match value count at row 1"}
+{"level":"error","message":"ER_BAD_NULL_ERROR: Column 'user_id' cannot be null"}
+{"level":"error","message":"ER_WRONG_VALUE_COUNT_ON_ROW: Column count doesn't match value count at row 1"}
+{"level":"error","message":"ER_BAD_NULL_ERROR: Column 'primaryTaxPayer_MaritalStatus' cannot be null"}
+{"level":"error","message":"ER_BAD_NULL_ERROR: Column 'primaryTaxPayer_MaritalStatus' cannot be null"}
+{"level":"error","message":"ER_BAD_NULL_ERROR: Column 'primaryTaxPayer_LastName' cannot be null"}
+{"level":"error","message":"ER_BAD_NULL_ERROR: Column 'primaryTaxPayer_LastName' cannot be null"}
+{"level":"error","message":"ER_PARSE_ERROR: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'where user_id = 33' at line 1"}
+{"level":"error","message":"ER_BAD_NULL_ERROR: Column 'primaryTaxPayer_LastName' cannot be null"}
+{"level":"error","message":"ER_BAD_NULL_ERROR: Column 'primaryTaxPayer_LastName' cannot be null"}
+{"level":"error","message":"ER_BAD_NULL_ERROR: Column 'primaryTaxPayer_LastName' cannot be null"}
+{"level":"error","message":"ER_BAD_NULL_ERROR: Column 'primaryTaxPayer_LastName' cannot be null"}
+{"level":"error","message":"ER_BAD_NULL_ERROR: Column 'primaryTaxPayer_LastName' cannot be null"}
+{"level":"error","message":"ER_BAD_NULL_ERROR: Column 'primaryTaxPayer_LastName' cannot be null"}
+{"level":"error","message":"ER_BAD_NULL_ERROR: Column 'primaryTaxPayer_LastName' cannot be null"}
+{"level":"error","message":"ER_BAD_NULL_ERROR: Column 'primaryTaxPayer_LastName' cannot be null"}
+{"level":"error","message":"ER_BAD_NULL_ERROR: Column 'primaryTaxPayer_LastName' cannot be null"}
+{"level":"error","message":"ER_BAD_NULL_ERROR: Column 'primaryTaxPayer_LastName' cannot be null"}
+{"level":"error","message":"ER_BAD_NULL_ERROR: Column 'primaryTaxPayer_LastName' cannot be null"}
+{"level":"error","message":"ER_BAD_NULL_ERROR: Column 'primaryTaxPayer_FirstName' cannot be null"}
+{"level":"error","message":"ER_BAD_NULL_ERROR: Column 'spouse_CurrentVisaCategory' cannot be null"}
+{"level":"error","message":"ER_BAD_NULL_ERROR: Column 'spouse_CurrentVisaCategory' cannot be null"}
+{"level":"error","message":"ER_BAD_NULL_ERROR: Column 'spouse_CurrentVisaCategory' cannot be null"}
+{"level":"error","message":"ER_BAD_NULL_ERROR: Column 'spouse_CurrentVisaCategory' cannot be null"}
+{"level":"error","message":"ER_EMPTY_QUERY: Query was empty"}
+{"level":"error","message":"ER_EMPTY_QUERY: Query was empty"}
+{"level":"error","message":"ER_EMPTY_QUERY: Query was empty"}
+{"level":"error","message":"ER_EMPTY_QUERY: Query was empty"}
+{"level":"error","message":"ER_EMPTY_QUERY: Query was empty"}
+{"level":"error","message":"ER_NO_SUCH_TABLE: Table 'filetax.contactdetails' doesn't exist"}
+{"level":"error","message":"ER_NO_SUCH_TABLE: Table 'filetax.contactdetails' doesn't exist"}
+{"level":"error","message":"ER_NO_SUCH_TABLE: Table 'filetax.contactdetails' doesn't exist"}
+{"level":"error","message":"ER_EMPTY_QUERY: Query was empty"}
+{"expiredAt":"2023-11-08T17:59:57.000Z","level":"error","message":"jwt expired","name":"TokenExpiredError"}
+{"expiredAt":"2023-11-08T17:59:57.000Z","level":"error","message":"jwt expired","name":"TokenExpiredError"}
+{"expiredAt":"2023-11-08T17:59:57.000Z","level":"error","message":"jwt expired","name":"TokenExpiredError"}
+{"expiredAt":"2023-11-08T17:59:57.000Z","level":"error","message":"jwt expired","name":"TokenExpiredError"}
+{"expiredAt":"2023-11-08T17:59:57.000Z","level":"error","message":"jwt expired","name":"TokenExpiredError"}
+{"expiredAt":"2023-11-08T17:59:57.000Z","level":"error","message":"jwt expired","name":"TokenExpiredError"}
+{"expiredAt":"2023-11-08T17:59:57.000Z","level":"error","message":"jwt expired","name":"TokenExpiredError"}
+{"expiredAt":"2023-11-08T17:59:57.000Z","level":"error","message":"jwt expired","name":"TokenExpiredError"}
+{"expiredAt":"2023-11-08T17:59:57.000Z","level":"error","message":"jwt expired","name":"TokenExpiredError"}
+{"expiredAt":"2023-11-08T17:59:57.000Z","level":"error","message":"jwt expired","name":"TokenExpiredError"}
+{"expiredAt":"2023-11-08T17:59:57.000Z","level":"error","message":"jwt expired","name":"TokenExpiredError"}
+{"expiredAt":"2023-11-08T17:59:57.000Z","level":"error","message":"jwt expired","name":"TokenExpiredError"}
+{"expiredAt":"2023-11-08T17:59:57.000Z","level":"error","message":"jwt expired","name":"TokenExpiredError"}
+{"expiredAt":"2023-11-08T17:59:57.000Z","level":"error","message":"jwt expired","name":"TokenExpiredError"}
+{"expiredAt":"2023-11-08T17:59:57.000Z","level":"error","message":"jwt expired","name":"TokenExpiredError"}
+{"expiredAt":"2023-11-08T17:59:57.000Z","level":"error","message":"jwt expired","name":"TokenExpiredError"}
+{"expiredAt":"2023-11-08T17:59:57.000Z","level":"error","message":"jwt expired","name":"TokenExpiredError"}
+{"expiredAt":"2023-11-08T17:59:57.000Z","level":"error","message":"jwt expired","name":"TokenExpiredError"}
+{"expiredAt":"2023-11-08T17:59:57.000Z","level":"error","message":"jwt expired","name":"TokenExpiredError"}
+{"level":"error","message":"jwt malformed","name":"JsonWebTokenError"}
+{"level":"error","message":"jwt malformed","name":"JsonWebTokenError"}

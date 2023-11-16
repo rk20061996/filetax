@@ -76,6 +76,18 @@ const resetPassword = async (data) => {
     }
 }
 
+const updatePassword = async (data) => {
+    try {
+        const config = {
+            headers: { Authorization: `${localStorage.getItem('token')}` }
+        };
+        const result = await Axios.post(apiUrl + "auth/updatePassword", data, config)
+        return result
+    } catch (err) {
+        return err
+    }
+}
+
 const authFunc = {
     signup,
     login,
@@ -83,7 +95,8 @@ const authFunc = {
     confirmAccount,
     forgotPassword,
     checkForgotToken,
-    resetPassword
+    resetPassword,
+    updatePassword
     
 }
 export default authFunc

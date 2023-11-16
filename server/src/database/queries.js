@@ -38,6 +38,8 @@ const resetPassword = `Update users set password= ?  where email = ?`
 
 const resetForgotPasswordKey = `delete from forgot_password where email = ?`
 
+const findById = `select * from users where id = ?`
+
 module.exports = {
     createDB,
     dropDB,
@@ -49,5 +51,6 @@ module.exports = {
     createForgotToken,
     checkForgotToken,
     resetPassword,
-    resetForgotPasswordKey
+    resetForgotPasswordKey,
+    findById
 };

@@ -92,9 +92,146 @@ const updateProfile = async (data) => {
 
 };
 
+const updateTaxPersonal = async (data) => {
+    const config = {
+        headers: { Authorization: `${localStorage.getItem('token')}` }
+    };
+    try {
+        const result = await Axios.post(apiUrl + "taxInformation/taxInformation-update", data, config)
+        return result
+    } catch (err) {
+        return err
+    }
+
+};
+const getTaxInformation = async () => {
+    const config = {
+        headers: { Authorization: `${localStorage.getItem('token')}` }
+    };
+    try {
+        const result = await Axios.post(apiUrl + "taxInformation/taxInformation-get", {}, config)
+        console.log("result-->",result)
+        if(result?.data?.data?.data?.res){
+            return result?.data?.data?.data?.res
+        }else{
+            return[]
+        }
+        // return result
+    } catch (err) {
+        return err
+    }
+
+};
 
 
+const updateTaxContact= async (data) => {
+    const config = {
+        headers: { Authorization: `${localStorage.getItem('token')}` }
+    };
+    try {
+        const result = await Axios.post(apiUrl + "taxInformation/contact-details-update", data, config)
+        return result
+    } catch (err) {
+        return err
+    }
 
+    
+
+};
+
+const getTaxContact = async () => {
+    const config = {
+        headers: { Authorization: `${localStorage.getItem('token')}` }
+    };
+    try {
+        const result = await Axios.post(apiUrl + "taxInformation/contact-details-get", {}, config)
+        console.log("result-->",result)
+        if(result?.data?.data?.data?.res){
+            return result?.data?.data?.data?.res
+        }else{
+            return[]
+        }
+        // return result
+    } catch (err) {
+        return err
+    }
+
+};
+
+const updateTaxDependent = async (data) => {
+    const config = {
+        headers: { Authorization: `${localStorage.getItem('token')}` }
+    };
+    try {
+        const result = await Axios.post(apiUrl + "taxInformation/dependent-details-update", data, config)
+        return result
+    } catch (err) {
+        return err
+    }
+};
+
+const getTaxDependent = async () => {
+    const config = {
+        headers: { Authorization: `${localStorage.getItem('token')}` }
+    };
+    try {
+        const result = await Axios.post(apiUrl + "taxInformation/dependent-details-get", {}, config)
+        console.log("result-->",result)
+        if(result?.data?.data?.data?.res){
+            return result?.data?.data?.data?.res
+        }else{
+            return[]
+        }
+        // return result
+    } catch (err) {
+        return err
+    }
+
+};
+
+
+const updateTaxResidency = async (data) => {
+    const config = {
+        headers: { Authorization: `${localStorage.getItem('token')}` }
+    };
+    try {
+        const result = await Axios.post(apiUrl + "taxInformation/residency-details-update", data, config)
+        return result
+    } catch (err) {
+        return err
+    }
+};
+
+const getTaxResidency= async () => {
+    const config = {
+        headers: { Authorization: `${localStorage.getItem('token')}` }
+    };
+    try {
+        const result = await Axios.post(apiUrl + "taxInformation/residency-details-get", {}, config)
+        console.log("result-->",result)
+        if(result?.data?.data?.data?.res){
+            return result?.data?.data?.data?.res
+        }else{
+            return[]
+        }
+        // return result
+    } catch (err) {
+        return err
+    }
+
+};
+
+const updateTaxDocumentStatus = async () => {
+    const config = {
+        headers: { Authorization: `${localStorage.getItem('token')}` }
+    };
+    try {
+        const result = await Axios.post(apiUrl + "taxInformation/updateTaxDocumentStatus", {}, config)
+        return result
+    } catch (err) {
+        return err
+    }
+};
 const userProfile = {
     getAllDocument,
     uploadDocument,
@@ -102,6 +239,15 @@ const userProfile = {
     deleteDocument,
     getUserDataByToken,
     updateProfile,
-    updateDocument
+    updateDocument,
+    updateTaxPersonal,
+    getTaxInformation,
+    updateTaxContact,
+    getTaxContact,
+    updateTaxDependent,
+    getTaxDependent,
+    updateTaxResidency,
+    getTaxResidency,
+    updateTaxDocumentStatus
 }
 export default userProfile

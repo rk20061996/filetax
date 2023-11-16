@@ -3,6 +3,7 @@ const { asyncHandler } = require('../middlewares/asyncHandler');
 const checkEmail = require('../middlewares/checkEmail');
 const { signup: signupValidator, signin: signinValidator } = require('../validators/auth');
 const authController = require('../controllers/auth.controller');
+const checkUserauth = require('../middlewares/checkUserauth');
 
 
 router.route('/signup')
@@ -26,5 +27,9 @@ router.route('/checkForgotToken')
 router.route('/resetPassword')
     .post(asyncHandler(authController.resetPassword));
 
+router.route('/updatePassword')
+    .post(asyncHandler(checkUserauth),asyncHandler(authController.updatePassword));
+
+    
     
 module.exports = router;

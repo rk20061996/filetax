@@ -302,3 +302,54 @@ exports.resetPassword= (req,res) =>{
         }
     });
 }
+
+
+exports.updatePassword= (req,res) =>{
+    const { oldPassword, newPassword } = req.body;
+    User.findById(req.user_id, (err, data) => {
+        if (err) {
+            if (err.kind === "not_found") {
+                res.status(404).send({
+                    status: 'error',
+                    message: `User with id ${req.user_id} was not found`
+                    , type: "email"
+                });
+                return;
+            }
+            res.status(500).send({
+                status: 'error',
+                message: err.message,
+                type: "email"
+            });
+            return;
+        }
+        if (data) {
+            if (comparePassword(oldPassword.trim(), data.password)) {
+                const hashedPassword = hashPassword(newPassword.trim());
+                const email = data.email
+                User.resetPassword({hashedPassword,email}, (err, dat) => {
+                    // console.log("user---?1", user)
+                    if (err) {
+                        res.status(500).send({
+                            status: "error",
+                            message: err.message
+                        });
+                    } else {
+                        res.status(201).send({
+                            status: 200,
+                            data: {
+                                data
+                            }
+                        });
+                    }
+                });
+                return;
+            }
+            res.status(401).send({
+                status: 'error',
+                message: 'Incorrect password'
+            });
+        }
+    });
+
+}
