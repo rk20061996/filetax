@@ -14,6 +14,54 @@ function Pricing(props) {
                     </div>
                 </div>
             </section>
+            <section className="pricingWrap">
+                <div className="container">
+                    <div className="row">
+                        <div className="col-sm-12 col-md-4">
+                            <div className="pricingContent">
+                                <h2>Starter</h2>
+                                <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit.</p>
+                                <h2>$250</h2>
+                                <p>Billed anually</p>
+                                <button className="btn btn-primary">Start free trial</button>
+                                <ul className="list-unstyled">
+                                    <li>Lorem, ipsum dolor sit amet adipisicing elit.</li>
+                                    <li>Lorem, ipsum dolor sit amet adipisicing elit.</li>
+                                    <li>Lorem, ipsum dolor sit amet adipisicing elit.</li>  
+                                </ul>
+                            </div>
+                        </div>
+                        <div className="col-sm-12 col-md-4">
+                            <div className="pricingContent active">
+                                <h2>Starter</h2>
+                                <p>Lorem ipsum dolor, sit amet consectetur adipisicing consectetur elit.</p>
+                                <h2>$250</h2>
+                                <p>Billed anually</p>
+                                <button className="btn btn-primary">Start free trial</button>
+                                <ul className="list-unstyled">
+                                    <li>Lorem, ipsum dolor sit amet adipisicing elit.</li>
+                                    <li>Lorem, ipsum dolor sit amet adipisicing elit.</li>
+                                    <li>Lorem, ipsum dolor sit amet adipisicing elit.</li>  
+                                </ul>
+                            </div>
+                        </div>
+                        <div className="col-sm-12 col-md-4">
+                            <div className="pricingContent">
+                                <h2>Starter</h2>
+                                <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit.</p>
+                                <h2>$250</h2>
+                                <p>Billed anually</p>
+                                <button className="btn btn-primary">Start free trial</button>
+                                <ul className="list-unstyled">
+                                    <li>Lorem, ipsum dolor sit amet adipisicing elit.</li>
+                                    <li>Lorem, ipsum dolor sit amet adipisicing elit.</li>
+                                    <li>Lorem, ipsum dolor sit amet adipisicing elit.</li>  
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
 
             <Footer />
         </>
