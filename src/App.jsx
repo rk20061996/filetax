@@ -17,14 +17,15 @@ import Taxplanning from './pages/tax-planning'
 import Taxreturnhome from './pages/tax-return'
 import Itinprocessing from './pages/itin-processing'
 import Taxconsulting from './pages/tax-consulting'
-
+import Fatca from './pages/fatca'
+import Fbar from './pages/fbar'
+import Taxextension from './pages/tax-extension'
 
 import HomeProfile from './userProfile/home-profile'
 import UploadDocument from './userProfile/upload-document'
 import TaxReturn from './userProfile/tax-return'
 import Profile from './userProfile/profile'
 import TaxDocument from './userProfile/tax-documentation'
-
 import authFunc from './serviceApi/auth'
 import { useNavigate } from "react-router-dom";
 import { useLocation } from 'react-router-dom'
@@ -133,6 +134,19 @@ function App() {
         path="/tax-consulting"
         element={<Taxconsulting isLoggedIn={isLoggedIn} setisLoggedIn={setisLoggedIn} />} // <-- passed as JSX
       />
+      <Route
+        path="/fatca"
+        element={<Fatca isLoggedIn={isLoggedIn} setisLoggedIn={setisLoggedIn} />} // <-- passed as JSX
+      />
+      <Route
+        path="/fbar"
+        element={<Fbar isLoggedIn={isLoggedIn} setisLoggedIn={setisLoggedIn} />} // <-- passed as JSX
+      />
+      <Route
+        path="/tax-extension"
+        element={<Taxextension isLoggedIn={isLoggedIn} setisLoggedIn={setisLoggedIn} />} // <-- passed as JSX
+      />
+      
 
 
 

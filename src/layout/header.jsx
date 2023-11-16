@@ -52,13 +52,19 @@ function Header(props) {
                                     <ul className="dropdown-menu">
                                         {/* student-tax  tax-return itin-processing tax-consulting*/}
                                         <li><NavLink to="/tax-planning" activeClassName="active" className="nav-link"> Tax Planning Advisory </NavLink> </li>
+
                                         <li><NavLink to="/student-tax" activeClassName="active" className="nav-link"> Student Tax Filing </NavLink> </li>
+
                                         <li><NavLink to="/tax-return" activeClassName="active" className="nav-link"> Tax Return Services </NavLink> </li>
                                         <li><NavLink to="/itin-processing" activeClassName="active" className="nav-link"> ITIN Processing </NavLink> </li>
-                                        <li><a className="dropdown-item" href="fbar.html"> FBAR </a> </li>
-                                        <li><a className="dropdown-item" href="fatca-html"> FATCA </a> </li>
+
+                                        <li><NavLink to="/fbar" activeClassName="active" className="nav-link"> FBAR </NavLink></li>
+
+                                        <li><NavLink to="/fatca" activeClassName="active" className="nav-link"> FATCA </NavLink></li>
+                                        {/* <li><a className="dropdown-item" href="fatca-html">  </a> </li> */}
                                         <li><NavLink to="/tax-consulting" activeClassName="active" className="nav-link">  Tax Consulting </NavLink> </li>
-                                        <li><a className="dropdown-item" href="tax-extension.html"> Tax Extension </a> </li>
+                                        <li><NavLink to="/tax-extension" activeClassName="active" className="nav-link">  Tax Extension </NavLink> </li>
+
                                     </ul>
                                 </li>
                                 <li className="nav-item">
