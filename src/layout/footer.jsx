@@ -30,7 +30,7 @@ function footer() {
                             value, commitment and behaviour towards fulfilment of client objectiv</p>
                     </div>
                     <div className="col-sm-12">
-                        <p className="copyright">© 2021. All Copy Rights Reserved by FILETAX.US</p>
+                        <p className="copyright">© 2023. All Copy Rights Reserved by FILETAX.US</p>
                     </div>
                 </div>
             </div>
