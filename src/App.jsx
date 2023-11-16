@@ -30,7 +30,9 @@ import authFunc from './serviceApi/auth'
 import { useNavigate } from "react-router-dom";
 import { useLocation } from 'react-router-dom'
 
-// import '../public/css/style.css'
+
+import Adminhome from './admin/admin-home'
+
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 function App() {
@@ -185,6 +187,12 @@ function App() {
             <TaxDocument isLoggedIn={isLoggedIn} setisLoggedIn={setisLoggedIn} /></>} // <-- passed as JSX
       />
       
+      <Route
+        path="/admin/home"
+        element={
+          <><link rel="stylesheet" href="css/admin.css" />
+            <Adminhome  /></>} // <-- passed as JSX
+      />
     </Routes>
 
   )
