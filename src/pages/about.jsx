@@ -9,15 +9,17 @@ function about(props) {
             <Header isLoggedIn={props.isLoggedIn} setisLoggedIn={props.setisLoggedIn}/>
             <section className="taxServices">
                 <div className="container">
-                    <div className="mainHeading">
-                        <h6>WELCOME TO FILETAX</h6>
-                        <h2>We provide you the best tax services in most<br /> convenient & affordable way.</h2>
-                    </div>
-                    <p>Our team of experts with 15 plus years of experience provide you the best solutions for all your
-                        tax compliance including Individual & Business tax returns. Individual tax services include ITIN
-                        application FBAR & FATCA filings. Our process is 100% online, secured, convenient & affordable.</p>
-                    <div className="text-center mt-4">
-                        <a href="#" className="btn btn-primary">Read More</a>
+                    <div className="aboutContent">
+                        <div className="mainHeading">
+                            <h6>WELCOME TO FILETAX</h6>
+                            <h2>We provide you the best tax services in most<br /> convenient & affordable way.</h2>
+                        </div>
+                        <p>Our team of experts with 15 plus years of experience provide you the best solutions for all your
+                            tax compliance including Individual & Business tax returns.<br></br> Individual tax services include ITIN
+                            application FBAR & FATCA filings. Our process is 100% online, secured, convenient & affordable.</p>
+                        <div className="text-center mt-4">
+                            <a href="#" className="btn btn-primary">Read More</a>
+                        </div>
                     </div>
                 </div>
             </section>

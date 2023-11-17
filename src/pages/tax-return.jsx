@@ -7,7 +7,7 @@ function Taxreturnhome(props) {
     return (
         <>
             <Header isLoggedIn={props.isLoggedIn} setisLoggedIn={props.setisLoggedIn} />
-            <section className="innerPageBanner servicesBanner">
+            <section className="innerPageBanner servicesBanner taxReturn">
                 <div className="container">
                     <div className="bannerContent">
                         <h1>Tax Return Services</h1>
