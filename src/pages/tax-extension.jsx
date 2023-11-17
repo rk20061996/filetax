@@ -7,7 +7,7 @@ function Taxextension(props) {
     return (
         <>
             <Header isLoggedIn={props.isLoggedIn} setisLoggedIn={props.setisLoggedIn} />
-            <section className="innerPageBanner servicesBanner">
+            <section className="innerPageBanner servicesBanner taxExtention">
                 <div className="container">
                     <div className="bannerContent">
                         <h1>Tax Extension Filing Services</h1>
@@ -23,7 +23,7 @@ function Taxextension(props) {
                             <p>If you are living abroad, you are granted an automatic two-month out of country tax extension to file your US. income tax returns, which pushes the deadline to June 15th. This applies if, as of April 15th, you are living, have your main place of business, or are on military/naval service duty outside the United States and Puerto Rico. It’s important to note if you’re currently living in the US., the automatic extension does not apply to you. Your tax return and any payments due need to be submitted by April 15th. Extension By Request Until October 15th If, however, you are not ready to file by June 15th, you can request another extension by timely filing Form 4868 with the Internal Revenue Service. The deadline would then be October 15th.</p>
                         </div>
                         <div className="col-sm-12 col-md-4">
-                            <img src="images/tax-extention.jpg" alt="" width="100%" className="heightAuto" />
+                            <img src="images/taxConsulting.jpg" alt="" width="100%" className="heightAuto" />
                         </div>
                         <div className="col-sm-12">
                         <h3>Additional US Tax Extension Until December 15th</h3>

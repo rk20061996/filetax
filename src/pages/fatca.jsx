@@ -7,7 +7,7 @@ function Fatca(props) {
     return (
         <>
             <Header isLoggedIn={props.isLoggedIn} setisLoggedIn={props.setisLoggedIn} />
-            <section className="innerPageBanner servicesBanner">
+            <section className="innerPageBanner servicesBanner fatcabg">
                 <div className="container">
                     <div className="bannerContent">
                         <h1>FATCA Filing</h1>

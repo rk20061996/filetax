@@ -235,6 +235,9 @@ header .dropdown-item:hover {
 }
 .taxServices {
     padding: 60px 0;
+}
+.aboutBg {
+    padding: 60px 0;
     background-image: url(../images/aboutBg.jpg);
     background-repeat: no-repeat;
     background-size: cover;
@@ -247,7 +250,7 @@ header .dropdown-item:hover {
 .aboutContent h2, .aboutContent h6, .aboutContent p{
     color: #ffffff;
 }
-.taxServices:before{
+.aboutBg:before{
     content: '';
     position: absolute;
     left: 0;
@@ -486,6 +489,23 @@ footer li a span{
 .innerPageBanner.taxReturn{
     background-image: url(../images/tax-return-services.jpg);
 }
+.innerPageBanner.ittinBg{
+    background-image: url(../images/ittinBg.jpg);
+}
+.innerPageBanner.fbarbg{
+    background-image: url(../images/fbar.jpg);
+}
+.innerPageBanner.fatcabg{
+    background-image: url(../images/fatcabg.jpg);
+}
+.innerPageBanner.taxConsulting{
+    background-image: url(../images/taxConsulting.jpg);
+}
+.innerPageBanner.taxExtention{
+    background-image: url(../images/taxExtention.jpg);
+}
+
+
 
 .innerPageBanner{
     padding: 60px 0;

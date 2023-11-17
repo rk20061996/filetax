@@ -7,7 +7,7 @@ function about(props) {
     return (
         <>
             <Header isLoggedIn={props.isLoggedIn} setisLoggedIn={props.setisLoggedIn}/>
-            <section className="taxServices">
+            <section className="taxServices aboutBg">
                 <div className="container">
                     <div className="aboutContent">
                         <div className="mainHeading">
