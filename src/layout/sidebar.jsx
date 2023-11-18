@@ -14,7 +14,9 @@ function Sidebar(props) {
 
     useEffect(() => {
         let localSession = localStorage.getItem('token');
-        if (localSession) {
+        let admincheck = localStorage.getItem("admin");
+
+        if (localSession ) {
             setLoggedIn(true);
         } else {
             navigate('/');

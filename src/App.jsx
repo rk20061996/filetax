@@ -33,6 +33,8 @@ import { useLocation } from 'react-router-dom'
 
 import Adminhome from './admin/admin-home'
 
+import Adminprofile from './admin/admin-profile'
+
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 function App() {
@@ -148,7 +150,7 @@ function App() {
         path="/tax-extension"
         element={<Taxextension isLoggedIn={isLoggedIn} setisLoggedIn={setisLoggedIn} />} // <-- passed as JSX
       />
-      
+
 
 
 
@@ -179,21 +181,28 @@ function App() {
 
             <Profile isLoggedIn={isLoggedIn} setisLoggedIn={setisLoggedIn} /></>} // <-- passed as JSX
       />
-            <Route
+      <Route
         path="/profile/tax-documentaion"
         element={
           <><link rel="stylesheet" href="css/profile.css" />
 
             <TaxDocument isLoggedIn={isLoggedIn} setisLoggedIn={setisLoggedIn} /></>} // <-- passed as JSX
       />
-      
+
       <Route
         path="/admin/home"
         element={
           <><link rel="stylesheet" href="css/admin.css" />
-            <Adminhome  /></>} // <-- passed as JSX
+            <Adminhome isLoggedIn={isLoggedIn} setisLoggedIn={setisLoggedIn} /></>} // <-- passed as JSX
+      />
+      <Route
+        path="/admin/profile/:id"
+        element={
+          <><link rel="stylesheet" href="css/admin.css" />
+            <Adminprofile isLoggedIn={isLoggedIn} setisLoggedIn={setisLoggedIn} /></>} // <-- passed as JSX
       />
     </Routes>
+
 
   )
 
