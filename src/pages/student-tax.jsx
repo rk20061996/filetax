@@ -7,7 +7,7 @@ function Studenttax(props) {
     return (
         <>
             <Header isLoggedIn={props.isLoggedIn} setisLoggedIn={props.setisLoggedIn} />
-            <section className="innerPageBanner servicesBanner">
+            <section className="innerPageBanner servicesBanner studentBg">
                 <div className="container">
                     <div className="bannerContent">
                         <h1>Student Tax Filing Services</h1>

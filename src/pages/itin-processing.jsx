@@ -7,7 +7,7 @@ function Itinprocessing(props) {
     return (
         <>
             <Header isLoggedIn={props.isLoggedIn} setisLoggedIn={props.setisLoggedIn} />
-            <section className="innerPageBanner servicesBanner">
+            <section className="innerPageBanner servicesBanner ittinBg">
                 <div className="container">
                     <div className="bannerContent">
                         <h1>ITIN Processing</h1>

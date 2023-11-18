@@ -236,6 +236,29 @@ header .dropdown-item:hover {
 .taxServices {
     padding: 60px 0;
 }
+.aboutBg {
+    padding: 60px 0;
+    background-image: url(../images/aboutBg.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+    position: relative;
+}
+.aboutContent{
+    position: relative;
+}
+.aboutContent h2, .aboutContent h6, .aboutContent p{
+    color: #ffffff;
+}
+.aboutBg:before{
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background-color: #000000b3;
+}
 .taxServices p {
     text-align: center;
 }
@@ -410,7 +433,7 @@ footer p, footer a{
     opacity: .5;
 }
 .aboutSection {
-    padding-bottom: 50px;
+    padding: 50px 0;
 }
 .successtories .item {
     padding-bottom: 40px;
@@ -460,6 +483,30 @@ footer li a span{
     margin-right: 5px;
 }
 /* Services page */
+.innerPageBanner.studentBg{
+    background-image: url(../images/studentBg.jpg);
+}
+.innerPageBanner.taxReturn{
+    background-image: url(../images/tax-return-services.jpg);
+}
+.innerPageBanner.ittinBg{
+    background-image: url(../images/ittinBg.jpg);
+}
+.innerPageBanner.fbarbg{
+    background-image: url(../images/fbar.jpg);
+}
+.innerPageBanner.fatcabg{
+    background-image: url(../images/fatcabg.jpg);
+}
+.innerPageBanner.taxConsulting{
+    background-image: url(../images/taxConsulting.jpg);
+}
+.innerPageBanner.taxExtention{
+    background-image: url(../images/taxExtention.jpg);
+}
+
+
+
 .innerPageBanner{
     padding: 60px 0;
     background-repeat: no-repeat;

@@ -7,7 +7,7 @@ function Fbar(props) {
     return (
         <>
             <Header isLoggedIn={props.isLoggedIn} setisLoggedIn={props.setisLoggedIn} />
-            <section className="innerPageBanner servicesBanner">
+            <section className="innerPageBanner servicesBanner fbarbg">
                 <div className="container">
                     <div className="bannerContent">
                         <h1>FBAR Filing</h1>

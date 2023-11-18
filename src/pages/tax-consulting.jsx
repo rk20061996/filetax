@@ -7,7 +7,7 @@ function Taxconsulting(props) {
     return (
         <>
             <Header isLoggedIn={props.isLoggedIn} setisLoggedIn={props.setisLoggedIn} />
-            <section className="innerPageBanner servicesBanner">
+            <section className="innerPageBanner servicesBanner taxConsulting">
                 <div className="container">
                     <div className="bannerContent">
                         <h1>Tax Consulting Services</h1>
@@ -18,7 +18,7 @@ function Taxconsulting(props) {
                 <div className="container">
                     <div className="row">
                         <div className="col-sm-12 col-md-4">
-                            <img src="images/Tax-Consulting.png" alt="" width="100%" />
+                            <img src="images/taxExtention.jpg" alt="" width="100%" />
                         </div>
                         <div className="col-sm-12 col-md-8">
                             <h3>Tax Consulting Services</h3>
