@@ -152,6 +152,104 @@ const updateTaxResidency = async (data) => {
         return err
     }
 };
+
+const getallUploadedDocument = async (data) => {
+    const config = {
+        headers: { Authorization: `${localStorage.getItem('token')}` }
+    };
+    try {
+        const result = await Axios.post(apiUrl + "admin/user-uploaded-document", data, config)
+        return result
+    } catch (err) {
+        return err
+    }
+};
+const deleteDocument = async (data) => {
+    const config = {
+        headers: { Authorization: `${localStorage.getItem('token')}` }
+    };
+    try {
+        const result = await Axios.post(apiUrl + "data/deleteDocument", data, config)
+        return result
+    } catch (err) {
+        return err
+    }
+
+};
+
+const uploadDocument = async (data) => {
+    const config = {
+        headers: { Authorization: `${localStorage.getItem('token')}` }
+    };
+    try {
+        const result = await Axios.post(apiUrl + "admin/uploadDocument", data, config)
+        return result
+    } catch (err) {
+        return err
+    }
+
+};
+const getAllDocument = async (data) => {
+    try {
+        const result = await Axios.post(apiUrl + "data/getDocumentName", {}, {})
+        return result
+    } catch (err) {
+        return err
+    }
+
+};
+
+const uploadTaxDraft = async (data) => {
+    const config = {
+        headers: { Authorization: `${localStorage.getItem('token')}` }
+    };
+    try {
+        const result = await Axios.post(apiUrl + "admin/uploadTaxDraft", data, config)
+        return result
+    } catch (err) {
+        return err
+    }
+
+};
+const getTaxDraftDocument = async (data) => {
+    const config = {
+        headers: { Authorization: `${localStorage.getItem('token')}` }
+    };
+    try {
+        const result = await Axios.post(apiUrl + "admin/getTaxDraftDocument", data, config)
+        return result
+    } catch (err) {
+        return err
+    }
+
+};
+
+const deleteTaxDocument = async (data) =>{
+    const config = {
+        headers: { Authorization: `${localStorage.getItem('token')}` }
+    };
+    try {
+        const result = await Axios.post(apiUrl + "admin/deleteTaxDocument", data, config)
+        return result
+    } catch (err) {
+        return err
+    }
+    
+}
+
+const updateStatus = async (data) =>{
+    const config = {
+        headers: { Authorization: `${localStorage.getItem('token')}` }
+    };
+    try {
+        const result = await Axios.post(apiUrl + "admin/updateStatus", data, config)
+        return result
+    } catch (err) {
+        return err
+    }
+    
+}
+
 const authFunc = {
     getAllUser,
     getSingleUser,
@@ -162,7 +260,14 @@ const authFunc = {
     updateTaxPersonal,
     updateTaxContact,
     updateTaxDependent,
-    updateTaxResidency
-    
+    updateTaxResidency,
+    getallUploadedDocument,
+    deleteDocument,
+    uploadDocument,
+    getAllDocument,
+    uploadTaxDraft,
+    getTaxDraftDocument,
+    deleteTaxDocument,
+    updateStatus
 }
 export default authFunc

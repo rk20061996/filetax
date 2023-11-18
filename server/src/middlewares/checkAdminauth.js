@@ -4,7 +4,7 @@ const checkUserauth =  (req, res, next) => {
     var authorization = req.headers.authorization;
     // console.log("authorization++++",authorization)
     var data = decode(authorization)
-    // console.log("dataAdmin", data)
+    console.log("dataAdminmiddle", data)
 
     if (data) {
         req.user_id = data.id

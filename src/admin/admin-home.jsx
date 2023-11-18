@@ -10,6 +10,9 @@ function Adminhome(props) {
     let navigate = useNavigate();
     const [userData, setUserData] = useState([]);
     const [userPaymentData, setUserPaymentData] = useState([]);
+    const [totalClientCount, settotalClientCount] = useState(0);
+
+    const [filterStatus, setfilterStatus] = useState(0);
 
     const [currentPage, setCurrentPage] = useState(1);
     const [usersPerPage] = useState(10); // Set the number of users per page
@@ -20,18 +23,18 @@ function Adminhome(props) {
             localStorage.removeItem('token')
             navigate("/");
         }
-        getUserData();
+        getUserData({filterStatus},"OnLoad");
         console.log("userPaymentData--->",userPaymentData)
     }, []);
 
     useEffect(() => {
-        
-        console.log("userPaymentData--->",userPaymentData)
-    }, [userPaymentData]);
+        getUserData({filterStatus},"OnFilter");
 
-    const getUserData = async () => {
+    }, [filterStatus]);
+
+    const getUserData = async (data,type) => {
         let localSession = localStorage.getItem('token')
-        const result = await authFunc.getAllUser();
+        const result = await authFunc.getAllUser(data);
         console.log("dataAdmin,", result)
         if (result?.data?.data?.res1) {
             setUserData(result?.data?.data?.res1);
@@ -41,16 +44,18 @@ function Adminhome(props) {
             // let 
             let paymentCompleted = [];
             let paymentNotCompleted = [];
-
-            for (let i = 0; i < udata.length; i++) {
-                let statusData = {};
-                if (udata[i].status_type === 7) {
-                    paymentCompleted.push(udata[i]);
-                } else {
-                    paymentNotCompleted.push(udata[i]);
+            if(type === "OnLoad"){
+                for (let i = 0; i < udata.length; i++) {
+                    let statusData = {};
+                    if (udata[i].status_type === 7) {
+                        paymentCompleted.push(udata[i]);
+                    } else {
+                        paymentNotCompleted.push(udata[i]);
+                    }
                 }
+                setUserPaymentData({paymentNotCompleted,paymentCompleted})   
+                settotalClientCount(udata.length)
             }
-            setUserPaymentData({paymentNotCompleted,paymentCompleted})
 
         } else {
             localStorage.removeItem('token');
@@ -73,7 +78,7 @@ function Adminhome(props) {
         <>
             {/* <Header /> */}
             <div className="main d-flex w-100 h-100">
-                <Sidebar isLoggedIn={props.isLoggedIn} setisLoggedIn={props.setisLoggedIn}/>
+                <Sidebar setfilterStatus={setfilterStatus} filterStatus={filterStatus} isLoggedIn={props.isLoggedIn} setisLoggedIn={props.setisLoggedIn}/>
                 <div className="mainContent container-fluid">
                     <div className="card dashboard">
                         <h3>Dashboard</h3>
@@ -87,7 +92,7 @@ function Adminhome(props) {
                             <div className="col-md-4">
                                 <div className="innerCard">
                                     <h4>Client Count</h4>
-                                    <p>{userData.length}</p>
+                                    <p>{totalClientCount}</p>
                                 </div>
                             </div>
                             <div className="col-md-4">
@@ -115,7 +120,7 @@ function Adminhome(props) {
                                         <td>{user.firstname} {user.lastname}</td>
                                         <td>{user.phone}</td>
                                         <td>{user.email}</td>
-                                        <td>{user.status_type ? user.status_type : "Ready for preparation"}</td>
+                                        <td>{user.status_type ? status[user.status_type] : "Ready for preparation"}</td>
                                         <td><Link to={`/admin/profile/${user.user_idMain}`} className="btn btn-primary">View Client</Link></td>
                                     </tr>
                                 ))}

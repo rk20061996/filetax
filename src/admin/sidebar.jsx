@@ -7,7 +7,7 @@ function Sidebar(props) {
     const [sessionCheck, setsessionCheck] = useState('')
     const [isLoggedIn, setisLoggedIn] = useState(false)
     let navigate = useNavigate();
-
+    const [selectedStatus, setSelectedStatus] = useState([0]);
     useEffect(() => {
         let localSession = localStorage.getItem('token')
         setsessionCheck(localSession)
@@ -18,6 +18,13 @@ function Sidebar(props) {
             navigate("/");
         }
     }, []);
+
+    const handleCheckboxChange = (value) => {
+        // alert(value)
+        setSelectedStatus(value)
+        props.setfilterStatus(value)
+    };
+
 
     return (
         <div className="SlideNav">
@@ -39,35 +46,60 @@ function Sidebar(props) {
                             <summary>Status</summary>
                             <ul>
                                 <li>
-                                    <label><input type="checkbox" name="fc" value="red"  checked/>All Clients</label>
+                                    <label><input type="radio" name="fc" value="0"    
+                                    checked={selectedStatus.includes(0)}
+                                        onChange={() => handleCheckboxChange("0")}
+                                    
+                                        />All Clients</label>
                                 </li>
                                 <li>
-                                    <label><input type="checkbox" name="fc" value="orange" />Ready for preparation</label>
+                                    <label><input type="radio" name="fc" value="1" 
+                                    checked={selectedStatus.includes(1)}
+                                        onChange={() => handleCheckboxChange("1")}
+                                        />Ready for preparation</label>
                                 </li>
                                 <li>
-                                    <label><input type="checkbox" name="fc" value="yellow" />In Progress </label>
+                                    <label><input type="radio" name="fc" value="2" 
+                                    checked={selectedStatus.includes(2)}
+                                    onChange={() => handleCheckboxChange("2")}
+                                    />In Progress </label>
                                 </li>
                                 <li>
-                                    <label><input type="checkbox" name="fc" value="green" />Summary Sent</label>
+                                    <label><input type="radio" name="fc" value="3" 
+                                    checked={selectedStatus.includes(3)}
+                                    onChange={() => handleCheckboxChange("3")}
+                                    />Summary Sent</label>
                                 </li>
                                 <li>
-                                    <label><input type="checkbox" name="fc" value="blue"  />Pending Recieved </label>
+                                    <label><input type="radio" name="fc" value="4"  
+                                    checked={selectedStatus.includes(4)}
+                                    onChange={() => handleCheckboxChange("4")}
+                                    />Pending Recieved </label>
                                 </li>
                                 <li>
-                                    <label><input type="checkbox" name="fc" value="purple" />Draft</label>
+                                    <label><input type="radio" name="fc" value="5" 
+                                    checked={selectedStatus.includes(5)}
+                                    onChange={() => handleCheckboxChange("5")}
+                                    />Draft</label>
                                 </li>
                                 <li>
-                                    <label><input type="checkbox" name="fc" value="magenta" />Ready for e-file</label>
+                                    <label><input type="radio" name="fc" value="6" 
+                                    checked={selectedStatus.includes(6)}
+                                    onChange={() => handleCheckboxChange("6")}
+                                    />Ready for e-file</label>
                                 </li>
                                 <li>
-                                    <label><input type="checkbox" name="fc" value="lightpink" />Accepted</label>
+                                    <label><input type="radio" name="fc" value="7" 
+                                    checked={selectedStatus.includes(7)}
+                                    onChange={() => handleCheckboxChange("7")}
+                                    />Accepted</label>
                                 </li>
                             </ul>
                         </details>
                     </fieldset>
                 </li>
-                <li>
-                    <a onClick={() => {
+                <li style={{"backgroundColor": "wheat","cursor":"pointer"}}>
+                    <a  onClick={() => {
                         localStorage.removeItem('token');
                         localStorage.removeItem('admin');
                         navigate('/');

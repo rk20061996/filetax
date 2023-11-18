@@ -3,30 +3,69 @@ import { Link } from 'react-router-dom';
 import { Pagination } from 'react-bootstrap';
 import Sidebar from "./sidebar";
 import Taxdocumentationadmin from "./tax-documentation-admin";
-
+import { Modal, Button } from 'react-bootstrap';
+import Uploaddocumentmodel from "./components/upload-document-model";
 import {
     useParams
 } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import authFunc from '../serviceApi/admin';
+import { Dropdown } from 'react-bootstrap';
 
 function Adminprofile(props) {
     let { id } = useParams();
     let navigate = useNavigate();
 
     const [userData, setUserData] = useState([]);
+    const [uploadedDocument, setuploadedDocument] = useState([]);
+    const [showModal, setShowModal] = useState(false);
+    const [taxDraft, settaxDraft] = useState([]);
+    const [selectedStatus, setSelectedStatus] = useState('1');
+    const [selectedStatusDisabled, setselectedStatusDisabled] = useState([]);
+
+    const status = { 1: "Ready for preparation", 2: "In Progress", 3: "Summary Sent", 4: "Pending Recieved", 5: "Draft", 6: "Ready for e-file", 7: "Accepted" }
 
     // alert(id)
 
     useEffect(() => {
         getSingleUserData()
+        getallUploadedDocument()
+        getTaxDraftDocument()
     }, []);
+
+    const handleStatusChange = async (event) => {
+        // alert(event)
+        const dataArray = []
+        for (let i = 1; i <= event; i++) {
+            // setselectedStatusDisabled.push(i)
+            dataArray.push(i)
+        }
+        setselectedStatusDisabled(dataArray)
+        setSelectedStatus(status[event]);
+        const result = await authFunc.updateStatus({ id, event, selectedStatus });
+
+        // Perform any other actions needed when the status changes
+    };
 
     const getSingleUserData = async () => {
         const result = await authFunc.getSingleUser({ id });
         console.log("dataAdmin,", result)
         if (result?.data?.data?.res1) {
             setUserData(result?.data?.data?.res1);
+            const dataResult = result?.data?.data?.res1
+            if (dataResult[0]?.status_type) {
+                const dataArray = []
+
+                for (let i = 1; i <= dataResult[0].status_type; i++) {
+                    // setselectedStatusDisabled.push(i)
+                    dataArray.push(i)
+                }
+                setselectedStatusDisabled(dataArray)
+                setSelectedStatus(status[dataResult[0].status_type]);
+            } else {
+                setSelectedStatus(status[1])
+                setselectedStatusDisabled([1])
+            }
             console.log("result?.data?.data?.res1", result?.data?.data?.res1)
         } else {
             localStorage.removeItem('token');
@@ -36,6 +75,68 @@ function Adminprofile(props) {
             navigate("/");
         }
     }
+    const getallUploadedDocument = async () => {
+        const result = await authFunc.getallUploadedDocument({ id });
+        console.log("result ---->0", result.data.data)
+        setuploadedDocument(result.data.data)
+    }
+    const getTaxDraftDocument = async () => {
+        const result = await authFunc.getTaxDraftDocument({ id });
+        console.log("result051", result.data.data)
+        settaxDraft(result.data.data)
+        // setuploadedDocument(result.data.data)
+    }
+    const handleFileAction = async (action, filenameid) => {
+        // Perform action based on 'action' (view, download, delete)
+        switch (action) {
+            case 'view':
+                window.open("uploads/" + filenameid, '_blank');
+                // break;
+                break;
+            case 'download':
+                window.open("uploads/" + filenameid, '_blank');
+                // break;
+                // break;
+                break;
+            case 'delete':
+                await authFunc.deleteDocument({ id: filenameid });
+                console.log("Document deleted");
+                getallUploadedDocument()
+                break;
+            default:
+                break;
+        }
+    };
+
+    const handleShowModal = () => setShowModal(!showModal);
+
+    // Function to close the modal
+    const handleCloseModal = () => {
+        setShowModal(false)
+    };
+    const handleFileChange2 = async (event) => {
+        event.preventDefault(); // Prevent form submission behavior
+
+        const formData = new FormData();
+        formData.append('file', event.target.files[0]);
+        formData.append('id', id);
+        event.target.value = '';
+        getTaxDraftDocument()
+        event.target.value = '';
+        try {
+            const response = await authFunc.uploadTaxDraft(formData);
+            event.preventDefault(); // Prevent form submission behavior
+            console.log("File uploaded:", response);
+        } catch (error) {
+            console.error("Error uploading file:", error);
+        }
+    };
+
+    const deleteTaxDraft = async (type, id) => {
+        await authFunc.deleteTaxDocument({ id: id });
+        console.log("Document deleted");
+        getTaxDraftDocument()
+    }
     return (
         <>
             {/* <Header /> */}
@@ -43,48 +144,25 @@ function Adminprofile(props) {
                 <Sidebar isLoggedIn={props.isLoggedIn} setisLoggedIn={props.setisLoggedIn} />
                 <div className="mainContent container-fluid">
                     <div className="card">
-                        <fieldset className="customfieldset">
-                            <div className="select-box">
-                                <div className="options-container">
-                                    <div className="option">
-                                        <input type="radio" className="radio" id="value1" name="category" value="value1" />
-                                        <label for="value1">Ready for preparation</label>
-                                    </div>
-                                    <div className="option">
-                                        <input type="radio" className="radio" id="value2" name="category" value="value2" />
-                                        <label for="value2">In Progress</label>
-                                    </div>
-                                    <div className="option">
-                                        <input type="radio" className="radio" id="value3" name="category" value="value3" />
-                                        <label for="value3">Summary Sent</label>
-                                    </div>
-                                    <div className="option">
-                                        <input type="radio" className="radio" id="value3" name="category" value="value3" />
-                                        <label for="value3">Pending Recieved</label>
-                                    </div>
-                                    <div className="option">
-                                        <input type="radio" className="radio" id="value3" name="category" value="value3" />
-                                        <label for="value3">Draft</label>
-                                    </div>
-                                    <div className="option">
-                                        <input type="radio" className="radio" id="value3" name="category" value="value3" />
-                                        <label for="value3">Ready for e-file</label>
-                                    </div>
-                                    <div className="option">
-                                        <input type="radio" className="radio" id="value3" name="category" value="value3" />
-                                        <label for="value3">Accepted</label>
-                                    </div>
-                                </div>
-                                <div className="selector-wrapper">
-                                    <span className="selected">Select Status</span>
-                                    <svg className="arrow rotated" style={{ "text-align": "right" }} id="drp-arrow2" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
-                                    // className="transition-all ml-auto rotate-180"
-                                    >
-                                        <path d="M7 14.5l5-5 5 5" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-                                    </svg>
-                                </div>
-                            </div>
-                        </fieldset>
+
+
+                        <Dropdown className="customfieldset" onSelect={handleStatusChange}>
+                            <Dropdown.Toggle variant="primary" id="dropdown-basic">
+                                {selectedStatus || 'Select Status'}
+                            </Dropdown.Toggle>
+
+                            <Dropdown.Menu>
+                                <Dropdown.Item disabled={selectedStatusDisabled.includes(1)} eventKey="1">Ready for preparation</Dropdown.Item>
+                                <Dropdown.Item disabled={selectedStatusDisabled.includes(2)} eventKey="2">In Progress</Dropdown.Item>
+                                <Dropdown.Item disabled={selectedStatusDisabled.includes(3)} eventKey="3">Summary Sent</Dropdown.Item>
+                                <Dropdown.Item disabled={selectedStatusDisabled.includes(4)} eventKey="4">Pending Recieved</Dropdown.Item>
+                                <Dropdown.Item disabled={selectedStatusDisabled.includes(5)} eventKey="5">Draft</Dropdown.Item>
+                                <Dropdown.Item disabled={selectedStatusDisabled.includes(6)} eventKey="6">Ready for e-file</Dropdown.Item>
+                                <Dropdown.Item disabled={selectedStatusDisabled.includes(7)} eventKey="7">Accepted</Dropdown.Item>
+
+                                {/* Add other status options here */}
+                            </Dropdown.Menu>
+                        </Dropdown>
                         <h3>User Profile</h3>
                         <form className="profileForm">
                             <div className="row">
@@ -127,31 +205,51 @@ function Adminprofile(props) {
                         </form>
                         <div className="row mt-5">
                             <div className="col-sm-12">
-                                <button className="btn btn-primary w-auto" data-bs-toggle="modal" data-bs-target="#tagdoc">Tax Documentation Form</button>
+                                <button className="btn btn-primary w-auto" data-bs-toggle="modal" data-bs-target="#tagdoc">Tax Documentation Form</button>
                             </div>
                         </div>
                         <div className="row mt-5">
                             <div className="col-sm-12">
                                 <h3>All Documents uploaded</h3>
                                 <div className="DocumentUploaded">
-                                    <h5 className="d-flex align-items-center">File type <p>Date: 20-09-2023</p>
-                                        <div className="d-flex viewBtns">
-                                            <button className="btn btn-primary">View</button>
-                                            <button className="btn btn-primary">Download</button>
-                                            <button className="btn btn-primary">Delete</button>
-                                        </div>
-                                    </h5>
-                                    <button className="btn btn-primary">Upload Document</button>
+                                    {uploadedDocument.map((file, index) => (
+                                        <h5 className="d-flex align-items-center">{file.document_name} <p>Date: {new Date(file.created_at).toLocaleDateString()}</p>
+                                            <p>{file.comment}</p>
+                                            <div style={{
+                                                "marginLeft": "auto",
+                                                "marginRight": 0
+                                            }} className="d-flex viewBtns">
+                                                {/* <button className="btn btn-primary" onClick={() => handleFileAction('view')}>View</button> */}
+                                                <button className="btn btn-primary" onClick={() => handleFileAction('download', file.filename)}>Download/View</button>
+                                                <button className="btn btn-primary" onClick={() => handleFileAction('delete', file.document_id)}>Delete</button>
+                                            </div>
+                                        </h5>
+                                    ))}
+                                    {uploadedDocument.length === 0 && <h5>No Uploaded Document</h5>}
+
+
+                                    <button className="btn btn-primary" onClick={handleShowModal} >
+                                        {/* <input style={{ width: '100%', display: 'none' }} type="file" className="input-file"  onChange={handleFileChange} /> */}
+
+                                        Upload Document</button>
                                 </div>
                             </div>
                         </div>
                         <div className="row mt-5">
                             <div className="col-sm-12">
                                 <h3 className="mb-3">Tax Draft </h3>
-                                <div className="file-upload">
-                                    <label for="upload" className="file-upload__label">Upload tax draft</label>
-                                    <input id="upload" className="file-upload__input" type="file" name="file-upload" />
-                                </div>
+                                {!taxDraft.length ?
+                                    <div className="file-upload">
+                                        <label for="upload" className="file-upload__label">Upload tax draft</label>
+                                        <input id="upload" onChange={(event) => handleFileChange2(event)} className="file-upload__input" type="file" name="file-upload" />
+                                    </div>
+                                    : <><div style={{
+                                        "marginLeft": "auto",
+                                        "marginRight": 0
+                                    }} className="d-flex viewBtns"><p>Document Already Updated waiting for Client review</p>
+                                        <button className="btn btn-primary" onClick={() => handleFileAction('download', taxDraft[0].file)}>Download/View</button>
+                                        <button className="btn btn-primary" onClick={() => deleteTaxDraft('delete', taxDraft[0].id)}>Delete</button></div></>
+                                }
                             </div>
                         </div>
                     </div>
@@ -172,6 +270,21 @@ function Adminprofile(props) {
                     </div>
                 </div>
             </div>
+
+            <Modal show={showModal} onHide={handleCloseModal}>
+                <Modal.Header closeButton>
+                    <Modal.Title>Success!</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <Uploaddocumentmodel handleShowModal={handleShowModal} />
+                    {/* <p>Congrats! Tax Document has been saved.</p> */}
+                </Modal.Body>
+                {/* <Modal.Footer> */}
+                {/* <Button variant="secondary" onClick={handleCloseModal}>
+                        OK
+                    </Button> */}
+                {/* </Modal.Footer> */}
+            </Modal>
         </>
     );
 }

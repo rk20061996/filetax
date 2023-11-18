@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link } from 'react-router-dom';
 import userProfile from "../../serviceApi/userprofile";
 import { Modal, Button } from 'react-bootstrap';
+import authFunc from '../../serviceApi/admin';
 
 const Residency = (props) => {
     const [validated, setValidated] = useState(false);
@@ -16,8 +17,8 @@ const Residency = (props) => {
         return `${year}-${month}-${day}`;
     }
     const handleFormSubmit = async () => {
-        const data = await userProfile.updateTaxDocumentStatus()
-        await userProfile.updateTaxResidency(props.formData)
+        // const data = await authFunc.updateTaxDocumentStatus()
+        await authFunc.updateTaxResidency(props.formData)
 
         handleShowModal()
     }
@@ -34,7 +35,7 @@ const Residency = (props) => {
                     <Modal.Title>Success!</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <p>Congrats! Your Tax Document has been saved.</p>
+                    <p>Congrats! Tax Document has been saved.</p>
                 </Modal.Body>
                 <Modal.Footer>
                     <Button variant="secondary" onClick={handleCloseModal}>
@@ -204,7 +205,7 @@ const Residency = (props) => {
                         </div>
                         <div className="row">
                             <div className="col-sm-12">
-                                <button onClick={() => { handleFormSubmit() }} type="button" className="btn btn-primary">Submit</button>
+                                <button onClick={() => { handleFormSubmit() }} type="button" data-bs-dismiss="modal" aria-label="Close" className="btn btn-primary">Submit</button>
                             </div>
                         </div>
                     </form>
@@ -213,5 +214,5 @@ const Residency = (props) => {
         </div>
     )
 }
-
+// type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
 export { Residency }; // Exporting as a named export

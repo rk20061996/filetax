@@ -33,6 +33,25 @@ router.route('/dependent-details-update')
 router.route('/residency-details-update')
     .post(asyncHandler(checkAdminauth), asyncHandler(adminController.updateResidencyDetails));
 
+router.route('/user-uploaded-document')
+    .post(asyncHandler(checkAdminauth), asyncHandler(adminController.userUploadedDocument));
+
+router.route('/uploadDocument')
+    .post(asyncHandler(checkAdminauth), asyncHandler(adminController.uploadDocumentFromAdmin));
+
+router.route('/uploadTaxDraft')
+    .post(asyncHandler(checkAdminauth), asyncHandler(adminController.uploadTaxDraft));
+
+router.route('/getTaxDraftDocument')
+    .post(asyncHandler(checkAdminauth), asyncHandler(adminController.getTaxDraftDocument));
+
+router.route('/deleteTaxDocument')
+    .post(asyncHandler(checkAdminauth), asyncHandler(adminController.deleteTaxDocument));
+
+router.route('/updateStatus')
+    .post(asyncHandler(checkAdminauth), asyncHandler(adminController.updateStatus));
+
+
 
 
 module.exports = router;

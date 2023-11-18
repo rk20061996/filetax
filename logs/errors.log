@@ -136,3 +136,13 @@
 {"level":"error","message":"ER_BAD_FIELD_ERROR: Unknown column 'user_status.user_idid' in 'on clause'"}
 {"level":"error","message":"ER_BAD_FIELD_ERROR: Unknown column 'creaed_on' in 'field list'"}
 {"level":"error","message":"ER_BAD_FIELD_ERROR: Unknown column 'creaed_on' in 'field list'"}
+{"level":"error","message":"ER_PARSE_ERROR: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ''1' , 0, 0, NOW())' at line 1"}
+{"level":"error","message":"ER_PARSE_ERROR: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ''1' , 0, 0, NOW())' at line 1"}
+{"level":"error","message":"ER_BAD_FIELD_ERROR: Unknown column 'user.id' in 'where clause'"}
+{"level":"error","message":"jwt malformed","name":"JsonWebTokenError"}
+{"level":"error","message":"jwt malformed","name":"JsonWebTokenError"}
+{"level":"error","message":"ER_BAD_FIELD_ERROR: Unknown column 'user.id' in 'where clause'"}
+{"level":"error","message":"jwt malformed","name":"JsonWebTokenError"}
+{"level":"error","message":"jwt malformed","name":"JsonWebTokenError"}
+{"level":"error","message":"ER_BAD_NULL_ERROR: Column 'id' cannot be null"}
+{"level":"error","message":"ER_BAD_FIELD_ERROR: Unknown column 'undefined' in 'where clause'"}

@@ -441,3 +441,46 @@
 {"level":"info","message":"Database connected"}
 {"level":"info","message":"Database connected"}
 {"level":"info","message":"Database connected"}
+{"level":"info","message":"Database connected"}
+{"level":"info","message":"Database connected"}
+{"level":"info","message":"Database connected"}
+{"level":"info","message":"Database connected"}
+{"level":"info","message":"Database connected"}
+{"level":"info","message":"Database connected"}
+{"level":"info","message":"Database connected"}
+{"level":"info","message":"Database connected"}
+{"level":"info","message":"Database connected"}
+{"level":"info","message":"Database connected"}
+{"level":"info","message":"Database connected"}
+{"level":"info","message":"Database connected"}
+{"level":"info","message":"Database connected"}
+{"level":"info","message":"Database connected"}
+{"level":"info","message":"Database connected"}
+{"level":"info","message":"Database connected"}
+{"level":"info","message":"Database connected"}
+{"level":"info","message":"Database connected"}
+{"level":"info","message":"Database connected"}
+{"level":"info","message":"Database connected"}
+{"level":"info","message":"Database connected"}
+{"level":"error","message":"ER_PARSE_ERROR: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ''1' , 0, 0, NOW())' at line 1"}
+{"level":"error","message":"ER_PARSE_ERROR: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ''1' , 0, 0, NOW())' at line 1"}
+{"level":"info","message":"Database connected"}
+{"level":"info","message":"Database connected"}
+{"level":"info","message":"Database connected"}
+{"level":"info","message":"Database connected"}
+{"level":"info","message":"Database connected"}
+{"level":"info","message":"Database connected"}
+{"level":"info","message":"Database connected"}
+{"level":"error","message":"ER_BAD_FIELD_ERROR: Unknown column 'user.id' in 'where clause'"}
+{"level":"error","message":"jwt malformed","name":"JsonWebTokenError"}
+{"level":"error","message":"jwt malformed","name":"JsonWebTokenError"}
+{"level":"error","message":"ER_BAD_FIELD_ERROR: Unknown column 'user.id' in 'where clause'"}
+{"level":"error","message":"jwt malformed","name":"JsonWebTokenError"}
+{"level":"error","message":"jwt malformed","name":"JsonWebTokenError"}
+{"level":"info","message":"Database connected"}
+{"level":"info","message":"Database connected"}
+{"level":"error","message":"ER_BAD_NULL_ERROR: Column 'id' cannot be null"}
+{"level":"info","message":"Database connected"}
+{"level":"info","message":"Database connected"}
+{"level":"error","message":"ER_BAD_FIELD_ERROR: Unknown column 'undefined' in 'where clause'"}
+{"level":"info","message":"Database connected"}
