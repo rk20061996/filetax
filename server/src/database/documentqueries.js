@@ -19,6 +19,9 @@ const updateProfile=`Update users set firstname=?, lastname=?, phone= ?, image=?
 const updateDocumentQuery=`
 Update document_upload set filename = ? where id = ?`;
 
+const getAllTaxReturnDocument =`select * from tax_draft where user_id = ?`
+
+const changeStatusTaxReturnDocument = `Update tax_draft set status =? , comment = ? where id = ?`
 module.exports = {
     getDcoumentData,
     uploadDocument,
@@ -26,5 +29,7 @@ module.exports = {
     deleteDocument,
     getUserDataByToken,
     updateProfile,
-    updateDocumentQuery
+    updateDocumentQuery,
+    getAllTaxReturnDocument,
+    changeStatusTaxReturnDocument
 };

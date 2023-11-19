@@ -52,7 +52,7 @@ function UploadDocument(props) {
   const handleUpload = async (event) => {
     event.preventDefault(); // Prevent form submission behavior
 
-    if (selectedFile && selectedTaxType && selectedTaxcomment) {
+    if (selectedFile && selectedTaxType ) {
       const formData = new FormData();
       formData.append('file', selectedFile);
       formData.append('taxType', selectedTaxType);

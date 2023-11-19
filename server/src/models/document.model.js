@@ -1,5 +1,5 @@
 const db = require('../config/db.config');
-const { getDcoumentData: getDcoumentData, uploadDocument: uploadDocument, getUploAdedDocument:getUploAdedDocument, deleteDocument:deleteDocument ,getUserDataByToken:getUserDataByToken, updateProfile:updateProfile, updateDocumentQuery:updateDocumentQuery} = require('../database/documentqueries');
+const { getDcoumentData: getDcoumentData, uploadDocument: uploadDocument, getUploAdedDocument:getUploAdedDocument, deleteDocument:deleteDocument ,getUserDataByToken:getUserDataByToken, updateProfile:updateProfile, updateDocumentQuery:updateDocumentQuery,getAllTaxReturnDocument:getAllTaxReturnDocument,changeStatusTaxReturnDocument:changeStatusTaxReturnDocument} = require('../database/documentqueries');
 const { logger } = require('../utils/logger');
 
 class Document {
@@ -82,6 +82,40 @@ class Document {
                 cb(null, res);
             })
     }
+
+    static getAllTaxReturnDocument(data, cb){
+        // console.log("herererere", data)
+        db.query(getAllTaxReturnDocument,
+            [
+                data.user_id,
+            ], (err, res) => {
+                if (err) {
+                    logger.error(err.message);
+                    cb(err, null);
+                    return;
+                }
+                cb(null, res);
+            })
+    }
+
+    static changeStatusTaxReturnDocument(data, cb){
+        // console.log("herererere", data)
+        db.query(changeStatusTaxReturnDocument,
+            [
+                data.status,
+                data.comment,
+                data.id,
+            ], (err, res) => {
+                if (err) {
+                    logger.error(err.message);
+                    cb(err, null);
+                    return;
+                }
+                cb(null, res);
+            })
+    }
+
+    
 
     static deleteDocument(data, cb){
         console.log("hererererdde", data)

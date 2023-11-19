@@ -2,8 +2,8 @@
 
 import Axios from "axios"
 
-// const apiUrl = "http://localhost:9000/api/"
-const apiUrl = "http://195.35.45.11:9000/api/"
+const apiUrl = "http://localhost:9000/api/"
+// const apiUrl = "http://195.35.45.11:9000/api/"
 
 const getAllDocument = async (data) => {
     try {
@@ -46,6 +46,18 @@ const getAllUploadedDocument = async (data) => {
     };
     try {
         const result = await Axios.post(apiUrl + "data/getUploadedDocument", data, config)
+        return result
+    } catch (err) {
+        return err
+    }
+
+};
+const getAllTaxReturnDocument = async (data) => {
+    const config = {
+        headers: { Authorization: `${localStorage.getItem('token')}` }
+    };
+    try {
+        const result = await Axios.post(apiUrl + "data/getAllTaxReturnDocument", data, config)
         return result
     } catch (err) {
         return err
@@ -232,6 +244,30 @@ const updateTaxDocumentStatus = async () => {
         return err
     }
 };
+const approveDocument = async (data) => {
+    const config = {
+        headers: { Authorization: `${localStorage.getItem('token')}` }
+    };
+    try {
+        const result = await Axios.post(apiUrl + "data/changeStatusTaxReturnDocument", data, config)
+        return result
+    } catch (err) {
+        return err
+    }
+};
+const rejectDocument = async (data) => {
+    const config = {
+        headers: { Authorization: `${localStorage.getItem('token')}` }
+    };
+    try {
+        const result = await Axios.post(apiUrl + "data/changeStatusTaxReturnDocument", data, config)
+        return result
+    } catch (err) {
+        return err
+    }
+};
+
+
 const userProfile = {
     getAllDocument,
     uploadDocument,
@@ -248,6 +284,9 @@ const userProfile = {
     getTaxDependent,
     updateTaxResidency,
     getTaxResidency,
-    updateTaxDocumentStatus
+    updateTaxDocumentStatus,
+    getAllTaxReturnDocument,
+    rejectDocument,
+    approveDocument
 }
 export default userProfile

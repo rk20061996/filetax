@@ -160,6 +160,40 @@ exports.getUploadedDocument = (req, res) => {
     });
 };
 
+exports.getAllTaxReturnDocument = (req, res) => {
+    document.getAllTaxReturnDocument({ user_id: req.user_id }, (err, data) => {
+        // console.log("user---?1", user)
+        if (err) {
+            res.status(200).send({
+                status: 500,
+                message: err.message
+            });
+        } else {
+            res.status(201).send({
+                status: 200,
+                data: data
+            });
+        }
+    });
+};
+
+exports.changeStatusTaxReturnDocument = (req, res) => {
+    document.changeStatusTaxReturnDocument({ user_id: req.user_id,id:req.body.id,status:req.body.status,comment:req.body.comment }, (err, data) => {
+        // console.log("user---?1", user)
+        if (err) {
+            res.status(200).send({
+                status: 500,
+                message: err.message
+            });
+        } else {
+            res.status(201).send({
+                status: 200,
+                data: data
+            });
+        }
+    });
+};
+
 exports.deleteDocument = (req, res) => {
     document.deleteDocument({ id: req.body.id }, (err, data) => {
         // console.log("user---?1", user)

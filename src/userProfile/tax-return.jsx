@@ -1,53 +1,138 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from 'react-router-dom';
 import Sidebar from '../../src/layout/sidebar';
+import userProfile from '../serviceApi/userprofile';
+import { Modal, Button } from 'react-bootstrap';
 
 function TaxReturn(props) {
-    return (
-      <div className="main d-flex w-100 h-100">
-      <Sidebar isLoggedIn={props.isLoggedIn} setisLoggedIn={props.setisLoggedIn}/>
+  const [uploadedDocument, setuploadedDocument] = useState([]);
+  const [showRejectModal, setShowRejectModal] = useState(false);
+  const [selectedDocumentId, setSelectedDocumentId] = useState(null);
+  const [rejectComment, setRejectComment] = useState('');
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  const fetchData = async () => {
+    try {
+      const getAllUploadedDocument = await userProfile.getAllTaxReturnDocument();
+      setuploadedDocument(getAllUploadedDocument?.data?.data);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
+
+  const approveDocument = async (documentId) => {
+    try {
+      await userProfile.approveDocument({ id:documentId, status: 1, comment: '' });
+      fetchData();
+    } catch (error) {
+      console.error("Error approving document:", error);
+    }
+  };
+
+  const showRejectModalHandler = (documentId) => {
+    setSelectedDocumentId(documentId);
+    setShowRejectModal(true);
+  };
+
+  const closeRejectModalHandler = () => {
+    setShowRejectModal(false);
+    setSelectedDocumentId(null);
+    setRejectComment('');
+  };
+
+  const rejectDocument = async () => {
+    try {
+      await userProfile.rejectDocument({ id: selectedDocumentId, status: 2, comment: rejectComment });
+      fetchData();
+      closeRejectModalHandler();
+    } catch (error) {
+      console.error("Error rejecting document:", error);
+    }
+  };
+
+  return (
+    <div className="main d-flex w-100 h-100">
+      <Sidebar isLoggedIn={props.isLoggedIn} setisLoggedIn={props.setisLoggedIn} />
       <div className="mainContent container-fluid">
         <div className="card">
           <h3>Tax Return</h3>
-          <div className="d-flex topWrap">
-              <p>Show 
-                <select>
-                  <option>1</option>
-                  <option>2</option>
-                  <option>3</option>
-                </select>
-                entries
-              </p>
-              <p>Search <input type="search" /> </p>
-          </div>
+
           <table>
-            <tr>
-              <th>S.No</th>
-              <th>Document Name</th>
-              <th>Document Tax Document</th>
-              <th>Date</th>
-            </tr>
-            <tr>
-              <td>1</td>
-              <td>Doc name</td>
-              <td>11</td>
-              <td>03-10-2023</td>
-            </tr>
+            <thead>
+              <tr>
+                <th>S.No</th>
+                <th>Document View</th>
+                <th>Document Status</th>
+                <th>Date</th>
+              </tr>
+            </thead>
+            <tbody>
+              {uploadedDocument.map((doc, index) => (
+                <tr key={index}>
+                  <td>{index + 1}</td>
+                  <td>
+                    <a href={"uploads/" + doc.file} target="_blank" rel="noopener noreferrer">
+                      Download <span className="material-symbols-outlined"> download </span>
+                    </a>
+                  </td>
+                  <td>
+                    {doc.status === "" || doc.status === 0 ? (
+                      <>
+                        <button className="btn btn-success" onClick={() => approveDocument(doc.id)}>
+                          Accept
+                        </button>{" "}
+                        <button className="btn btn-danger" onClick={() => showRejectModalHandler(doc.id)}>
+                          Reject
+                        </button>
+                      </>
+                    ) : doc.status === 1 ? (
+                      <button className="btn btn-success">Accepted</button>
+                    ) : (
+                      <button className="btn btn-danger">Rejected</button>
+                    )}
+                  </td>
+                  <td>
+                    {new Date(doc.created_at).getDate() +
+                      "-" +
+                      (parseInt(new Date(doc.created_at).getMonth()) + 1) +
+                      "-" +
+                      new Date(doc.created_at).getFullYear()}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
           </table>
-          <div className="navWrap">
-            <p>Showing 0 to 0 of 0 entries</p>
-            <ul className="list-unstyled">
-              <li><a href="#">Previous</a></li>
-              <li><a href="#">1</a></li>
-              <li><a href="#">2</a></li>
-              <li><a href="#">3</a></li>
-              <li><a href="#">Next</a></li>
-            </ul>
-          </div>
         </div>
       </div>
-      </div>
-    );
+
+      {/* Reject Modal */}
+      <Modal show={showRejectModal} onHide={closeRejectModalHandler}>
+        <Modal.Header closeButton>
+          <Modal.Title>Reject Document</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <label>Rejection Comment:</label>
+          <textarea
+            value={rejectComment}
+            onChange={(e) => setRejectComment(e.target.value)}
+            className="form-control"
+            rows="4"
+          />
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={closeRejectModalHandler}>
+            Close
+          </Button>
+          <Button variant="danger" onClick={rejectDocument}>
+            Save Rejection
+          </Button>
+        </Modal.Footer>
+      </Modal>
+    </div>
+  );
 }
 
 export default TaxReturn;
