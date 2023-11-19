@@ -80,7 +80,7 @@ class Admin {
     }
 
     static getTaxDraftDocument(data, cb){
-        const query1 = 'select * from  tax_draft where is_deleted = 0';
+        const query1 = 'select * from  tax_draft where is_deleted = 0 and user_id = ?';
         db.query(query1, [data.user_id], (err1, res1) => {
             if (err1) {
                 logger.error(err1.message);

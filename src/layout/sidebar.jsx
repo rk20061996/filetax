@@ -64,7 +64,7 @@ function Sidebar(props) {
                 </li>
                 <li className="bgColorChange">
                     <Link to="/profile/tax-documentaion" activeClassName="active">
-                        <span className="material-symbols-outlined"> upload_file </span> Tax Documents
+                        <span className="material-symbols-outlined"> upload_file </span> Tax Information
                     </Link>
                 </li>
                 <li className="bgColorChange">

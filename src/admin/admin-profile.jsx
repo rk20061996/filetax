@@ -24,6 +24,7 @@ function Adminprofile(props) {
     const [selectedStatusDisabled, setselectedStatusDisabled] = useState([]);
 
     const status = { 1: "Ready for preparation", 2: "In Progress", 3: "Summary Sent", 4: "Pending Recieved", 5: "Draft", 6: "Ready for e-file", 7: "Accepted" }
+    const [filterStatus, setfilterStatus] = useState(0);
 
     // alert(id)
 
@@ -141,7 +142,7 @@ function Adminprofile(props) {
         <>
             {/* <Header /> */}
             <div className="main d-flex w-100 h-100">
-                <Sidebar isLoggedIn={props.isLoggedIn} setisLoggedIn={props.setisLoggedIn} />
+                <Sidebar setfilterStatus={setfilterStatus} isLoggedIn={props.isLoggedIn} setisLoggedIn={props.setisLoggedIn} />
                 <div className="mainContent container-fluid">
                     <div className="card">
 
@@ -153,12 +154,12 @@ function Adminprofile(props) {
 
                             <Dropdown.Menu>
                                 <Dropdown.Item disabled={selectedStatusDisabled.includes(1)} eventKey="1">Ready for preparation</Dropdown.Item>
-                                <Dropdown.Item disabled={selectedStatusDisabled.includes(2)} eventKey="2">In Progress</Dropdown.Item>
-                                <Dropdown.Item disabled={selectedStatusDisabled.includes(3)} eventKey="3">Summary Sent</Dropdown.Item>
-                                <Dropdown.Item disabled={selectedStatusDisabled.includes(4)} eventKey="4">Pending Recieved</Dropdown.Item>
-                                <Dropdown.Item disabled={selectedStatusDisabled.includes(5)} eventKey="5">Draft</Dropdown.Item>
-                                <Dropdown.Item disabled={selectedStatusDisabled.includes(6)} eventKey="6">Ready for e-file</Dropdown.Item>
-                                <Dropdown.Item disabled={selectedStatusDisabled.includes(7)} eventKey="7">Accepted</Dropdown.Item>
+                                <Dropdown.Item  eventKey="2">In Progress</Dropdown.Item>
+                                <Dropdown.Item  eventKey="3">Summary Sent</Dropdown.Item>
+                                <Dropdown.Item  eventKey="4">Pending Recieved</Dropdown.Item>
+                                <Dropdown.Item  eventKey="5">Draft</Dropdown.Item>
+                                <Dropdown.Item  eventKey="6">Ready for e-file</Dropdown.Item>
+                                <Dropdown.Item  eventKey="7">Accepted</Dropdown.Item>
 
                                 {/* Add other status options here */}
                             </Dropdown.Menu>
@@ -205,7 +206,7 @@ function Adminprofile(props) {
                         </form>
                         <div className="row mt-5">
                             <div className="col-sm-12">
-                                <button className="btn btn-primary w-auto" data-bs-toggle="modal" data-bs-target="#tagdoc">Tax Documentation Form</button>
+                                <button className="btn btn-primary w-auto" data-bs-toggle="modal" data-bs-target="#tagdoc">Tax Information Form</button>
                             </div>
                         </div>
                         <div className="row mt-5">

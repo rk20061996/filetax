@@ -30,11 +30,11 @@ function TaxDocument(props) {
     });
 
     const handleFormSubmit = async () => {
-        await userProfile.updateTaxPersonal(formData)
-        await userProfile.updateTaxContact(formData)
-        await userProfile.updateTaxDependent(formData)
-        await userProfile.updateTaxResidency(formData)
-        getTaxData()
+        // await userProfile.updateTaxPersonal(formData)
+        // await userProfile.updateTaxContact(formData)
+        // await userProfile.updateTaxDependent(formData)
+        // await userProfile.updateTaxResidency(formData)
+        // getTaxData()
     };
 
     const getTaxData = async () =>{

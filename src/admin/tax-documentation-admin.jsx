@@ -35,11 +35,11 @@ function Taxdocumentationadmin() {
     });
 
     const handleFormSubmit = async () => {
-        await authFunc.updateTaxPersonal(formData)
-        await authFunc.updateTaxContact(formData)
-        await authFunc.updateTaxDependent(formData)
-        await authFunc.updateTaxResidency(formData)
-        getTaxData()
+        // await authFunc.updateTaxPersonal(formData)
+        // await authFunc.updateTaxContact(formData)
+        // await authFunc.updateTaxDependent(formData)
+        // await authFunc.updateTaxResidency(formData)
+        // getTaxData()
     };
 
     const getTaxData = async () =>{

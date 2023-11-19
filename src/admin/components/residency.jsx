@@ -44,6 +44,16 @@ const Residency = (props) => {
                 </Modal.Footer>
             </Modal>
             <div className="row">
+                <button
+                    disabled={!props.formData.residency?.payerStateName1 ? true : false}
+
+                    onClick={async () => {
+                        await authFunc.updateTaxResidency(props.formData)
+                    }}
+                    className="btn btn-warning pull-right" style={{
+                        "width": "fit-content"
+                    }}>Save As Draft</button>
+
                 <div className="col-sm-12">
                     <form >
                         <div className="row">
@@ -205,7 +215,7 @@ const Residency = (props) => {
                         </div>
                         <div className="row">
                             <div className="col-sm-12">
-                                <button onClick={() => { handleFormSubmit() }} type="button" data-bs-dismiss="modal" aria-label="Close" className="btn btn-primary">Submit</button>
+                                <button onClick={() => { handleFormSubmit() }} type="button" data-bs-dismiss="modal" aria-label="Close" className="btn btn-primary">Update</button>
                             </div>
                         </div>
                     </form>
