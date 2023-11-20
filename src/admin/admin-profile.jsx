@@ -22,6 +22,7 @@ function Adminprofile(props) {
     const [taxDraft, settaxDraft] = useState([]);
     const [selectedStatus, setSelectedStatus] = useState('1');
     const [selectedStatusDisabled, setselectedStatusDisabled] = useState([]);
+    const [lastUploadedDoc, setlastUploadedDoc] = useState({});
 
     const status = { 1: "Ready for preparation", 2: "In Progress", 3: "Summary Sent", 4: "Pending Recieved", 5: "Draft", 6: "Ready for e-file", 7: "Accepted" }
     const [filterStatus, setfilterStatus] = useState(0);
@@ -76,6 +77,8 @@ function Adminprofile(props) {
             navigate("/");
         }
     }
+
+
     const getallUploadedDocument = async () => {
         const result = await authFunc.getallUploadedDocument({ id });
         console.log("result ---->0", result.data.data)
@@ -85,8 +88,16 @@ function Adminprofile(props) {
         const result = await authFunc.getTaxDraftDocument({ id });
         console.log("result051", result.data.data)
         settaxDraft(result.data.data)
+        let daata = result.data.data
+        // for(let i = 0 ; i <daata.length ; i++){
+        const sortedArrayDescending = daata.sort((a, b) => b.id - a.id);
+        setlastUploadedDoc(sortedArrayDescending[0])
+        // console.log("daata.",sortedArrayDescending);
+
+        // }
         // setuploadedDocument(result.data.data)
     }
+
     const handleFileAction = async (action, filenameid) => {
         // Perform action based on 'action' (view, download, delete)
         switch (action) {
@@ -154,12 +165,12 @@ function Adminprofile(props) {
 
                             <Dropdown.Menu>
                                 <Dropdown.Item disabled={selectedStatusDisabled.includes(1)} eventKey="1">Ready for preparation</Dropdown.Item>
-                                <Dropdown.Item  eventKey="2">In Progress</Dropdown.Item>
-                                <Dropdown.Item  eventKey="3">Summary Sent</Dropdown.Item>
-                                <Dropdown.Item  eventKey="4">Pending Recieved</Dropdown.Item>
-                                <Dropdown.Item  eventKey="5">Draft</Dropdown.Item>
-                                <Dropdown.Item  eventKey="6">Ready for e-file</Dropdown.Item>
-                                <Dropdown.Item  eventKey="7">Accepted</Dropdown.Item>
+                                <Dropdown.Item eventKey="2">In Progress</Dropdown.Item>
+                                <Dropdown.Item eventKey="3">Summary Sent</Dropdown.Item>
+                                <Dropdown.Item eventKey="4">Pending Recieved</Dropdown.Item>
+                                <Dropdown.Item eventKey="5">Draft</Dropdown.Item>
+                                <Dropdown.Item eventKey="6">Ready for e-file</Dropdown.Item>
+                                <Dropdown.Item eventKey="7">Accepted</Dropdown.Item>
 
                                 {/* Add other status options here */}
                             </Dropdown.Menu>
@@ -239,19 +250,44 @@ function Adminprofile(props) {
                         <div className="row mt-5">
                             <div className="col-sm-12">
                                 <h3 className="mb-3">Tax Draft </h3>
-                                {!taxDraft.length ?
+                                {!taxDraft.length &&
                                     <div className="file-upload">
                                         <label for="upload" className="file-upload__label">Upload tax draft</label>
                                         <input id="upload" onChange={(event) => handleFileChange2(event)} className="file-upload__input" type="file" name="file-upload" />
                                     </div>
-                                    : <><div style={{
+                                }
+                                {lastUploadedDoc.status === 0 ?
+                                    <><div style={{
                                         "marginLeft": "auto",
                                         "marginRight": 0
                                     }} className="d-flex viewBtns"><p>Document Already Updated waiting for Client review</p>
                                         <button className="btn btn-primary" onClick={() => handleFileAction('download', taxDraft[0].file)}>Download/View</button>
-                                        <button className="btn btn-primary" onClick={() => deleteTaxDraft('delete', taxDraft[0].id)}>Delete</button></div></>
+                                        <button className="btn btn-primary" onClick={() => deleteTaxDraft('delete', taxDraft[0].id)}>Delete</button></div></> : lastUploadedDoc.status === 1 ?
+
+                                        <div style={{ "marginLeft": "auto", "marginRight": 0 }} className="d-flex viewBtns">
+                                            <p style={{"color":"green"}}>Document Approved By Client </p>
+                                            <button className="btn btn-primary" onClick={() => handleFileAction('download',
+                                                taxDraft[0].file)}>Download/View</button></div> :
+
+                                        <>
+                                            <div style={{ "marginLeft": "auto", "marginRight": 0 }} className="d-flex viewBtns">
+                                                <p >Document Rejected By Client </p>
+                                                <p style={{"color":"red"}}>{lastUploadedDoc.comment} </p>
+                                                <button className="btn btn-primary" onClick={() => handleFileAction('download',
+                                                    taxDraft[0].file)}>Download/View</button>
+                                                <button className="btn btn-primary" onClick={() => deleteTaxDraft('delete', taxDraft[0].id)}>Delete</button>
+                                            </div>
+                                            <div className="file-upload">
+                                                <label for="upload" className="file-upload__label">Upload tax draft</label>
+                                                <input id="upload" onChange={(event) => handleFileChange2(event)} className="file-upload__input" type="file" name="file-upload" />
+                                            </div>
+                                        </>
+
                                 }
+
+
                             </div>
+
                         </div>
                     </div>
                 </div>
