@@ -19,6 +19,13 @@ console.log("here we come")
     router.route('/getUploadedDocument')
     .post(asyncHandler(checkUserauth),asyncHandler(documentController.getUploadedDocument));
 
+    router.route('/getAllTaxReturnDocument')
+    .post(asyncHandler(checkUserauth),asyncHandler(documentController.getAllTaxReturnDocument));
+    
+    router.route('/changeStatusTaxReturnDocument')
+    .post(asyncHandler(checkUserauth),asyncHandler(documentController.changeStatusTaxReturnDocument));
+    
+
     router.route('/deleteDocument')
     .post(asyncHandler(checkUserauth),asyncHandler(documentController.deleteDocument));
     

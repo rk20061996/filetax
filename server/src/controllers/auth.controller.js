@@ -102,6 +102,7 @@ exports.signin = (req, res) => {
                         email: data.email,
                         image: data.image,
                         status: data.status,
+                        user_type:data.user_type
                         // unique: data.status
                     }
                 });

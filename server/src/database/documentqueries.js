@@ -12,13 +12,16 @@ Update document_upload set is_deleted = 1 where id = ?`;
 
 
 const getUserDataByToken=`
-select firstname,lastname,email,phone from users  where id = ?`;
+select firstname,lastname,email,phone,user_type from users  where id = ?`;
 
 const updateProfile=`Update users set firstname=?, lastname=?, phone= ?, image=?  where id = ?`;
 
 const updateDocumentQuery=`
 Update document_upload set filename = ? where id = ?`;
 
+const getAllTaxReturnDocument =`select * from tax_draft where user_id = ?`
+
+const changeStatusTaxReturnDocument = `Update tax_draft set status =? , comment = ? where id = ?`
 module.exports = {
     getDcoumentData,
     uploadDocument,
@@ -26,5 +29,7 @@ module.exports = {
     deleteDocument,
     getUserDataByToken,
     updateProfile,
-    updateDocumentQuery
+    updateDocumentQuery,
+    getAllTaxReturnDocument,
+    changeStatusTaxReturnDocument
 };

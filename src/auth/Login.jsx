@@ -43,7 +43,13 @@ function Login(props) {
                 console.log("token--->", submitInfo, submitInfo.data.data.token, submitInfo)
                 props.setisLoggedIn(true);
                 dispatch(setUser(submitInfo.data.data)); // Dispatch action to save user details
-                navigate("/profile/home");
+                if(submitInfo.data.data.user_type == 2){
+                    navigate("/profile/home");
+                }else{
+                    navigate("/admin/home");
+                    localStorage.setItem("admin", "yes");
+
+                }
             } else {
                 handleShowModal()
             }

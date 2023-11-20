@@ -14,7 +14,9 @@ function Sidebar(props) {
 
     useEffect(() => {
         let localSession = localStorage.getItem('token');
-        if (localSession) {
+        let admincheck = localStorage.getItem("admin");
+
+        if (localSession ) {
             setLoggedIn(true);
         } else {
             navigate('/');
@@ -62,7 +64,7 @@ function Sidebar(props) {
                 </li>
                 <li className="bgColorChange">
                     <Link to="/profile/tax-documentaion" activeClassName="active">
-                        <span className="material-symbols-outlined"> upload_file </span> Tax Documents
+                        <span className="material-symbols-outlined"> upload_file </span> Tax Information
                     </Link>
                 </li>
                 <li className="bgColorChange">

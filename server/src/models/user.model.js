@@ -53,6 +53,7 @@ class User {
             cb({ kind: "not_found" }, null);
         })
     }
+    
     static findById(id, cb) {
         db.query(findById, id, (err, res) => {
             if (err) {
