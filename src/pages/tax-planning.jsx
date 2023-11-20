@@ -43,7 +43,7 @@ e-mailing us at contact@FILETAX.us We will review and respond to you FREE OF ANY
 </p>
                         </div>
                         <div class="col-sm-12 col-md-5">
-                            <img src="images/tax-planning.png" alt="" class="w-100" />
+                            <img src="images/tax-planning.jpg" alt="" class="w-100" />
                         </div>
                     </div>
                 </div>

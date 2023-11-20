@@ -84,56 +84,56 @@ arrow_right_alt
                         <h2>Our Services</h2>
                     </div>
                     <div className="row">
-                        <div className="col-sm-6 col-md-3">
+                        <div className="col-sm-6 col-md-6 col-lg-3">
                             <div className="item">
                                 <img src="images/tax.png" class="srvicesImg" alt="" />
                                 <h4>Tax Planning Advisory</h4>
                                 <p>Our expert advisors provide strategic guidance to optimize your financial decisions and minimize your tax liability.<a href="#">Read more</a></p>
                             </div>
                         </div>
-                        <div className="col-sm-6 col-md-3">
+                        <div className="col-sm-6 col-md-6 col-lg-3">
                             <div className="item">
                                 <img src="images/student.png" class="srvicesImg" alt="" />
                                 <h4>Student Tax Filing</h4>
                                 <p>We specialize in assisting students with their tax returns, ensuring they take advantage of applicable deductions and credits.<a href="#">Read more</a></p>
                             </div>
                         </div>
-                        <div className="col-sm-6 col-md-3">
+                        <div className="col-sm-6 col-md-6 col-lg-3">
                             <div className="item">
                                 <img src="images/tax1.png" class="srvicesImg" alt="" />
                                 <h4>Tax Return Services</h4>
                                 <p>Our team ensures accurate and timely filing of your tax returns, simplifying the process for individuals and businesses.<a href="#">Read more</a></p>
                             </div>
                         </div>
-                        <div className="col-sm-6 col-md-3">
+                        <div className="col-sm-6 col-md-6 col-lg-3">
                             <div className="item">
                                 <img src="images/calculators.png" class="srvicesImg" alt="" />
                                 <h4>ITIN Processing</h4>
                                 <p>We help individuals obtain an Individual Taxpayer Identification Number (ITIN) for tax compliance. <a href="#">Read more</a></p>
                             </div>
                         </div>
-                        <div className="col-sm-6 col-md-3">
+                        <div className="col-sm-6 col-md-6 col-lg-3">
                             <div className="item">
                                 <img src="images/dollar.png" class="srvicesImg" alt="" />
                                 <h4>FBAR (Foreign Bank Account Report)</h4>
                                 <p>Ensure compliance with FBAR reporting requirements for foreign financial accounts.<a href="#">Read more</a></p>
                             </div>
                         </div>
-                        <div className="col-sm-6 col-md-3">
+                        <div className="col-sm-6 col-md-6 col-lg-3">
                             <div className="item">
                                 <img src="images/financial.png" class="srvicesImg" alt="" />
                                 <h4>FATCA (Foreign Account Tax Compliance Act)</h4>
                                 <p>We offer expertise in FATCA reporting, helping you navigate international tax regulations. <a href="#">Read more</a></p>
                             </div>
                         </div>
-                        <div className="col-sm-6 col-md-3">
+                        <div className="col-sm-6 col-md-6 col-lg-3">
                             <div className="item">
                                 <img src="images/tax2.png" class="srvicesImg" alt="" />
                                 <h4>Tax Consulting</h4>
                                 <p>Our tax experts provide customized solutions, addressing complex tax issues and planning for your financial future.<a href="#">Read more</a></p>
                             </div>
                         </div>
-                        <div className="col-sm-6 col-md-3">
+                        <div className="col-sm-6 col-md-6 col-lg-3">
                             <div className="item">
                                 <img src="images/tax3.png" class="srvicesImg" alt="" />
                                 <h4>Tax Extension</h4>
@@ -227,7 +227,7 @@ arrow_right_alt
             <section className="visionFiletax">
                 <div className="container">
                     <div className="row justify-content-center">
-                        <div className="col-sm-7">
+                        <div className="col-md-12 col-lg-7">
                             <h2>Vision of File tax</h2>
                             <p>Our vision is to be the trusted catalyst for financial prosperity. We aim to provide innovative, personalized tax planning solutions that empower individuals and businesses to minimize tax burdens, achieve financial security, and unlock their full financial potential. Together, we build a brighter financial future.</p>
                         </div>
