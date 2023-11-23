@@ -5,12 +5,15 @@ import Sidebar from "./sidebar";
 import Taxdocumentationadmin from "./tax-documentation-admin";
 import { Modal, Button } from 'react-bootstrap';
 import Uploaddocumentmodel from "./components/upload-document-model";
+import { Printablecomponent } from "./components/printable-component"
 import {
     useParams
 } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import authFunc from '../serviceApi/admin';
 import { Dropdown } from 'react-bootstrap';
+import html2canvas from 'html2canvas';
+import jsPDF from 'jspdf';
 
 function Adminprofile(props) {
     let { id } = useParams();
@@ -19,10 +22,17 @@ function Adminprofile(props) {
     const [userData, setUserData] = useState([]);
     const [uploadedDocument, setuploadedDocument] = useState([]);
     const [showModal, setShowModal] = useState(false);
+    const [showModal2, setshowModal2] = useState(false);
+    const [showConfirmationModal, setShowConfirmationModal] = useState(false);
+    
     const [taxDraft, settaxDraft] = useState([]);
     const [selectedStatus, setSelectedStatus] = useState('1');
     const [selectedStatusDisabled, setselectedStatusDisabled] = useState([]);
     const [lastUploadedDoc, setlastUploadedDoc] = useState({});
+
+    const [downloadDoc, setdownloadDoc] = useState(0);
+    const [formDataForDownload, setformDataForDownload] = useState(0);
+    const [documentToDelete, setDocumentToDelete] = useState(null);
 
     const status = { 1: "Ready for preparation", 2: "In Progress", 3: "Summary Sent", 4: "Pending Recieved", 5: "Draft", 6: "Ready for e-file", 7: "Accepted" }
     const [filterStatus, setfilterStatus] = useState(0);
@@ -111,13 +121,27 @@ function Adminprofile(props) {
                 // break;
                 break;
             case 'delete':
-                await authFunc.deleteDocument({ id: filenameid });
-                console.log("Document deleted");
-                getallUploadedDocument()
+                setDocumentToDelete(filenameid);
+                // Open the confirmation modal
+                setShowConfirmationModal(true);
+                // await authFunc.deleteDocument({ id: filenameid });
+                // console.log("Document deleted");
+                // getallUploadedDocument()
                 break;
             default:
                 break;
         }
+    };
+
+    const handleDeleteConfirmation = async (documentId) => {
+        // Perform the deletion
+        await authFunc.deleteDocument({ id: documentId });
+        console.log("Document deleted");
+        getallUploadedDocument();
+    
+        // Reset the document ID state and close the confirmation modal
+        setDocumentToDelete(null);
+        setShowConfirmationModal(false);
     };
 
     const handleShowModal = () => setShowModal(!showModal);
@@ -149,10 +173,66 @@ function Adminprofile(props) {
         console.log("Document deleted");
         getTaxDraftDocument()
     }
+
+    // const generatePDF = async () => {
+    //     alert()
+    //     // setdownloadDoc(1)
+    //     const pages = document.querySelectorAll('.pdf-pagess'); // Assuming each HTML page has the 'pdf-page' class
+    //     const pdf = new jsPDF({ unit: 'mm', format: 'a4' });
+    //     const options = {
+    //         scale: 3, // Adjust the scale as needed
+    //         // windowWidth: document.documentElement.scrollWidth,
+    //         // windowHeight: document.documentElement.scrollHeight,
+    //         // useCORS: true, // Enable CORS support
+    //         // letterRendering: true,
+    //         // logging: true,
+    //         // allowTaint: false,
+    //         // foreignObjectRendering: true,
+    //         // width:"20px",
+    //         // width: 1200,
+    //         height: 1100,
+    //         onclone: (document) => {
+    //             // Apply styles to the cloned document
+    //             document.body.style.fontSize = '20px'; // Adjust the font size as needed
+    //             // document.body.style.height = '5px';
+    //         },
+    //     };
+    //     const promises = Array.from(pages).map(async (page, index) => {
+    //         const canvas = await html2canvas(page, options);
+    //         const imgData = canvas.toDataURL('image/png');
+    //         pdf.addImage(imgData, 'PNG', 0, 0, pdf.internal.pageSize.getWidth(), pdf.internal.pageSize.getHeight());
+    //         if (index < pages.length - 1) {
+    //             pdf.addPage();
+    //         }
+    //     });
+
+    //     try {
+    //         await Promise.all(promises);
+    //         pdf.save('multi_page_document.pdf');
+    //     } catch (error) {
+    //         console.error('Error generating PDF:', error);
+    //     }
+    // };
     return (
         <>
             {/* <Header /> */}
             <div className="main d-flex w-100 h-100">
+                <Modal show={showConfirmationModal} onHide={() => setShowConfirmationModal(false)}>
+                    <Modal.Header closeButton>
+                        <Modal.Title>Confirm Deletion</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                        Are you sure you want to delete this document?
+                    </Modal.Body>
+                    <Modal.Footer>
+                        <Button variant="secondary" onClick={() => setShowConfirmationModal(false)}>
+                            Cancel
+                        </Button>
+                        <Button variant="primary" onClick={() => handleDeleteConfirmation(documentToDelete)}>
+                            Confirm
+                        </Button>
+                    </Modal.Footer>
+                </Modal>;
                 <Sidebar setfilterStatus={setfilterStatus} isLoggedIn={props.isLoggedIn} setisLoggedIn={props.setisLoggedIn} />
                 <div className="mainContent container-fluid">
                     <div className="card">
@@ -218,6 +298,13 @@ function Adminprofile(props) {
                         <div className="row mt-5">
                             <div className="col-sm-12">
                                 <button className="btn btn-primary w-auto" data-bs-toggle="modal" data-bs-target="#tagdoc">Tax Information Form</button>
+                                {/* <button
+                                    onClick={async () => {
+                                        setshowModal2(true)
+                                    }}
+                                    className="btn btn-warning pull-right" style={{
+                                        "width": "fit-content"
+                                    }}>Download</button> */}
                             </div>
                         </div>
                         <div className="row mt-5">
@@ -232,7 +319,7 @@ function Adminprofile(props) {
                                                 "marginRight": 0
                                             }} className="d-flex viewBtns">
                                                 {/* <button className="btn btn-primary" onClick={() => handleFileAction('view')}>View</button> */}
-                                                <button className="btn btn-primary" onClick={() => handleFileAction('download', file.filename)}>Download/View</button>
+                                                <button className="btn btn-primary" onClick={() => handleFileAction('download', file.filename)}>View</button>
                                                 <button className="btn btn-primary" onClick={() => handleFileAction('delete', file.document_id)}>Delete</button>
                                             </div>
                                         </h5>
@@ -247,7 +334,7 @@ function Adminprofile(props) {
                                 </div>
                             </div>
                         </div>
-                        <div className="row mt-5">
+                        <div className="row mt-5 ">
                             <div className="col-sm-12">
                                 <h3 className="mb-3">Tax Draft </h3>
                                 {!taxDraft.length &&
@@ -256,34 +343,39 @@ function Adminprofile(props) {
                                         <input id="upload" onChange={(event) => handleFileChange2(event)} className="file-upload__input" type="file" name="file-upload" />
                                     </div>
                                 }
-                                {lastUploadedDoc.status === 0 ?
-                                    <><div style={{
-                                        "marginLeft": "auto",
-                                        "marginRight": 0
-                                    }} className="d-flex viewBtns"><p>Document Already Updated waiting for Client review</p>
-                                        <button className="btn btn-primary" onClick={() => handleFileAction('download', taxDraft[0].file)}>Download/View</button>
-                                        <button className="btn btn-primary" onClick={() => deleteTaxDraft('delete', taxDraft[0].id)}>Delete</button></div></> : lastUploadedDoc.status === 1 ?
-
-                                        <div style={{ "marginLeft": "auto", "marginRight": 0 }} className="d-flex viewBtns">
-                                            <p style={{"color":"green"}}>Document Approved By Client </p>
-                                            <button className="btn btn-primary" onClick={() => handleFileAction('download',
-                                                taxDraft[0].file)}>Download/View</button></div> :
-
-                                        <>
-                                            <div style={{ "marginLeft": "auto", "marginRight": 0 }} className="d-flex viewBtns">
-                                                <p >Document Rejected By Client </p>
-                                                <p style={{"color":"red"}}>{lastUploadedDoc.comment} </p>
-                                                <button className="btn btn-primary" onClick={() => handleFileAction('download',
-                                                    taxDraft[0].file)}>Download/View</button>
+                                {taxDraft.length && (
+                                    <>
+                                        {lastUploadedDoc?.status === 0 ? (
+                                            <div style={{
+                                                "marginLeft": "auto",
+                                                "marginRight": 0
+                                            }} className="d-flex viewBtns">
+                                                <p>Document Already Updated waiting for Client review</p>
+                                                <button className="btn btn-primary" onClick={() => handleFileAction('download', taxDraft[0].file)}>View</button>
                                                 <button className="btn btn-primary" onClick={() => deleteTaxDraft('delete', taxDraft[0].id)}>Delete</button>
                                             </div>
-                                            <div className="file-upload">
-                                                <label for="upload" className="file-upload__label">Upload tax draft</label>
-                                                <input id="upload" onChange={(event) => handleFileChange2(event)} className="file-upload__input" type="file" name="file-upload" />
+                                        ) : lastUploadedDoc?.status === 1 ? (
+                                            <div style={{ "marginLeft": "auto", "marginRight": 0 }} className="d-flex viewBtns">
+                                                <p style={{ "color": "green" }}>Document Approved By Client</p>
+                                                <button className="btn btn-primary" onClick={() => handleFileAction('download', taxDraft[0].file)}>View</button>
                                             </div>
-                                        </>
+                                        ) : (
+                                            <>
+                                                <div style={{ "marginLeft": "auto", "marginRight": 0 }} className="d-flex viewBtns">
+                                                    <p>Document Rejected By Client</p>
+                                                    <p style={{ "color": "red" }}>{lastUploadedDoc.comment}</p>
+                                                    <button className="btn btn-primary" onClick={() => handleFileAction('download', taxDraft[0].file)}>View</button>
+                                                    <button className="btn btn-primary" onClick={() => deleteTaxDraft('delete', taxDraft[0].id)}>Delete</button>
+                                                </div>
+                                                <div className="file-upload">
+                                                    <label htmlFor="upload" className="file-upload__label">Upload tax draft</label>
+                                                    <input id="upload" onChange={(event) => handleFileChange2(event)} className="file-upload__input" type="file" name="file-upload" />
+                                                </div>
+                                            </>
+                                        )}
+                                    </>
+                                )}
 
-                                }
 
 
                             </div>
@@ -294,7 +386,7 @@ function Adminprofile(props) {
             </div>
 
 
-            <div class="modal customModal fade" id="tagdoc" tabindex="-1" aria-labelledby="TagdocModalLabel" aria-hidden="true">
+            <div class="modal customModal fade " id="tagdoc" tabindex="-1" aria-labelledby="TagdocModalLabel" aria-hidden="true">
                 <div class="modal-dialog  modal-lg">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -302,7 +394,7 @@ function Adminprofile(props) {
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            <Taxdocumentationadmin />
+                            <Taxdocumentationadmin setformDataForDownload={setformDataForDownload} downloadDoc={downloadDoc} setdownloadDoc={setdownloadDoc} />
                         </div>
                     </div>
                 </div>
@@ -313,7 +405,7 @@ function Adminprofile(props) {
                     <Modal.Title>Success!</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <Uploaddocumentmodel handleShowModal={handleShowModal} />
+                    <Uploaddocumentmodel getallUploadedDocument={getallUploadedDocument} handleShowModal={handleShowModal} />
                     {/* <p>Congrats! Tax Document has been saved.</p> */}
                 </Modal.Body>
                 {/* <Modal.Footer> */}
@@ -322,6 +414,21 @@ function Adminprofile(props) {
                     </Button> */}
                 {/* </Modal.Footer> */}
             </Modal>
+
+            <Modal show={showModal2} >
+
+                <Modal.Body>
+
+                    {/* const [showModal2, setshowModal2] = useState(false); */}
+                    <Printablecomponent setshowModal2={setshowModal2} formData={formDataForDownload} downloadDoc={props.downloadDoc} setdownloadDoc={props.setdownloadDoc} />
+                </Modal.Body>
+                {/* <Modal.Footer> */}
+                {/* <Button variant="secondary" onClick={handleCloseModal}>
+                        OK
+                    </Button> */}
+                {/* </Modal.Footer> */}
+            </Modal>
+
         </>
     );
 }

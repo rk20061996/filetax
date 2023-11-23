@@ -5,11 +5,13 @@ import { Personalinfo } from "./components/personalInfo"
 import { Contactinfo } from "./components/contactinfo"
 import { Dependents } from "./components/dependents"
 import { Residency } from "./components/residency"
+import { Printablecomponent } from "./components/printable-component"
+
 import authFunc from '../serviceApi/admin';
 import {
     useParams
 } from "react-router-dom";
-function Taxdocumentationadmin() {
+function Taxdocumentationadmin(props) {
     let { id } = useParams();
     let navigate = useNavigate();
 
@@ -51,6 +53,12 @@ function Taxdocumentationadmin() {
         const data4 = await authFunc.getTaxResidency({id:id})
         console.log("data3",data.data.data.res)
         setFormData({...formData,
+            contact:data2.data.data.res[0],
+            primaryTaxPayer:data.data.data.res[0],
+            dependent:data3.data.data.res[0],
+            residency:data4.data.data.res[0] 
+        } )
+        props.setformDataForDownload({...formData,
             contact:data2.data.data.res[0],
             primaryTaxPayer:data.data.data.res[0],
             dependent:data3.data.data.res[0],

@@ -83,7 +83,8 @@ const Personalinfo = (props) => {
                             <label>Date of Marriage (DD/MM/YYYY)</label>
                             <input type="date" placeholder=""
                                 required
-                                value={formatDateToYYYYMMDD(props.formData.primaryTaxPayer?.primaryTaxPayer_DateOfMarriage)}
+                                disabled={props.formData.primaryTaxPayer?.primaryTaxPayer_MaritalStatus == 'Single' || props.formData.primaryTaxPayer?.primaryTaxPayer_MaritalStatus == ''} 
+                                value={props.formData.primaryTaxPayer?.primaryTaxPayer_DateOfMarriage && props.formData.primaryTaxPayer?.primaryTaxPayer_MaritalStatus == 'Married' ?formatDateToYYYYMMDD(props.formData.primaryTaxPayer?.primaryTaxPayer_DateOfMarriage):""}
                                 onChange={(e) => props.handleInputChange("primaryTaxPayer", "primaryTaxPayer_DateOfMarriage", e.target.value)}
 
                             />
@@ -92,7 +93,7 @@ const Personalinfo = (props) => {
                             <label>Date of Birth (DD/MM/YYYY)</label>
                             <input type="date" placeholder=""
                                 required
-                                value={formatDateToYYYYMMDD(props.formData.primaryTaxPayer?.primaryTaxPayer_DateOfBirth)}
+                                value={props.formData.primaryTaxPayer?.primaryTaxPayer_DateOfBirth?formatDateToYYYYMMDD(props.formData.primaryTaxPayer?.primaryTaxPayer_DateOfBirth):""}
                                 onChange={(e) => props.handleInputChange("primaryTaxPayer", "primaryTaxPayer_DateOfBirth", e.target.value)}
 
                             />
@@ -128,7 +129,7 @@ const Personalinfo = (props) => {
                             <label>First date of entry to US (DD/MM/YYYY)</label>
                             <input type="date" placeholder=""
                                 required
-                                value={formatDateToYYYYMMDD(props.formData.primaryTaxPayer?.primaryTaxPayer_FirstEntryToUS)}
+                                value={props.formData.primaryTaxPayer?.primaryTaxPayer_FirstEntryToUS?formatDateToYYYYMMDD(props.formData.primaryTaxPayer?.primaryTaxPayer_FirstEntryToUS):""}
                                 onChange={(e) => props.handleInputChange("primaryTaxPayer", "primaryTaxPayer_FirstEntryToUS", e.target.value)}
                             />
                         </div>
@@ -143,7 +144,8 @@ const Personalinfo = (props) => {
                                 type="date"
                                 placeholder=""
                                 required
-                                value={formatDateToYYYYMMDD(props.formData.primaryTaxPayer?.spouse_FirstDate)}
+                                value={props.formData.primaryTaxPayer?.primaryTaxPayer_MaritalStatus == 'Single' || props.formData.primaryTaxPayer?.spouse_FirstDate == '' ? '' : formatDateToYYYYMMDD(props.formData.primaryTaxPayer?.spouse_FirstDate)}
+                                // value={}
                                 onChange={(e) => props.handleInputChange("primaryTaxPayer", "spouse_FirstDate", e.target.value)}
                                 disabled={props.formData.primaryTaxPayer?.primaryTaxPayer_MaritalStatus == 'Single' || props.formData.primaryTaxPayer?.primaryTaxPayer_MaritalStatus == ''} />
                         </div>
@@ -195,7 +197,7 @@ const Personalinfo = (props) => {
                             <label>Date of Birth (DD/MM/YYYY)</label>
                             <input type="date" placeholder=""
                                 required
-                                value={formatDateToYYYYMMDD(props.formData.primaryTaxPayer?.spouse_DateOfBirth)}
+                                value={props.formData.primaryTaxPayer?.spouse_DateOfBirth ? formatDateToYYYYMMDD(props.formData.primaryTaxPayer?.spouse_DateOfBirth):""}
                                 onChange={(e) => props.handleInputChange("primaryTaxPayer", "spouse_DateOfBirth", e.target.value)}
                                 disabled={props.formData.primaryTaxPayer?.primaryTaxPayer_MaritalStatus == 'Single' || props.formData.primaryTaxPayer?.primaryTaxPayer_MaritalStatus == ''} />
                         </div>
@@ -227,7 +229,7 @@ const Personalinfo = (props) => {
                             <label>First date of entry to US (DD/MM/YYYY)</label>
                             <input type="date" placeholder=""
                                 required
-                                value={formatDateToYYYYMMDD(props.formData.primaryTaxPayer?.spouse_FirstEntryToUS)}
+                                value={props.formData.primaryTaxPayer?.spouse_FirstEntryToUS ?formatDateToYYYYMMDD(props.formData.primaryTaxPayer?.spouse_FirstEntryToUS):""}
                                 onChange={(e) => props.handleInputChange("primaryTaxPayer", "spouse_FirstEntryToUS", e.target.value)}
                                 disabled={props.formData.primaryTaxPayer?.primaryTaxPayer_MaritalStatus == 'Single' || props.formData.primaryTaxPayer?.primaryTaxPayer_MaritalStatus == ''}
                             />

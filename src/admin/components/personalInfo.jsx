@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Link } from 'react-router-dom';
 import authFunc from '../../serviceApi/admin';
+import html2canvas from 'html2canvas';
+import jsPDF from 'jspdf';
 
 
 const Personalinfo = (props) => {
@@ -17,6 +19,46 @@ const Personalinfo = (props) => {
 
         return `${year}-${month}-${day}`;
     }
+    const generatePDF = async () => {
+        // alert("dd");
+        // return
+        const pages = document.querySelectorAll('.rowwww'); // Assuming each HTML page has the 'pdf-page' class
+        const pdf = new jsPDF({ unit: 'mm', format: 'a4' });
+        const options = {
+            scrollY: -window.scrollY,
+            scale: 3, // Adjust the scale as needed
+            // windowWidth: document.documentElement.scrollWidth,
+            // windowHeight: document.documentElement.scrollHeight,
+            // useCORS: true, // Enable CORS support
+            // letterRendering: true,
+            // logging: true,
+            // allowTaint: false,
+            // foreignObjectRendering: true,
+            // width:"20px",
+            // width: 1200,
+            height: 1100,
+            onclone: (document) => {
+                // Apply styles to the cloned document
+                document.body.style.fontSize = '20px'; // Adjust the font size as needed
+                // document.body.style.height = '5px';
+            },
+        };
+        const promises = Array.from(pages).map(async (page, index) => {
+            const canvas = await html2canvas(page, options);
+            const imgData = canvas.toDataURL('image/png');
+            pdf.addImage(imgData, 'PNG', 0, 0, pdf.internal.pageSize.getWidth(), pdf.internal.pageSize.getHeight());
+            if (index < pages.length - 1) {
+                pdf.addPage();
+            }
+        });
+
+        try {
+            await Promise.all(promises);
+            pdf.save('multi_page_document.pdf');
+        } catch (error) {
+            console.error('Error generating PDF:', error);
+        }
+    };
     return (
         <div className="tab-pane fade show active"
             id="personalInfotab"
@@ -28,13 +70,27 @@ const Personalinfo = (props) => {
                 disabled={!props.formData.primaryTaxPayer?.primaryTaxPayer_LastName ? true : false}
 
                 onClick={async () => {
-
                     await authFunc.updateTaxPersonal(props.formData)
+
+
                 }}
                 className="btn btn-warning pull-right" style={{
                     "width": "fit-content"
                 }}>Save As Draft</button>
-            <div className="row">
+                 {/* <button
+                // disabled={!props.formData.primaryTaxPayer?.primaryTaxPayer_LastName ? true : false}
+
+                onClick={async () => {
+                    generatePDF()
+
+
+                }}
+                className="btn btn-warning pull-right" style={{
+                    "width": "fit-content"
+                }}>PDFs</button> */}
+           
+            <div className="row rowwww">
+
                 {/* <div className="></div> */}
 
                 <div className="col-sm-12 col-md-6">
@@ -83,7 +139,8 @@ const Personalinfo = (props) => {
                             <label>Date of Marriage (DD/MM/YYYY)</label>
                             <input type="date" placeholder=""
                                 required
-                                value={formatDateToYYYYMMDD(props.formData.primaryTaxPayer?.primaryTaxPayer_DateOfMarriage)}
+                                disabled={props.formData.primaryTaxPayer?.primaryTaxPayer_MaritalStatus == 'Single' || props.formData.primaryTaxPayer?.primaryTaxPayer_MaritalStatus == ''} 
+                                value={props.formData.primaryTaxPayer?.primaryTaxPayer_DateOfMarriage && props.formData.primaryTaxPayer?.primaryTaxPayer_MaritalStatus == 'Married' ?formatDateToYYYYMMDD(props.formData.primaryTaxPayer?.primaryTaxPayer_DateOfMarriage):""}
                                 onChange={(e) => props.handleInputChange("primaryTaxPayer", "primaryTaxPayer_DateOfMarriage", e.target.value)}
 
                             />
@@ -92,7 +149,7 @@ const Personalinfo = (props) => {
                             <label>Date of Birth (DD/MM/YYYY)</label>
                             <input type="date" placeholder=""
                                 required
-                                value={formatDateToYYYYMMDD(props.formData.primaryTaxPayer?.primaryTaxPayer_DateOfBirth)}
+                                value={props.formData.primaryTaxPayer?.primaryTaxPayer_DateOfBirth?formatDateToYYYYMMDD(props.formData.primaryTaxPayer?.primaryTaxPayer_DateOfBirth):""}
                                 onChange={(e) => props.handleInputChange("primaryTaxPayer", "primaryTaxPayer_DateOfBirth", e.target.value)}
 
                             />
@@ -128,7 +185,7 @@ const Personalinfo = (props) => {
                             <label>First date of entry to US (DD/MM/YYYY)</label>
                             <input type="date" placeholder=""
                                 required
-                                value={formatDateToYYYYMMDD(props.formData.primaryTaxPayer?.primaryTaxPayer_FirstEntryToUS)}
+                                value={props.formData.primaryTaxPayer?.primaryTaxPayer_FirstEntryToUS?formatDateToYYYYMMDD(props.formData.primaryTaxPayer?.primaryTaxPayer_FirstEntryToUS):""}
                                 onChange={(e) => props.handleInputChange("primaryTaxPayer", "primaryTaxPayer_FirstEntryToUS", e.target.value)}
                             />
                         </div>
@@ -143,7 +200,8 @@ const Personalinfo = (props) => {
                                 type="date"
                                 placeholder=""
                                 required
-                                value={formatDateToYYYYMMDD(props.formData.primaryTaxPayer?.spouse_FirstDate)}
+                                value={props.formData.primaryTaxPayer?.primaryTaxPayer_MaritalStatus == 'Single' || props.formData.primaryTaxPayer?.spouse_FirstDate == '' ? '' : formatDateToYYYYMMDD(props.formData.primaryTaxPayer?.spouse_FirstDate)}
+                                // value={}
                                 onChange={(e) => props.handleInputChange("primaryTaxPayer", "spouse_FirstDate", e.target.value)}
                                 disabled={props.formData.primaryTaxPayer?.primaryTaxPayer_MaritalStatus == 'Single' || props.formData.primaryTaxPayer?.primaryTaxPayer_MaritalStatus == ''} />
                         </div>
@@ -195,7 +253,7 @@ const Personalinfo = (props) => {
                             <label>Date of Birth (DD/MM/YYYY)</label>
                             <input type="date" placeholder=""
                                 required
-                                value={formatDateToYYYYMMDD(props.formData.primaryTaxPayer?.spouse_DateOfBirth)}
+                                value={props.formData.primaryTaxPayer?.spouse_DateOfBirth ? formatDateToYYYYMMDD(props.formData.primaryTaxPayer?.spouse_DateOfBirth):""}
                                 onChange={(e) => props.handleInputChange("primaryTaxPayer", "spouse_DateOfBirth", e.target.value)}
                                 disabled={props.formData.primaryTaxPayer?.primaryTaxPayer_MaritalStatus == 'Single' || props.formData.primaryTaxPayer?.primaryTaxPayer_MaritalStatus == ''} />
                         </div>
@@ -227,7 +285,7 @@ const Personalinfo = (props) => {
                             <label>First date of entry to US (DD/MM/YYYY)</label>
                             <input type="date" placeholder=""
                                 required
-                                value={formatDateToYYYYMMDD(props.formData.primaryTaxPayer?.spouse_FirstEntryToUS)}
+                                value={props.formData.primaryTaxPayer?.spouse_FirstEntryToUS ?formatDateToYYYYMMDD(props.formData.primaryTaxPayer?.spouse_FirstEntryToUS):""}
                                 onChange={(e) => props.handleInputChange("primaryTaxPayer", "spouse_FirstEntryToUS", e.target.value)}
                                 disabled={props.formData.primaryTaxPayer?.primaryTaxPayer_MaritalStatus == 'Single' || props.formData.primaryTaxPayer?.primaryTaxPayer_MaritalStatus == ''}
                             />
@@ -236,6 +294,7 @@ const Personalinfo = (props) => {
                     </form>
                 </div>
             </div>
+            
         </div>
     );
 }

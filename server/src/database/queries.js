@@ -20,7 +20,7 @@ INSERT INTO users VALUES(null, ?, ?, ?, ?,?, NOW(),'',0,?,2)
 `;
 
 const findUserByEmail = `
-SELECT * FROM users WHERE email = ?
+SELECT users.*, user_status.status_type FROM users left join user_status on user_status.user_id = users.id   WHERE users.email = ?
 `;
 const checkConfirmToken = `
 SELECT * FROM users WHERE email_confirmation_id = ?

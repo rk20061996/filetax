@@ -7,12 +7,13 @@ function UploadDocument(props) {
 
   const [documentData, setDocumentData] = useState([]);
   const [selectedFile, setSelectedFile] = useState(null);
-  const [selectedTaxType, setSelectedTaxType] = useState(""); // New state for selected tax type
+  const [selectedTaxType, setSelectedTaxType] = useState(0); // New state for selected tax type
   const [uploadedDocument, setuploadedDocument] = useState([]); // New state for selected tax type
   const [selectedTaxcomment, setselectedTaxcomment] = useState(""); // New state for selected tax type
   const [imageValue, setimageValue] = useState(""); // New state for selected tax type
   const [show, setShow] = useState(false); // New state for selected tax type
-
+  const [deleteDocumentId, setDeleteDocumentId] = useState(null);
+  const [show2, setShow2] = useState(false);
 
   useEffect(() => {
     const getAllDocumentName = async () => {
@@ -39,6 +40,8 @@ function UploadDocument(props) {
     }
   };
 
+
+
   const handleFileChange = (event) => {
     setSelectedFile(event.target.files[0]);
     // event.target.value = '';
@@ -52,14 +55,16 @@ function UploadDocument(props) {
   const handleUpload = async (event) => {
     event.preventDefault(); // Prevent form submission behavior
 
-    if (selectedFile && selectedTaxType ) {
+    if (selectedFile) {
       const formData = new FormData();
       formData.append('file', selectedFile);
       formData.append('taxType', selectedTaxType);
       formData.append('selectedTaxcomment', selectedTaxcomment);
 
       try {
+        event.preventDefault(); // Prevent form submission behavior
         const response = await userProfile.uploadDocument(formData);
+        event.preventDefault(); // Prevent form submission behavior
         console.log("File uploaded:", response);
 
         setSelectedFile(null);
@@ -94,18 +99,25 @@ function UploadDocument(props) {
       console.error("Error uploading file:", error);
     }
   };
+
   const handleDelete = async (documentId) => {
+    setDeleteDocumentId(documentId); // Set the document ID to be deleted
+    setShow2(true); // Show the confirmation dialog
+  };
+  const handleConfirmDelete = async () => {
     try {
-      // alert(documentId)
       // Send a delete request to the server using the userProfile service
-      await userProfile.deleteDocument({ id: documentId });
+      await userProfile.deleteDocument({ id: deleteDocumentId });
       console.log("Document deleted");
 
       fetchData(); // Refetch data after successful deletion
+      setShow2(false); // Close the confirmation dialog
     } catch (error) {
       console.error("Error deleting document:", error);
     }
   };
+
+
   const deleteStyle = {
     cursor: 'pointer' // Style to set cursor to pointer
   };
@@ -117,7 +129,7 @@ function UploadDocument(props) {
 
   return (
     <div className="main d-flex w-100 h-100">
-      
+
       <Modal show={show} onHide={() => { setShow(!show) }}>
         <Modal.Header closeButton>
           <Modal.Title>File Updated Successful</Modal.Title>
@@ -131,6 +143,24 @@ function UploadDocument(props) {
           </Button>
         </Modal.Footer>
       </Modal>
+      <Modal show={show2} onHide={() => setShow2(false)}>
+        <Modal.Header closeButton>
+          <Modal.Title>Confirm Deletion</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <p>Are you sure you want to delete this document?</p>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={() => setShow2(false)}>
+            Cancel
+          </Button>
+          <Button variant="danger" onClick={handleConfirmDelete}>
+            Delete
+          </Button>
+        </Modal.Footer>
+      </Modal>
+      {/* ... (remaining code) */}
+      {/* </div> */}
       <Sidebar isLoggedIn={props.isLoggedIn} setisLoggedIn={props.setisLoggedIn} />
       <div className="mainContent container-fluid">
         <div className="card">
@@ -174,7 +204,7 @@ function UploadDocument(props) {
                 <th>Tax Type</th>
                 <th>Uploaded Documents</th>
                 <th>Date</th>
-                <th>Year</th>
+                {/* <th>Year</th> */}
                 <th>Comment</th>
                 <th>Action</th>
               </tr>
@@ -182,14 +212,14 @@ function UploadDocument(props) {
             <tbody>
               {uploadedDocument.map((doc, index) => (
                 <tr key={index}>
-                  <td>{doc.document_name}</td>
+                  <td>{doc.document_name ? doc.document_name : "Not Selected"}</td>
                   <td>
                     <a href={"uploads/" + doc.filename} target="_blank" rel="noopener noreferrer">
-                      Download <span className="material-symbols-outlined"> download </span>
+                      View <span className="material-symbols-outlined"> download </span>
                     </a>
                   </td>
-                  <td>{doc.created_at}</td>
-                  <td>{new Date(doc.created_at).getFullYear()}</td>
+                  <td>{new Date(doc.created_at).toLocaleDateString()}</td>
+                  {/* <td>{new Date(doc.created_at).getFullYear()}</td> */}
                   <td>{doc.comment}</td>
                   <td>
                     <a style={deleteStyle} onClick={handleFileUploadClick}>
@@ -198,7 +228,7 @@ function UploadDocument(props) {
                         type="file"
                         className="input-file"
                         ref={fileInputRef}
-                        onChange={(event) => handleFileChange2(event,doc.document_id)}
+                        onChange={(event) => handleFileChange2(event, doc.document_id)}
                       />
                       <span className="material-symbols-outlined"> upload </span>
                     </a>
@@ -210,7 +240,7 @@ function UploadDocument(props) {
           </table>
         </div>
       </div>
-    </div>
+    </div >
   );
 }
 

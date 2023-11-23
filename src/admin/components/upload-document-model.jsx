@@ -8,7 +8,7 @@ import {
 function Uploaddocumentmodel(props) {
     const [documentData, setDocumentData] = useState([]);
     const [selectedFile, setSelectedFile] = useState(null);
-    const [selectedTaxType, setSelectedTaxType] = useState(""); // New state for selected tax type
+    const [selectedTaxType, setSelectedTaxType] = useState(0); // New state for selected tax type
     const [uploadedDocument, setuploadedDocument] = useState([]); // New state for selected tax type
     const [selectedTaxcomment, setselectedTaxcomment] = useState(""); // New state for selected tax type
     const [imageValue, setimageValue] = useState(""); // New state for selected tax type
@@ -54,7 +54,7 @@ function Uploaddocumentmodel(props) {
     const handleUpload = async (event) => {
       event.preventDefault(); // Prevent form submission behavior
   
-      if (selectedFile && selectedTaxType && selectedTaxcomment) {
+      if (selectedFile ) {
         const formData = new FormData();
         formData.append('file', selectedFile);
         formData.append('taxType', selectedTaxType);
@@ -71,6 +71,7 @@ function Uploaddocumentmodel(props) {
           setSelectedTaxType("");
           setselectedTaxcomment("")
           setimageValue("")
+          props.getallUploadedDocument()
           props.handleShowModal(false)
         //   fetchData(); // Refetch data after successful upload
         } catch (error) {

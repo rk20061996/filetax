@@ -500,3 +500,22 @@
 {"level":"info","message":"Database connected"}
 {"level":"info","message":"Database connected"}
 {"level":"info","message":"Database connected"}
+{"level":"info","message":"Database connected"}
+{"level":"info","message":"Database connected"}
+{"level":"info","message":"Database connected"}
+{"level":"error","message":"ER_BAD_FIELD_ERROR: Unknown column 'NaN' in 'field list'"}
+{"level":"error","message":"ER_BAD_FIELD_ERROR: Unknown column 'NaN' in 'field list'"}
+{"level":"error","message":"ER_BAD_FIELD_ERROR: Unknown column 'NaN' in 'field list'"}
+{"level":"info","message":"Database connected"}
+{"level":"info","message":"Database connected"}
+{"level":"info","message":"Database connected"}
+{"level":"info","message":"Database connected"}
+{"level":"error","message":"ER_PARSE_ERROR: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'join user_status.user_id = users.id FROM users left join WHERE email = 'ravik...' at line 1"}
+{"level":"info","message":"Database connected"}
+{"level":"error","message":"ER_PARSE_ERROR: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'left join on user_status.user_id = users.id FROM users left join WHERE email ...' at line 1"}
+{"level":"info","message":"Database connected"}
+{"level":"error","message":"ER_PARSE_ERROR: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'left join on user_status.user_id = users.id FROM users  WHERE users.email = '...' at line 1"}
+{"level":"info","message":"Database connected"}
+{"level":"error","message":"ER_PARSE_ERROR: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'left join user_status on user_status.user_id = users.id FROM users  WHERE use...' at line 1"}
+{"level":"info","message":"Database connected"}
+{"level":"info","message":"Database connected"}
