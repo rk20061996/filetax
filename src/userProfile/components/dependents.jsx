@@ -54,18 +54,32 @@ const Dependents = (props) => {
         setactiveDependetIndex(index)
     };
     useEffect(() => {
-        console.log("propos.dependent", props.formData)
+        console.log("propos.dependent-->", activeDependetIndex)
+        if (props.formData.dependent.length == 0) {
+            const dependetn = props.formData.dependent
+            dependetn.push({})
+            // const [activeDependetIndex, setactiveDependetIndex] = useState(0);
+            setactiveDependetIndex(0)
+            // setactiveDependetIndex(dependetn.length - 1)
 
-        settotalDependet(props.formData.dependent.length)
-    }, [props.formData])
+            props.setFormData({ ...props.formData, contact: props.formData.contact, primaryTaxPayer: props.formData.primaryTaxPayer, dependent: dependetn, residency: props.formData.residency })
+        }
+        // settotalDependet(props.formData.dependent.length)
+    }, [props.formData, activeDependetIndex])
 
     const removeDependent = (index) => {
+        // alert(3)
         // Implement your logic to remove the dependent at the given index
         let dependetn = props.formData.dependent
-        setactiveDependetIndex(dependetn.length - 1)
         // const dependetn = props.formData.dependent
-        dependetn.splice(index,1)
+        dependetn.splice(index, 1)
         props.setFormData({ ...props.formData, contact: props.formData.contact, primaryTaxPayer: props.formData.primaryTaxPayer, dependent: dependetn, residency: props.formData.residency })
+        // let 
+        setTimeout(
+            () => setactiveDependetIndex(0)
+            ,
+            100
+        );
     };
     const handleInputChange = (index, field, value) => {
         const data = props.formData.dependent
@@ -96,7 +110,7 @@ const Dependents = (props) => {
             <button
                 disabled={props.formData.dependent.length > 5}
                 onClick={addDependent}
-                className="btn btn-primary pull-right"style={{  float: 'right' }}>Add Dependent</button>
+                className="btn btn-primary pull-right" style={{ float: 'right' }}>Add Dependent</button>
             {/* {props.formData.dependent.length && <div style={{ marginBottom: '10px',"float": "right" }}>
                 {props.formData.dependent.map((depend, index) => (
                     <Button
@@ -109,8 +123,8 @@ const Dependents = (props) => {
                     </Button>
                 ))}
             </div>}  */}
-            {props.formData?.dependent?.length && <div >
-                { props.formData?.dependent?.map((depend, index) => (
+            {props.formData?.dependent?.length ? <div >
+                {props.formData?.dependent?.map((depend, index) => (
                     <div key={index} style={{ display: 'inline-block', marginRight: '5px' }}>
                         <Button
                             variant={index === activeDependetIndex ? 'contained' : 'outlined'}
@@ -129,7 +143,7 @@ const Dependents = (props) => {
 
                     </div>
                 ))}
-            </div>}
+            </div> : ""}
 
             <div className="row">
                 <div className="col-sm-12 mt-5">
