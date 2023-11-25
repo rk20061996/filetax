@@ -3,6 +3,12 @@ import { Link } from 'react-router-dom';
 import userProfile from "../../serviceApi/userprofile";
 import { Modal, Button } from 'react-bootstrap';
 import authFunc from '../../serviceApi/admin';
+import dayjs, { Dayjs } from 'dayjs';
+import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+// import { TextField } from '@material-ui/core';
 
 const Residency = (props) => {
     const [validated, setValidated] = useState(false);
@@ -88,36 +94,116 @@ const Residency = (props) => {
                                             />
                                         </div>
                                         <div className="columntax">
-                                            <input
+                                            {/* <input
                                                 type="date"
                                                 placeholder=""
                                                 required
                                                 value={formatDateToYYYYMMDD(props.formData?.residency?.payerResidencyStartDate1)}
                                                 onChange={(e) => props.handleInputChange("residency", "payerResidencyStartDate1", e.target.value)}
-                                            />
-                                            <input
+                                            /> */}
+                                            <LocalizationProvider style={{ 'width': '100% !important' }} dateAdapter={AdapterDayjs}>
+                                                <DatePicker
+                                                    format="DD-MM-YYYY"
+                                                    slotProps={{
+                                                        textField: {
+                                                            size: "small",
+                                                            error: false,
+                                                        },
+                                                    }}
+                                                    value={props.formData.residency?.payerResidencyStartDate1 && props.formData.residency?.payerResidencyStartDate1 != '' ?
+                                                        dayjs(formatDateToYYYYMMDD(props.formData.residency?.payerResidencyStartDate1))
+                                                        : ""}
+                                                    onChange={(e) => {
+                                                        var datetime = new Date(e);
+                                                        datetime.setHours(datetime.getHours() + 6);
+                                                        console.log("dateeee", datetime)
+                                                        props.handleInputChange("residency", "payerResidencyStartDate1", datetime)
+                                                    }}
+                                                />
+                                            </LocalizationProvider>
+                                            {/* <input
                                                 type="date"
                                                 placeholder=""
                                                 required
                                                 value={formatDateToYYYYMMDD(props.formData?.residency?.spouseResidencyStartDate1)}
                                                 onChange={(e) => props.handleInputChange("residency", "spouseResidencyStartDate1", e.target.value)}
-                                            />
+                                            /> */}
+                                            <LocalizationProvider style={{ 'width': '100% !important' }} dateAdapter={AdapterDayjs}>
+                                                <DatePicker
+                                                    format="DD-MM-YYYY"
+                                                    slotProps={{
+                                                        textField: {
+                                                            size: "small",
+                                                            error: false,
+                                                        },
+                                                    }}
+                                                    value={props.formData.residency?.spouseResidencyStartDate1 && props.formData.residency?.spouseResidencyStartDate1 != '' ?
+                                                        dayjs(formatDateToYYYYMMDD(props.formData.residency?.spouseResidencyStartDate1))
+                                                        : ""}
+                                                    onChange={(e) => {
+                                                        var datetime = new Date(e);
+                                                        datetime.setHours(datetime.getHours() + 6);
+                                                        console.log("dateeee", datetime)
+                                                        props.handleInputChange("residency", "spouseResidencyStartDate1", datetime)
+                                                    }}
+                                                />
+                                            </LocalizationProvider>
                                         </div>
                                         <div className="columntax">
-                                            <input
+                                            {/* <input
                                                 type="date"
                                                 placeholder=""
                                                 required
                                                 value={formatDateToYYYYMMDD(props.formData?.residency?.payerResidencyEndDate1)}
                                                 onChange={(e) => props.handleInputChange("residency", "payerResidencyEndDate1", e.target.value)}
-                                            />
-                                            <input
+                                            /> */}
+                                            <LocalizationProvider style={{ 'width': '100% !important' }} dateAdapter={AdapterDayjs}>
+                                                <DatePicker
+                                                    format="DD-MM-YYYY"
+                                                    slotProps={{
+                                                        textField: {
+                                                            size: "small",
+                                                            error: false,
+                                                        },
+                                                    }}
+                                                    value={props.formData.residency?.payerResidencyEndDate1 && props.formData.residency?.payerResidencyEndDate1 != '' ?
+                                                        dayjs(formatDateToYYYYMMDD(props.formData.residency?.payerResidencyEndDate1))
+                                                        : ""}
+                                                    onChange={(e) => {
+                                                        var datetime = new Date(e);
+                                                        datetime.setHours(datetime.getHours() + 6);
+                                                        console.log("dateeee", datetime)
+                                                        props.handleInputChange("residency", "payerResidencyEndDate1", datetime)
+                                                    }}
+                                                />
+                                            </LocalizationProvider>
+                                            {/* <input
                                                 type="date"
                                                 placeholder=""
                                                 required
                                                 value={formatDateToYYYYMMDD(props.formData?.residency?.spouseResidencyEndDate1)}
                                                 onChange={(e) => props.handleInputChange("residency", "spouseResidencyEndDate1", e.target.value)}
-                                            />
+                                            /> */}
+                                            <LocalizationProvider style={{ 'width': '100% !important' }} dateAdapter={AdapterDayjs}>
+                                                <DatePicker
+                                                    format="DD-MM-YYYY"
+                                                    slotProps={{
+                                                        textField: {
+                                                            size: "small",
+                                                            error: false,
+                                                        },
+                                                    }}
+                                                    value={props.formData.residency?.spouseResidencyEndDate1 && props.formData.residency?.spouseResidencyEndDate1 != '' ?
+                                                        dayjs(formatDateToYYYYMMDD(props.formData.residency?.spouseResidencyEndDate1))
+                                                        : ""}
+                                                    onChange={(e) => {
+                                                        var datetime = new Date(e);
+                                                        datetime.setHours(datetime.getHours() + 6);
+                                                        console.log("dateeee", datetime)
+                                                        props.handleInputChange("residency", "spouseResidencyEndDate1", datetime)
+                                                    }}
+                                                />
+                                            </LocalizationProvider>
                                         </div>
                                         <div className="columntax">
                                             <input
@@ -162,36 +248,116 @@ const Residency = (props) => {
                                             />
                                         </div>
                                         <div className="columntax">
-                                            <input
+                                            {/* <input
                                                 type="date"
                                                 placeholder=""
                                                 required
                                                 value={formatDateToYYYYMMDD(props.formData?.residency?.payerResidencyStartDate2)}
                                                 onChange={(e) => props.handleInputChange("residency", "payerResidencyStartDate2", e.target.value)}
-                                            />
-                                            <input
+                                            /> */}
+                                            <LocalizationProvider style={{ 'width': '100% !important' }} dateAdapter={AdapterDayjs}>
+                                                <DatePicker
+                                                    format="DD-MM-YYYY"
+                                                    slotProps={{
+                                                        textField: {
+                                                            size: "small",
+                                                            error: false,
+                                                        },
+                                                    }}
+                                                    value={props.formData.residency?.payerResidencyStartDate2 && props.formData.residency?.payerResidencyStartDate2 != '' ?
+                                                        dayjs(formatDateToYYYYMMDD(props.formData.residency?.payerResidencyStartDate2))
+                                                        : ""}
+                                                    onChange={(e) => {
+                                                        var datetime = new Date(e);
+                                                        datetime.setHours(datetime.getHours() + 6);
+                                                        console.log("dateeee", datetime)
+                                                        props.handleInputChange("residency", "payerResidencyStartDate2", datetime)
+                                                    }}
+                                                />
+                                            </LocalizationProvider>
+                                            {/* <input
                                                 type="date"
                                                 placeholder=""
                                                 required
                                                 value={formatDateToYYYYMMDD(props.formData?.residency?.spouseResidencyStartDate2)}
                                                 onChange={(e) => props.handleInputChange("residency", "spouseResidencyStartDate2", e.target.value)}
-                                            />
+                                            /> */}
+                                            <LocalizationProvider style={{ 'width': '100% !important' }} dateAdapter={AdapterDayjs}>
+                                                <DatePicker
+                                                    format="DD-MM-YYYY"
+                                                    slotProps={{
+                                                        textField: {
+                                                            size: "small",
+                                                            error: false,
+                                                        },
+                                                    }}
+                                                    value={props.formData.residency?.spouseResidencyStartDate2 && props.formData.residency?.spouseResidencyStartDate2 != '' ?
+                                                        dayjs(formatDateToYYYYMMDD(props.formData.residency?.spouseResidencyStartDate2))
+                                                        : ""}
+                                                    onChange={(e) => {
+                                                        var datetime = new Date(e);
+                                                        datetime.setHours(datetime.getHours() + 6);
+                                                        console.log("dateeee", datetime)
+                                                        props.handleInputChange("residency", "spouseResidencyStartDate2", datetime)
+                                                    }}
+                                                />
+                                            </LocalizationProvider>
                                         </div>
                                         <div className="columntax">
-                                            <input
+                                            {/* <input
                                                 type="date"
                                                 placeholder=""
                                                 required
                                                 value={formatDateToYYYYMMDD(props.formData?.residency?.payerResidencyEndDate2)}
                                                 onChange={(e) => props.handleInputChange("residency", "payerResidencyEndDate2", e.target.value)}
-                                            />
-                                            <input
+                                            /> */}
+                                            <LocalizationProvider style={{ 'width': '100% !important' }} dateAdapter={AdapterDayjs}>
+                                                <DatePicker
+                                                    format="DD-MM-YYYY"
+                                                    slotProps={{
+                                                        textField: {
+                                                            size: "small",
+                                                            error: false,
+                                                        },
+                                                    }}
+                                                    value={props.formData.residency?.payerResidencyEndDate2 && props.formData.residency?.payerResidencyEndDate2 != '' ?
+                                                        dayjs(formatDateToYYYYMMDD(props.formData.residency?.payerResidencyEndDate2))
+                                                        : ""}
+                                                    onChange={(e) => {
+                                                        var datetime = new Date(e);
+                                                        datetime.setHours(datetime.getHours() + 6);
+                                                        console.log("dateeee", datetime)
+                                                        props.handleInputChange("residency", "payerResidencyEndDate2", datetime)
+                                                    }}
+                                                />
+                                            </LocalizationProvider>
+                                            {/* <input
                                                 type="date"
                                                 placeholder=""
                                                 required
                                                 value={formatDateToYYYYMMDD(props.formData?.residency?.spouseResidencyEndDate2)}
                                                 onChange={(e) => props.handleInputChange("residency", "spouseResidencyEndDate2", e.target.value)}
-                                            />
+                                            /> */}
+                                            <LocalizationProvider style={{ 'width': '100% !important' }} dateAdapter={AdapterDayjs}>
+                                                <DatePicker
+                                                    format="DD-MM-YYYY"
+                                                    slotProps={{
+                                                        textField: {
+                                                            size: "small",
+                                                            error: false,
+                                                        },
+                                                    }}
+                                                    value={props.formData.residency?.spouseResidencyEndDate2 && props.formData.residency?.spouseResidencyEndDate2 != '' ?
+                                                        dayjs(formatDateToYYYYMMDD(props.formData.residency?.spouseResidencyEndDate2))
+                                                        : ""}
+                                                    onChange={(e) => {
+                                                        var datetime = new Date(e);
+                                                        datetime.setHours(datetime.getHours() + 6);
+                                                        console.log("dateeee", datetime)
+                                                        props.handleInputChange("residency", "spouseResidencyEndDate2", datetime)
+                                                    }}
+                                                />
+                                            </LocalizationProvider>
                                         </div>
                                         <div className="columntax">
                                             <input

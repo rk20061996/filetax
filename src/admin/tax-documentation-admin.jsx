@@ -70,6 +70,7 @@ function Taxdocumentationadmin(props) {
       }, []);
     
     const handleInputChange = (section, field, value) => {
+        console.log("section",section,field,value)
         setFormData((prevData) => ({
             ...prevData,
             [section]: {
