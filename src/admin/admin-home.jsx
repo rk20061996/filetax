@@ -111,7 +111,7 @@ function Adminhome(props) {
                     <div className="card dashboard">
                         <h3>Dashboard</h3>
                         <div className="row">
-                            {/* <div className="col-md-4">
+                            <div className="col-md-4">
                                 <div className="innerCard">
                                     <h4>Payments Completed</h4>
                                     <p>{userPaymentData?.paymentCompleted?.length}</p>
@@ -128,7 +128,7 @@ function Adminhome(props) {
                                     <h4>Payments Pending</h4>
                                     <p>{userPaymentData?.paymentNotCompleted?.length}</p>
                                 </div>
-                            </div> */}
+                            </div>
                         </div>
                         <div className=" export-btn-container " style={{
                             "display": "flex",
@@ -174,13 +174,13 @@ function Adminhome(props) {
                                 ))}
                             </tbody>
                         </table>
-                        <Pagination>
+                        {/* <Pagination>
                             {[...Array(Math.ceil(userData.length / usersPerPage)).keys()].map((number) => (
                                 <Pagination.Item key={number + 1} active={number + 1 === currentPage} onClick={() => paginate(number + 1)}>
                                     {number + 1}
                                 </Pagination.Item>
                             ))}
-                        </Pagination>
+                        </Pagination> */}
                     </div>
                 </div>
             </div>

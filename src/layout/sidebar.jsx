@@ -99,11 +99,11 @@ function Sidebar(props) {
                         <span className="material-symbols-outlined"> note </span> Tax Returns
                     </NavLink>
                 </li>
-                <li className="bgColorChange">
+                {/* <li className="bgColorChange">
                     <NavLink to="/" activeClassName="active">
                         <span className="material-symbols-outlined"> attach_money </span> Payment
                     </NavLink>
-                </li>
+                </li> */}
                 {/* <li className="bgColorChange">
                     <a onClick={handleMessages}>
                         <span className="material-symbols-outlined"> mail </span> Messages

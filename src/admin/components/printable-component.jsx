@@ -73,7 +73,7 @@ const Printablecomponent = (props) => {
         >
 
             <button
-                // disabled={!props.formData.primaryTaxPayer?.primaryTaxPayer_LastName ? true : false}
+                disabled={!props.formData.primaryTaxPayer?.primaryTaxPayer_LastName ? true : false}
 
                 onClick={async () => {
                     generatePDF()

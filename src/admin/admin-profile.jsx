@@ -393,7 +393,7 @@ function Adminprofile(props) {
                                         <input id="upload" onChange={(event) => handleFileChange2(event)} className="file-upload__input" type="file" name="file-upload" />
                                     </div>
                                 }
-                                {taxDraft.length && (
+                                {taxDraft.length ? (
                                     <>
                                         {lastUploadedDoc?.status === 0 ? (
                                             <div style={{
@@ -424,7 +424,7 @@ function Adminprofile(props) {
                                             </>
                                         )}
                                     </>
-                                )}
+                                ):""}
 
 
 
