@@ -28,7 +28,7 @@ const Residency = (props) => {
         setShowModal(false)
     };
     return (
-        <div className="tab-pane fade" id="residency-tab-pane" role="tabpanel" aria-labelledby="residency-tab" tabIndex="0">
+        <div className="residencyTab tab-pane fade" id="residency-tab-pane" role="tabpanel" aria-labelledby="residency-tab" tabIndex="0">
             <Modal show={showModal} onHide={handleCloseModal}>
                 <Modal.Header closeButton>
                     <Modal.Title>Success!</Modal.Title>
@@ -58,7 +58,7 @@ const Residency = (props) => {
                         <div className="row">
                             <div className="col-sm-12">
                                 <div className="row">
-                                    <div className="col-md-6">
+                                    <div className="col-md-6 residencyLabel">
                                         <label style={{ "color": "transparent" }}>Label</label>
                                         <label>STATE NAME - 1</label>
                                         <label>Residency Start Date (DD/MM/YYYY)</label>

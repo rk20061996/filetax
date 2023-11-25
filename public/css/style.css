@@ -687,3 +687,32 @@ footer li a span{
 .pricingWrap {
     margin-bottom: 80px;
 }
+
+
+
+/********************/
+.prfileWrap a {
+    color: #ffffff;
+}
+.mainContent form {
+    padding-top: 0 !important;
+}
+.mainContent input, .mainContent label {
+    font-size: 14px !important;
+    margin-bottom: 2px !important;
+}
+.mainContent input{
+    width: 100% !important;
+}
+.mainContent .form-group label{
+    width: 45% !important;
+    line-height: 26px !important;
+}
+.mainContent form input {
+    width: 100% !important;
+}
+
+.residencyTab .residencyLabel label {
+    line-height: 22px;
+    margin-top: 8px;
+}
