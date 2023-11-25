@@ -132,43 +132,72 @@ exports.getcontactDetails=(req,res) =>{
 exports.dependentDetails=(req,res) =>{
     const user_id = req.user_id
 
-    const {firstName,middleName,lastName,ssnItin,visaCategory,dateOfBirth,relationship,firstDateOfEntry,dependantCareExpenses,status}  = req.body.dependent
-    if(req.body.dependent && req.body.dependent.id){
-        // console.log("end game")
-        tax.updateDependent({id:req.body.dependent.id,user_id,firstName,middleName,lastName,ssnItin,visaCategory,dateOfBirth,relationship,firstDateOfEntry,dependantCareExpenses,status}, (err, data) => {
-            // console.log("user---?1", user)
-            if (err) {
-                res.status(200).send({
-                    status: "error",
-                    message: err.message
-                });
-            } else {
-                res.status(201).send({
-                    status: 200,
-                    data: {
-                        data
-                    }
-                });
-            }
-        });        
-    }else{
-        tax.savedependent({user_id,firstName,middleName,lastName,ssnItin,visaCategory,dateOfBirth,relationship,firstDateOfEntry,dependantCareExpenses,status}, (err, data) => {
-            // console.log("user---?1", user)
-            if (err) {
-                res.status(200).send({
-                    status: "error",
-                    message: err.message
-                });
-            } else {
-                res.status(201).send({
-                    status: 200,
-                    data: {
-                        data
-                    }
-                });
-            }
-        });
-    }
+    // const {firstName,middleName,lastName,ssnItin,visaCategory,dateOfBirth,relationship,firstDateOfEntry,dependantCareExpenses,status}  = req.body.dependent
+    // if(req.body.dependent && req.body.dependent.id){
+    //     // console.log("end game")
+    //     tax.updateDependent({id:req.body.dependent.id,user_id,firstName,middleName,lastName,ssnItin,visaCategory,dateOfBirth,relationship,firstDateOfEntry,dependantCareExpenses,status}, (err, data) => {
+    //         // console.log("user---?1", user)
+    //         if (err) {
+    //             res.status(200).send({
+    //                 status: "error",
+    //                 message: err.message
+    //             });
+    //         } else {
+    //             res.status(201).send({
+    //                 status: 200,
+    //                 data: {
+    //                     data
+    //                 }
+    //             });
+    //         }
+    //     });        
+    // }else{
+    //     tax.savedependent({user_id,firstName,middleName,lastName,ssnItin,visaCategory,dateOfBirth,relationship,firstDateOfEntry,dependantCareExpenses,status}, (err, data) => {
+    //         // console.log("user---?1", user)
+    //         if (err) {
+    //             res.status(200).send({
+    //                 status: "error",
+    //                 message: err.message
+    //             });
+    //         } else {
+    //             res.status(201).send({
+    //                 status: 200,
+    //                 data: {
+    //                     data
+    //                 }
+    //             });
+    //         }
+    //     });
+    // }
+    console.log("hereerere")
+    var bodyDATA= req.body.dependent
+    tax.deleteTaxDependentByUserId({user_id}, (err, data) => {
+        // console.log("user---?1", user)
+        if (err) {
+            res.status(200).send({
+                status: "error",
+                message: err.message
+            });
+        } else {
+            console.log("deleted")
+            tax.InsertDependentByUserId({user_id,bodyDATA}, (err, data) => {
+                // console.log("user---?1", user)
+                if (err) {
+                    res.status(200).send({
+                        status: "error",
+                        message: err.message
+                    });
+                } else {
+                    res.status(201).send({
+                        status: 200,
+                        data: {
+                            data
+                        }
+                    });
+                }
+            }); 
+        }
+    }); 
 }
 
 exports.getdependentDetails=(req,res) =>{
@@ -195,43 +224,73 @@ exports.getdependentDetails=(req,res) =>{
 exports.residencytDetails=(req,res) =>{
     const user_id = req.user_id
 
-    const {payerStateName1,spouseStateName1,payerResidencyStartDate1,spouseResidencyStartDate1,payerResidencyEndDate1,spouseResidencyEndDate1,payerRentPaidAnnual1,spouseRentPaidAnnual1,payerStateName2,spouseStateName2,payerResidencyStartDate2,spouseResidencyStartDate2,payerResidencyEndDate2,spouseResidencyEndDate2,payerRentPaidAnnual2,spouseRentPaidAnnual2,status}  = req.body.residency
-    if(req.body.residency && req.body.residency.id){
-        // console.log("end game")
-        tax.updateresidency({id:req.body.residency.id,payerStateName1,spouseStateName1,payerResidencyStartDate1,spouseResidencyStartDate1,payerResidencyEndDate1,spouseResidencyEndDate1,payerRentPaidAnnual1,spouseRentPaidAnnual1,payerStateName2,spouseStateName2,payerResidencyStartDate2,spouseResidencyStartDate2,payerResidencyEndDate2,spouseResidencyEndDate2,payerRentPaidAnnual2,spouseRentPaidAnnual2,status}, (err, data) => {
-            // console.log("user---?1", user)
-            if (err) {
-                res.status(200).send({
-                    status: "error",
-                    message: err.message
-                });
-            } else {
-                res.status(201).send({
-                    status: 200,
-                    data: {
-                        data
-                    }
-                });
-            }
-        });        
-    }else{
-        tax.saveresidency({user_id,payerStateName1,spouseStateName1,payerResidencyStartDate1,spouseResidencyStartDate1,payerResidencyEndDate1,spouseResidencyEndDate1,payerRentPaidAnnual1,spouseRentPaidAnnual1,payerStateName2,spouseStateName2,payerResidencyStartDate2,spouseResidencyStartDate2,payerResidencyEndDate2,spouseResidencyEndDate2,payerRentPaidAnnual2,spouseRentPaidAnnual2,status}, (err, data) => {
-            // console.log("user---?1", user)
-            if (err) {
-                res.status(200).send({
-                    status: "error",
-                    message: err.message
-                });
-            } else {
-                res.status(201).send({
-                    status: 200,
-                    data: {
-                        data
-                    }
-                });
-            }
-        });
-    }
+    // const {payerStateName1,spouseStateName1,payerResidencyStartDate1,spouseResidencyStartDate1,payerResidencyEndDate1,spouseResidencyEndDate1,payerRentPaidAnnual1,spouseRentPaidAnnual1,payerStateName2,spouseStateName2,payerResidencyStartDate2,spouseResidencyStartDate2,payerResidencyEndDate2,spouseResidencyEndDate2,payerRentPaidAnnual2,spouseRentPaidAnnual2,status}  = req.body.residency
+    // if(req.body.residency && req.body.residency.id){
+    //     // console.log("end game")
+    //     tax.updateresidency({id:req.body.residency.id,payerStateName1,spouseStateName1,payerResidencyStartDate1,spouseResidencyStartDate1,payerResidencyEndDate1,spouseResidencyEndDate1,payerRentPaidAnnual1,spouseRentPaidAnnual1,payerStateName2,spouseStateName2,payerResidencyStartDate2,spouseResidencyStartDate2,payerResidencyEndDate2,spouseResidencyEndDate2,payerRentPaidAnnual2,spouseRentPaidAnnual2,status}, (err, data) => {
+    //         // console.log("user---?1", user)
+    //         if (err) {
+    //             res.status(200).send({
+    //                 status: "error",
+    //                 message: err.message
+    //             });
+    //         } else {
+    //             res.status(201).send({
+    //                 status: 200,
+    //                 data: {
+    //                     data
+    //                 }
+    //             });
+    //         }
+    //     });        
+    // }else{
+    //     tax.saveresidency({user_id,payerStateName1,spouseStateName1,payerResidencyStartDate1,spouseResidencyStartDate1,payerResidencyEndDate1,spouseResidencyEndDate1,payerRentPaidAnnual1,spouseRentPaidAnnual1,payerStateName2,spouseStateName2,payerResidencyStartDate2,spouseResidencyStartDate2,payerResidencyEndDate2,spouseResidencyEndDate2,payerRentPaidAnnual2,spouseRentPaidAnnual2,status}, (err, data) => {
+    //         // console.log("user---?1", user)
+    //         if (err) {
+    //             res.status(200).send({
+    //                 status: "error",
+    //                 message: err.message
+    //             });
+    //         } else {
+    //             res.status(201).send({
+    //                 status: 200,
+    //                 data: {
+    //                     data
+    //                 }
+    //             });
+    //         }
+    //     });
+    // }
+
+    console.log("hereerere")
+    var bodyDATA= req.body.residency
+    tax.deleteTaxResidentByUserId({user_id}, (err, data) => {
+        // console.log("user---?1", user)
+        if (err) {
+            res.status(200).send({
+                status: "error",
+                message: err.message
+            });
+        } else {
+            console.log("deleted")
+            tax.InsertResidentByUserId({user_id,bodyDATA}, (err, data) => {
+                // console.log("user---?1", user)
+                if (err) {
+                    res.status(200).send({
+                        status: "error",
+                        message: err.message
+                    });
+                } else {
+                    res.status(201).send({
+                        status: 200,
+                        data: {
+                            data
+                        }
+                    });
+                }
+            }); 
+        }
+    }); 
 }
 
 exports.getresidencyDetails=(req,res) =>{

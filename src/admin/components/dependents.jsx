@@ -137,9 +137,9 @@ const Dependents = (props) => {
                                 onChange={(e) => props.handleInputChange("dependent", "firstDateOfEntry", e.target.value)}
                                 required
                             /> */}
-                            {
+                            {/* {
                                 console.log("props.formData.dependent?.firstDateOfEntry",props.formData.dependent)
-                            }
+                            } */}
                             <LocalizationProvider style={{ 'width': '100% !important' }} dateAdapter={AdapterDayjs}>
                                 <DatePicker
                                     format="DD-MM-YYYY"

@@ -45,7 +45,7 @@ function TaxDocument(props) {
         const data3 = await userProfile.getTaxDependent(formData)
         const data4 = await userProfile.getTaxResidency(formData)
         console.log("data3",data3)
-        setFormData({...formData,contact:data2[0],primaryTaxPayer:data[0],dependent:data3[0],residency:data4[0] } )
+        setFormData({...formData,contact:data2[0],primaryTaxPayer:data[0],dependent:data3,residency:data4 } )
     }
     useEffect(() => {
         getTaxData()
@@ -84,8 +84,8 @@ function TaxDocument(props) {
                         <div className="tab-content" id="myTabContent">
                             <Personalinfo formData={formData} handleInputChange={handleInputChange} handleFormSubmit={handleFormSubmit} />
                             <Contactinfo formData={formData} handleInputChange={handleInputChange} handleFormSubmit={handleFormSubmit}/>
-                            <Dependents formData={formData} handleInputChange={handleInputChange} handleFormSubmit={handleFormSubmit}/>
-                            <Residency  formData={formData} handleInputChange={handleInputChange} handleFormSubmit={handleFormSubmit}/>
+                            <Dependents setFormData= {setFormData} formData={formData} handleInputChange={handleInputChange} handleFormSubmit={handleFormSubmit}/>
+                            <Residency setFormData= {setFormData}  formData={formData} handleInputChange={handleInputChange} handleFormSubmit={handleFormSubmit}/>
 
                         </div>
                     </div>
