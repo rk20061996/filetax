@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from "react"
+import React, { useState, useEffect } from "react"
 import { Link } from 'react-router-dom';
 import { useNavigate } from "react-router-dom";
 import { NavLink } from 'react-router-dom';
@@ -10,6 +10,8 @@ function Sidebar(props) {
     let navigate = useNavigate();
     const [selectedStatus, setSelectedStatus] = useState([0]);
     const [showLogoutModal, setShowLogoutModal] = useState(false);
+    // completeuserData
+    // props.completeuserData
     useEffect(() => {
         let localSession = localStorage.getItem('token')
         setsessionCheck(localSession)
@@ -19,13 +21,53 @@ function Sidebar(props) {
             //   if (location.pathname !== '/confirm-account' && location.pathname !== '/reset-password') {
             navigate("/");
         }
+        setSelectedStatus([0, 1, 2, 3, 4, 5, 6, 7, 8])
     }, []);
-
+    useEffect(() => {
+        // if()
+    }, [props.completeuserData]);
     const handleCheckboxChange = (value) => {
-        // alert(value)
-        setSelectedStatus(value)
-        props.setfilterStatus(value)
+        if (value === 0) {
+            // Select all checkboxes
+            setSelectedStatus([0, 1, 2, 3, 4, 5, 6, 7, 8]);
+            props.setfilterStatus([0, 1, 2, 3, 4, 5, 6, 7, 8]);
+
+        } else {
+            // Deselect "Select All" if it's present
+            const dataCheckbox = selectedStatus.includes(0) ? [] : selectedStatus.slice();
+            let finalValue = []
+            if (selectedStatus.includes(value)) {
+                // Deselect the clicked checkbox
+
+                // alert('38')
+
+                const updatedStatus = dataCheckbox.filter((item) => item !== value);
+                finalValue = updatedStatus
+                setSelectedStatus(updatedStatus);
+                props.setfilterStatus(finalValue);
+
+            } else {
+                // alert('43')
+                console.log("value--->",value)
+                // Select the clicked checkbox
+                let alreadySelec = dataCheckbox
+                alreadySelec.push(value)
+                setSelectedStatus([...dataCheckbox, value]);
+                props.setfilterStatus(alreadySelec);
+            }
+            if(dataCheckbox.length == 0){
+                // alert('fi')
+                setSelectedStatus([value]);
+                finalValue = [value]
+                props.setfilterStatus(finalValue);
+
+            }
+
+        }
+    
+        // Propagate the selected status to the parent component
     };
+    
     const handleLogout = () => {
         // Show the logout confirmation modal
         setShowLogoutModal(true);
@@ -47,7 +89,32 @@ function Sidebar(props) {
         setShowLogoutModal(false);
     };
 
+    const checkStatus= (num)=>{
+        let datas = []
+        if(props.completeuserData && props.completeuserData.length > 0){
+            for (let i = 0; i < props.completeuserData.length; i++) {
+                let statusData = {};
+                if (props.completeuserData[i].status_type == num && num != 0 && num != 1) {
+                    datas.push(props.completeuserData[i]);
+                } 
+                if(num == 1){
+                    if (props.completeuserData[i].status_type == null) {
+                        console.log("props.completeuserData",props.completeuserData[i])
+                        datas.push(props.completeuserData[i]);
+                    } 
+                    // datas.push(props.completeuserData[i]);
+    
+                }
+            }
+            if(num == 0){
+                datas = props.completeuserData;
+            }
+            console.log("nummm",num,datas)
+            return datas.length
 
+        }
+
+    }
 
     return (
         <div className="SlideNav">
@@ -61,7 +128,7 @@ function Sidebar(props) {
                 </p>
             </div>
             <ul className="list-unstyled">
-            <li><NavLink to="/admin/home" activeClassName="active" className="nav-link"><span className="material-symbols-outlined"> home </span>Dashboard </NavLink></li>
+                <li><NavLink to="/admin/home" activeClassName="active" className="nav-link"><span className="material-symbols-outlined"> home </span>Dashboard </NavLink></li>
                 {/* <li><a href="home.html" className="active"><span className="material-symbols-outlined"> home </span> Dashboard</a></li> */}
                 <li>
                     <fieldset>
@@ -69,53 +136,64 @@ function Sidebar(props) {
                             <summary>Status</summary>
                             <ul>
                                 <li>
-                                    <label><input type="radio" name="fc" value="0"    
-                                    checked={selectedStatus.includes(0)}
-                                        onChange={() => handleCheckboxChange("0")}
-                                    
-                                        />All Clients</label>
+                                    <label><input type="checkbox" name="fc" value="0"
+                                        checked={selectedStatus.includes(0)}
+                                        onChange={() => handleCheckboxChange(0)}
+
+                                    />All Clients { props?.completeuserData && (
+                                        <span className="notification-badge">{checkStatus(0)}</span>
+                                    )}
+                                    </label>
                                 </li>
                                 <li>
-                                    <label><input type="radio" name="fc" value="1" 
-                                    checked={selectedStatus.includes(1)}
-                                        onChange={() => handleCheckboxChange("1")}
-                                        />Ready for preparation</label>
+                                    <label><input type="checkbox" name="fc" value="1"
+                                        checked={selectedStatus.includes(1)}
+                                        onChange={() => handleCheckboxChange(1)}
+                                    />Ready for preparation { props?.completeuserData &&  (
+                                        <span className="notification-badge">{checkStatus(1)}</span>
+                                    )}</label>
                                 </li>
                                 <li>
-                                    <label><input type="radio" name="fc" value="2" 
-                                    checked={selectedStatus.includes(2)}
-                                    onChange={() => handleCheckboxChange("2")}
-                                    />In Progress </label>
+                                    <label><input type="checkbox" name="fc" value="2"
+                                        checked={selectedStatus.includes(2)}
+                                        onChange={() => handleCheckboxChange(2)}
+                                    />In Progress { props?.completeuserData && (
+                                        <span className="notification-badge">{checkStatus(2)} </span>)}</label>
                                 </li>
                                 <li>
-                                    <label><input type="radio" name="fc" value="3" 
-                                    checked={selectedStatus.includes(3)}
-                                    onChange={() => handleCheckboxChange("3")}
-                                    />Summary Sent</label>
+                                    <label><input type="checkbox" name="fc" value="3"
+                                        checked={selectedStatus.includes(3)}
+                                        onChange={() => handleCheckboxChange(3)}
+                                    />Summary Sent { props?.completeuserData && (
+                                        <span className="notification-badge">{checkStatus(3)} </span>)}</label>
                                 </li>
                                 <li>
-                                    <label><input type="radio" name="fc" value="4"  
-                                    checked={selectedStatus.includes(4)}
-                                    onChange={() => handleCheckboxChange("4")}
-                                    />Pending Recieved </label>
+                                    <label><input type="checkbox" name="fc" value="4"
+                                        checked={selectedStatus.includes(4)}
+                                        onChange={() => handleCheckboxChange(4)}
+                                    />Pending Recieved { props?.completeuserData && (
+                                        <span className="notification-badge">{checkStatus(4)} </span>)}</label>
                                 </li>
                                 <li>
-                                    <label><input type="radio" name="fc" value="5" 
-                                    checked={selectedStatus.includes(5)}
-                                    onChange={() => handleCheckboxChange("5")}
-                                    />Draft</label>
+                                    <label><input type="checkbox" name="fc" value="5"
+                                        checked={selectedStatus.includes(5)}
+                                        onChange={() => handleCheckboxChange(5)}
+                                    />Draft{ props?.completeuserData && (
+                                        <span className="notification-badge">{checkStatus(5)} </span>)}</label>
                                 </li>
                                 <li>
-                                    <label><input type="radio" name="fc" value="6" 
-                                    checked={selectedStatus.includes(6)}
-                                    onChange={() => handleCheckboxChange("6")}
-                                    />Ready for e-file</label>
+                                    <label><input type="checkbox" name="fc" value="6"
+                                        checked={selectedStatus.includes(6)}
+                                        onChange={() => handleCheckboxChange(6)}
+                                    />Ready for e-file{ props?.completeuserData && (
+                                        <span className="notification-badge">{checkStatus(6)} </span>)}</label>
                                 </li>
                                 <li>
-                                    <label><input type="radio" name="fc" value="7" 
-                                    checked={selectedStatus.includes(7)}
-                                    onChange={() => handleCheckboxChange("7")}
-                                    />Accepted</label>
+                                    <label><input type="checkbox" name="fc" value="7"
+                                        checked={selectedStatus.includes(7)}
+                                        onChange={() => handleCheckboxChange(7)}
+                                    />Accepted{ props?.completeuserData && (
+                                        <span className="notification-badge">{checkStatus(7)} </span>)}</label>
                                 </li>
                             </ul>
                         </details>

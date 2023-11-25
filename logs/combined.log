@@ -519,3 +519,17 @@
 {"level":"error","message":"ER_PARSE_ERROR: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'left join user_status on user_status.user_id = users.id FROM users  WHERE use...' at line 1"}
 {"level":"info","message":"Database connected"}
 {"level":"info","message":"Database connected"}
+{"level":"info","message":"Database connected"}
+{"level":"info","message":"Database connected"}
+{"level":"error","message":"ER_PARSE_ERROR: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ')' at line 1"}
+{"level":"error","message":"ER_PARSE_ERROR: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ')' at line 1"}
+{"level":"info","message":"Database connected"}
+{"level":"info","message":"Database connected"}
+{"level":"info","message":"Database connected"}
+{"level":"info","message":"Database connected"}
+{"level":"info","message":"Database connected"}
+{"level":"info","message":"Database connected"}
+{"level":"info","message":"Database connected"}
+{"level":"info","message":"Database connected"}
+{"level":"info","message":"Database connected"}
+{"level":"info","message":"Database connected"}

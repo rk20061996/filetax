@@ -6,13 +6,20 @@ class Admin {
         // console.log("herererere--->updateprofile", data);
 
         let query1 = ""
-        if(data.status_id == 0){
-            query1 = 'Select *,users.id as user_idMain from users left join user_status on user_status.user_id = users.id where user_type != 1';
-        }else if(data.status_id == 1){
-            query1 = 'Select *,users.id as user_idMain from users left join user_status on user_status.user_id = users.id where user_type != 1 AND user_status.user_id IS NULL' ;
+        if (data.status_id.includes(0) ) {
+            query1 = 'Select *,users.id as user_idMain,users.id as id from users left join user_status on user_status.user_id = users.id where user_type != 1';
+        } else if (data.status_id.includes(1) && data.status_id.length === 1) {
+            query1 = 'Select *,users.id as user_idMain,users.id as id from users left join user_status on user_status.user_id = users.id where user_type != 1 AND user_status.user_id IS NULL';
         }
-        else{
-            query1 = 'Select *,users.id as user_idMain from users inner join user_status on user_status.user_id = users.id where user_type != 1 and user_status.status_type ='+data.status_id;
+        else {
+            var formatted = `(${data.status_id.map(v => JSON.stringify(v.toString())).join(', ')})`;
+
+            query1 = 'Select *,users.id as user_idMain,users.id as id from users inner join user_status on user_status.user_id = users.id where user_type != 1 and user_status.status_type in ' + formatted;
+            if(data.status_id.includes(1)){
+                query1 = 'Select *,users.id as user_idMain,users.id as id from users left join user_status on user_status.user_id = users.id where user_type != 1 and (user_status.status_type in ' + formatted + ' OR user_status.user_id IS NULL)';
+            }
+            console.log("mainQuery22",query1)
+
         }
 
 
@@ -39,7 +46,7 @@ class Admin {
         });
     }
 
-    static getSingleUser (data, cb) {
+    static getSingleUser(data, cb) {
         const query1 = 'select users.id,users.firstname,users.lastname,users.email,users.phone,users.created_on,users.image,user_status.status_type  from users left join user_status on user_status.user_id  = users.id where users.id = ?';
         db.query(query1, [data.id], (err1, res1) => {
             if (err1) {
@@ -59,11 +66,11 @@ class Admin {
             // });
         });
     }
-    static uploadTaxDraft (data, cb) {
+    static uploadTaxDraft(data, cb) {
         // INSERT INTO users VALUES(null, ?, ?, ?, ?,?, NOW(),'',0,?,2)
 
         const query1 = 'INSERT INTO tax_draft VALUES(null, ?,?,? , 0, 0, NOW())';
-        db.query(query1, [data.filename,"",data.user_id], (err1, res1) => {
+        db.query(query1, [data.filename, "", data.user_id], (err1, res1) => {
             if (err1) {
                 logger.error(err1.message);
                 cb(err1, null);
@@ -79,7 +86,7 @@ class Admin {
         });
     }
 
-    static getTaxDraftDocument(data, cb){
+    static getTaxDraftDocument(data, cb) {
         const query1 = 'select * from  tax_draft where is_deleted = 0 and user_id = ?';
         db.query(query1, [data.user_id], (err1, res1) => {
             if (err1) {
@@ -92,7 +99,7 @@ class Admin {
         });
     }
 
-    static deleteTaxDocument(data, cb){
+    static deleteTaxDocument(data, cb) {
         const query1 = 'update tax_draft set is_deleted = 1 where id = ?';
         db.query(query1, [data.id], (err1, res1) => {
             if (err1) {
@@ -105,17 +112,17 @@ class Admin {
         });
     }
 
-    static updateStatus(data, cb){
-        let query1  = ''
+    static updateStatus(data, cb) {
+        let query1 = ''
 
-        if(data.selectedStatus == "Ready for preparation"){
+        if (data.selectedStatus == "Ready for preparation") {
             query1 = 'Insert into user_status VALUES(null, ?,?)';
-        }else{
-            query1 = 'update user_status set status_type='+data.status_id+'  where user_id = '+data.id;
+        } else {
+            query1 = 'update user_status set status_type=' + data.status_id + '  where user_id = ' + data.id;
         }
 
         // const query1 = 'update tax_draft set is_deleted = 1 where id = ?';
-        db.query(query1, [data.status_id,data.id], (err1, res1) => {
+        db.query(query1, [data.status_id, data.id], (err1, res1) => {
             if (err1) {
                 logger.error(err1.message);
                 cb(err1, null);
@@ -126,8 +133,8 @@ class Admin {
         });
     }
 
-    
-    
+
+
 }
 
 module.exports = Admin;

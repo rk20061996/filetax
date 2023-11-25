@@ -11,8 +11,9 @@ function Adminhome(props) {
     const [userData, setUserData] = useState([]);
     const [userPaymentData, setUserPaymentData] = useState([]);
     const [totalClientCount, settotalClientCount] = useState(0);
+    const [completeuserData, setcompleteuserData] = useState([]);
 
-    const [filterStatus, setfilterStatus] = useState(0);
+    const [filterStatus, setfilterStatus] = useState([0]);
     const [searchTerm, setSearchTerm] = useState('');
 
     const [currentPage, setCurrentPage] = useState(1);
@@ -54,6 +55,7 @@ function Adminhome(props) {
                 }
                 setUserPaymentData({ paymentNotCompleted, paymentCompleted })
                 settotalClientCount(udata.length)
+                setcompleteuserData(udata)
             }
         } else {
             localStorage.removeItem('token');
@@ -104,12 +106,12 @@ function Adminhome(props) {
     return (
         <>
             <div className="main d-flex w-100 h-100">
-                <Sidebar setfilterStatus={setfilterStatus} filterStatus={filterStatus} isLoggedIn={props.isLoggedIn} setisLoggedIn={props.setisLoggedIn} />
+                <Sidebar completeuserData={completeuserData} setfilterStatus={setfilterStatus} filterStatus={filterStatus} isLoggedIn={props.isLoggedIn} setisLoggedIn={props.setisLoggedIn} />
                 <div className="mainContent container-fluid">
                     <div className="card dashboard">
                         <h3>Dashboard</h3>
                         <div className="row">
-                            <div className="col-md-4">
+                            {/* <div className="col-md-4">
                                 <div className="innerCard">
                                     <h4>Payments Completed</h4>
                                     <p>{userPaymentData?.paymentCompleted?.length}</p>
@@ -126,7 +128,7 @@ function Adminhome(props) {
                                     <h4>Payments Pending</h4>
                                     <p>{userPaymentData?.paymentNotCompleted?.length}</p>
                                 </div>
-                            </div>
+                            </div> */}
                         </div>
                         <div className=" export-btn-container " style={{
                             "display": "flex",

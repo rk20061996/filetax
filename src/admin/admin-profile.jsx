@@ -23,8 +23,10 @@ function Adminprofile(props) {
     const [uploadedDocument, setuploadedDocument] = useState([]);
     const [showModal, setShowModal] = useState(false);
     const [showModal2, setshowModal2] = useState(false);
-    const [showConfirmationModal, setShowConfirmationModal] = useState(false);
+    const [showModal3, setShowModal3] = useState(false);
     
+    const [showConfirmationModal, setShowConfirmationModal] = useState(false);
+
     const [taxDraft, settaxDraft] = useState([]);
     const [selectedStatus, setSelectedStatus] = useState('1');
     const [selectedStatusDisabled, setselectedStatusDisabled] = useState([]);
@@ -37,8 +39,25 @@ function Adminprofile(props) {
     const status = { 1: "Ready for preparation", 2: "In Progress", 3: "Summary Sent", 4: "Pending Recieved", 5: "Draft", 6: "Ready for e-file", 7: "Accepted" }
     const [filterStatus, setfilterStatus] = useState(0);
 
-    // alert(id)
-
+    const [formData, setFormData] = useState({
+        primaryTaxPayer: {
+            // id
+        },
+        spouse: {
+            // id
+        },
+        contact: {
+            // id
+        },
+        dependent: {
+            // id
+        },
+        residency: {
+            // id
+        },
+        id
+        // Add data structure for other sections
+    });
     useEffect(() => {
         getSingleUserData()
         getallUploadedDocument()
@@ -138,7 +157,7 @@ function Adminprofile(props) {
         await authFunc.deleteDocument({ id: documentId });
         console.log("Document deleted");
         getallUploadedDocument();
-    
+
         // Reset the document ID state and close the confirmation modal
         setDocumentToDelete(null);
         setShowConfirmationModal(false);
@@ -149,6 +168,9 @@ function Adminprofile(props) {
     // Function to close the modal
     const handleCloseModal = () => {
         setShowModal(false)
+    };
+    const handleCloseModal3= () => {
+        setShowModal3(false)
     };
     const handleFileChange2 = async (event) => {
         event.preventDefault(); // Prevent form submission behavior
@@ -174,6 +196,32 @@ function Adminprofile(props) {
         getTaxDraftDocument()
     }
 
+
+    const getTaxData = async () =>{
+        const data = await authFunc.getTaxInformation({id:id})
+        // console.log("data--->0",data)
+        // setFormData({...formData,primaryTaxPayer:data[0] } )
+        const data2 = await authFunc.getTaxContact({id:id})
+        const data3 = await authFunc.getTaxDependent({id:id})
+        const data4 = await authFunc.getTaxResidency({id:id})
+        console.log("data3",data.data.data.res)
+        setFormData({...formData,
+            contact:data2.data.data.res[0],
+            primaryTaxPayer:data.data.data.res[0],
+            dependent:data3.data.data.res[0],
+            residency:data4.data.data.res[0] 
+        } )
+        // props.setformDataForDownload({...formData,
+        //     contact:data2.data.data.res[0],
+        //     primaryTaxPayer:data.data.data.res[0],
+        //     dependent:data3.data.data.res[0],
+        //     residency:data4.data.data.res[0] 
+        // } )
+    }
+    useEffect(() => {
+        getTaxData()
+      }, []);
+    
     // const generatePDF = async () => {
     //     alert()
     //     // setdownloadDoc(1)
@@ -258,14 +306,14 @@ function Adminprofile(props) {
                         <h3>User Profile</h3>
                         <form className="profileForm">
                             <div className="row">
-                                <div className="col-sm-12">
+                                {/* <div className="col-sm-12">
                                     <div className="profileImg">
                                         {userData[0]?.image && userData[0]?.image !== '' ?
                                             <img src={'uploads/profile/' + userData[0]?.image} alt="" />
                                             : <span className="material-symbols-outlined"> person </span>
                                         }
                                     </div>
-                                </div>
+                                </div> */}
                                 <div className="col-sm-6">
                                     <div className="">
                                         <label>Name</label>
@@ -297,14 +345,16 @@ function Adminprofile(props) {
                         </form>
                         <div className="row mt-5">
                             <div className="col-sm-12">
-                                <button className="btn btn-primary w-auto" data-bs-toggle="modal" data-bs-target="#tagdoc">Tax Information Form</button>
-                                {/* <button
+                                {/* <button className="btn btn-primary w-auto" data-bs-toggle="modal" data-bs-target="#tagdoc">Tax Information Form</button> */}
+                                <button
                                     onClick={async () => {
+                                        // handleCloseModal3(true)
+                                        // handleCloseModal3(false)
                                         setshowModal2(true)
                                     }}
                                     className="btn btn-warning pull-right" style={{
                                         "width": "fit-content"
-                                    }}>Download</button> */}
+                                    }}>Tax Documentation Form</button>
                             </div>
                         </div>
                         <div className="row mt-5">
@@ -386,20 +436,21 @@ function Adminprofile(props) {
             </div>
 
 
-            <div class="modal customModal fade " id="tagdoc" tabindex="-1" aria-labelledby="TagdocModalLabel" aria-hidden="true">
-                <div class="modal-dialog  modal-lg">
+            {/* <div class="modal customModal fade " id="tagdoc" tabindex="-1" aria-labelledby="TagdocModalLabel" aria-hidden="true"> */}
+            <Modal className="modal-lg" show={showModal3} onHide={handleCloseModal3}>
+                <div >
                     <div class="modal-content">
                         <div class="modal-header">
                             <h4>Tag Documents</h4>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            <button type="button" onClick={handleCloseModal3} class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
                             <Taxdocumentationadmin setformDataForDownload={setformDataForDownload} downloadDoc={downloadDoc} setdownloadDoc={setdownloadDoc} />
                         </div>
                     </div>
                 </div>
-            </div>
-
+            {/* </div> */}
+        </Modal >
             <Modal show={showModal} onHide={handleCloseModal}>
                 <Modal.Header closeButton>
                     <Modal.Title>Success!</Modal.Title>
@@ -415,12 +466,12 @@ function Adminprofile(props) {
                 {/* </Modal.Footer> */}
             </Modal>
 
-            <Modal show={showModal2} >
+            <Modal className="modal-lg" show={showModal2} >
 
                 <Modal.Body>
 
                     {/* const [showModal2, setshowModal2] = useState(false); */}
-                    <Printablecomponent setshowModal2={setshowModal2} formData={formDataForDownload} downloadDoc={props.downloadDoc} setdownloadDoc={props.setdownloadDoc} />
+                    <Printablecomponent setShowModal3={setShowModal3} setshowModal2={setshowModal2} formData={formData} downloadDoc={props.downloadDoc} setdownloadDoc={props.setdownloadDoc} />
                 </Modal.Body>
                 {/* <Modal.Footer> */}
                 {/* <Button variant="secondary" onClick={handleCloseModal}>
