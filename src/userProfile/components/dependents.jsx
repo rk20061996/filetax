@@ -17,9 +17,9 @@ const Dependents = (props) => {
                     "width": "fit-content"
                 }}>Save As Draft</button>
             <div className="row">
-                <div className="col-sm-7">
+                <div className="col-sm-12 mt-5">
                     <form noValidate validated={validated} onSubmit={props.handleFormSubmit}>
-                        <div className="">
+                        <div className="form-group">
                             <label>Dependant First Name</label>
                             <input
                                 type="text"
@@ -29,7 +29,7 @@ const Dependents = (props) => {
                                 required
                             />
                         </div>
-                        <div className="">
+                        <div className="form-group">
                             <label>Dependant Middle Name</label>
                             <input
                                 type="text"
@@ -39,7 +39,7 @@ const Dependents = (props) => {
                                 required
                             />
                         </div>
-                        <div className="">
+                        <div className="form-group">
                             <label>Dependant Last Name</label>
                             <input
                                 type="text"
@@ -49,7 +49,7 @@ const Dependents = (props) => {
                                 required
                             />
                         </div>
-                        <div className="">
+                        <div className="form-group">
                             <label>SSN/ITIN</label>
                             <input
                                 type="text"
@@ -59,7 +59,7 @@ const Dependents = (props) => {
                                 required
                             />
                         </div>
-                        <div className="">
+                        <div className="form-group">
                             <label>Dependant Visa Category</label>
                             <input
                                 type="text"
@@ -69,7 +69,7 @@ const Dependents = (props) => {
                                 required
                             />
                         </div>
-                        <div className="">
+                        <div className="form-group">
                             <label>Dependant Date of Birth</label>
                             <input
                                 type="date"
@@ -79,7 +79,7 @@ const Dependents = (props) => {
                                 required
                             />
                         </div>
-                        <div className="">
+                        <div className="form-group">
                             <label>Relationship</label>
                             <input
                                 type="text"
@@ -89,7 +89,7 @@ const Dependents = (props) => {
                                 required
                             />
                         </div>
-                        <div className="">
+                        <div className="form-group">
                             <label>First date of entry to US (DD/MM/YYYY)</label>
                             <input
                                 type="date"
@@ -99,7 +99,7 @@ const Dependents = (props) => {
                                 required
                             />
                         </div>
-                        <div className="">
+                        <div className="form-group">
                             <label>Have you incurred any dependant care expenses</label>
                             <input
                                 type="text"
