@@ -40,6 +40,9 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 function App() {
   const [sessionCheck, setsessionCheck] = useState('')
   const [isLoggedIn, setisLoggedIn] = useState(false)
+  const [firstLoad, setfirstLoad] = useState(true)
+  const [filterStatus, setfilterStatus] = useState([0, 1, 2, 3, 4, 5, 6, 7, 8]);
+
   let navigate = useNavigate();
   const location = useLocation();
 
@@ -188,18 +191,21 @@ function App() {
 
             <TaxDocument isLoggedIn={isLoggedIn} setisLoggedIn={setisLoggedIn} /></>} // <-- passed as JSX
       />
+{/*   const [firstLoad, setfirstLoad] = useState(true)
+  const [filterStatus, setfilterStatus] = useState([0]);
 
+ */}
       <Route
         path="/admin/home"
         element={
           <><link rel="stylesheet" href="css/admin.css" />
-            <Adminhome isLoggedIn={isLoggedIn} setisLoggedIn={setisLoggedIn} /></>} // <-- passed as JSX
+            <Adminhome filterStatus={filterStatus} setfilterStatus= {setfilterStatus}  firstLoad={firstLoad} setfirstLoad={setfirstLoad} isLoggedIn={isLoggedIn} setisLoggedIn={setisLoggedIn} /></>} // <-- passed as JSX
       />
       <Route
         path="/admin/profile/:id"
         element={
           <><link rel="stylesheet" href="css/admin.css" />
-            <Adminprofile isLoggedIn={isLoggedIn} setisLoggedIn={setisLoggedIn} /></>} // <-- passed as JSX
+            <Adminprofile filterStatus={filterStatus} setfilterStatus= {setfilterStatus} firstLoad={firstLoad} setfirstLoad={setfirstLoad} isLoggedIn={isLoggedIn} setisLoggedIn={setisLoggedIn} /></>} // <-- passed as JSX
       />
     </Routes>
 

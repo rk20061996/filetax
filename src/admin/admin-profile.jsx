@@ -188,6 +188,8 @@ function Adminprofile(props) {
         event.target.value = '';
         try {
             const response = await authFunc.uploadTaxDraft(formData);
+            getTaxDraftDocument()
+
             event.preventDefault(); // Prevent form submission behavior
             console.log("File uploaded:", response);
         } catch (error) {
@@ -297,12 +299,12 @@ function Adminprofile(props) {
                         </Button>
                     </Modal.Footer>
                 </Modal>;
-                <Sidebar setfilterStatus={setfilterStatus} isLoggedIn={props.isLoggedIn} setisLoggedIn={props.setisLoggedIn} />
+                <Sidebar setfilterStatus={props.setfilterStatus} filterStatus={props.filterStatus} firstLoad={props.firstLoad} setfirstLoad={props.setfirstLoad}  isLoggedIn={props.isLoggedIn} setisLoggedIn={props.setisLoggedIn} />
                 <div className="mainContent container-fluid">
                     <div className="card">
 
-                        <div class="backBtn">
-                            <button>Back</button>
+                        <div  class="backBtn">
+                            <button onClick={ () =>{navigate('/admin/home')}}>Back</button>
                         </div>
                         <Dropdown className="customfieldset" onSelect={handleStatusChange}>
                             <Dropdown.Toggle variant="primary" id="dropdown-basic">

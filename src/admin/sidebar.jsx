@@ -21,11 +21,16 @@ function Sidebar(props) {
             //   if (location.pathname !== '/confirm-account' && location.pathname !== '/reset-password') {
             navigate("/");
         }
-        setSelectedStatus([0, 1, 2, 3, 4, 5, 6, 7, 8])
+        console.log("props.firstLoad-->", props.firstLoad)
+        // if(props.firstLoad){
+        // setSelectedStatus([0, 1, 2, 3, 4, 5, 6, 7, 8])
+        props.setfirstLoad(false)
+        // }
+
     }, []);
     useEffect(() => {
-        // if()
-    }, [props.completeuserData]);
+        setSelectedStatus(props.filterStatus)
+    }, [props.filterStatus]);
     const handleCheckboxChange = (value) => {
         if (value === 0) {
             // Select all checkboxes
@@ -48,14 +53,14 @@ function Sidebar(props) {
 
             } else {
                 // alert('43')
-                console.log("value--->",value)
+                console.log("value--->", value)
                 // Select the clicked checkbox
                 let alreadySelec = dataCheckbox
                 alreadySelec.push(value)
                 setSelectedStatus([...dataCheckbox, value]);
                 props.setfilterStatus(alreadySelec);
             }
-            if(dataCheckbox.length == 0){
+            if (dataCheckbox.length == 0) {
                 // alert('fi')
                 setSelectedStatus([value]);
                 finalValue = [value]
@@ -64,10 +69,10 @@ function Sidebar(props) {
             }
 
         }
-    
+
         // Propagate the selected status to the parent component
     };
-    
+
     const handleLogout = () => {
         // Show the logout confirmation modal
         setShowLogoutModal(true);
@@ -89,27 +94,27 @@ function Sidebar(props) {
         setShowLogoutModal(false);
     };
 
-    const checkStatus= (num)=>{
+    const checkStatus = (num) => {
         let datas = []
-        if(props.completeuserData && props.completeuserData.length > 0){
+        if (props.completeuserData && props.completeuserData.length > 0) {
             for (let i = 0; i < props.completeuserData.length; i++) {
                 let statusData = {};
                 if (props.completeuserData[i].status_type == num && num != 0 && num != 1) {
                     datas.push(props.completeuserData[i]);
-                } 
-                if(num == 1){
+                }
+                if (num == 1) {
                     if (props.completeuserData[i].status_type == null) {
-                        console.log("props.completeuserData",props.completeuserData[i])
+                        console.log("props.completeuserData", props.completeuserData[i])
                         datas.push(props.completeuserData[i]);
-                    } 
+                    }
                     // datas.push(props.completeuserData[i]);
-    
+
                 }
             }
-            if(num == 0){
+            if (num == 0) {
                 datas = props.completeuserData;
             }
-            console.log("nummm",num,datas)
+            console.log("nummm", num, datas)
             return datas.length
 
         }
@@ -137,62 +142,62 @@ function Sidebar(props) {
                             <ul>
                                 <li>
                                     <label><input type="checkbox" name="fc" value="0"
-                                        checked={selectedStatus.includes(0)}
+                                        checked={selectedStatus?.includes(0)}
                                         onChange={() => handleCheckboxChange(0)}
 
-                                    />All Clients { props?.completeuserData && (
+                                    />All Clients {props?.completeuserData && (
                                         <span className="notification-badge">{checkStatus(0)}</span>
                                     )}
                                     </label>
                                 </li>
                                 <li>
                                     <label><input type="checkbox" name="fc" value="1"
-                                        checked={selectedStatus.includes(1)}
+                                        checked={selectedStatus?.includes(1)}
                                         onChange={() => handleCheckboxChange(1)}
-                                    />Ready for preparation { props?.completeuserData &&  (
+                                    />Ready for preparation {props?.completeuserData && (
                                         <span className="notification-badge">{checkStatus(1)}</span>
                                     )}</label>
                                 </li>
                                 <li>
                                     <label><input type="checkbox" name="fc" value="2"
-                                        checked={selectedStatus.includes(2)}
+                                        checked={selectedStatus?.includes(2)}
                                         onChange={() => handleCheckboxChange(2)}
-                                    />In Progress { props?.completeuserData && (
+                                    />In Progress {props?.completeuserData && (
                                         <span className="notification-badge">{checkStatus(2)} </span>)}</label>
                                 </li>
                                 <li>
                                     <label><input type="checkbox" name="fc" value="3"
-                                        checked={selectedStatus.includes(3)}
+                                        checked={selectedStatus?.includes(3)}
                                         onChange={() => handleCheckboxChange(3)}
-                                    />Summary Sent { props?.completeuserData && (
+                                    />Summary Sent {props?.completeuserData && (
                                         <span className="notification-badge">{checkStatus(3)} </span>)}</label>
                                 </li>
                                 <li>
                                     <label><input type="checkbox" name="fc" value="4"
-                                        checked={selectedStatus.includes(4)}
+                                        checked={selectedStatus?.includes(4)}
                                         onChange={() => handleCheckboxChange(4)}
-                                    />Pending Recieved { props?.completeuserData && (
+                                    />Pending Recieved {props?.completeuserData && (
                                         <span className="notification-badge">{checkStatus(4)} </span>)}</label>
                                 </li>
                                 <li>
                                     <label><input type="checkbox" name="fc" value="5"
-                                        checked={selectedStatus.includes(5)}
+                                        checked={selectedStatus?.includes(5)}
                                         onChange={() => handleCheckboxChange(5)}
-                                    />Draft{ props?.completeuserData && (
+                                    />Draft{props?.completeuserData && (
                                         <span className="notification-badge">{checkStatus(5)} </span>)}</label>
                                 </li>
                                 <li>
                                     <label><input type="checkbox" name="fc" value="6"
-                                        checked={selectedStatus.includes(6)}
+                                        checked={selectedStatus?.includes(6)}
                                         onChange={() => handleCheckboxChange(6)}
-                                    />Ready for e-file{ props?.completeuserData && (
+                                    />Ready for e-file{props?.completeuserData && (
                                         <span className="notification-badge">{checkStatus(6)} </span>)}</label>
                                 </li>
                                 <li>
                                     <label><input type="checkbox" name="fc" value="7"
-                                        checked={selectedStatus.includes(7)}
+                                        checked={selectedStatus?.includes(7)}
                                         onChange={() => handleCheckboxChange(7)}
-                                    />Accepted{ props?.completeuserData && (
+                                    />Accepted{props?.completeuserData && (
                                         <span className="notification-badge">{checkStatus(7)} </span>)}</label>
                                 </li>
                             </ul>

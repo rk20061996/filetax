@@ -13,7 +13,6 @@ function Adminhome(props) {
     const [totalClientCount, settotalClientCount] = useState(0);
     const [completeuserData, setcompleteuserData] = useState([]);
 
-    const [filterStatus, setfilterStatus] = useState([0]);
     const [searchTerm, setSearchTerm] = useState('');
 
     const [currentPage, setCurrentPage] = useState(1);
@@ -27,13 +26,15 @@ function Adminhome(props) {
             localStorage.removeItem('token')
             navigate("/");
         }
-        getUserData({ filterStatus }, "OnLoad");
+        let filt = props.filterStatus
+        getUserData({ filterStatus:filt }, "OnLoad");
         console.log("userPaymentData--->", userPaymentData)
     }, []);
 
     useEffect(() => {
-        getUserData({ filterStatus }, "OnFilter");
-    }, [filterStatus]);
+        let filt = props.filterStatus
+        getUserData({ filterStatus:filt }, "OnFilter");
+    }, [props.filterStatus]);
 
     const getUserData = async (data, type) => {
         let localSession = localStorage.getItem('token')
@@ -95,7 +96,7 @@ function Adminhome(props) {
             user.lastname.toLowerCase().includes(searchString.toLowerCase()) ||
             user.email.toLowerCase().includes(searchString.toLowerCase()) ||
             user.phone.includes(searchString) ||
-            user.dynamicUser_id && user.dynamicUser_id.includes(searchString.toLowerCase()) 
+            user.dynamicUser_id && user.dynamicUser_id.toLowerCase().includes(searchString.toLowerCase()) 
         );
     };
 
@@ -107,7 +108,7 @@ function Adminhome(props) {
     return (
         <>
             <div className="main d-flex w-100 h-100">
-                <Sidebar completeuserData={completeuserData} setfilterStatus={setfilterStatus} filterStatus={filterStatus} isLoggedIn={props.isLoggedIn} setisLoggedIn={props.setisLoggedIn} />
+                <Sidebar firstLoad={props.firstLoad} setfirstLoad={props.setfirstLoad} completeuserData={completeuserData} setfilterStatus={props.setfilterStatus} filterStatus={props.filterStatus} isLoggedIn={props.isLoggedIn} setisLoggedIn={props.setisLoggedIn} />
                 <div className="mainContent container-fluid">
                     <div className="card dashboard">
                         <h3>Dashboard</h3>

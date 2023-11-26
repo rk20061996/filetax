@@ -214,8 +214,9 @@ function UploadDocument(props) {
                 <tr key={index}>
                   <td>{doc.document_name ? doc.document_name : "Not Selected"}</td>
                   <td>
+                  {doc.filename.split('-')[1]} {"  "} {" "}
                     <a href={"uploads/" + doc.filename} target="_blank" rel="noopener noreferrer">
-                      View <span className="material-symbols-outlined"> download </span>
+                       <span className="material-symbols-outlined"> download </span>
                     </a>
                   </td>
                   <td>{new Date(doc.created_at).toLocaleDateString()}</td>
