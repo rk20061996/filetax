@@ -33,10 +33,10 @@ const Contactinfo = (props) => {
                 className="btn btn-warning pull-right" style={{
                     "width": "fit-content"
                 }}>Save As Draft</button>
-            <div className="row">
+            <div className="row singleForm">
             <div className="col-sm-12 mt-5">
                     <form noValidate validated={validated} onSubmit={props.handleFormSubmit}>
-                        <div className="">
+                        <div className="form-group">
                             <label>Current Street address</label>
                             <input
                                 type="text"
@@ -47,7 +47,7 @@ const Contactinfo = (props) => {
 
                             />
                         </div>
-                        <div className="">
+                        <div className="form-group">
                             <label>Apt Number</label>
                             <input
                                 type="text"
@@ -57,7 +57,7 @@ const Contactinfo = (props) => {
                                 required
                             />
                         </div>
-                        <div className="">
+                        <div className="form-group">
                             <label>City</label>
                             <input
                                 type="text"
@@ -67,7 +67,7 @@ const Contactinfo = (props) => {
                                 required
                             />
                         </div>
-                        <div className="">
+                        <div className="form-group">
                             <label>State</label>
                             <input
                                 type="text"
@@ -77,7 +77,7 @@ const Contactinfo = (props) => {
                                 required
                             />
                         </div>
-                        <div className="">
+                        <div className="form-group">
                             <label>Zip Code</label>
                             <input
                                 type="text"
@@ -87,7 +87,7 @@ const Contactinfo = (props) => {
                                 required
                             />
                         </div>
-                        <div className="">
+                        <div className="form-group">
                             <label>Country</label>
                             <input
                                 type="text"
@@ -97,7 +97,7 @@ const Contactinfo = (props) => {
                                 required
                             />
                         </div>
-                        <div className="">
+                        <div className="form-group">
                             <label>Email ID</label>
                             <input
                                 type="text"
@@ -107,7 +107,7 @@ const Contactinfo = (props) => {
                                 required
                             />
                         </div>
-                        <div className="">
+                        <div className="form-group">
                             <label>Mobile Number</label>
                             <input
                                 type="text"
@@ -117,7 +117,7 @@ const Contactinfo = (props) => {
                                 required
                             />
                         </div>
-                        <div className="">
+                        <div className="form-group">
                             <label>Work Number</label>
                             <input
                                 type="text"

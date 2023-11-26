@@ -186,7 +186,7 @@ const Printablecomponent = (props) => {
             aria-labelledby="personalInfo"
             tabindex="0"
         >
-
+            <div className="headBtn">
             <button
                 disabled={!props.formData.primaryTaxPayer?.primaryTaxPayer_LastName ? true : false}
 
@@ -215,15 +215,15 @@ const Printablecomponent = (props) => {
                     "width": "fit-content",
                     "marginLeft": "90px"
                 }}>Edit Form</button>
-
+            </div>
             <div className="row rowwwws">
 
                 {/* <div className="></div> */}
 
-                <div className="col-sm-12 col-md-6">
-                    <h4 onClick={exportToExcel}>Primary Tax Payer</h4>
+                <div className="col-sm-12 col-md-7">
+                    <h4>Primary Tax Payer</h4>
                     <form >
-                        <div className="">
+                        <div className="form-group">
                             <label>Last name as per SSN card *</label>
                             <input
                                 readOnly
@@ -234,7 +234,7 @@ const Printablecomponent = (props) => {
                             // onChange={(e) => props.handleInputChange("primaryTaxPayer", "primaryTaxPayer_LastName", e.target.value)}
                             />
                         </div>
-                        <div className="">
+                        <div className="form-group">
                             <label>First Name</label>
                             <input
                                 readOnly
@@ -245,7 +245,7 @@ const Printablecomponent = (props) => {
                             // onChange={(e) => props.handleInputChange("primaryTaxPayer", "primaryTaxPayer_FirstName", e.target.value)}
                             />
                         </div>
-                        <div className="">
+                        <div className="form-group">
                             <label>Middle Name</label>
                             <input type="text" placeholder=""
                                 disabled
@@ -255,7 +255,7 @@ const Printablecomponent = (props) => {
                             // onChange={(e) => props.handleInputChange("primaryTaxPayer", "primaryTaxPayer_MiddleName", e.target.value)} 
                             />
                         </div>
-                        <div className="">
+                        <div className="form-group">
                             <label>Marital Status</label>
                             <select
                                 disabled
@@ -269,7 +269,7 @@ const Printablecomponent = (props) => {
                                 <option value="Married">Married</option>
                             </select>
                         </div>
-                        <div className="">
+                        <div className="form-group">
                             <label>Date of Marriage (DD/MM/YYYY)</label>
                             <input readOnly type="date" placeholder="" disabled
                                 required
@@ -278,7 +278,7 @@ const Printablecomponent = (props) => {
 
                             />
                         </div>
-                        <div className="">
+                        <div className="form-group">
                             <label>Date of Birth (DD/MM/YYYY)</label>
                             <input readOnly type="date" placeholder="" disabled
                                 required
@@ -287,7 +287,7 @@ const Printablecomponent = (props) => {
 
                             />
                         </div>
-                        <div className="">
+                        <div className="form-group">
                             <label>SSN/ITIN</label>
                             <input readOnly type="text" placeholder="" disabled
                                 required
@@ -296,7 +296,7 @@ const Printablecomponent = (props) => {
 
                             />
                         </div>
-                        <div className="">
+                        <div className="form-group">
                             <label>Current Visa Category</label>
                             <input readOnly type="text" placeholder="" disabled
                                 required
@@ -305,7 +305,7 @@ const Printablecomponent = (props) => {
 
                             />
                         </div>
-                        <div className="">
+                        <div className="form-group">
                             <label>Current Occupation</label>
                             <input readOnly type="text" placeholder=""
                                 required disabled
@@ -314,7 +314,7 @@ const Printablecomponent = (props) => {
 
                             />
                         </div>
-                        <div className="">
+                        <div className="form-group">
                             <label>First date of entry to US (DD/MM/YYYY)</label>
                             <input readOnly type="date" placeholder=""
                                 required disabled
@@ -324,11 +324,11 @@ const Printablecomponent = (props) => {
                         </div>
                     </form>
                 </div>
-                <div className="col-sm-12 col-md-6">
+                <div className="col-sm-12 col-md-5">
                     <h4> Spouse </h4>
                     <form noValidate validated={validated} onSubmit={props.handleFormSubmit}>
-                        <div className="">
-                            <label>First date of entry to US (DD/MM/YYYY)</label>
+                        <div className="form-group">
+                            {/* <label>First date of entry to US (DD/MM/YYYY)</label> */}
                             <input readOnly disabled
                                 type="date"
                                 placeholder=""
@@ -337,8 +337,8 @@ const Printablecomponent = (props) => {
                             // disabled={props.formData.primaryTaxPayer?.primaryTaxPayer_MaritalStatus == 'Single' || props.formData.primaryTaxPayer?.primaryTaxPayer_MaritalStatus == ''} 
                             />
                         </div>
-                        <div className="">
-                            <label>First Name</label>
+                        <div className="form-group">
+                            {/* <label>First Name</label> */}
                             <input readOnly disabled
                                 type="text"
                                 placeholder=""
@@ -348,8 +348,8 @@ const Printablecomponent = (props) => {
                             // disabled={props.formData.primaryTaxPayer?.primaryTaxPayer_MaritalStatus == 'Single' || props.formData.primaryTaxPayer?.primaryTaxPayer_MaritalStatus == ''} 
                             />
                         </div>
-                        <div className="">
-                            <label>Middle Name</label>
+                        <div className="form-group">
+                            {/* <label>Middle Name</label> */}
                             <input readOnly type="text" placeholder="" disabled
                                 required
                                 value={props.formData.primaryTaxPayer?.spouse_MiddleName}
@@ -357,8 +357,8 @@ const Printablecomponent = (props) => {
                             // disabled={props.formData.primaryTaxPayer?.primaryTaxPayer_MaritalStatus == 'Single' || props.formData.primaryTaxPayer?.primaryTaxPayer_MaritalStatus == ''} 
                             />
                         </div>
-                        <div className="">
-                            <label>Marital Status</label>
+                        <div className="form-group">
+                            {/* <label>Marital Status</label> */}
                             <input type="text" placeholder="" disabled
                                 required
                                 readOnly
@@ -373,8 +373,8 @@ const Printablecomponent = (props) => {
                             // disabled={props.formData.primaryTaxPayer?.primaryTaxPayer_MaritalStatus == 'Single' || props.formData.primaryTaxPayer?.primaryTaxPayer_MaritalStatus == ''}
                             />
                         </div>
-                        <div className="">
-                            <label>Date of Marriage (DD/MM/YYYY)</label>
+                        <div className="form-group">
+                            {/* <label>Date of Marriage (DD/MM/YYYY)</label> */}
                             <input readOnly type="date" placeholder=""
                                 required disabled
                                 value={props.formData.primaryTaxPayer?.primaryTaxPayer_MaritalStatus == 'Single' ? '' : props.formData.primaryTaxPayer?.primaryTaxPayer_DateOfMarriage}
@@ -384,8 +384,8 @@ const Printablecomponent = (props) => {
                             // disabled={props.formData.primaryTaxPayer?.primaryTaxPayer_MaritalStatus == 'Single' || props.formData.primaryTaxPayer?.primaryTaxPayer_MaritalStatus == ''} 
                             />
                         </div>
-                        <div className="">
-                            <label>Date of Birth (DD/MM/YYYY)</label>
+                        <div className="form-group">
+                            {/* <label>Date of Birth (DD/MM/YYYY)</label> */}
                             <input readOnly type="date" placeholder=""
                                 required disabled
                                 value={formatDateToYYYYMMDD(props.formData.primaryTaxPayer?.spouse_DateOfBirth)}
@@ -393,8 +393,8 @@ const Printablecomponent = (props) => {
                             // disabled={props.formData.primaryTaxPayer?.primaryTaxPayer_MaritalStatus == 'Single' || props.formData.primaryTaxPayer?.primaryTaxPayer_MaritalStatus == ''} 
                             />
                         </div>
-                        <div className="">
-                            <label>SSN/ITIN</label>
+                        <div className="form-group">
+                            {/* <label>SSN/ITIN</label> */}
                             <input readOnly type="text" placeholder=""
                                 required disabled
                                 value={props.formData.primaryTaxPayer?.spouse_SSN_ITIN}
@@ -402,8 +402,8 @@ const Printablecomponent = (props) => {
                             // disabled={props.formData.primaryTaxPayer?.primaryTaxPayer_MaritalStatus == 'Single' || props.formData.primaryTaxPayer?.primaryTaxPayer_MaritalStatus == ''} 
                             />
                         </div>
-                        <div className="">
-                            <label>Current Visa Category</label>
+                        <div className="form-group">
+                            {/* <label>Current Visa Category</label> */}
                             <input readOnly type="text" placeholder=""
                                 required disabled
                                 value={props.formData.primaryTaxPayer?.spouse_CurrentVisaCategory}
@@ -411,8 +411,8 @@ const Printablecomponent = (props) => {
                             // disabled={props.formData.primaryTaxPayer?.primaryTaxPayer_MaritalStatus == 'Single' || props.formData.primaryTaxPayer?.primaryTaxPayer_MaritalStatus == ''} 
                             />
                         </div>
-                        <div className="">
-                            <label>Current Occupation</label>
+                        <div className="form-group">
+                            {/* <label>Current Occupation</label> */}
                             <input readOnly type="text" placeholder=""
                                 required disabled
                                 value={props.formData.primaryTaxPayer?.spouse_CurrentOccupation}
@@ -420,8 +420,8 @@ const Printablecomponent = (props) => {
                             // disabled={props.formData.primaryTaxPayer?.primaryTaxPayer_MaritalStatus == 'Single' || props.formData.primaryTaxPayer?.primaryTaxPayer_MaritalStatus == ''} 
                             />
                         </div>
-                        <div className="">
-                            <label>First date of entry to US (DD/MM/YYYY)</label>
+                        <div className="form-group">
+                            {/* <label>First date of entry to US (DD/MM/YYYY)</label> */}
                             <input readOnly type="date" placeholder=""
                                 required disabled
                                 value={formatDateToYYYYMMDD(props.formData.primaryTaxPayer?.spouse_FirstEntryToUS)}
@@ -433,11 +433,11 @@ const Printablecomponent = (props) => {
                     </form>
                 </div>
             </div>
-            <div className="row rowwwws">
-                <div className="col-sm-7">
-                    <h4>Contact Details</h4>
+            <div className="row rowwwws singleForm mt-5">
+                <div className="col-sm-12">
+                <h4>Contact Details</h4>
                     <form noValidate validated={validated} onSubmit={props.handleFormSubmit}>
-                        <div className="">
+                        <div className="form-group">
                             <label>Current Street address</label>
                             <input readOnly
                                 type="text"
@@ -448,7 +448,7 @@ const Printablecomponent = (props) => {
 
                             />
                         </div>
-                        <div className="">
+                        <div className="form-group">
                             <label>Apt Number</label>
                             <input readOnly
                                 type="text"
@@ -458,7 +458,7 @@ const Printablecomponent = (props) => {
                                 required
                             />
                         </div>
-                        <div className="">
+                        <div className="form-group">
                             <label>City</label>
                             <input readOnly
                                 type="text"
@@ -468,7 +468,7 @@ const Printablecomponent = (props) => {
                                 required
                             />
                         </div>
-                        <div className="">
+                        <div className="form-group">
                             <label>State</label>
                             <input readOnly
                                 type="text"
@@ -478,7 +478,7 @@ const Printablecomponent = (props) => {
                                 required
                             />
                         </div>
-                        <div className="">
+                        <div className="form-group">
                             <label>Zip Code</label>
                             <input readOnly
                                 type="text"
@@ -488,7 +488,7 @@ const Printablecomponent = (props) => {
                                 required
                             />
                         </div>
-                        <div className="">
+                        <div className="form-group">
                             <label>Country</label>
                             <input readOnly
                                 type="text"
@@ -498,7 +498,7 @@ const Printablecomponent = (props) => {
                                 required
                             />
                         </div>
-                        <div className="">
+                        <div className="form-group">
                             <label>Email ID</label>
                             <input readOnly
                                 type="text"
@@ -508,7 +508,7 @@ const Printablecomponent = (props) => {
                                 required
                             />
                         </div>
-                        <div className="">
+                        <div className="form-group">
                             <label>Mobile Number</label>
                             <input readOnly
                                 type="text"
@@ -518,7 +518,7 @@ const Printablecomponent = (props) => {
                                 required
                             />
                         </div>
-                        <div className="">
+                        <div className="form-group">
                             <label>Work Number</label>
                             <input readOnly
                                 type="text"
@@ -531,11 +531,11 @@ const Printablecomponent = (props) => {
                     </form>
                 </div>
             </div>
-            <div className="row rowwwws">
-                <div className="col-sm-7">
-                    <h4>Dependent Details</h4>
+            <div className="row rowwwws singleForm mt-5">
+                <div className="col-sm-12">
+                <h4>Dependent Details</h4>
                     <form noValidate validated={validated} onSubmit={props.handleFormSubmit}>
-                        <div className="">
+                        <div className="form-group">
                             <label>Dependant First Name</label>
                             <input readOnly
                                 type="text"
@@ -545,7 +545,7 @@ const Printablecomponent = (props) => {
                                 required
                             />
                         </div>
-                        <div className="">
+                        <div className="form-group">
                             <label>Dependant Middle Name</label>
                             <input readOnly
                                 type="text"
@@ -555,7 +555,7 @@ const Printablecomponent = (props) => {
                                 required
                             />
                         </div>
-                        <div className="">
+                        <div className="form-group">
                             <label>Dependant Last Name</label>
                             <input readOnly
                                 type="text"
@@ -565,7 +565,7 @@ const Printablecomponent = (props) => {
                                 required
                             />
                         </div>
-                        <div className="">
+                        <div className="form-group">
                             <label>SSN/ITIN</label>
                             <input readOnly
                                 type="text"
@@ -575,7 +575,7 @@ const Printablecomponent = (props) => {
                                 required
                             />
                         </div>
-                        <div className="">
+                        <div className="form-group">
                             <label>Dependant Visa Category</label>
                             <input readOnly
                                 type="text"
@@ -585,7 +585,7 @@ const Printablecomponent = (props) => {
                                 required
                             />
                         </div>
-                        <div className="">
+                        <div className="form-group">
                             <label>Dependant Date of Birth</label>
                             <input readOnly
                                 type="date"
@@ -595,7 +595,7 @@ const Printablecomponent = (props) => {
                                 required
                             />
                         </div>
-                        <div className="">
+                        <div className="form-group">
                             <label>Relationship</label>
                             <input readOnly
                                 type="text"
@@ -605,7 +605,7 @@ const Printablecomponent = (props) => {
                                 required
                             />
                         </div>
-                        <div className="">
+                        <div className="form-group">
                             <label>First date of entry to US (DD/MM/YYYY)</label>
                             <input readOnly
                                 type="date"
@@ -615,7 +615,7 @@ const Printablecomponent = (props) => {
                                 required
                             />
                         </div>
-                        <div className="">
+                        <div className="form-group">
                             <label>Have you incurred any dependant care expenses</label>
                             <input readOnly
                                 type="text"
@@ -628,21 +628,21 @@ const Printablecomponent = (props) => {
                     </form>
                 </div>
             </div>
-            <div className="row rowwwws">
+            <div className="row rowwwws mt-5 residentForm">
                 <div className="col-sm-12">
                     <h4>Resident Details</h4>
                     <form >
                         <div className="row">
                             <div className="col-sm-12">
                                 <div className="row">
-                                    <div className="col-md-6">
+                                    <div className="col-md-4 residentLabel">
                                         <label style={{ "color": "transparent" }}>Label</label>
                                         <label>STATE NAME - 1</label>
                                         <label>Residency Start Date (DD/MM/YYYY)</label>
                                         <label>Residency End Date (DD/MM/YYYY)</label>
                                         <label>Rent Paid - Annual</label>
                                     </div>
-                                    <div className="col-md-6">
+                                    <div className="col-md-8">
                                         <div className="columntax d-block">
                                             <label>Tax Payer</label>
                                             <label>Spouse</label>
@@ -713,14 +713,14 @@ const Printablecomponent = (props) => {
                                         </div>
                                     </div>
                                 </div>
-                                <div className="row mt-4">
-                                    <div className="col-md-6">
+                                <div className="row mt-4 residentLabel">
+                                    <div className="col-md-4">
                                         <label>STATE NAME - 2</label>
                                         <label>Residency Start Date (DD/MM/YYYY)</label>
                                         <label>Residency End Date (DD/MM/YYYY)</label>
                                         <label>Rent Paid - Annual</label>
                                     </div>
-                                    <div className="col-md-6">
+                                    <div className="col-md-8">
                                         <div className="columntax">
                                             <input readOnly
                                                 type="text"

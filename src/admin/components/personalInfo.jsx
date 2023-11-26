@@ -115,14 +115,14 @@ const Personalinfo = (props) => {
                     "width": "fit-content"
                 }}>PDFs</button> */}
 
-            <div className="row rowwww">
+            <div className="row rowwww singleForm">
 
                 {/* <div className="></div> */}
 
                 <div className="col-sm-12 mt-5">
                     <h4>Primary Tax Payer</h4>
                     <form >
-                        <div className="">
+                        <div className="form-group">
                             <label>Last name as per SSN card *</label>
                             <input
                                 type="text"
@@ -132,7 +132,7 @@ const Personalinfo = (props) => {
                                 onChange={(e) => props.handleInputChange("primaryTaxPayer", "primaryTaxPayer_LastName", e.target.value)}
                             />
                         </div>
-                        <div className="">
+                        <div className="form-group">
                             <label>First Name</label>
                             <input
                                 type="text"
@@ -142,14 +142,14 @@ const Personalinfo = (props) => {
                                 onChange={(e) => props.handleInputChange("primaryTaxPayer", "primaryTaxPayer_FirstName", e.target.value)}
                             />
                         </div>
-                        <div className="">
+                        <div className="form-group">
                             <label>Middle Name</label>
                             <input type="text" placeholder=""
                                 required
                                 value={props.formData.primaryTaxPayer?.primaryTaxPayer_MiddleName}
                                 onChange={(e) => props.handleInputChange("primaryTaxPayer", "primaryTaxPayer_MiddleName", e.target.value)} />
                         </div>
-                        <div className="">
+                        <div className="form-group">
                             <label>Marital Status</label>
                             <select
                                 required
@@ -161,7 +161,7 @@ const Personalinfo = (props) => {
                                 <option value="Married">Married</option>
                             </select>
                         </div>
-                        <div className="">
+                        <div className="form-group">
                             <label>Date of Marriage (DD/MM/YYYY)</label>
                             {/* <input type="date" placeholder=""
                                 required
@@ -191,7 +191,7 @@ const Personalinfo = (props) => {
                                 />
                             </LocalizationProvider>
                         </div>
-                        <div className="">
+                        <div className="form-group">
                             <label>Date of Birth (DD/MM/YYYY)</label>
                             {/* <input type="date" placeholder=""
                                 required
@@ -220,7 +220,7 @@ const Personalinfo = (props) => {
                                 />
                             </LocalizationProvider>
                         </div>
-                        <div className="">
+                        <div className="form-group">
                             <label>SSN/ITIN</label>
                             <input type="text" placeholder=""
                                 required
@@ -229,7 +229,7 @@ const Personalinfo = (props) => {
 
                             />
                         </div>
-                        <div className="">
+                        <div className="form-group">
                             <label>Current Visa Category</label>
                             <input type="text" placeholder=""
                                 required
@@ -238,7 +238,7 @@ const Personalinfo = (props) => {
 
                             />
                         </div>
-                        <div className="">
+                        <div className="form-group">
                             <label>Current Occupation</label>
                             <input type="text" placeholder=""
                                 required
@@ -247,7 +247,7 @@ const Personalinfo = (props) => {
 
                             />
                         </div>
-                        <div className="">
+                        <div className="form-group">
                             <label>First date of entry to US (DD/MM/YYYY)</label>
                             {/* <input type="date" placeholder=""
                                 required
@@ -280,7 +280,7 @@ const Personalinfo = (props) => {
                 <div className="col-sm-12 mt-5">
                     <h4> Spouse </h4>
                     <form noValidate validated={validated} onSubmit={props.handleFormSubmit}>
-                        <div className="">
+                        <div className="form-group">
                             <label>First date of entry to US (DD/MM/YYYY)</label>
                             {/* <input
                                 type="date"
@@ -313,7 +313,7 @@ const Personalinfo = (props) => {
                                 />
                             </LocalizationProvider>
                         </div>
-                        <div className="">
+                        <div className="form-group">
                             <label>First Name</label>
                             <input
                                 type="text"
@@ -323,7 +323,7 @@ const Personalinfo = (props) => {
                                 onChange={(e) => props.handleInputChange("primaryTaxPayer", "spouse_FirstName", e.target.value)}
                                 disabled={props.formData.primaryTaxPayer?.primaryTaxPayer_MaritalStatus == 'Single' || props.formData.primaryTaxPayer?.primaryTaxPayer_MaritalStatus == ''} />
                         </div>
-                        <div className="">
+                        <div className="form-group">
                             <label>Middle Name</label>
                             <input type="text" placeholder=""
                                 required
@@ -331,7 +331,7 @@ const Personalinfo = (props) => {
                                 onChange={(e) => props.handleInputChange("primaryTaxPayer", "spouse_MiddleName", e.target.value)}
                                 disabled={props.formData.primaryTaxPayer?.primaryTaxPayer_MaritalStatus == 'Single' || props.formData.primaryTaxPayer?.primaryTaxPayer_MaritalStatus == ''} />
                         </div>
-                        <div className="">
+                        <div className="form-group">
                             <label>Marital Status</label>
                             <input type="text" placeholder=""
                                 required
@@ -347,7 +347,7 @@ const Personalinfo = (props) => {
                                 disabled={props.formData.primaryTaxPayer?.primaryTaxPayer_MaritalStatus == 'Single' || props.formData.primaryTaxPayer?.primaryTaxPayer_MaritalStatus == ''}
                             />
                         </div>
-                        <div className="">
+                        <div className="form-group">
                             <label>Date of Marriage (DD/MM/YYYY)</label>
                             {/* <input type="date" placeholder=""
                                 required
@@ -385,7 +385,7 @@ const Personalinfo = (props) => {
                                 />
                             </LocalizationProvider>
                         </div>
-                        <div className="">
+                        <div className="form-group">
                             <label>Date of Birth (DD/MM/YYYY)</label>
                             {/* <input type="date" placeholder=""
                                 required
@@ -415,7 +415,7 @@ const Personalinfo = (props) => {
                                 />
                             </LocalizationProvider>
                         </div>
-                        <div className="">
+                        <div className="form-group">
                             <label>SSN/ITIN</label>
                             <input type="text" placeholder=""
                                 required
@@ -423,7 +423,7 @@ const Personalinfo = (props) => {
                                 onChange={(e) => props.handleInputChange("primaryTaxPayer", "spouse_SSN_ITIN", e.target.value)}
                                 disabled={props.formData.primaryTaxPayer?.primaryTaxPayer_MaritalStatus == 'Single' || props.formData.primaryTaxPayer?.primaryTaxPayer_MaritalStatus == ''} />
                         </div>
-                        <div className="">
+                        <div className="form-group">
                             <label>Current Visa Category</label>
                             <input type="text" placeholder=""
                                 required
@@ -431,7 +431,7 @@ const Personalinfo = (props) => {
                                 onChange={(e) => props.handleInputChange("primaryTaxPayer", "spouse_CurrentVisaCategory", e.target.value)}
                                 disabled={props.formData.primaryTaxPayer?.primaryTaxPayer_MaritalStatus == 'Single' || props.formData.primaryTaxPayer?.primaryTaxPayer_MaritalStatus == ''} />
                         </div>
-                        <div className="">
+                        <div className="form-group">
                             <label>Current Occupation</label>
                             <input type="text" placeholder=""
                                 required
@@ -439,7 +439,7 @@ const Personalinfo = (props) => {
                                 onChange={(e) => props.handleInputChange("primaryTaxPayer", "spouse_CurrentOccupation", e.target.value)}
                                 disabled={props.formData.primaryTaxPayer?.primaryTaxPayer_MaritalStatus == 'Single' || props.formData.primaryTaxPayer?.primaryTaxPayer_MaritalStatus == ''} />
                         </div>
-                        <div className="">
+                        <div className="form-group">
                             <label>First date of entry to US (DD/MM/YYYY)</label>
                             {/* <input type="date" placeholder=""
                                 required

@@ -716,3 +716,51 @@ footer li a span{
     line-height: 22px;
     margin-top: 8px;
 }
+.clientId {
+    display: flex;
+    align-items: center;
+    height: 30px;
+    line-height: 30px;
+    padding: 0 10px;
+    border-radius: 5px;
+    border: 1px solid var(--grey-color);
+}
+.clientId input{
+    border: 0;
+}
+.clientId .input-group-text {
+    border: 0;
+    background: transparent;
+    padding: 0;
+}
+.clientId input {
+    background: transparent;
+    height: auto;
+    margin: 0 !important;
+}
+.clientId .input-group-text svg {
+    width: 20px;
+}
+.headBtn {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 15px;
+}
+form .form-group label{
+    width: 100%;
+}
+.singleForm .form-group label {
+    display: flex;
+    width: 20%;
+}
+.residentLabel label {
+    height: 43px !important;
+    line-height: 43px;
+    display: flex;
+    align-items: center;
+}
+.residencyLabel label {
+    height: 42px;
+    line-height: 45px;
+}
