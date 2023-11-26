@@ -3,14 +3,52 @@ import { Link } from 'react-router-dom';
 import authFunc from '../../serviceApi/admin';
 import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
+import * as XLSX from 'xlsx';
 
 
 const Printablecomponent = (props) => {
     const [validated, setValidated] = useState(false);
     const [showLoader, setshowLoader] = useState(false);
+    const [sheet3Data, setsheet3Data] = useState([]);
+    const [sheet4Data, setsheet4Data] = useState([]);
 
+    const daYCounter = ['First', 'Second', 'Third', 'Fourth', 'Fifth', 'Sixth']
+    // let  = []
     useEffect(() => {
-        //console.log("formData--->09",props.formData,props.formData.primaryTaxPayer?.primaryTaxPayer_LastName)
+        let data = []
+        for (let i = 0; i < props.formData?.dependent.length; i++) {
+            data.push(
+                [`${daYCounter[i]} Dependent`, ''],
+                ['Dependant First Name', props.formData?.dependent[i]?.firstName],
+                ['Dependant Middle Name', props.formData?.dependent[i]?.middleName],
+                ['Dependant Last Name', props.formData?.dependent[i]?.lastName],
+                ['SSN/ITIN', props.formData?.dependent[i]?.ssnItin],
+                ['Dependant Visa Category', props.formData?.dependent[i]?.visaCategory],
+                ['Dependant Date of Birth', props.formData?.dependent[i]?.dateOfBirth],
+                ['Relationship', props.formData?.dependent[i]?.relationship],
+                ['First date of entry to US (DD/MM/YYYY)', props.formData?.dependent[i]?.firstDateOfEntry],
+                ['Have you incurred any dependant care expenses', props.formData?.dependent[i]?.dependantCareExpenses],
+                ['', ''],
+                ['', ''],
+                ['', ''],
+            );
+
+        }
+        let data2 = []
+        data2.push(['', 'Tax Payer', 'Spouse'])
+        for (let i = 0; i < props.formData?.residency.length; i++) {
+            data2.push([
+                ['STATE NAME - ' + i + 1, props.formData?.residency[i].payerStateName1, props.formData?.residency[i].spouseStateName1],
+                ['Residency Start Date (DD/MM/YYYY)', props.formData?.residency[i].payerResidencyStartDate1, props.formData?.residency[i].spouseResidencyStartDate1],
+                ['Residency End Date (DD/MM/YYYY)', props.formData?.residency[i].payerResidencyEndDate1, props.formData?.residency[i].spouseResidencyEndDate1],
+                ['Rent Paid - Annual', props.formData?.residency[i].payerRentPaidAnnual1, props.formData?.residency[i].spouseRentPaidAnnual1],
+                ['', ''],
+                ['', ''],
+            ]);
+        }
+        console.log("data0000", data2)
+        setsheet3Data(data)
+        setsheet4Data(data2)
     }, [props.formData]);
     function formatDateToYYYYMMDD(dateString) {
         const date = new Date(dateString);
@@ -64,6 +102,83 @@ const Printablecomponent = (props) => {
             console.error('Error generating PDF:', error);
         }
     };
+
+    const exportToExcel = () => {
+        // Create a workbook
+        const workbook = XLSX.utils.book_new();
+
+        // Add sheets to the workbook
+        let sheet1Data = [
+            ['', 'Primary Tax Payer', 'Spouse'],
+            ['Last name as per SSN card', props.formData?.primaryTaxPayer?.primaryTaxPayer_LastName, props.formData?.primaryTaxPayer?.spouse_FirstDate],
+            ['First Name', props.formData?.primaryTaxPayer?.primaryTaxPayer_FirstName, props.formData?.primaryTaxPayer?.spouse_FirstName],
+            ['Middle Name', props.formData?.primaryTaxPayer?.primaryTaxPayer_MiddleName, props.formData?.primaryTaxPayer?.spouse_MiddleName],
+            ['Marital Status', props.formData?.primaryTaxPayer?.primaryTaxPayer_MaritalStatus, props.formData?.primaryTaxPayer?.primaryTaxPayer_MaritalStatus != 'Single' && props.formData?.primaryTaxPayer?.primaryTaxPayer_MaritalStatus != '' ? props.formData?.primaryTaxPayer?.primaryTaxPayer_MaritalStatus : ""],
+            ['Date of Marriage (DD/MM/YYYY)', props.formData?.primaryTaxPayer?.primaryTaxPayer_DateOfMarriage, props.formData?.primaryTaxPayer?.primaryTaxPayer_MaritalStatus != 'Single' && props.formData?.primaryTaxPayer?.primaryTaxPayer_MaritalStatus != '' ? props.formData?.primaryTaxPayer?.primaryTaxPayer_DateOfMarriage : ""],
+            ['Date of Birth (DD/MM/YYYY)', props.formData?.primaryTaxPayer?.primaryTaxPayer_DateOfBirth, props.formData?.primaryTaxPayer?.spouse_DateOfBirth],
+            ['SSN/ITIN', props.formData?.primaryTaxPayer?.primaryTaxPayer_SSN_ITIN, props.formData?.primaryTaxPayer?.spouse_SSN_ITIN],
+            ['Current Visa Category', props.formData?.primaryTaxPayer?.primaryTaxPayer_CurrentVisaCategory, props.formData?.primaryTaxPayer?.spouse_CurrentVisaCategory],
+            ['Current Occupation', props.formData?.primaryTaxPayer?.primaryTaxPayer_CurrentOccupation, props.formData?.primaryTaxPayer?.spouse_CurrentOccupation],
+            ['First date of entry to US (DD/MM/YYYY)', props.formData?.primaryTaxPayer?.primaryTaxPayer_FirstEntryToUS, props.formData?.primaryTaxPayer?.spouse_FirstEntryToUS],
+        ];
+        // for(let i = 0 ; i < props.formData.primaryTaxPayer)
+        const sheet1 = XLSX.utils.aoa_to_sheet(sheet1Data);
+
+        // Set column width for Sheet1 (columns B and C)
+        sheet1['!cols'] = [{ width: 25 }, { width: 25 }, { width: 25 }];
+
+        XLSX.utils.book_append_sheet(workbook, sheet1, 'Personal Info');
+
+
+
+        const sheet2Data = [
+            ['Current Street address', props.formData?.contact?.currentStreetAddress],
+            ['Apt Number', props.formData?.contact?.aptNumber],
+            ['City', props.formData?.contact?.city],
+            ['State', props.formData?.contact?.state],
+            ['Zip Code', props.formData?.contact?.zipCode],
+            ['Country', props.formData?.contact?.country],
+            ['Email ID', props.formData?.contact?.emailId],
+            ['Mobile Number', props.formData?.contact?.mobileNumber],
+            ['Work Number', props.formData?.contact?.workNumber],
+        ];
+        const sheet2 = XLSX.utils.aoa_to_sheet(sheet2Data);
+
+        // Set column width for Sheet2 (columns A and B)
+        sheet2['!cols'] = [{ width: 20 }, { width: 20 }];
+
+        XLSX.utils.book_append_sheet(workbook, sheet2, 'Contact Info');
+
+
+        const sheet3 = XLSX.utils.aoa_to_sheet(sheet3Data);
+
+        // Set column width for Sheet2 (columns A and B)
+        sheet3['!cols'] = [{ width: 20 }, { width: 25 }];
+
+        XLSX.utils.book_append_sheet(workbook, sheet3, 'Dependent Details');
+
+
+
+        let data2 = [['', 'Tax Payer', 'Spouse']];
+        for (let i = 0; i < props.formData?.residency.length; i++) {
+            data2.push(['STATE NAME - ' + (i + 1), props.formData?.residency[i]?.payerStateName1, props.formData?.residency[i]?.spouseStateName1]);
+            data2.push(['Residency Start Date (DD/MM/YYYY)', props.formData?.residency[i]?.payerResidencyStartDate1, props.formData?.residency[i]?.spouseResidencyStartDate1]);
+            data2.push(['Residency End Date (DD/MM/YYYY)', props.formData?.residency[i]?.payerResidencyEndDate1, props.formData?.residency[i]?.spouseResidencyEndDate1]);
+            data2.push(['Rent Paid - Annual', props.formData?.residency[i]?.payerRentPaidAnnual1, props.formData?.residency[i]?.spouseRentPaidAnnual1]);
+            data2.push(['', '']);
+            data2.push(['', '']);
+        }
+
+        const sheet4 = XLSX.utils.aoa_to_sheet(data2);
+        sheet4['!cols'] = [{ width: 20 }, { width: 25 }, { width: 25 }];
+
+
+        XLSX.utils.book_append_sheet(workbook, sheet4, 'Residency Details');
+
+        // Save the workbook to a file
+        XLSX.writeFile(workbook, 'exported_data.xlsx');
+    };
+
     return (
         <div className="tab-pane fade show active"
             id="personalInfotab"
@@ -106,7 +221,7 @@ const Printablecomponent = (props) => {
                 {/* <div className="></div> */}
 
                 <div className="col-sm-12 col-md-6">
-                    <h4>Primary Tax Payer</h4>
+                    <h4 onClick={exportToExcel}>Primary Tax Payer</h4>
                     <form >
                         <div className="">
                             <label>Last name as per SSN card *</label>
@@ -238,9 +353,9 @@ const Printablecomponent = (props) => {
                             <input readOnly type="text" placeholder="" disabled
                                 required
                                 value={props.formData.primaryTaxPayer?.spouse_MiddleName}
-                                // onChange={(e) => props.handleInputChange("primaryTaxPayer", "spouse_MiddleName", e.target.value)}
-                                // disabled={props.formData.primaryTaxPayer?.primaryTaxPayer_MaritalStatus == 'Single' || props.formData.primaryTaxPayer?.primaryTaxPayer_MaritalStatus == ''} 
-                                />
+                            // onChange={(e) => props.handleInputChange("primaryTaxPayer", "spouse_MiddleName", e.target.value)}
+                            // disabled={props.formData.primaryTaxPayer?.primaryTaxPayer_MaritalStatus == 'Single' || props.formData.primaryTaxPayer?.primaryTaxPayer_MaritalStatus == ''} 
+                            />
                         </div>
                         <div className="">
                             <label>Marital Status</label>
@@ -248,14 +363,14 @@ const Printablecomponent = (props) => {
                                 required
                                 readOnly
                                 value={props.formData.primaryTaxPayer?.primaryTaxPayer_MaritalStatus == 'Single' ? '' : props.formData.primaryTaxPayer?.primaryTaxPayer_MaritalStatus}
-                                // onChange={(e) =>
+                            // onChange={(e) =>
 
-                                //     props.handleInputChange("primaryTaxPayer", "primaryTaxPayer_MaritalStatus", e.target.value)
+                            //     props.handleInputChange("primaryTaxPayer", "primaryTaxPayer_MaritalStatus", e.target.value)
 
-                                // }
+                            // }
 
 
-                                // disabled={props.formData.primaryTaxPayer?.primaryTaxPayer_MaritalStatus == 'Single' || props.formData.primaryTaxPayer?.primaryTaxPayer_MaritalStatus == ''}
+                            // disabled={props.formData.primaryTaxPayer?.primaryTaxPayer_MaritalStatus == 'Single' || props.formData.primaryTaxPayer?.primaryTaxPayer_MaritalStatus == ''}
                             />
                         </div>
                         <div className="">
@@ -274,44 +389,44 @@ const Printablecomponent = (props) => {
                             <input readOnly type="date" placeholder=""
                                 required disabled
                                 value={formatDateToYYYYMMDD(props.formData.primaryTaxPayer?.spouse_DateOfBirth)}
-                                // onChange={(e) => props.handleInputChange("primaryTaxPayer", "spouse_DateOfBirth", e.target.value)}
-                                // disabled={props.formData.primaryTaxPayer?.primaryTaxPayer_MaritalStatus == 'Single' || props.formData.primaryTaxPayer?.primaryTaxPayer_MaritalStatus == ''} 
-                                />
+                            // onChange={(e) => props.handleInputChange("primaryTaxPayer", "spouse_DateOfBirth", e.target.value)}
+                            // disabled={props.formData.primaryTaxPayer?.primaryTaxPayer_MaritalStatus == 'Single' || props.formData.primaryTaxPayer?.primaryTaxPayer_MaritalStatus == ''} 
+                            />
                         </div>
                         <div className="">
                             <label>SSN/ITIN</label>
                             <input readOnly type="text" placeholder=""
                                 required disabled
                                 value={props.formData.primaryTaxPayer?.spouse_SSN_ITIN}
-                                // onChange={(e) => props.handleInputChange("primaryTaxPayer", "spouse_SSN_ITIN", e.target.value)}
-                                // disabled={props.formData.primaryTaxPayer?.primaryTaxPayer_MaritalStatus == 'Single' || props.formData.primaryTaxPayer?.primaryTaxPayer_MaritalStatus == ''} 
-                                />
+                            // onChange={(e) => props.handleInputChange("primaryTaxPayer", "spouse_SSN_ITIN", e.target.value)}
+                            // disabled={props.formData.primaryTaxPayer?.primaryTaxPayer_MaritalStatus == 'Single' || props.formData.primaryTaxPayer?.primaryTaxPayer_MaritalStatus == ''} 
+                            />
                         </div>
                         <div className="">
                             <label>Current Visa Category</label>
                             <input readOnly type="text" placeholder=""
                                 required disabled
                                 value={props.formData.primaryTaxPayer?.spouse_CurrentVisaCategory}
-                                // onChange={(e) => props.handleInputChange("primaryTaxPayer", "spouse_CurrentVisaCategory", e.target.value)}
-                                // disabled={props.formData.primaryTaxPayer?.primaryTaxPayer_MaritalStatus == 'Single' || props.formData.primaryTaxPayer?.primaryTaxPayer_MaritalStatus == ''} 
-                                />
+                            // onChange={(e) => props.handleInputChange("primaryTaxPayer", "spouse_CurrentVisaCategory", e.target.value)}
+                            // disabled={props.formData.primaryTaxPayer?.primaryTaxPayer_MaritalStatus == 'Single' || props.formData.primaryTaxPayer?.primaryTaxPayer_MaritalStatus == ''} 
+                            />
                         </div>
                         <div className="">
                             <label>Current Occupation</label>
                             <input readOnly type="text" placeholder=""
                                 required disabled
                                 value={props.formData.primaryTaxPayer?.spouse_CurrentOccupation}
-                                // onChange={(e) => props.handleInputChange("primaryTaxPayer", "spouse_CurrentOccupation", e.target.value)}
-                                // disabled={props.formData.primaryTaxPayer?.primaryTaxPayer_MaritalStatus == 'Single' || props.formData.primaryTaxPayer?.primaryTaxPayer_MaritalStatus == ''} 
-                                />
+                            // onChange={(e) => props.handleInputChange("primaryTaxPayer", "spouse_CurrentOccupation", e.target.value)}
+                            // disabled={props.formData.primaryTaxPayer?.primaryTaxPayer_MaritalStatus == 'Single' || props.formData.primaryTaxPayer?.primaryTaxPayer_MaritalStatus == ''} 
+                            />
                         </div>
                         <div className="">
                             <label>First date of entry to US (DD/MM/YYYY)</label>
                             <input readOnly type="date" placeholder=""
                                 required disabled
                                 value={formatDateToYYYYMMDD(props.formData.primaryTaxPayer?.spouse_FirstEntryToUS)}
-                                // onChange={(e) => props.handleInputChange("primaryTaxPayer", "spouse_FirstEntryToUS", e.target.value)}
-                                // disabled={props.formData.primaryTaxPayer?.primaryTaxPayer_MaritalStatus == 'Single' || props.formData.primaryTaxPayer?.primaryTaxPayer_MaritalStatus == ''}
+                            // onChange={(e) => props.handleInputChange("primaryTaxPayer", "spouse_FirstEntryToUS", e.target.value)}
+                            // disabled={props.formData.primaryTaxPayer?.primaryTaxPayer_MaritalStatus == 'Single' || props.formData.primaryTaxPayer?.primaryTaxPayer_MaritalStatus == ''}
                             />
                         </div>
                         {/* Add more inputs with similar validation and value change handling */}
@@ -320,7 +435,7 @@ const Printablecomponent = (props) => {
             </div>
             <div className="row rowwwws">
                 <div className="col-sm-7">
-                <h4>Contact Details</h4>
+                    <h4>Contact Details</h4>
                     <form noValidate validated={validated} onSubmit={props.handleFormSubmit}>
                         <div className="">
                             <label>Current Street address</label>
@@ -418,7 +533,7 @@ const Printablecomponent = (props) => {
             </div>
             <div className="row rowwwws">
                 <div className="col-sm-7">
-                <h4>Dependent Details</h4>
+                    <h4>Dependent Details</h4>
                     <form noValidate validated={validated} onSubmit={props.handleFormSubmit}>
                         <div className="">
                             <label>Dependant First Name</label>
@@ -515,7 +630,7 @@ const Printablecomponent = (props) => {
             </div>
             <div className="row rowwwws">
                 <div className="col-sm-12">
-                <h4>Resident Details</h4>
+                    <h4>Resident Details</h4>
                     <form >
                         <div className="row">
                             <div className="col-sm-12">

@@ -214,8 +214,8 @@ function Adminprofile(props) {
             ...formData,
             contact: data2.data.data.res[0],
             primaryTaxPayer: data.data.data.res[0],
-            dependent: data3.data.data.res[0],
-            residency: data4.data.data.res[0]
+            dependent: data3.data.data.res,
+            residency: data4.data.data.res
         })
         // props.setformDataForDownload({...formData,
         //     contact:data2.data.data.res[0],
