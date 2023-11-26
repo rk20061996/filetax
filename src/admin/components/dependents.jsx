@@ -113,7 +113,7 @@ const Dependents = (props) => {
                 disabled={props.formData.dependent.length > 5}
                 onClick={addDependent}
                 className="btn btn-primary pull-right" style={{ float: 'right' }}>Add Dependent</button>
-            {props.formData?.dependent?.length ? <div >
+            {props.formData?.dependent?.length ? <div className="mt-4">
                 {props.formData?.dependent?.map((depend, index) => (
                     <div key={index} style={{ display: 'inline-block', marginRight: '5px' }}>
                         <Button
@@ -134,7 +134,7 @@ const Dependents = (props) => {
                     </div>
                 ))}
             </div> : ""}
-            <div className="row">
+            <div className="row singleForm">
                 <div className="col-sm-12 mt-5">
                     <form noValidate validated={validated} onSubmit={props.handleFormSubmit}>
                         <div className="form-group">

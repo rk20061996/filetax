@@ -91,6 +91,7 @@ const Residency = (props) => {
 
             </Stack>}
             <div className="row">
+                <div className="customBtns mb-4">
                 <button
                 disabled={!props.formData.residency[0]?.payerStateName1 ? true : false}
 
@@ -109,6 +110,7 @@ const Residency = (props) => {
                     disabled={props.formData.residency.length > 5}
                     onClick={addResidency}
                     className="btn btn-primary pull-right" style={{ float: 'right',"width": "fit-content" }}>Add Residency</button>
+                    </div>
                 {props.formData?.residency?.length ? < >
                     {props.formData?.residency?.map((depend, index) => (
                         <div className="col-sm-12">

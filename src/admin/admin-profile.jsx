@@ -351,18 +351,20 @@ function Adminprofile(props) {
                                     </div>
                                     <div className="">
                                         <label>Client ID</label>
-                                        <input disabled={!editClient} readonly={!editClient} value={dynamicUserId} type="text" placeholder=""
-                                            // onChange={()=>{
-                                            //     setdynamicUserId()
-                                            // }}
-                                            onChange={(e) => 
-                                                setdynamicUserId(e.target.value)
-                                            }
+                                        <div className="clientId">
+                                            <input disabled={!editClient} readonly={!editClient} value={dynamicUserId} type="text" placeholder=""
+                                                // onChange={()=>{
+                                                //     setdynamicUserId()
+                                                // }}
+                                                onChange={(e) => 
+                                                    setdynamicUserId(e.target.value)
+                                                }
 
-                                        />
-                                        {!editClient && <span onClick={editClientId} className="input-group-text">
-                                            <EditIcon />
-                                        </span>}
+                                            />
+                                            {!editClient && <span onClick={editClientId} className="input-group-text">
+                                                <EditIcon />
+                                            </span>}
+                                        </div>
                                     </div>
                                 </div>
                                 {editClient && <div className="col-sm-12">
@@ -464,7 +466,7 @@ function Adminprofile(props) {
 
 
             {/* <div class="modal customModal fade " id="tagdoc" tabindex="-1" aria-labelledby="TagdocModalLabel" aria-hidden="true"> */}
-            <Modal className="modal-lg" show={showModal3} onHide={handleCloseModal3}>
+            <Modal className="modal-xl" show={showModal3} onHide={handleCloseModal3}>
                 <div >
                     <div class="modal-content">
                         <div class="modal-header">
@@ -493,7 +495,7 @@ function Adminprofile(props) {
                 {/* </Modal.Footer> */}
             </Modal>
 
-            <Modal className="modal-lg" show={showModal2} onHide={() => setshowModal2(false)} >
+            <Modal className="modal-xl" show={showModal2} onHide={() => setshowModal2(false)} >
                 <Modal.Header closeButton>
                     <Modal.Title>Tax Information!</Modal.Title>
                 </Modal.Header>
