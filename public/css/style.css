@@ -764,3 +764,7 @@ form .form-group label{
     height: 42px;
     line-height: 45px;
 }
+.backBtn {
+    position: absolute;
+    top: 20px;
+}

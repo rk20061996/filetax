@@ -301,7 +301,9 @@ function Adminprofile(props) {
                 <div className="mainContent container-fluid">
                     <div className="card">
 
-
+                        <div class="backBtn">
+                            <button>Back</button>
+                        </div>
                         <Dropdown className="customfieldset" onSelect={handleStatusChange}>
                             <Dropdown.Toggle variant="primary" id="dropdown-basic">
                                 {selectedStatus || 'Select Status'}
@@ -319,7 +321,7 @@ function Adminprofile(props) {
                                 {/* Add other status options here */}
                             </Dropdown.Menu>
                         </Dropdown>
-                        <h3>User Profile</h3>
+                        <h3 className="mt-5">User Profile</h3>
                         <form className="profileForm">
                             <div className="row">
                                 {/* <div className="col-sm-12">

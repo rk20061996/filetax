@@ -167,13 +167,13 @@ function UploadDocument(props) {
           <h3>Uploaded Tax Document</h3>
           {/* <form > */}
           <div className="row">
-            <div className="col-sm-12 col-md-7">
+            <div className="col-sm-12 col-md-6">
               <div style={{ display: 'block' }} className="form-group">
                 <label>Upload Document</label>
                 <input style={{ width: '100%' }} type="file" className="input-file" value={imageValue} onChange={handleFileChange} />
               </div>
             </div>
-            <div className="col-sm-12 col-md-7">
+            <div className="col-sm-12 col-md-6">
               <div style={{ display: 'block' }} className="form-group">
                 <label>Choose Tax Type</label>
                 <select value={selectedTaxType} onChange={handleTaxTypeChange}>
@@ -184,7 +184,7 @@ function UploadDocument(props) {
                 </select>
               </div>
             </div>
-            <div className="col-sm-12 col-md-7">
+            <div className="col-sm-12 col-md-6">
               <div style={{ display: 'block' }} className="form-group">
                 <label>Comments </label>
                 <textarea value={selectedTaxcomment}
