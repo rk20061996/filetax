@@ -46,8 +46,29 @@ class Admin {
         });
     }
 
+    static updateDynamicUserId(data, cb){
+        const query1 = 'update users set dynamicUser_id = ? where users.id = ?';
+        db.query(query1, [data.dynamicUserId,data.id], (err1, res1) => {
+            if (err1) {
+                logger.error(err1.message);
+                cb(err1, null);
+                return;
+            }
+
+            cb(null, {
+                res1,
+                // res2,
+                // res3,
+                // res4
+            });
+            // });
+            // });
+            // });
+        });
+    }
+
     static getSingleUser(data, cb) {
-        const query1 = 'select users.id,users.firstname,users.lastname,users.email,users.phone,users.created_on,users.image,user_status.status_type  from users left join user_status on user_status.user_id  = users.id where users.id = ?';
+        const query1 = 'select users.id,users.firstname,users.lastname,users.email,users.dynamicUser_id,users.phone,users.created_on,users.image,user_status.status_type  from users left join user_status on user_status.user_id  = users.id where users.id = ?';
         db.query(query1, [data.id], (err1, res1) => {
             if (err1) {
                 logger.error(err1.message);

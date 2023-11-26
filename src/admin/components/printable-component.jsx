@@ -320,6 +320,7 @@ const Printablecomponent = (props) => {
             </div>
             <div className="row rowwwws">
                 <div className="col-sm-7">
+                <h4>Contact Details</h4>
                     <form noValidate validated={validated} onSubmit={props.handleFormSubmit}>
                         <div className="">
                             <label>Current Street address</label>
@@ -417,6 +418,7 @@ const Printablecomponent = (props) => {
             </div>
             <div className="row rowwwws">
                 <div className="col-sm-7">
+                <h4>Dependent Details</h4>
                     <form noValidate validated={validated} onSubmit={props.handleFormSubmit}>
                         <div className="">
                             <label>Dependant First Name</label>
@@ -513,6 +515,7 @@ const Printablecomponent = (props) => {
             </div>
             <div className="row rowwwws">
                 <div className="col-sm-12">
+                <h4>Resident Details</h4>
                     <form >
                         <div className="row">
                             <div className="col-sm-12">

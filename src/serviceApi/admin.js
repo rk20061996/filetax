@@ -250,6 +250,19 @@ const updateStatus = async (data) =>{
     
 }
 
+const updateDynamicUserId = async (data) =>{
+    const config = {
+        headers: { Authorization: `${localStorage.getItem('token')}` }
+    };
+    try {
+        const result = await Axios.post(apiUrl + "admin/updateDynamicUserId", data, config)
+        return result
+    } catch (err) {
+        return err
+    }
+    
+}
+
 const authFunc = {
     getAllUser,
     getSingleUser,
@@ -268,6 +281,7 @@ const authFunc = {
     uploadTaxDraft,
     getTaxDraftDocument,
     deleteTaxDocument,
-    updateStatus
+    updateStatus,
+    updateDynamicUserId
 }
 export default authFunc

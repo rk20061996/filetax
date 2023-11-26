@@ -52,6 +52,9 @@ router.route('/updateStatus')
     .post(asyncHandler(checkAdminauth), asyncHandler(adminController.updateStatus));
 
 
+router.route('/updateDynamicUserId')
+    .post(asyncHandler(checkAdminauth), asyncHandler(adminController.updateDynamicUserId));
+
 
 
 module.exports = router;

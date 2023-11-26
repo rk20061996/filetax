@@ -1,39 +1,43 @@
-.marginTopBottom{
-    margin-top: 50px;
-    margin-bottom: 50px;
+.marginTopBottom {
+  margin-top: 50px;
+  margin-bottom: 50px;
 }
-.bgColorChange{
-    color: white;
+
+.bgColorChange {
+  color: white;
 }
+
 .tooltip {
-    position: relative;
-    display: inline-block;
-    border-bottom: 1px dotted black; /* If you want dots under the hoverable text */
-  }
-  
-  /* Tooltip text */
-  .tooltip .tooltiptext {
-    visibility: hidden;
-    width: 120px;
-    background-color: black;
-    color: #fff;
-    text-align: center;
-    padding: 5px 0;
-    border-radius: 6px;
-   
-    /* Position the tooltip text - see examples below! */
-    position: absolute;
-    z-index: 1;
-  }
-  
-  /* Show the tooltip text when you mouse over the tooltip container */
-  .tooltip:hover .tooltiptext {
-    visibility: visible;
-  }
-  .checkbox-label {
-    position: relative;
-    display: flex;
-    align-items: center;
+  position: relative;
+  display: inline-block;
+  border-bottom: 1px dotted black;
+  /* If you want dots under the hoverable text */
+}
+
+/* Tooltip text */
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 120px;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  padding: 5px 0;
+  border-radius: 6px;
+
+  /* Position the tooltip text - see examples below! */
+  position: absolute;
+  z-index: 1;
+}
+
+/* Show the tooltip text when you mouse over the tooltip container */
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+}
+
+.checkbox-label {
+  position: relative;
+  display: flex;
+  align-items: center;
 }
 
 .notification-badge {
@@ -48,13 +52,20 @@
   margin-left: 15px;
   margin-top: 3px;
   width: 22px;
+  display: flex;
+  justify-content: center;
 }
+
 .buttonload {
   /* background-color: #04AA6D;  */
-  border: none; /* Remove borders */
-  color: white; /* White text */
-  padding: 12px 24px; /* Some padding */
-  font-size: 16px; /* Set a font-size */
+  border: none;
+  /* Remove borders */
+  color: white;
+  /* White text */
+  padding: 12px 24px;
+  /* Some padding */
+  font-size: 16px;
+  /* Set a font-size */
 }
 
 /* Add a right margin to each icon */
@@ -62,10 +73,12 @@
   margin-left: -12px;
   margin-right: 8px;
 }
+
 .spinner-border {
   --bs-spinner-width: 1rem;
   --bs-spinner-height: 1rem;
 }
-.MuiFormControl-root{
+
+.MuiFormControl-root {
   width: 100%;
 }

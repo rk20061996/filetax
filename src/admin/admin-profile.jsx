@@ -14,6 +14,7 @@ import authFunc from '../serviceApi/admin';
 import { Dropdown } from 'react-bootstrap';
 import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
+import EditIcon from '@mui/icons-material/Edit';
 
 function Adminprofile(props) {
     let { id } = useParams();
@@ -24,7 +25,7 @@ function Adminprofile(props) {
     const [showModal, setShowModal] = useState(false);
     const [showModal2, setshowModal2] = useState(false);
     const [showModal3, setShowModal3] = useState(false);
-    
+
     const [showConfirmationModal, setShowConfirmationModal] = useState(false);
 
     const [taxDraft, settaxDraft] = useState([]);
@@ -38,6 +39,9 @@ function Adminprofile(props) {
 
     const status = { 1: "Ready for preparation", 2: "In Progress", 3: "Summary Sent", 4: "Pending Recieved", 5: "Draft", 6: "Ready for e-file", 7: "Accepted" }
     const [filterStatus, setfilterStatus] = useState(0);
+
+    const [editClient, seteditClient] = useState(false);
+    const [dynamicUserId, setdynamicUserId] = useState(id);
 
     const [formData, setFormData] = useState({
         primaryTaxPayer: {
@@ -84,6 +88,7 @@ function Adminprofile(props) {
         if (result?.data?.data?.res1) {
             setUserData(result?.data?.data?.res1);
             const dataResult = result?.data?.data?.res1
+            setdynamicUserId(dataResult[0].dynamicUser_id ?dataResult[0].dynamicUser_id : dataResult[0].id)
             if (dataResult[0]?.status_type) {
                 const dataArray = []
 
@@ -169,7 +174,7 @@ function Adminprofile(props) {
     const handleCloseModal = () => {
         setShowModal(false)
     };
-    const handleCloseModal3= () => {
+    const handleCloseModal3 = () => {
         setShowModal3(false)
     };
     const handleFileChange2 = async (event) => {
@@ -197,20 +202,21 @@ function Adminprofile(props) {
     }
 
 
-    const getTaxData = async () =>{
-        const data = await authFunc.getTaxInformation({id:id})
+    const getTaxData = async () => {
+        const data = await authFunc.getTaxInformation({ id: id })
         // console.log("data--->0",data)
         // setFormData({...formData,primaryTaxPayer:data[0] } )
-        const data2 = await authFunc.getTaxContact({id:id})
-        const data3 = await authFunc.getTaxDependent({id:id})
-        const data4 = await authFunc.getTaxResidency({id:id})
-        console.log("data3",data.data.data.res)
-        setFormData({...formData,
-            contact:data2.data.data.res[0],
-            primaryTaxPayer:data.data.data.res[0],
-            dependent:data3.data.data.res[0],
-            residency:data4.data.data.res[0] 
-        } )
+        const data2 = await authFunc.getTaxContact({ id: id })
+        const data3 = await authFunc.getTaxDependent({ id: id })
+        const data4 = await authFunc.getTaxResidency({ id: id })
+        console.log("data3", data.data.data.res)
+        setFormData({
+            ...formData,
+            contact: data2.data.data.res[0],
+            primaryTaxPayer: data.data.data.res[0],
+            dependent: data3.data.data.res[0],
+            residency: data4.data.data.res[0]
+        })
         // props.setformDataForDownload({...formData,
         //     contact:data2.data.data.res[0],
         //     primaryTaxPayer:data.data.data.res[0],
@@ -220,8 +226,8 @@ function Adminprofile(props) {
     }
     useEffect(() => {
         getTaxData()
-      }, []);
-    
+    }, []);
+
     // const generatePDF = async () => {
     //     alert()
     //     // setdownloadDoc(1)
@@ -261,6 +267,16 @@ function Adminprofile(props) {
     //         console.error('Error generating PDF:', error);
     //     }
     // };
+    const editClientId = () => {
+        // const [editClient, seteditClient] = useState(false);
+        seteditClient(true)
+    }
+    const submitForm = async() => {
+        const data = { id, dynamicUserId}
+        const result = await authFunc.updateDynamicUserId(data);
+
+        seteditClient(false)
+    }
     return (
         <>
             {/* <Header /> */}
@@ -335,12 +351,23 @@ function Adminprofile(props) {
                                     </div>
                                     <div className="">
                                         <label>Client ID</label>
-                                        <input disabled readonly value={userData[0]?.id} type="text" placeholder="" />
+                                        <input disabled={!editClient} readonly={!editClient} value={dynamicUserId} type="text" placeholder=""
+                                            // onChange={()=>{
+                                            //     setdynamicUserId()
+                                            // }}
+                                            onChange={(e) => 
+                                                setdynamicUserId(e.target.value)
+                                            }
+
+                                        />
+                                        {!editClient && <span onClick={editClientId} className="input-group-text">
+                                            <EditIcon />
+                                        </span>}
                                     </div>
                                 </div>
-                                <div className="col-sm-12">
-                                    {/* <button className="btn btn-primary w-auto">Submit</button> */}
-                                </div>
+                                {editClient && <div className="col-sm-12">
+                                    <button type="button" onClick={submitForm} className="btn btn-primary w-auto">Submit</button>
+                                </div>}
                             </div>
                         </form>
                         <div className="row mt-5">
@@ -424,7 +451,7 @@ function Adminprofile(props) {
                                             </>
                                         )}
                                     </>
-                                ):""}
+                                ) : ""}
 
 
 
@@ -449,8 +476,8 @@ function Adminprofile(props) {
                         </div>
                     </div>
                 </div>
-            {/* </div> */}
-        </Modal >
+                {/* </div> */}
+            </Modal >
             <Modal show={showModal} onHide={handleCloseModal}>
                 <Modal.Header closeButton>
                     <Modal.Title>Success!</Modal.Title>
@@ -466,8 +493,10 @@ function Adminprofile(props) {
                 {/* </Modal.Footer> */}
             </Modal>
 
-            <Modal className="modal-lg" show={showModal2} >
-
+            <Modal className="modal-lg" show={showModal2} onHide={() => setshowModal2(false)} >
+                <Modal.Header closeButton>
+                    <Modal.Title>Tax Information!</Modal.Title>
+                </Modal.Header>
                 <Modal.Body>
 
                     {/* const [showModal2, setshowModal2] = useState(false); */}

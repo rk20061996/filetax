@@ -119,7 +119,7 @@ const Personalinfo = (props) => {
 
                 {/* <div className="></div> */}
 
-                <div className="col-sm-12 col-md-6">
+                <div className="col-sm-12 mt-5">
                     <h4>Primary Tax Payer</h4>
                     <form >
                         <div className="">
@@ -164,11 +164,11 @@ const Personalinfo = (props) => {
                         <div className="">
                             <label>Date of Marriage (DD/MM/YYYY)</label>
                             {/* <input type="date" placeholder=""
-                                // dataDateFormat="DD/MM/YYYY"
                                 required
-                                disabled={props.formData.primaryTaxPayer?.primaryTaxPayer_MaritalStatus == 'Single' || props.formData.primaryTaxPayer?.primaryTaxPayer_MaritalStatus == ''}
-                                value={props.formData.primaryTaxPayer?.primaryTaxPayer_DateOfMarriage && props.formData.primaryTaxPayer?.primaryTaxPayer_MaritalStatus == 'Married' ? formatDateToYYYYMMDD(props.formData.primaryTaxPayer?.primaryTaxPayer_DateOfMarriage) : ""}
+                                disabled={props.formData.primaryTaxPayer?.primaryTaxPayer_MaritalStatus == 'Single' || props.formData.primaryTaxPayer?.primaryTaxPayer_MaritalStatus == ''} 
+                                value={props.formData.primaryTaxPayer?.primaryTaxPayer_DateOfMarriage && props.formData.primaryTaxPayer?.primaryTaxPayer_MaritalStatus == 'Married' ?formatDateToYYYYMMDD(props.formData.primaryTaxPayer?.primaryTaxPayer_DateOfMarriage):""}
                                 onChange={(e) => props.handleInputChange("primaryTaxPayer", "primaryTaxPayer_DateOfMarriage", e.target.value)}
+
                             /> */}
                             <LocalizationProvider style={{ 'width': '100% !important' }} dateAdapter={AdapterDayjs}>
                                 <DatePicker
@@ -195,25 +195,10 @@ const Personalinfo = (props) => {
                             <label>Date of Birth (DD/MM/YYYY)</label>
                             {/* <input type="date" placeholder=""
                                 required
-                                value={props.formData.primaryTaxPayer?.primaryTaxPayer_DateOfBirth ? formatDateToYYYYMMDD(props.formData.primaryTaxPayer?.primaryTaxPayer_DateOfBirth) : ""}
+                                value={props.formData.primaryTaxPayer?.primaryTaxPayer_DateOfBirth?formatDateToYYYYMMDD(props.formData.primaryTaxPayer?.primaryTaxPayer_DateOfBirth):""}
                                 onChange={(e) => props.handleInputChange("primaryTaxPayer", "primaryTaxPayer_DateOfBirth", e.target.value)}
 
                             /> */}
-                            {/* <LocalizationProvider style={{ 'width': '100% !important' }} dateAdapter={AdapterDayjs}>
-                                <DatePicker
-                                    format="DD-MM-YYYY"
-                                    slotProps={{
-                                        textField: {
-                                            size: "small",
-                                            error: false,
-                                        },
-                                    }}
-                                    value={props.formData.primaryTaxPayer?.primaryTaxPayer_DateOfBirth ?
-                                        dayjs(formatDateToYYYYMMDD(props.formData.primaryTaxPayer?.primaryTaxPayer_DateOfBirth))
-                                        : ""}
-                                    onChange={(e) => props.handleInputChange("primaryTaxPayer", "primaryTaxPayer_DateOfBirth", e)}
-                                />
-                            </LocalizationProvider> */}
                             <LocalizationProvider style={{ 'width': '100% !important' }} dateAdapter={AdapterDayjs}>
                                 <DatePicker
                                     format="DD-MM-YYYY"
@@ -266,7 +251,7 @@ const Personalinfo = (props) => {
                             <label>First date of entry to US (DD/MM/YYYY)</label>
                             {/* <input type="date" placeholder=""
                                 required
-                                value={props.formData.primaryTaxPayer?.primaryTaxPayer_FirstEntryToUS ? formatDateToYYYYMMDD(props.formData.primaryTaxPayer?.primaryTaxPayer_FirstEntryToUS) : ""}
+                                value={props.formData.primaryTaxPayer?.primaryTaxPayer_FirstEntryToUS?formatDateToYYYYMMDD(props.formData.primaryTaxPayer?.primaryTaxPayer_FirstEntryToUS):""}
                                 onChange={(e) => props.handleInputChange("primaryTaxPayer", "primaryTaxPayer_FirstEntryToUS", e.target.value)}
                             /> */}
                             <LocalizationProvider style={{ 'width': '100% !important' }} dateAdapter={AdapterDayjs}>
@@ -292,7 +277,7 @@ const Personalinfo = (props) => {
                         </div>
                     </form>
                 </div>
-                <div className="col-sm-12 col-md-6">
+                <div className="col-sm-12 mt-5">
                     <h4> Spouse </h4>
                     <form noValidate validated={validated} onSubmit={props.handleFormSubmit}>
                         <div className="">
@@ -305,7 +290,7 @@ const Personalinfo = (props) => {
                                 // value={}
                                 onChange={(e) => props.handleInputChange("primaryTaxPayer", "spouse_FirstDate", e.target.value)}
                                 disabled={props.formData.primaryTaxPayer?.primaryTaxPayer_MaritalStatus == 'Single' || props.formData.primaryTaxPayer?.primaryTaxPayer_MaritalStatus == ''} /> */}
-                            <LocalizationProvider style={{ 'width': '100% !important' }} dateAdapter={AdapterDayjs}>
+                                <LocalizationProvider style={{ 'width': '100% !important' }} dateAdapter={AdapterDayjs}>
                                 <DatePicker
                                     disabled={props.formData.primaryTaxPayer?.primaryTaxPayer_MaritalStatus == 'Single' || props.formData.primaryTaxPayer?.primaryTaxPayer_MaritalStatus == ''}
 
@@ -370,9 +355,8 @@ const Personalinfo = (props) => {
 
                                 // value={formatDateToYYYYMMDD(props.formData.primaryTaxPayer?.spouse_DateOfMarriage)}
                                 onChange={(e) => props.handleInputChange("primaryTaxPayer", "spouse_DateOfMarriage", e.target.value)}
-                                disabled={props.formData.primaryTaxPayer?.primaryTaxPayer_MaritalStatus == 'Single' || props.formData.primaryTaxPayer?.primaryTaxPayer_MaritalStatus == ''} 
-                                /> */}
-                            <LocalizationProvider style={{ 'width': '100% !important' }} dateAdapter={AdapterDayjs}>
+                                disabled={props.formData.primaryTaxPayer?.primaryTaxPayer_MaritalStatus == 'Single' || props.formData.primaryTaxPayer?.primaryTaxPayer_MaritalStatus == ''} /> */}
+                                <LocalizationProvider style={{ 'width': '100% !important' }} dateAdapter={AdapterDayjs}>
                                 <DatePicker
                                     readonly
                                     disabled={props.formData.primaryTaxPayer?.primaryTaxPayer_MaritalStatus == 'Single' || props.formData.primaryTaxPayer?.primaryTaxPayer_MaritalStatus == ''}
@@ -405,10 +389,10 @@ const Personalinfo = (props) => {
                             <label>Date of Birth (DD/MM/YYYY)</label>
                             {/* <input type="date" placeholder=""
                                 required
-                                value={props.formData.primaryTaxPayer?.spouse_DateOfBirth ? formatDateToYYYYMMDD(props.formData.primaryTaxPayer?.spouse_DateOfBirth) : ""}
+                                value={props.formData.primaryTaxPayer?.spouse_DateOfBirth ? formatDateToYYYYMMDD(props.formData.primaryTaxPayer?.spouse_DateOfBirth):""}
                                 onChange={(e) => props.handleInputChange("primaryTaxPayer", "spouse_DateOfBirth", e.target.value)}
                                 disabled={props.formData.primaryTaxPayer?.primaryTaxPayer_MaritalStatus == 'Single' || props.formData.primaryTaxPayer?.primaryTaxPayer_MaritalStatus == ''} /> */}
-                            <LocalizationProvider style={{ 'width': '100% !important' }} dateAdapter={AdapterDayjs}>
+                                <LocalizationProvider style={{ 'width': '100% !important' }} dateAdapter={AdapterDayjs}>
                                 <DatePicker
                                     disabled={props.formData.primaryTaxPayer?.primaryTaxPayer_MaritalStatus == 'Single' || props.formData.primaryTaxPayer?.primaryTaxPayer_MaritalStatus == ''}
 
@@ -459,7 +443,7 @@ const Personalinfo = (props) => {
                             <label>First date of entry to US (DD/MM/YYYY)</label>
                             {/* <input type="date" placeholder=""
                                 required
-                                value={props.formData.primaryTaxPayer?.spouse_FirstEntryToUS ? formatDateToYYYYMMDD(props.formData.primaryTaxPayer?.spouse_FirstEntryToUS) : ""}
+                                value={props.formData.primaryTaxPayer?.spouse_FirstEntryToUS ?formatDateToYYYYMMDD(props.formData.primaryTaxPayer?.spouse_FirstEntryToUS):""}
                                 onChange={(e) => props.handleInputChange("primaryTaxPayer", "spouse_FirstEntryToUS", e.target.value)}
                                 disabled={props.formData.primaryTaxPayer?.primaryTaxPayer_MaritalStatus == 'Single' || props.formData.primaryTaxPayer?.primaryTaxPayer_MaritalStatus == ''}
                             /> */}

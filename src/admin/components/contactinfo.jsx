@@ -2,21 +2,39 @@ import React, { useState } from "react";
 import { Link } from 'react-router-dom';
 import authFunc from '../../serviceApi/admin';
 
+import Alert from '@mui/material/Alert';
+import Button from '@mui/material/Button';
+import Stack from '@mui/material/Stack';
+
+import IconButton from '@mui/material/IconButton';
+import CloseIcon from '@mui/icons-material/Close';
 
 const Contactinfo = (props) => {
     const [validated, setValidated] = useState(false);
+    const [successMessage, setsuccessMessage] = useState(false);
+
     return (
         <div className="tab-pane fade" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
+           {successMessage && <Stack sx={{ width: '100%' }} spacing={2}>
+                <Alert onClose={() => { }}>Saved to Draft!</Alert>
+
+            </Stack>}
             <button
                 disabled = {!props.formData.contact?.currentStreetAddress?true:false}
                 onClick={async() => {
+                    setsuccessMessage(true);
+
                     await authFunc.updateTaxContact(props.formData)
+                    setTimeout(
+                        () => setsuccessMessage(false),
+                        2000
+                    );
                 }}
                 className="btn btn-warning pull-right" style={{
                     "width": "fit-content"
                 }}>Save As Draft</button>
             <div className="row">
-                <div className="col-sm-7">
+            <div className="col-sm-12 mt-5">
                     <form noValidate validated={validated} onSubmit={props.handleFormSubmit}>
                         <div className="">
                             <label>Current Street address</label>

@@ -38,7 +38,7 @@ function Login(props) {
             setValidation(errorMsg);
         } else {
 
-            if (submitInfo.data.data.status) {
+            if (submitInfo?.data?.data?.status) {
                 localStorage.setItem("token", submitInfo.data.data.token);
                 console.log("token--->", submitInfo, submitInfo.data.data.token, submitInfo)
                 props.setisLoggedIn(true);

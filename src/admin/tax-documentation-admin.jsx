@@ -55,8 +55,8 @@ function Taxdocumentationadmin(props) {
         setFormData({...formData,
             contact:data2.data.data.res[0],
             primaryTaxPayer:data.data.data.res[0],
-            dependent:data3.data.data.res[0],
-            residency:data4.data.data.res[0] 
+            dependent:data3.data.data.res,
+            residency:data4.data.data.res 
         } )
         props.setformDataForDownload({...formData,
             contact:data2.data.data.res[0],
@@ -99,8 +99,8 @@ function Taxdocumentationadmin(props) {
             <div className="tab-content" id="myTabContent">
                 <Personalinfo formData={formData} handleInputChange={handleInputChange} handleFormSubmit={handleFormSubmit} />
                 <Contactinfo formData={formData} handleInputChange={handleInputChange} handleFormSubmit={handleFormSubmit} />
-                <Dependents formData={formData} handleInputChange={handleInputChange} handleFormSubmit={handleFormSubmit} />
-                <Residency formData={formData} handleInputChange={handleInputChange} handleFormSubmit={handleFormSubmit} />
+                <Dependents setFormData={setFormData} formData={formData} handleInputChange={handleInputChange} handleFormSubmit={handleFormSubmit} />
+                <Residency setFormData={setFormData} formData={formData} handleInputChange={handleInputChange} handleFormSubmit={handleFormSubmit} />
 
             </div>
         </div>

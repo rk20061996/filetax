@@ -94,7 +94,8 @@ function Adminhome(props) {
             user.firstname.toLowerCase().includes(searchString.toLowerCase()) ||
             user.lastname.toLowerCase().includes(searchString.toLowerCase()) ||
             user.email.toLowerCase().includes(searchString.toLowerCase()) ||
-            user.phone.includes(searchString)
+            user.phone.includes(searchString) ||
+            user.dynamicUser_id && user.dynamicUser_id.includes(searchString.toLowerCase()) 
         );
     };
 
@@ -164,7 +165,7 @@ function Adminhome(props) {
                             <tbody>
                                 {filteredUsers.map((user, index) => (
                                     <tr key={index}>
-                                        <td>{user.user_idMain}</td>
+                                        <td>{user.dynamicUser_id ? user.dynamicUser_id :user.user_idMain}</td>
                                         <td>{user.firstname} {user.lastname}</td>
                                         <td>{user.phone}</td>
                                         <td>{user.email}</td>

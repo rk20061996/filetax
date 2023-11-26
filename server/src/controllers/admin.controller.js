@@ -533,43 +533,71 @@ exports.updateDependencyDetails = (req,res) =>{
 const dependentDetails=(req,res) =>{
     const user_id = req.body.id
 
-    const {firstName,middleName,lastName,ssnItin,visaCategory,dateOfBirth,relationship,firstDateOfEntry,dependantCareExpenses,status}  = req.body.dependent
-    if(req.body.dependent && req.body.dependent.id){
-        // console.log("end game")
-        taxInformtaion.updateDependent({id:req.body.dependent.id,user_id,firstName,middleName,lastName,ssnItin,visaCategory,dateOfBirth,relationship,firstDateOfEntry,dependantCareExpenses,status}, (err, data) => {
-            // console.log("user---?1", user)
-            if (err) {
-                res.status(200).send({
-                    status: "error",
-                    message: err.message
-                });
-            } else {
-                res.status(201).send({
-                    status: 200,
-                    data: {
-                        data
-                    }
-                });
-            }
-        });        
-    }else{
-        taxInformtaion.savedependent({user_id,firstName,middleName,lastName,ssnItin,visaCategory,dateOfBirth,relationship,firstDateOfEntry,dependantCareExpenses,status}, (err, data) => {
-            // console.log("user---?1", user)
-            if (err) {
-                res.status(200).send({
-                    status: "error",
-                    message: err.message
-                });
-            } else {
-                res.status(201).send({
-                    status: 200,
-                    data: {
-                        data
-                    }
-                });
-            }
-        });
-    }
+    // const {firstName,middleName,lastName,ssnItin,visaCategory,dateOfBirth,relationship,firstDateOfEntry,dependantCareExpenses,status}  = req.body.dependent
+    // if(req.body.dependent && req.body.dependent.id){
+    //     // console.log("end game")
+    //     taxInformtaion.updateDependent({id:req.body.dependent.id,user_id,firstName,middleName,lastName,ssnItin,visaCategory,dateOfBirth,relationship,firstDateOfEntry,dependantCareExpenses,status}, (err, data) => {
+    //         // console.log("user---?1", user)
+    //         if (err) {
+    //             res.status(200).send({
+    //                 status: "error",
+    //                 message: err.message
+    //             });
+    //         } else {
+    //             res.status(201).send({
+    //                 status: 200,
+    //                 data: {
+    //                     data
+    //                 }
+    //             });
+    //         }
+    //     });        
+    // }else{
+    //     taxInformtaion.savedependent({user_id,firstName,middleName,lastName,ssnItin,visaCategory,dateOfBirth,relationship,firstDateOfEntry,dependantCareExpenses,status}, (err, data) => {
+    //         // console.log("user---?1", user)
+    //         if (err) {
+    //             res.status(200).send({
+    //                 status: "error",
+    //                 message: err.message
+    //             });
+    //         } else {
+    //             res.status(201).send({
+    //                 status: 200,
+    //                 data: {
+    //                     data
+    //                 }
+    //             });
+    //         }
+    //     });
+    // }
+    var bodyDATA= req.body.dependent
+    taxInformtaion.deleteTaxDependentByUserId({user_id}, (err, data) => {
+        console.log("user---?1", user_id)
+        if (err) {
+            res.status(200).send({
+                status: "error",
+                message: err.message
+            });
+        } else {
+            console.log("deleted")
+            taxInformtaion.InsertDependentByUserId({user_id,bodyDATA}, (err, data) => {
+                // console.log("user---?1", user)
+                if (err) {
+                    res.status(200).send({
+                        status: "error",
+                        message: err.message
+                    });
+                } else {
+                    res.status(201).send({
+                        status: 200,
+                        data: {
+                            data
+                        }
+                    });
+                }
+            }); 
+        }
+    }); 
 }
 
 exports.updateResidencyDetails = (req,res) =>{
@@ -601,43 +629,73 @@ exports.updateResidencyDetails = (req,res) =>{
 const residencytDetails=(req,res) =>{
     const user_id = req.body.id
 
-    const {payerStateName1,spouseStateName1,payerResidencyStartDate1,spouseResidencyStartDate1,payerResidencyEndDate1,spouseResidencyEndDate1,payerRentPaidAnnual1,spouseRentPaidAnnual1,payerStateName2,spouseStateName2,payerResidencyStartDate2,spouseResidencyStartDate2,payerResidencyEndDate2,spouseResidencyEndDate2,payerRentPaidAnnual2,spouseRentPaidAnnual2,status}  = req.body.residency
-    if(req.body.residency && req.body.residency.id){
-        // console.log("end game")
-        taxInformtaion.updateresidency({id:req.body.residency.id,payerStateName1,spouseStateName1,payerResidencyStartDate1,spouseResidencyStartDate1,payerResidencyEndDate1,spouseResidencyEndDate1,payerRentPaidAnnual1,spouseRentPaidAnnual1,payerStateName2,spouseStateName2,payerResidencyStartDate2,spouseResidencyStartDate2,payerResidencyEndDate2,spouseResidencyEndDate2,payerRentPaidAnnual2,spouseRentPaidAnnual2,status}, (err, data) => {
-            // console.log("user---?1", user)
-            if (err) {
-                res.status(200).send({
-                    status: "error",
-                    message: err.message
-                });
-            } else {
-                res.status(201).send({
-                    status: 200,
-                    data: {
-                        data
-                    }
-                });
-            }
-        });        
-    }else{
-        taxInformtaion.saveresidency({user_id,payerStateName1,spouseStateName1,payerResidencyStartDate1,spouseResidencyStartDate1,payerResidencyEndDate1,spouseResidencyEndDate1,payerRentPaidAnnual1,spouseRentPaidAnnual1,payerStateName2,spouseStateName2,payerResidencyStartDate2,spouseResidencyStartDate2,payerResidencyEndDate2,spouseResidencyEndDate2,payerRentPaidAnnual2,spouseRentPaidAnnual2,status}, (err, data) => {
-            // console.log("user---?1", user)
-            if (err) {
-                res.status(200).send({
-                    status: "error",
-                    message: err.message
-                });
-            } else {
-                res.status(201).send({
-                    status: 200,
-                    data: {
-                        data
-                    }
-                });
-            }
-        });
-    }
+    // const {payerStateName1,spouseStateName1,payerResidencyStartDate1,spouseResidencyStartDate1,payerResidencyEndDate1,spouseResidencyEndDate1,payerRentPaidAnnual1,spouseRentPaidAnnual1,payerStateName2,spouseStateName2,payerResidencyStartDate2,spouseResidencyStartDate2,payerResidencyEndDate2,spouseResidencyEndDate2,payerRentPaidAnnual2,spouseRentPaidAnnual2,status}  = req.body.residency
+    // if(req.body.residency && req.body.residency.id){
+    //     // console.log("end game")
+    //     taxInformtaion.updateresidency({id:req.body.residency.id,payerStateName1,spouseStateName1,payerResidencyStartDate1,spouseResidencyStartDate1,payerResidencyEndDate1,spouseResidencyEndDate1,payerRentPaidAnnual1,spouseRentPaidAnnual1,payerStateName2,spouseStateName2,payerResidencyStartDate2,spouseResidencyStartDate2,payerResidencyEndDate2,spouseResidencyEndDate2,payerRentPaidAnnual2,spouseRentPaidAnnual2,status}, (err, data) => {
+    //         // console.log("user---?1", user)
+    //         if (err) {
+    //             res.status(200).send({
+    //                 status: "error",
+    //                 message: err.message
+    //             });
+    //         } else {
+    //             res.status(201).send({
+    //                 status: 200,
+    //                 data: {
+    //                     data
+    //                 }
+    //             });
+    //         }
+    //     });        
+    // }else{
+    //     taxInformtaion.saveresidency({user_id,payerStateName1,spouseStateName1,payerResidencyStartDate1,spouseResidencyStartDate1,payerResidencyEndDate1,spouseResidencyEndDate1,payerRentPaidAnnual1,spouseRentPaidAnnual1,payerStateName2,spouseStateName2,payerResidencyStartDate2,spouseResidencyStartDate2,payerResidencyEndDate2,spouseResidencyEndDate2,payerRentPaidAnnual2,spouseRentPaidAnnual2,status}, (err, data) => {
+    //         // console.log("user---?1", user)
+    //         if (err) {
+    //             res.status(200).send({
+    //                 status: "error",
+    //                 message: err.message
+    //             });
+    //         } else {
+    //             res.status(201).send({
+    //                 status: 200,
+    //                 data: {
+    //                     data
+    //                 }
+    //             });
+    //         }
+    //     });
+    // }
+    
+    console.log("hereerere")
+    var bodyDATA= req.body.residency
+    taxInformtaion.deleteTaxResidentByUserId({user_id}, (err, data) => {
+        // console.log("user---?1", user)
+        if (err) {
+            res.status(200).send({
+                status: "error",
+                message: err.message
+            });
+        } else {
+            console.log("deleted")
+            taxInformtaion.InsertResidentByUserId({user_id,bodyDATA}, (err, data) => {
+                // console.log("user---?1", user)
+                if (err) {
+                    res.status(200).send({
+                        status: "error",
+                        message: err.message
+                    });
+                } else {
+                    res.status(201).send({
+                        status: 200,
+                        data: {
+                            data
+                        }
+                    });
+                }
+            }); 
+        }
+    }); 
 }
 
 exports.userUploadedDocument =(req,res) =>{
@@ -703,6 +761,45 @@ exports.updateStatus= (req,res)=>{
                 status: 200,
                 data: data
             });
+        }
+    });
+}
+
+exports.updateDynamicUserId = (req,res) =>{
+    document.getUserDataByToken({ user_id: req.user_id }, (err, data) => {
+        console.log("user---?1", req.user_id)
+        if (err) {
+            res.status(200).send({
+                status: 500,
+                message: err.message
+            });
+        } else {
+            console.log("dataAdmin",)
+            if(data[0].user_type == 1){
+                admin.updateDynamicUserId({ id: req.body.id,dynamicUserId:req.body.dynamicUserId }, (err, data) => {
+                    // console.log("user---?1", user)
+                    if (err) {
+                        res.status(200).send({
+                            status: 500,
+                            message: err.message
+                        });
+                    } else {
+                        res.status(201).send({
+                            status: 200,
+                            data: data
+                        });
+                    }
+                });
+            }else{
+                res.status(200).send({
+                    status: 500,
+                    message: "Not an Admin"
+                });
+            }
+            // res.status(201).send({
+            //     status: 200,
+            //     data: data
+            // });
         }
     });
 }
