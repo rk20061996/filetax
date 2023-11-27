@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { useNavigate } from "react-router-dom";
 import { NavLink } from 'react-router-dom';
 import { Modal, Button } from 'react-bootstrap';
+import { useLocation } from 'react-router-dom';
 
 function Sidebar(props) {
     const [sessionCheck, setsessionCheck] = useState('')
@@ -12,6 +13,14 @@ function Sidebar(props) {
     const [showLogoutModal, setShowLogoutModal] = useState(false);
     // completeuserData
     // props.completeuserData
+    // const showLeft = ['/admin/home'].indexOf(url) > -1;
+    const location = useLocation();
+    let isAdminHomePage = location.pathname === '/admin/home';
+  
+    // if (!isAdminHomePage) {
+    //   // If not on the admin home page, render nothing or return null
+    //   return null;
+    // }
     useEffect(() => {
         let localSession = localStorage.getItem('token')
         setsessionCheck(localSession)
@@ -32,6 +41,8 @@ function Sidebar(props) {
         setSelectedStatus(props.filterStatus)
     }, [props.filterStatus]);
     const handleCheckboxChange = (value) => {
+        // alert(value)
+        console.log("value-->", value)
         if (value === 0) {
             // Select all checkboxes
             setSelectedStatus([0, 1, 2, 3, 4, 5, 6, 7, 8]);
@@ -48,8 +59,13 @@ function Sidebar(props) {
 
                 const updatedStatus = dataCheckbox.filter((item) => item !== value);
                 finalValue = updatedStatus
-                setSelectedStatus(updatedStatus);
-                props.setfilterStatus(finalValue);
+                if (finalValue.length) {
+                    setSelectedStatus(updatedStatus);
+                    props.setfilterStatus(finalValue);
+                } else {
+                    setSelectedStatus([9]);
+                    props.setfilterStatus([9]);
+                }
 
             } else {
                 // alert('43')
@@ -135,9 +151,10 @@ function Sidebar(props) {
             <ul className="list-unstyled">
                 <li><NavLink to="/admin/home" activeClassName="active" className="nav-link"><span className="material-symbols-outlined"> home </span>Dashboard </NavLink></li>
                 {/* <li><a href="home.html" className="active"><span className="material-symbols-outlined"> home </span> Dashboard</a></li> */}
+                {/* {isAdminHomePage &&  */}
                 <li>
                     <fieldset>
-                        <details open>
+                        <details open={isAdminHomePage}>
                             <summary>Status</summary>
                             <ul>
                                 <li>
@@ -204,6 +221,7 @@ function Sidebar(props) {
                         </details>
                     </fieldset>
                 </li>
+                {/* } */}
                 <li style={{ "backgroundColor": "wheat", "cursor": "pointer" }}>
                     <a onClick={handleLogout}>
                         <span className="material-symbols-outlined"> logout </span> Log Out

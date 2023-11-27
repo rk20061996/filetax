@@ -27,13 +27,14 @@ function Adminhome(props) {
             navigate("/");
         }
         let filt = props.filterStatus
-        getUserData({ filterStatus:filt }, "OnLoad");
-        console.log("userPaymentData--->", userPaymentData)
+        getUserData({ filterStatus: filt.length ? filt : [0, 1, 2, 3, 4, 5, 6, 7, 8, 9] }, "OnLoad");
+        getAllUserDataWithoutFilter()
+        // console.log("userPaymentData--->", userPaymentData)
     }, []);
 
     useEffect(() => {
         let filt = props.filterStatus
-        getUserData({ filterStatus:filt }, "OnFilter");
+        getUserData({ filterStatus: filt.length ? filt : [0, 1, 2, 3, 4, 5, 6, 7, 8, 9] }, "OnFilter");
     }, [props.filterStatus]);
 
     const getUserData = async (data, type) => {
@@ -42,22 +43,52 @@ function Adminhome(props) {
         console.log("dataAdmin,", result)
         if (result?.data?.data?.res1) {
             setUserData(result?.data?.data?.res1);
+            // const udata = result?.data?.data?.res1;
+            // let paymentCompleted = [];
+            // let paymentNotCompleted = [];
+            // if (type === "OnLoad" && props.filterStatus.length == 9) {
+            //     for (let i = 0; i < udata.length; i++) {
+            //         let statusData = {};
+            //         if (udata[i].status_type === 7) {
+            //             paymentCompleted.push(udata[i]);
+            //         } else {
+            //             paymentNotCompleted.push(udata[i]);
+            //         }
+            //     }
+            //     setUserPaymentData({ paymentNotCompleted, paymentCompleted })
+            //     settotalClientCount(udata.length)
+            //     setcompleteuserData(udata)
+            // }
+        } else {
+            localStorage.removeItem('token');
+            localStorage.removeItem('admin');
+            props.setisLoggedIn(false)
+            navigate("/");
+        }
+    }
+
+
+    const getAllUserDataWithoutFilter = async (data, type) => {
+        // let localSession = localStorage.getItem('token')
+        const result = await authFunc.getAllUser({ filterStatus: [0, 1, 2, 3, 4, 5, 6, 7, 8] });
+        console.log("dataAdmin,", result)
+        if (result?.data?.data?.res1) {
             const udata = result?.data?.data?.res1;
             let paymentCompleted = [];
             let paymentNotCompleted = [];
-            if (type === "OnLoad") {
-                for (let i = 0; i < udata.length; i++) {
-                    let statusData = {};
-                    if (udata[i].status_type === 7) {
-                        paymentCompleted.push(udata[i]);
-                    } else {
-                        paymentNotCompleted.push(udata[i]);
-                    }
+            // if (type === "OnLoad" && props.filterStatus.length == 9) {
+            for (let i = 0; i < udata.length; i++) {
+                let statusData = {};
+                if (udata[i].status_type === 7) {
+                    paymentCompleted.push(udata[i]);
+                } else {
+                    paymentNotCompleted.push(udata[i]);
                 }
-                setUserPaymentData({ paymentNotCompleted, paymentCompleted })
-                settotalClientCount(udata.length)
-                setcompleteuserData(udata)
             }
+            setUserPaymentData({ paymentNotCompleted, paymentCompleted })
+            settotalClientCount(udata.length)
+            setcompleteuserData(udata)
+            // }
         } else {
             localStorage.removeItem('token');
             localStorage.removeItem('admin');
@@ -96,7 +127,7 @@ function Adminhome(props) {
             user.lastname.toLowerCase().includes(searchString.toLowerCase()) ||
             user.email.toLowerCase().includes(searchString.toLowerCase()) ||
             user.phone.includes(searchString) ||
-            user.dynamicUser_id && user.dynamicUser_id.toLowerCase().includes(searchString.toLowerCase()) 
+            user.dynamicUser_id && user.dynamicUser_id.toLowerCase().includes(searchString.toLowerCase())
         );
     };
 
@@ -143,7 +174,7 @@ function Adminhome(props) {
                                 value={searchTerm}
                                 onChange={(e) => setSearchTerm(e.target.value)}
                                 className="search-input"
-                                style={{"marginRight": "10px"}}
+                                style={{ "marginRight": "10px" }}
                             />
                             <button className="btn btn-primary" onClick={exportToExcel}>
                                 Export to Excel
@@ -163,10 +194,10 @@ function Adminhome(props) {
                                     <th>Profile</th>
                                 </tr>
                             </thead>
-                            <tbody>
+                            {filteredUsers.length ? <tbody>
                                 {filteredUsers.map((user, index) => (
                                     <tr key={index}>
-                                        <td>{user.dynamicUser_id ? user.dynamicUser_id :user.user_idMain}</td>
+                                        <td>{user.dynamicUser_id ? user.dynamicUser_id : user.user_idMain}</td>
                                         <td>{user.firstname} {user.lastname}</td>
                                         <td>{user.phone}</td>
                                         <td>{user.email}</td>
@@ -174,7 +205,10 @@ function Adminhome(props) {
                                         <td><Link to={`/admin/profile/${user.user_idMain}`} className="btn btn-primary">View Client</Link></td>
                                     </tr>
                                 ))}
-                            </tbody>
+                            </tbody> : <h5 style={{
+                                "marginTop": "30px",
+                                "marginLeft": "10px"
+                            }} >No Data Found</h5>}
                         </table>
                         {/* <Pagination>
                             {[...Array(Math.ceil(userData.length / usersPerPage)).keys()].map((number) => (

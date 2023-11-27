@@ -506,7 +506,7 @@ function Adminprofile(props) {
                 <Modal.Body>
 
                     {/* const [showModal2, setshowModal2] = useState(false); */}
-                    <Printablecomponent setShowModal3={setShowModal3} setshowModal2={setshowModal2} formData={formData} downloadDoc={props.downloadDoc} setdownloadDoc={props.setdownloadDoc} />
+                    <Printablecomponent setShowModal3={setShowModal3} setshowModal2={setshowModal2} setFormData={setFormData} formData={formData} downloadDoc={props.downloadDoc} setdownloadDoc={props.setdownloadDoc} />
                 </Modal.Body>
                 {/* <Modal.Footer> */}
                 {/* <Button variant="secondary" onClick={handleCloseModal}>

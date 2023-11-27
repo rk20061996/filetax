@@ -66,15 +66,23 @@ const Printablecomponent = (props) => {
         console.log("data0000", data2)
         setsheet3Data(data)
         setsheet4Data(data2)
-        if (props.formData.dependent.length == 0) {
+        if (props.formData.dependent.length == 0 || props.formData.residency.length == 0) {
             const dependetn = props.formData.dependent
-            dependetn.push({})
+            if(props.formData.dependent.length == 0){
+                dependetn.push({})
+            }
+            const residency = props.formData.residency
+            if(props.formData.residency.length == 0){
+                residency.push({})
+
+            }
             // const [activeDependetIndex, setactiveDependetIndex] = useState(0);
             setactiveDependetIndex(0)
             // setactiveDependetIndex(dependetn.length - 1)
 
-            props.setFormData({ ...props.formData, contact: props.formData.contact, primaryTaxPayer: props.formData.primaryTaxPayer, dependent: dependetn, residency: props.formData.residency })
+            props.setFormData({ ...props.formData, contact: props.formData.contact, primaryTaxPayer: props.formData.primaryTaxPayer, dependent: dependetn, residency: residency })
         }
+        
     }, [props.formData]);
     function formatDateToYYYYMMDD(dateString) {
         const date = new Date(dateString);
