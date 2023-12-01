@@ -154,8 +154,21 @@ const Dependents = (props) => {
                                 type="text"
                                 placeholder=""
                                 value={props.formData.dependent[activeDependetIndex]?.firstName ? props.formData.dependent[activeDependetIndex]?.firstName : ""}
-                                onChange={(e) => handleInputChange(activeDependetIndex, "firstName", e.target.value)}
+                                // onChange={(e) => handleInputChange(activeDependetIndex, "firstName", e.target.value)}
                                 required
+                                onChange={(e) => {
+                                    const inputValue = e.target.value;
+                                
+                                    // Check if the input value is less than or equal to 15 characters
+                                    if (inputValue.length <= 15) {
+                                      // If within the limit, update the state
+                                      handleInputChange(activeDependetIndex, "firstName", inputValue);
+                                    } else {
+                                      // If exceeding the limit, truncate the input value to 15 characters
+                                      const truncatedValue = inputValue.substring(0, 15);
+                                      handleInputChange(activeDependetIndex, "firstName", truncatedValue);
+                                    }
+                                  }}
                             />
                         </div>
                         <div className="form-group">
@@ -164,8 +177,21 @@ const Dependents = (props) => {
                                 type="text"
                                 placeholder=""
                                 value={props.formData.dependent[activeDependetIndex]?.middleName ? props.formData.dependent[activeDependetIndex]?.middleName : ""}
-                                onChange={(e) => handleInputChange(activeDependetIndex, "middleName", e.target.value)}
+                                // onChange={(e) => handleInputChange(activeDependetIndex, "middleName", e.target.value)}
                                 required
+                                onChange={(e) => {
+                                    const inputValue = e.target.value;
+                                
+                                    // Check if the input value is less than or equal to 15 characters
+                                    if (inputValue.length <= 15) {
+                                      // If within the limit, update the state
+                                      handleInputChange(activeDependetIndex, "middleName", inputValue);
+                                    } else {
+                                      // If exceeding the limit, truncate the input value to 15 characters
+                                      const truncatedValue = inputValue.substring(0, 15);
+                                      handleInputChange(activeDependetIndex, "middleName", truncatedValue);
+                                    }
+                                  }}
                             />
                         </div>
                         <div className="form-group">
@@ -174,8 +200,21 @@ const Dependents = (props) => {
                                 type="text"
                                 placeholder=""
                                 value={props.formData.dependent[activeDependetIndex]?.lastName ? props.formData.dependent[activeDependetIndex]?.lastName : ""}
-                                onChange={(e) => handleInputChange(activeDependetIndex, "lastName", e.target.value)}
+                                // onChange={(e) => handleInputChange(activeDependetIndex, "lastName", e.target.value)}
                                 required
+                                onChange={(e) => {
+                                    const inputValue = e.target.value;
+                                
+                                    // Check if the input value is less than or equal to 15 characters
+                                    if (inputValue.length <= 15) {
+                                      // If within the limit, update the state
+                                      handleInputChange(activeDependetIndex, "lastName", inputValue);
+                                    } else {
+                                      // If exceeding the limit, truncate the input value to 15 characters
+                                      const truncatedValue = inputValue.substring(0, 15);
+                                      handleInputChange(activeDependetIndex, "lastName", truncatedValue);
+                                    }
+                                  }}
                             />
                         </div>
                         <div className="form-group">

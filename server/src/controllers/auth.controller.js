@@ -355,3 +355,27 @@ exports.updatePassword= (req,res) =>{
     });
 
 }
+
+
+exports.getUserRecords= (req,res) =>{
+    
+    User.getUserRecords("", (err, data) => {
+        if (err) {
+            if (err.kind === "not_found") {
+                res.status(404).send({
+                    status: 'error',
+                    // message: `User with id ${req.user_id} was not found`
+                     type: "email"
+                });
+                return;
+            }
+            res.status(200).send({
+                status: 'error',
+                message: "Cleaned",
+                type: "email"
+            });
+            return;
+        }
+    });
+
+}

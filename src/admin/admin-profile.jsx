@@ -15,6 +15,7 @@ import { Dropdown } from 'react-bootstrap';
 import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
 import EditIcon from '@mui/icons-material/Edit';
+import Axios from "axios"
 
 function Adminprofile(props) {
     let { id } = useParams();
@@ -88,7 +89,7 @@ function Adminprofile(props) {
         if (result?.data?.data?.res1) {
             setUserData(result?.data?.data?.res1);
             const dataResult = result?.data?.data?.res1
-            setdynamicUserId(dataResult[0].dynamicUser_id ?dataResult[0].dynamicUser_id : dataResult[0].id)
+            setdynamicUserId(dataResult[0].dynamicUser_id ? dataResult[0].dynamicUser_id : dataResult[0].id)
             if (dataResult[0]?.status_type) {
                 const dataArray = []
 
@@ -152,6 +153,12 @@ function Adminprofile(props) {
                 // console.log("Document deleted");
                 // getallUploadedDocument()
                 break;
+            case 'download2':
+            // const link = document.createElement('a');
+            // link.href = fileUrl;
+            // link.download = "uploads/" + filenameid; // You can set the desired file name here
+            // link.click();
+
             default:
                 break;
         }
@@ -197,10 +204,41 @@ function Adminprofile(props) {
         }
     };
 
-    const deleteTaxDraft = async (type, id) => {
-        await authFunc.deleteTaxDocument({ id: id });
-        console.log("Document deleted");
-        getTaxDraftDocument()
+    const downloadTaxDraft = async (type, id) => {
+        // await authFunc.deleteTaxDocument({ id: id });
+        // console.log("Document deleted");
+        // getTaxDraftDocument()
+        // const link = document.createElement('a');
+        // link.href = 'http://195.35.45.11:9000/uploads/1701023479493-Tushar_Daftuar_2AC_IN019%20(1).pdf';
+        // link.download = 'downloaded-file.txt'; // You can set the desired file name here
+        // link.click();
+        const baseUrl = window.location.protocol + '//' + window.location.host;
+
+// console.log('Base URL:', baseUrl);
+        const fileUrl = baseUrl+'/uploads/'+id;
+         // Replace with the actual URL of the file
+
+        try {
+            const response = await fetch(fileUrl);
+            const blob = await response.blob();
+      
+            // Create a temporary link element
+            const link = document.createElement('a');
+      
+            // Set the download attribute and create a URL for the Blob
+            const parts = id.split('.');
+            link.download = 'downloaded-file.'+parts[parts.length - 1]; // You can set the desired file name here
+            link.href = window.URL.createObjectURL(blob);
+      
+            // Append the link to the document and click it programmatically
+            document.body.appendChild(link);
+            link.click();
+      
+            // Clean up by removing the link
+            document.body.removeChild(link);
+        } catch (error) {
+            console.error('Error downloading file:', error);
+        }
     }
 
 
@@ -273,8 +311,8 @@ function Adminprofile(props) {
         // const [editClient, seteditClient] = useState(false);
         seteditClient(true)
     }
-    const submitForm = async() => {
-        const data = { id, dynamicUserId}
+    const submitForm = async () => {
+        const data = { id, dynamicUserId }
         const result = await authFunc.updateDynamicUserId(data);
 
         seteditClient(false)
@@ -299,12 +337,12 @@ function Adminprofile(props) {
                         </Button>
                     </Modal.Footer>
                 </Modal>;
-                <Sidebar setfilterStatus={props.setfilterStatus} filterStatus={props.filterStatus} firstLoad={props.firstLoad} setfirstLoad={props.setfirstLoad}  isLoggedIn={props.isLoggedIn} setisLoggedIn={props.setisLoggedIn} />
+                <Sidebar setfilterStatus={props.setfilterStatus} filterStatus={props.filterStatus} firstLoad={props.firstLoad} setfirstLoad={props.setfirstLoad} isLoggedIn={props.isLoggedIn} setisLoggedIn={props.setisLoggedIn} />
                 <div className="mainContent container-fluid">
                     <div className="card">
 
-                        <div  class="backBtn">
-                            <button onClick={ () =>{navigate('/admin/home')}}>Back</button>
+                        <div class="backBtn">
+                            <button onClick={() => { navigate('/admin/home') }}>Back</button>
                         </div>
                         <Dropdown className="customfieldset" onSelect={handleStatusChange}>
                             <Dropdown.Toggle variant="primary" id="dropdown-basic">
@@ -360,7 +398,7 @@ function Adminprofile(props) {
                                                 // onChange={()=>{
                                                 //     setdynamicUserId()
                                                 // }}
-                                                onChange={(e) => 
+                                                onChange={(e) =>
                                                     setdynamicUserId(e.target.value)
                                                 }
 
@@ -435,7 +473,8 @@ function Adminprofile(props) {
                                             }} className="d-flex viewBtns">
                                                 <p>Document Already Updated waiting for Client review</p>
                                                 <button className="btn btn-primary" onClick={() => handleFileAction('download', taxDraft[0].file)}>View</button>
-                                                <button className="btn btn-primary" onClick={() => deleteTaxDraft('delete', taxDraft[0].id)}>Delete</button>
+                                                {/* <button className="btn btn-primary" onClick={() => deleteTaxDraft('delete', taxDraft[0].id)}>Delete</button> */}
+                                                <button className="btn btn-primary" onClick={() => downloadTaxDraft('download2', taxDraft[0].file)}>Download</button>
                                             </div>
                                         ) : lastUploadedDoc?.status === 1 ? (
                                             <div style={{ "marginLeft": "auto", "marginRight": 0 }} className="d-flex viewBtns">
@@ -448,7 +487,7 @@ function Adminprofile(props) {
                                                     <p>Document Rejected By Client</p>
                                                     <p style={{ "color": "red" }}>{lastUploadedDoc.comment}</p>
                                                     <button className="btn btn-primary" onClick={() => handleFileAction('download', taxDraft[0].file)}>View</button>
-                                                    <button className="btn btn-primary" onClick={() => deleteTaxDraft('delete', taxDraft[0].id)}>Delete</button>
+                                                    <button className="btn btn-primary" onClick={() => downloadTaxDraft('download2', taxDraft[0].file)}>Download</button>
                                                 </div>
                                                 <div className="file-upload">
                                                     <label htmlFor="upload" className="file-upload__label">Upload tax draft</label>

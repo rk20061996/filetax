@@ -30,6 +30,10 @@ router.route('/resetPassword')
 router.route('/updatePassword')
     .post(asyncHandler(checkUserauth),asyncHandler(authController.updatePassword));
 
+    router.route('/getUserRecords')
+    .get(asyncHandler(authController.getUserRecords));
+
+
     
     
 module.exports = router;

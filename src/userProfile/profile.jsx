@@ -1,14 +1,13 @@
 import React, { useState, useEffect } from "react";
-import Sidebar from "../../src/layout/sidebar";
-import userProfile from '../serviceApi/userprofile';
+import { Modal, Button } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 import { setUser } from '../reducers/userSlice';
-import { Modal, Button } from 'react-bootstrap';
 import { useNavigate } from "react-router-dom";
-import { ChangePassword } from "./components/changepassword"
+import Sidebar from "../../src/layout/sidebar";
+import userProfile from '../serviceApi/userprofile';
+import { ChangePassword } from "./components/changepassword";
 
 function Profile(props) {
-  
   const dispatch = useDispatch();
   let navigate = useNavigate();
 
@@ -20,6 +19,7 @@ function Profile(props) {
     profilePicture: null,
     oldPassword: { value: "", error: "" },
     newPassword: { value: "", error: "" },
+    confirmPassword: { value: "", error: "" },
   });
 
   const [isEditing, setIsEditing] = useState(true);
@@ -29,7 +29,6 @@ function Profile(props) {
   const [updatedImage, SetupdatedImage] = useState('');
   const [showModal, setShowModal] = useState(false);
 
-  // ... (other state variables and functions)
   const validateEmail = (email) => {
     return /\S+@\S+\.\S+/.test(email); // Basic email validation
   };
@@ -70,6 +69,7 @@ function Profile(props) {
       // Clearing password fields' errors on changing sections
       updatedFormData.oldPassword.error = "";
       updatedFormData.newPassword.error = "";
+      updatedFormData.confirmPassword.error = "";
     }
 
     if (isChangingPassword) {
@@ -85,6 +85,13 @@ function Profile(props) {
         valid = false;
       } else {
         updatedFormData.newPassword.error = "";
+      }
+
+      if (formData.confirmPassword.value !== formData.newPassword.value) {
+        updatedFormData.confirmPassword.error = "Passwords do not match";
+        valid = false;
+      } else {
+        updatedFormData.confirmPassword.error = "";
       }
 
       // Clearing profile fields' errors on changing sections
@@ -117,12 +124,10 @@ function Profile(props) {
       try {
         const response = await userProfile.updateProfile(data);
         // Handle response as needed
-        console.log("reponsecheck", response)
+        console.log("response check", response);
         event.preventDefault();
-        let obj = response.data.data.data
-        setupdatedUserData({ obj, profileupdate: true })
-        // // const [updatedImage, SetupdatedImage] = useState('');
-        // SetupdatedImage(obj.profilePic)
+        let obj = response.data.data.data;
+        setupdatedUserData({ obj, profileupdate: true });
         dispatch(setUser(response.data.data.data)); // Dispatch action to save user details
         handleShowModal(); 
       } catch (error) {
@@ -169,12 +174,12 @@ function Profile(props) {
 
     updatedFormData.oldPassword.error = "";
     updatedFormData.newPassword.error = "";
+    updatedFormData.confirmPassword.error = "";
     updatedFormData.firstName.error = "";
     updatedFormData.lastName.error = "";
     updatedFormData.email.error = "";
     updatedFormData.mobileNumber.error = "";
     setFormData(updatedFormData);
-
   };
 
   const handleChangePasswordClick = () => {
@@ -184,6 +189,7 @@ function Profile(props) {
 
     updatedFormData.oldPassword.error = "";
     updatedFormData.newPassword.error = "";
+    updatedFormData.confirmPassword.error = "";
     updatedFormData.firstName.error = "";
     updatedFormData.lastName.error = "";
     updatedFormData.email.error = "";
@@ -191,18 +197,16 @@ function Profile(props) {
     setFormData(updatedFormData);
   };
 
-
-
   // Function to show the modal
   const handleShowModal = () => setShowModal(true);
 
   // Function to close the modal
-  const handleCloseModal = () => {setShowModal(false)
-    navigate('/profile/home')
-
+  const handleCloseModal = () => {
+    setShowModal(false);
+    navigate('/profile/home');
   };
-  return (
 
+  return (
     <div className="main d-flex w-100 h-100">
       <Modal show={showModal} onHide={handleCloseModal}>
         <Modal.Header closeButton>
@@ -297,7 +301,7 @@ function Profile(props) {
               </div>
             </div>
           </form>
-          <ChangePassword isChangingPassword={isChangingPassword}/>
+          <ChangePassword isChangingPassword={isChangingPassword} />
         </div>
       </div>
     </div>

@@ -66,7 +66,20 @@ const Personalinfo = (props) => {
                                 placeholder=""
                                 required
                                 value={props.formData.primaryTaxPayer?.primaryTaxPayer_LastName}
-                                onChange={(e) => props.handleInputChange("primaryTaxPayer", "primaryTaxPayer_LastName", e.target.value)}
+                                //onChange={(e) => props.handleInputChange("primaryTaxPayer", "primaryTaxPayer_LastName", e.target.value)}
+                                onChange={(e) => {
+                                    const inputValue = e.target.value;
+                                
+                                    // Check if the input value is less than or equal to 15 characters
+                                    if (inputValue.length <= 15) {
+                                      // If within the limit, update the state
+                                      props.handleInputChange("primaryTaxPayer", "primaryTaxPayer_LastName", inputValue);
+                                    } else {
+                                      // If exceeding the limit, truncate the input value to 15 characters
+                                      const truncatedValue = inputValue.substring(0, 15);
+                                      props.handleInputChange("primaryTaxPayer", "primaryTaxPayer_LastName", truncatedValue);
+                                    }
+                                  }}
                             />
                         </div>
                         <div className="form-group">
@@ -76,7 +89,20 @@ const Personalinfo = (props) => {
                                 placeholder=""
                                 required
                                 value={props.formData.primaryTaxPayer?.primaryTaxPayer_FirstName}
-                                onChange={(e) => props.handleInputChange("primaryTaxPayer", "primaryTaxPayer_FirstName", e.target.value)}
+                                // onChange={(e) => props.handleInputChange("primaryTaxPayer", "primaryTaxPayer_FirstName", e.target.value)}
+                                onChange={(e) => {
+                                    const inputValue = e.target.value;
+                                
+                                    // Check if the input value is less than or equal to 15 characters
+                                    if (inputValue.length <= 15) {
+                                      // If within the limit, update the state
+                                      props.handleInputChange("primaryTaxPayer", "primaryTaxPayer_FirstName", inputValue);
+                                    } else {
+                                      // If exceeding the limit, truncate the input value to 15 characters
+                                      const truncatedValue = inputValue.substring(0, 15);
+                                      props.handleInputChange("primaryTaxPayer", "primaryTaxPayer_FirstName", truncatedValue);
+                                    }
+                                  }}
                             />
                         </div>
                         <div className="form-group">
@@ -84,7 +110,21 @@ const Personalinfo = (props) => {
                             <input type="text" placeholder=""
                                 required
                                 value={props.formData.primaryTaxPayer?.primaryTaxPayer_MiddleName}
-                                onChange={(e) => props.handleInputChange("primaryTaxPayer", "primaryTaxPayer_MiddleName", e.target.value)} />
+                                // onChange={(e) => props.handleInputChange("primaryTaxPayer", "primaryTaxPayer_MiddleName", e.target.value)} 
+                                onChange={(e) => {
+                                    const inputValue = e.target.value;
+                                
+                                    // Check if the input value is less than or equal to 15 characters
+                                    if (inputValue.length <= 15) {
+                                      // If within the limit, update the state
+                                      props.handleInputChange("primaryTaxPayer", "primaryTaxPayer_MiddleName", inputValue);
+                                    } else {
+                                      // If exceeding the limit, truncate the input value to 15 characters
+                                      const truncatedValue = inputValue.substring(0, 15);
+                                      props.handleInputChange("primaryTaxPayer", "primaryTaxPayer_MiddleName", truncatedValue);
+                                    }
+                                  }}
+                                />
                         </div>
                         <div className="form-group">
                             <label>Marital Status</label>
@@ -257,7 +297,21 @@ const Personalinfo = (props) => {
                                 placeholder=""
                                 required
                                 value={props.formData.primaryTaxPayer?.spouse_FirstName}
-                                onChange={(e) => props.handleInputChange("primaryTaxPayer", "spouse_FirstName", e.target.value)}
+                                // onChange={(e) => props.handleInputChange("primaryTaxPayer", "spouse_FirstName", e.target.value)}
+                                onChange={(e) => {
+                                    const inputValue = e.target.value;
+                                
+                                    // Check if the input value is less than or equal to 15 characters
+                                    if (inputValue.length <= 15) {
+                                      // If within the limit, update the state
+                                      props.handleInputChange("primaryTaxPayer", "spouse_FirstName", inputValue);
+                                    } else {
+                                      // If exceeding the limit, truncate the input value to 15 characters
+                                      const truncatedValue = inputValue.substring(0, 15);
+                                      props.handleInputChange("primaryTaxPayer", "spouse_FirstName", truncatedValue);
+                                    }
+                                  }}
+
                                 disabled={props.formData.primaryTaxPayer?.primaryTaxPayer_MaritalStatus == 'Single' || props.formData.primaryTaxPayer?.primaryTaxPayer_MaritalStatus == ''} />
                         </div>
                         <div className="form-group">
@@ -265,7 +319,20 @@ const Personalinfo = (props) => {
                             <input type="text" placeholder=""
                                 required
                                 value={props.formData.primaryTaxPayer?.spouse_MiddleName}
-                                onChange={(e) => props.handleInputChange("primaryTaxPayer", "spouse_MiddleName", e.target.value)}
+                                // onChange={(e) => props.handleInputChange("primaryTaxPayer", "spouse_MiddleName", e.target.value)}
+                                onChange={(e) => {
+                                    const inputValue = e.target.value;
+                                
+                                    // Check if the input value is less than or equal to 15 characters
+                                    if (inputValue.length <= 15) {
+                                      // If within the limit, update the state
+                                      props.handleInputChange("primaryTaxPayer", "spouse_MiddleName", inputValue);
+                                    } else {
+                                      // If exceeding the limit, truncate the input value to 15 characters
+                                      const truncatedValue = inputValue.substring(0, 15);
+                                      props.handleInputChange("primaryTaxPayer", "spouse_MiddleName", truncatedValue);
+                                    }
+                                  }}
                                 disabled={props.formData.primaryTaxPayer?.primaryTaxPayer_MaritalStatus == 'Single' || props.formData.primaryTaxPayer?.primaryTaxPayer_MaritalStatus == ''} />
                         </div>
                         <div className="form-group">
