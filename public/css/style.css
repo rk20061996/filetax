@@ -771,3 +771,6 @@ form .form-group label{
 .userProfile .innerCard{
     margin-bottom: 25px;
 }
+.innerCard p svg {
+    width: 22px;
+}
