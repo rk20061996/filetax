@@ -164,7 +164,7 @@ const Residency = (props) => {
                                             /> */}
                                                     <LocalizationProvider style={{ 'width': '100% !important' }} dateAdapter={AdapterDayjs}>
                                                         <DatePicker
-                                                            format="DD-MM-YYYY"
+                                                            format="MM-DD-YYYY"
                                                             slotProps={{
                                                                 textField: {
                                                                     size: "small",
@@ -193,7 +193,7 @@ const Residency = (props) => {
                                             /> */}
                                                     <LocalizationProvider style={{ 'width': '100% !important' }} dateAdapter={AdapterDayjs}>
                                                         <DatePicker
-                                                            format="DD-MM-YYYY"
+                                                            format="MM-DD-YYYY"
                                                             slotProps={{
                                                                 textField: {
                                                                     size: "small",
@@ -223,7 +223,7 @@ const Residency = (props) => {
                                             /> */}
                                                     <LocalizationProvider style={{ 'width': '100% !important' }} dateAdapter={AdapterDayjs}>
                                                         <DatePicker
-                                                            format="DD-MM-YYYY"
+                                                            format="MM-DD-YYYY"
                                                             slotProps={{
                                                                 textField: {
                                                                     size: "small",
@@ -251,7 +251,7 @@ const Residency = (props) => {
                                             /> */}
                                                     <LocalizationProvider style={{ 'width': '100% !important' }} dateAdapter={AdapterDayjs}>
                                                         <DatePicker
-                                                            format="DD-MM-YYYY"
+                                                            format="MM-DD-YYYY"
                                                             slotProps={{
                                                                 textField: {
                                                                     size: "small",

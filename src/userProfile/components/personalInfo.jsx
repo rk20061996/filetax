@@ -109,7 +109,7 @@ const Personalinfo = (props) => {
                             /> */}
                             <LocalizationProvider style={{ 'width': '100% !important' }} dateAdapter={AdapterDayjs}>
                                 <DatePicker
-                                    format="DD-MM-YYYY"
+                                    format="MM-DD-YYYY"
                                     slotProps={{
                                         textField: {
                                             size: "small",
@@ -138,7 +138,7 @@ const Personalinfo = (props) => {
                             /> */}
                             <LocalizationProvider style={{ 'width': '100% !important' }} dateAdapter={AdapterDayjs}>
                                 <DatePicker
-                                    format="DD-MM-YYYY"
+                                    format="MM-DD-YYYY"
                                     slotProps={{
                                         textField: {
                                             size: "small",
@@ -193,7 +193,7 @@ const Personalinfo = (props) => {
                             /> */}
                             <LocalizationProvider style={{ 'width': '100% !important' }} dateAdapter={AdapterDayjs}>
                                 <DatePicker
-                                    format="DD-MM-YYYY"
+                                    format="MM-DD-YYYY"
                                     slotProps={{
                                         textField: {
                                             size: "small",
@@ -231,7 +231,7 @@ const Personalinfo = (props) => {
                                 <DatePicker
                                     disabled={props.formData.primaryTaxPayer?.primaryTaxPayer_MaritalStatus == 'Single' || props.formData.primaryTaxPayer?.primaryTaxPayer_MaritalStatus == ''}
 
-                                    format="DD-MM-YYYY"
+                                    format="MM-DD-YYYY"
                                     slotProps={{
                                         textField: {
                                             size: "small",
@@ -298,7 +298,7 @@ const Personalinfo = (props) => {
                                     readonly
                                     disabled={props.formData.primaryTaxPayer?.primaryTaxPayer_MaritalStatus == 'Single' || props.formData.primaryTaxPayer?.primaryTaxPayer_MaritalStatus == ''}
 
-                                    format="DD-MM-YYYY"
+                                    format="MM-DD-YYYY"
                                     slotProps={{
                                         textField: {
                                             size: "small",
@@ -333,7 +333,7 @@ const Personalinfo = (props) => {
                                 <DatePicker
                                     disabled={props.formData.primaryTaxPayer?.primaryTaxPayer_MaritalStatus == 'Single' || props.formData.primaryTaxPayer?.primaryTaxPayer_MaritalStatus == ''}
 
-                                    format="DD-MM-YYYY"
+                                    format="MM-DD-YYYY"
                                     slotProps={{
                                         textField: {
                                             size: "small",
@@ -388,7 +388,7 @@ const Personalinfo = (props) => {
                                 <DatePicker
                                     disabled={props.formData.primaryTaxPayer?.primaryTaxPayer_MaritalStatus == 'Single' || props.formData.primaryTaxPayer?.primaryTaxPayer_MaritalStatus == ''}
 
-                                    format="DD-MM-YYYY"
+                                    format="MM-DD-YYYY"
                                     slotProps={{
                                         textField: {
                                             size: "small",

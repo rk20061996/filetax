@@ -151,7 +151,7 @@ function Sidebar(props) {
             <ul className="list-unstyled">
                 <li><NavLink to="/admin/home" activeClassName="active" className="nav-link"><span className="material-symbols-outlined"> home </span>Dashboard </NavLink></li>
                 {/* <li><a href="home.html" className="active"><span className="material-symbols-outlined"> home </span> Dashboard</a></li> */}
-                {/* {isAdminHomePage &&  */}
+                {isAdminHomePage && 
                 <li>
                     <fieldset>
                         <details open={isAdminHomePage}>
@@ -221,7 +221,7 @@ function Sidebar(props) {
                         </details>
                     </fieldset>
                 </li>
-                {/* } */}
+                 } 
                 <li style={{ "backgroundColor": "wheat", "cursor": "pointer" }}>
                     <a onClick={handleLogout}>
                         <span className="material-symbols-outlined"> logout </span> Log Out
