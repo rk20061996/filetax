@@ -362,16 +362,43 @@ function Adminprofile(props) {
                             </Dropdown.Menu>
                         </Dropdown>
                         <h3 className="mt-5">User Profile</h3>
-                        <form className="profileForm">
+                        <div class="row userProfile">
+                            <div class="col-md-4">
+                                <div class="innerCard">
+                                    <h4>Ravi Kant</h4>
+                                    <p>Name</p>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="innerCard">
+                                    <h4>ravi@gmail.com</h4>
+                                    <p>Eamil</p>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="innerCard">
+                                    <h4>876543223</h4>
+                                    <p>Mobile Number</p>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="innerCard">
+                                    <h4>10/03/2023</h4>
+                                    <p>Date</p>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="innerCard">
+                                    <h4>3</h4>
+                                    <p className="d-flex justify-content-between">Client ID
+                                    <svg class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root" focusable="false" aria-hidden="true" viewBox="0 0 24 24" data-testid="EditIcon"><path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34a.9959.9959 0 0 0-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"></path></svg>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        {/* <form className="profileForm">
                             <div className="row">
-                                {/* <div className="col-sm-12">
-                                    <div className="profileImg">
-                                        {userData[0]?.image && userData[0]?.image !== '' ?
-                                            <img src={'uploads/profile/' + userData[0]?.image} alt="" />
-                                            : <span className="material-symbols-outlined"> person </span>
-                                        }
-                                    </div>
-                                </div> */}
+                                {}
                                 <div className="col-sm-6">
                                     <div className="">
                                         <label>Name</label>
@@ -413,8 +440,8 @@ function Adminprofile(props) {
                                     <button type="button" onClick={submitForm} className="btn btn-primary w-auto">Submit</button>
                                 </div>}
                             </div>
-                        </form>
-                        <div className="row mt-5">
+                        </form> */}
+                        <div className="row mt-3">
                             <div className="col-sm-12">
                                 {/* <button className="btn btn-primary w-auto" data-bs-toggle="modal" data-bs-target="#tagdoc">Tax Information Form</button> */}
                                 <button
