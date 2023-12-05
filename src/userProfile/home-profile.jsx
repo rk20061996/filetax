@@ -6,6 +6,36 @@ import { useSelector } from 'react-redux';
 function HomeProfile(props) {
   const user = useSelector(state => state.user); // Assuming 'user' is a slice of your Redux state
   const status = { 1: "Ready for preparation", 2: "In Progress", 3: "Summary Sent", 4: "Pending Recieved", 5: "Draft", 6: "Ready for e-file", 7: "Accepted" }
+
+  const downloadTaxNotes = async() =>{
+    const baseUrl = window.location.protocol + '//' + window.location.host;
+
+// console.log('Base URL:', baseUrl);
+        const fileUrl = baseUrl+'/tax-notes/Tax - Notes 2023.xlsx';
+         // Replace with the actual URL of the file
+
+        try {
+            const response = await fetch(fileUrl);
+            const blob = await response.blob();
+      
+            // Create a temporary link element
+            const link = document.createElement('a');
+      
+            // Set the download attribute and create a URL for the Blob
+            // const parts = id.split('.');
+            link.download = 'Tax-Notes2023.xlsx'; // You can set the desired file name here
+            link.href = window.URL.createObjectURL(blob);
+      
+            // Append the link to the document and click it programmatically
+            document.body.appendChild(link);
+            link.click();
+      
+            // Clean up by removing the link
+            document.body.removeChild(link);
+        } catch (error) {
+            console.error('Error downloading file:', error);
+        }
+  }
   return (
     <div className="main d-flex w-100 h-100">
       <Sidebar isLoggedIn={props.isLoggedIn} setisLoggedIn={props.setisLoggedIn} />
@@ -22,26 +52,27 @@ function HomeProfile(props) {
           </div>
            {/* Status indicator */}
            <div className="status-indicator">
-              <h3>Status</h3>
-              <p>Your tax preparation status is <span className="status-ready">{user?.userData?.user_status_type?status[user?.userData?.user_status_type]:"Ready for preparation"}</span></p>
+              <h3>Status {" "}<button style={{"marginLeft": "50px"}} className="status-ready btn btn-primary">{user?.userData?.user_status_type?status[user?.userData?.user_status_type]:"Ready for preparation"}</button></h3>
+              {/* <p>Your tax preparation status is {" "}</p> */}
             </div>
           <div className="progressWrap">
             <h3>Our Process</h3>
             <ul className="list-unstyled">
-              <li>
+            <li>
                 <h6>Step 1</h6>
-                <NavLink to="/profile/tax-documentaion" activeClassName="active">
-                  <span className="material-symbols-outlined"> upload </span>
+                <NavLink onClick={downloadTaxNotes} activeClassName="active">
+                  <span className="material-symbols-outlined"> download </span>
                 </NavLink>
-                <p>Tax Information</p>
+                <p>Download Document</p>
               </li>
               <li>
                 <h6>Step 2</h6>
-                <NavLink to="/profile/upload-document" activeClassName="active">
-                  <span className="material-symbols-outlined"> download </span>
+                <NavLink to="/profile/tax-documentaion" activeClassName="active">
+                  <span className="material-symbols-outlined"> upload </span>
                 </NavLink>
                 <p>Upload Documents</p>
               </li>
+              
               <li>
                 <h6>Step 3</h6>
                 <NavLink to="/profile/tax-return" activeClassName="active">

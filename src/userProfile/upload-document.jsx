@@ -68,7 +68,7 @@ function UploadDocument(props) {
         console.log("File uploaded:", response);
 
         setSelectedFile(null);
-        setSelectedTaxType("");
+        setSelectedTaxType(0);
         setselectedTaxcomment("")
         setimageValue("")
         fetchData(); // Refetch data after successful upload
@@ -214,16 +214,18 @@ function UploadDocument(props) {
                 <tr key={index}>
                   <td>{doc.document_name ? doc.document_name : "Not Selected"}</td>
                   <td>
-                  {doc.filename.split('-')[1]} {"  "} {" "}
+                  
+                  {doc.filename.split(/\d{13}-/)[1]} {"  "} {" "}
                     <a href={"uploads/" + doc.filename} target="_blank" rel="noopener noreferrer">
                        <span className="material-symbols-outlined"> download </span>
                     </a>
                   </td>
                   <td>{new Date(doc.created_at).toLocaleDateString()}</td>
                   {/* <td>{new Date(doc.created_at).getFullYear()}</td> */}
-                  <td>{doc.comment}</td>
+                  {doc.is_deleted == 0 && <td>{doc.comment}</td>}
+                  {doc.is_deleted == 2 && <td>{doc.comment_rejected}</td>}
                   <td>
-                    <a style={deleteStyle} onClick={handleFileUploadClick}>
+                    {/* <a style={deleteStyle} onClick={handleFileUploadClick}>
                       <input
                         style={{ width: '100%', display: 'none' }}
                         type="file"
@@ -232,8 +234,9 @@ function UploadDocument(props) {
                         onChange={(event) => handleFileChange2(event, doc.document_id)}
                       />
                       <span className="material-symbols-outlined"> upload </span>
-                    </a>
+                    </a> */}
                     <a style={deleteStyle} onClick={() => handleDelete(doc.document_id)}> <span className="material-symbols-outlined"> delete </span> </a>
+                    {doc.is_deleted == 2 && <button style={{ "marginLeft": "5px" }} className="btn btn-danger" >Rejected</button> } 
                   </td>
                 </tr>
               ))}

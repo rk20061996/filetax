@@ -68,7 +68,7 @@ function Uploaddocumentmodel(props) {
           console.log("File uploaded:", response);
   
           setSelectedFile(null);
-          setSelectedTaxType("");
+          setSelectedTaxType(0);
           setselectedTaxcomment("")
           setimageValue("")
           props.getallUploadedDocument()

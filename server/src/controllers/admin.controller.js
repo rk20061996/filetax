@@ -803,3 +803,44 @@ exports.updateDynamicUserId = (req,res) =>{
         }
     });
 }
+
+exports.rejectUploadedDoc = (req,res) =>{
+    document.getUserDataByToken({ user_id: req.user_id }, (err, data) => {
+        console.log("user---?1", req.user_id)
+        if (err) {
+            res.status(200).send({
+                status: 500,
+                message: err.message
+            });
+        } else {
+            console.log("dataAdmin Reject",)
+            if(data[0].user_type == 1){
+                admin.rejectUploadedDoc({ id: req.body.id,comment:req.body.comment }, (err, data) => {
+                    // console.log("user---?1", user)
+                    if (err) {
+                        res.status(200).send({
+                            status: 500,
+                            message: err.message
+                        });
+                    } else {
+                        res.status(201).send({
+                            status: 200,
+                            data: data
+                        });
+                    }
+                });
+            }else{
+                res.status(200).send({
+                    status: 500,
+                    message: "Not an Admin"
+                });
+            }
+            // res.status(201).send({
+            //     status: 200,
+            //     data: data
+            // });
+        }
+    });
+}
+
+

@@ -44,6 +44,9 @@ function Adminprofile(props) {
     const [editClient, seteditClient] = useState(false);
     const [dynamicUserId, setdynamicUserId] = useState(id);
 
+    const [rejectedDocumentId, setrejectedDocumentId] = useState(0);
+    const [rejectionConfirmModel, setrejectionConfirmModel] = useState(false);
+    const [rejectionComment, setrejectionComment] = useState('');
     const [formData, setFormData] = useState({
         primaryTaxPayer: {
             // id
@@ -214,26 +217,26 @@ function Adminprofile(props) {
         // link.click();
         const baseUrl = window.location.protocol + '//' + window.location.host;
 
-// console.log('Base URL:', baseUrl);
-        const fileUrl = baseUrl+'/uploads/'+id;
-         // Replace with the actual URL of the file
+        // console.log('Base URL:', baseUrl);
+        const fileUrl = baseUrl + '/uploads/' + id;
+        // Replace with the actual URL of the file
 
         try {
             const response = await fetch(fileUrl);
             const blob = await response.blob();
-      
+
             // Create a temporary link element
             const link = document.createElement('a');
-      
+
             // Set the download attribute and create a URL for the Blob
             const parts = id.split('.');
-            link.download = 'downloaded-file.'+parts[parts.length - 1]; // You can set the desired file name here
+            link.download = 'downloaded-file.' + parts[parts.length - 1]; // You can set the desired file name here
             link.href = window.URL.createObjectURL(blob);
-      
+
             // Append the link to the document and click it programmatically
             document.body.appendChild(link);
             link.click();
-      
+
             // Clean up by removing the link
             document.body.removeChild(link);
         } catch (error) {
@@ -317,6 +320,23 @@ function Adminprofile(props) {
 
         seteditClient(false)
     }
+    const rejectionClick = async (id) => {
+        setrejectedDocumentId(id)
+        setrejectionConfirmModel(true)
+    }
+    const handlerejectionConfirmModel = async () => {
+        const data = { id: rejectedDocumentId, comment: rejectionComment }
+        const response = await authFunc.rejectUploadedDoc(data);
+        setrejectionConfirmModel(false)
+
+        getallUploadedDocument()
+        // const [rejectionComment, setrejectionComment] = useState(''); rejectedDocumentId
+    }
+
+    const deleteTaxDraft = async (type, id) => {
+        const response = await authFunc.deleteTaxDocument({ id });
+        getTaxDraftDocument()
+    }
     return (
         <>
             {/* <Header /> */}
@@ -336,7 +356,26 @@ function Adminprofile(props) {
                             Confirm
                         </Button>
                     </Modal.Footer>
-                </Modal>;
+                </Modal>
+                <Modal show={rejectionConfirmModel} onHide={() => setrejectionConfirmModel(false)}>
+                    <Modal.Header closeButton>
+                        <Modal.Title>Rejection Comment</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                        <textarea style={{ 'height': '100%' }} value={rejectionComment}
+                            onChange={(event) => {
+                                setrejectionComment(event.target.value)
+                            }}></textarea>
+                    </Modal.Body>
+                    <Modal.Footer>
+                        <Button variant="secondary" onClick={() => setrejectionConfirmModel(false)}>
+                            Cancel
+                        </Button>
+                        <Button variant="primary" onClick={() => handlerejectionConfirmModel()}>
+                            Submit
+                        </Button>
+                    </Modal.Footer>
+                </Modal>
                 <Sidebar setfilterStatus={props.setfilterStatus} filterStatus={props.filterStatus} firstLoad={props.firstLoad} setfirstLoad={props.setfirstLoad} isLoggedIn={props.isLoggedIn} setisLoggedIn={props.setisLoggedIn} />
                 <div className="mainContent container-fluid">
                     <div className="card">
@@ -346,7 +385,14 @@ function Adminprofile(props) {
                         </div>
                         <Dropdown className="customfieldset" onSelect={handleStatusChange}>
                             <Dropdown.Toggle variant="primary" id="dropdown-basic">
-                                {selectedStatus || 'Select Status'}
+                                {/* {selectedStatus || 'Select Status'} */}
+                                {selectedStatus ? (
+                                    <>
+                                        <span>Status:</span> {selectedStatus}
+                                    </>
+                                ) : (
+                                    "Select Status"
+                                )}
                             </Dropdown.Toggle>
 
                             <Dropdown.Menu>
@@ -363,37 +409,56 @@ function Adminprofile(props) {
                         </Dropdown>
                         <h3 className="mt-5">User Profile</h3>
                         <div class="row userProfile">
-                            <div class="col-md-4">
+                            <div class="col-md-3">
                                 <div class="innerCard">
-                                    <h4>Ravi Kant</h4>
+                                    <h4 style={{ "fontSize": "16px" }}>{userData[0]?.firstname + " " + userData[0]?.lastname} </h4>
                                     <p>Name</p>
                                 </div>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-3">
                                 <div class="innerCard">
-                                    <h4>ravi@gmail.com</h4>
-                                    <p>Eamil</p>
+                                    <h4 style={{ "fontSize": "16px" }}>{userData[0]?.email}</h4>
+                                    <p>Email</p>
                                 </div>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-3">
                                 <div class="innerCard">
-                                    <h4>876543223</h4>
+                                    <h4 style={{ "fontSize": "16px" }}>{userData[0]?.phone}</h4>
                                     <p>Mobile Number</p>
                                 </div>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-3">
                                 <div class="innerCard">
-                                    <h4>10/03/2023</h4>
+                                    <h4 style={{ "fontSize": "16px" }}>{new Date(userData[0]?.created_on).toLocaleDateString()}</h4>
                                     <p>Date</p>
                                 </div>
                             </div>
                             <div class="col-md-4">
-                                <div class="innerCard">
+                                {/* <div class="innerCard">
                                     <h4>3</h4>
                                     <p className="d-flex justify-content-between">Client ID
                                     <svg class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root" focusable="false" aria-hidden="true" viewBox="0 0 24 24" data-testid="EditIcon"><path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34a.9959.9959 0 0 0-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"></path></svg>
                                     </p>
+                                </div> */}
+                                <div className="clientId">
+                                    <input disabled={!editClient} readonly={!editClient} value={dynamicUserId} type="text" placeholder=""
+                                        // onChange={()=>{
+                                        //     setdynamicUserId()
+                                        // }}
+                                        onChange={(e) =>
+                                            setdynamicUserId(e.target.value)
+                                        }
+
+                                    />
+                                    {!editClient && <span onClick={editClientId} className="input-group-text">
+                                        <EditIcon />
+                                    </span>}
+
                                 </div>
+                                {editClient &&
+                                    <button style={{ "marginTop": "5px" }} type="button" onClick={submitForm} className="btn btn-primary w-auto">Submit</button>
+                                }
+
                             </div>
                         </div>
                         {/* <form className="profileForm">
@@ -441,41 +506,76 @@ function Adminprofile(props) {
                                 </div>}
                             </div>
                         </form> */}
-                        <div className="row mt-3">
+                        {/* <div className="row mt-3">
                             <div className="col-sm-12">
-                                {/* <button className="btn btn-primary w-auto" data-bs-toggle="modal" data-bs-target="#tagdoc">Tax Information Form</button> */}
+                               
                                 <button
                                     onClick={async () => {
-                                        // handleCloseModal3(true)
-                                        // handleCloseModal3(false)
+                                        
                                         setshowModal2(true)
                                     }}
                                     className="btn btn-warning pull-right" style={{
                                         "width": "fit-content"
                                     }}>Tax Documentation Form</button>
                             </div>
-                        </div>
+                        </div> */}
                         <div className="row mt-5">
                             <div className="col-sm-12">
                                 <h3>All Documents uploaded</h3>
                                 <div className="DocumentUploaded">
-                                    {uploadedDocument.map((file, index) => (
-                                        <h5 className="d-flex align-items-center">{file.document_name} <p>Date: {new Date(file.created_at).toLocaleDateString()}</p>
-                                            <p>{file.comment}</p>
-                                            <div style={{
-                                                "marginLeft": "auto",
-                                                "marginRight": 0
-                                            }} className="d-flex viewBtns">
-                                                {/* <button className="btn btn-primary" onClick={() => handleFileAction('view')}>View</button> */}
-                                                <button className="btn btn-primary" onClick={() => handleFileAction('download', file.filename)}>View</button>
-                                                <button className="btn btn-primary" onClick={() => handleFileAction('delete', file.document_id)}>Delete</button>
-                                            </div>
-                                        </h5>
-                                    ))}
+                                    <table style={{ "width": "100%" }}>
+                                        {uploadedDocument.length !== 0 && <thead>
+                                            <tr>
+                                                <th>Tax Type</th>
+                                                <th>Uploaded Documents</th>
+                                                <th>Date</th>
+                                                {/* <th>Year</th> */}
+                                                <th>Comment</th>
+                                                <th>Action</th>
+                                            </tr>
+
+                                        </thead>
+                                        }
+                                        <tbody>
+                                            {uploadedDocument.map((file, index) => (
+                                                // <div className="container">
+
+
+                                                <tr key={index}>
+                                                    <td>
+                                                        {file.document_name ? file.document_name : "Not Selected"}
+                                                    </td>
+                                                    <td>
+                                                        {/* <td> */}
+                                                        {file.filename.split(/\d{13}-/)[1]}
+                                                        {/* </td> */}
+                                                    </td>
+                                                    <td>{new Date(file.created_at).toLocaleDateString()}</td>
+                                                    {file.is_deleted == 0 && <td>{file.comment}</td>}
+                                                    {file.is_deleted == 2 && <td>{file.comment_rejected}</td>}
+                                                    <td>
+                                                        {/* <button className="btn btn-warning" onClick={() => handleFileAction('download', file.filename)}>View</button> */}
+                                                        {/* margin-left: 5px;
+                                                                width: 20%;
+                                                                width: fit-content;
+                                                                padding: 0px 6px 0px 6px;
+                                                                height: fit-content; */}
+                                                        <button style={{ "marginLeft": "5px",'width': 'fit-content','padding': '0px 6px' }} className="btn btn-danger" onClick={() => handleFileAction('delete', file.document_id)}>Delete</button>
+                                                        <button style={{ "marginLeft": "5px",'width': 'fit-content','padding': '0px 6px' }} className="btn btn-success" onClick={() => downloadTaxDraft('download2', file.filename)}>Download</button>
+                                                        {file.is_deleted == 0 && <button style={{ "marginLeft": "5px",'width': 'fit-content','padding': '0px 6px' }} className="btn btn-danger" onClick={() => rejectionClick(file.document_id)}>Reject</button>}
+                                                        {file.is_deleted == 2 && <button style={{ "marginLeft": "5px" }} className="btn btn-danger" >Rejected</button>}
+                                                    </td>
+                                                </tr>
+
+
+                                                // </div>
+                                            ))}
+                                        </tbody>
+                                    </table>
                                     {uploadedDocument.length === 0 && <h5>No Uploaded Document</h5>}
 
 
-                                    <button className="btn btn-primary" onClick={handleShowModal} >
+                                    <button style={{ "marginTop": "10px" }} className="btn btn-primary" onClick={handleShowModal} >
                                         {/* <input style={{ width: '100%', display: 'none' }} type="file" className="input-file"  onChange={handleFileChange} /> */}
 
                                         Upload Document</button>
@@ -500,8 +600,8 @@ function Adminprofile(props) {
                                             }} className="d-flex viewBtns">
                                                 <p>Document Already Updated waiting for Client review</p>
                                                 <button className="btn btn-primary" onClick={() => handleFileAction('download', taxDraft[0].file)}>View</button>
-                                                {/* <button className="btn btn-primary" onClick={() => deleteTaxDraft('delete', taxDraft[0].id)}>Delete</button> */}
-                                                <button className="btn btn-primary" onClick={() => downloadTaxDraft('download2', taxDraft[0].file)}>Download</button>
+                                                <button className="btn btn-primary" onClick={() => deleteTaxDraft('delete', taxDraft[0].id)}>Delete</button>
+                                                {/* <button className="btn btn-primary" onClick={() => downloadTaxDraft('download2', taxDraft[0].file)}>Download</button> */}
                                             </div>
                                         ) : lastUploadedDoc?.status === 1 ? (
                                             <div style={{ "marginLeft": "auto", "marginRight": 0 }} className="d-flex viewBtns">
@@ -514,7 +614,8 @@ function Adminprofile(props) {
                                                     <p>Document Rejected By Client</p>
                                                     <p style={{ "color": "red" }}>{lastUploadedDoc.comment}</p>
                                                     <button className="btn btn-primary" onClick={() => handleFileAction('download', taxDraft[0].file)}>View</button>
-                                                    <button className="btn btn-primary" onClick={() => downloadTaxDraft('download2', taxDraft[0].file)}>Download</button>
+                                                    {/* <button className="btn btn-primary" onClick={() => downloadTaxDraft('download2', taxDraft[0].file)}>Download</button> */}
+                                                    <button className="btn btn-primary" onClick={() => deleteTaxDraft('delete', taxDraft[0].id)}>Delete</button>
                                                 </div>
                                                 <div className="file-upload">
                                                     <label htmlFor="upload" className="file-upload__label">Upload tax draft</label>

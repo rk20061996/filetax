@@ -16,7 +16,7 @@ CREATE TABLE IF NOT EXISTS users (
 `;
 
 const createNewUser = `
-INSERT INTO users VALUES(null, ?, ?, ?, ?,?, NOW(),'',0,?,2,?)
+INSERT INTO users VALUES(null, ?, ?, ?, ?,?, NOW(),'',0,?,2,'')
 `;
 
 const findUserByEmail = `

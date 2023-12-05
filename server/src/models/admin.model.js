@@ -154,6 +154,21 @@ class Admin {
         });
     }
 
+    static rejectUploadedDoc(data, cb) {
+        let query1 = 'update document_upload set comment_rejected= ?  ,is_deleted = 2 where id = ?' 
+
+        // const query1 = 'update tax_draft set is_deleted = 1 where id = ?';
+        db.query(query1, [data.comment, data.id], (err1, res1) => {
+            if (err1) {
+                logger.error(err1.message);
+                cb(err1, null);
+                return;
+            }
+
+            cb(null, res1);
+        });
+    }
+
 
 
 }

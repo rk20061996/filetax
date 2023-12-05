@@ -83,11 +83,11 @@ function Sidebar(props) {
                         <span className="material-symbols-outlined"> home </span> Home
                     </NavLink>
                 </li>
-                <li className="bgColorChange">
+                {/* <li className="bgColorChange">
                     <NavLink to="/profile/tax-documentaion" activeClassName="active">
                         <span className="material-symbols-outlined"> upload_file </span> Tax Information
                     </NavLink>
-                </li>
+                </li> */}
                 <li className="bgColorChange">
                     <NavLink to="/profile/upload-document" activeClassName="active">
                         <span className="material-symbols-outlined"> upload_file </span> Upload Documents

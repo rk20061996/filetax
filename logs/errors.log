@@ -165,3 +165,7 @@
 {"level":"error","message":"jwt malformed","name":"JsonWebTokenError"}
 {"level":"error","message":"jwt malformed","name":"JsonWebTokenError"}
 {"level":"error","message":"jwt malformed","name":"JsonWebTokenError"}
+{"level":"error","message":"ER_BAD_FIELD_ERROR: Unknown column 'NaN' in 'field list'"}
+{"level":"error","message":"ER_BAD_FIELD_ERROR: Unknown column 'NaN' in 'field list'"}
+{"level":"error","message":"ER_BAD_FIELD_ERROR: Unknown column 'NaN' in 'field list'"}
+{"level":"error","message":"ER_PARSE_ERROR: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '?)' at line 1"}

@@ -55,6 +55,9 @@ router.route('/updateStatus')
 router.route('/updateDynamicUserId')
     .post(asyncHandler(checkAdminauth), asyncHandler(adminController.updateDynamicUserId));
 
+    router.route('/rejectUploadedDoc')
+    .post(asyncHandler(checkAdminauth), asyncHandler(adminController.rejectUploadedDoc));
 
+    
 
 module.exports = router;

@@ -82,3 +82,25 @@
 .MuiFormControl-root {
   width: 100%;
 }
+.clientId {
+  display: flex;
+  align-items: center;
+}
+
+.clientInput {
+  flex: 1;
+  padding: 8px;
+  margin-right: 8px;
+}
+
+.editIcon {
+  cursor: pointer;
+  padding: 8px;
+  background-color: #e0e0e0;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.submitButton {
+  cursor: pointer;
+}
