@@ -32,8 +32,8 @@ import { useLocation } from 'react-router-dom'
 
 
 import Adminhome from './admin/admin-home'
-
 import Adminprofile from './admin/admin-profile'
+import Notification from './admin/notification'
 
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
@@ -206,6 +206,12 @@ function App() {
         element={
           <><link rel="stylesheet" href="css/admin.css" />
             <Adminprofile filterStatus={filterStatus} setfilterStatus= {setfilterStatus} firstLoad={firstLoad} setfirstLoad={setfirstLoad} isLoggedIn={isLoggedIn} setisLoggedIn={setisLoggedIn} /></>} // <-- passed as JSX
+      />
+      <Route
+        path="/admin/notification"
+        element={
+          <><link rel="stylesheet" href="css/admin.css" /><link rel="stylesheet" href="css/notification.css" />
+            <Notification filterStatus={filterStatus} setfilterStatus= {setfilterStatus}  firstLoad={firstLoad} setfirstLoad={setfirstLoad} isLoggedIn={isLoggedIn} setisLoggedIn={setisLoggedIn} /></>} // <-- passed as JSX
       />
     </Routes>
 

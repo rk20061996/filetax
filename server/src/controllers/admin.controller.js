@@ -843,4 +843,80 @@ exports.rejectUploadedDoc = (req,res) =>{
     });
 }
 
+exports.getAllUploadedDocument = (req,res) =>{
+    document.getUserDataByToken({ user_id: req.user_id }, (err, data) => {
+        console.log("user---?1", req.user_id)
+        if (err) {
+            res.status(200).send({
+                status: 500,
+                message: err.message
+            });
+        } else {
+            console.log("dataAdmin",)
+            if(data[0].user_type == 1){
+                admin.getAllUploadedDocument({  }, (err, data) => {
+                    // console.log("user---?1", user)
+                    if (err) {
+                        res.status(200).send({
+                            status: 500,
+                            message: err.message
+                        });
+                    } else {
+                        res.status(201).send({
+                            status: 200,
+                            data: data
+                        });
+                    }
+                });
+            }else{
+                res.status(200).send({
+                    status: 500,
+                    message: "Not an Admin"
+                });
+            }
+            // res.status(201).send({
+            //     status: 200,
+            //     data: data
+            // });
+        }
+    });
+}
 
+exports.getAllNotification= (req,res) =>{
+    document.getUserDataByToken({ user_id: req.user_id }, (err, data) => {
+        console.log("user---?1", req.user_id)
+        if (err) {
+            res.status(200).send({
+                status: 500,
+                message: err.message
+            });
+        } else {
+            console.log("dataAdmin",)
+            if(data[0].user_type == 1){
+                admin.getAllNotification({  }, (err, data) => {
+                    // console.log("user---?1", user)
+                    if (err) {
+                        res.status(200).send({
+                            status: 500,
+                            message: err.message
+                        });
+                    } else {
+                        res.status(201).send({
+                            status: 200,
+                            data: data
+                        });
+                    }
+                });
+            }else{
+                res.status(200).send({
+                    status: 500,
+                    message: "Not an Admin"
+                });
+            }
+            // res.status(201).send({
+            //     status: 200,
+            //     data: data
+            // });
+        }
+    });
+}

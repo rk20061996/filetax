@@ -541,18 +541,18 @@ function Adminprofile(props) {
                                                 // <div className="container">
 
 
-                                                <tr key={index}>
-                                                    <td>
+                                                <tr  key={index}>
+                                                    <td style={{    "width": "12%"}}>
                                                         {file.document_name ? file.document_name : "Not Selected"}
                                                     </td>
-                                                    <td>
+                                                    <td style={{    "width": "15%"}}>
                                                         {/* <td> */}
                                                         {file.filename.split(/\d{13}-/)[1]}
                                                         {/* </td> */}
                                                     </td>
-                                                    <td>{new Date(file.created_at).toLocaleDateString()}</td>
-                                                    {file.is_deleted == 0 && <td>{file.comment}</td>}
-                                                    {file.is_deleted == 2 && <td>{file.comment_rejected}</td>}
+                                                    <td style={{    "width": "10%"}}>{new Date(file.created_at).toLocaleDateString()}</td>
+                                                    {file.is_deleted == 0 && <td style={{    "width": "20%"}}>{file.comment}</td>}
+                                                    {file.is_deleted == 2 && <td style={{    "width": "20%"}}>{file.comment_rejected}</td>}
                                                     <td>
                                                         {/* <button className="btn btn-warning" onClick={() => handleFileAction('download', file.filename)}>View</button> */}
                                                         {/* margin-left: 5px;
@@ -563,7 +563,7 @@ function Adminprofile(props) {
                                                         <button style={{ "marginLeft": "5px",'width': 'fit-content','padding': '0px 6px' }} className="btn btn-danger" onClick={() => handleFileAction('delete', file.document_id)}>Delete</button>
                                                         <button style={{ "marginLeft": "5px",'width': 'fit-content','padding': '0px 6px' }} className="btn btn-success" onClick={() => downloadTaxDraft('download2', file.filename)}>Download</button>
                                                         {file.is_deleted == 0 && <button style={{ "marginLeft": "5px",'width': 'fit-content','padding': '0px 6px' }} className="btn btn-danger" onClick={() => rejectionClick(file.document_id)}>Reject</button>}
-                                                        {file.is_deleted == 2 && <button style={{ "marginLeft": "5px" }} className="btn btn-danger" >Rejected</button>}
+                                                        {file.is_deleted == 2 && <button style={{ "marginLeft": "5px",'width': 'fit-content','padding': '0px 6px' }} className="btn btn-danger" >Rejected</button>}
                                                     </td>
                                                 </tr>
 

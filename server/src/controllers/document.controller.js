@@ -81,7 +81,8 @@ exports.uploadDocument = (req, res) => {
         const user_id = req.user_id
         const filename = req.file.filename
         const selectedTaxcomment = req.body.selectedTaxcomment
-        const data = new document(document_type_id.trim(), user_id, filename.trim(), selectedTaxcomment);
+        const user_type = 'client'
+        const data = new document(document_type_id.trim(), user_id, filename.trim(), selectedTaxcomment,user_type);
 
         document.uploadDocumentQuery(data, (err, dat) => {
             // console.log("user---?1", user)

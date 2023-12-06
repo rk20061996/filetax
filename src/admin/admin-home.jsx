@@ -23,6 +23,9 @@ function Adminhome(props) {
     const [sortColumn, setSortColumn] = useState("user_idMain");
     const [sortDirection, setSortDirection] = useState("asc");
 
+    const [userSignedUpIn, setuserSignedUpIn] = useState("");
+    const [userUploadedDoc, setuserUploadedDoc] = useState(0);
+
     const handleSort = (column) => {
         // If the same column is clicked again, toggle the sort direction
         if (column === sortColumn) {
@@ -56,6 +59,7 @@ function Adminhome(props) {
         let filt = props.filterStatus;
         getUserData({ filterStatus: filt.length ? filt : [0, 1, 2, 3, 4, 5, 6, 7, 8, 9] }, "OnLoad");
         getAllUserDataWithoutFilter();
+        getCountAllUploadedDoc()
     }, []);
 
     useEffect(() => {
@@ -79,7 +83,19 @@ function Adminhome(props) {
         }
     };
 
+    const isUserCreatedInLast24Hours = (user) => {
+        const userCreationDate = new Date(user.created_on); // Assuming there is a 'created_at' property in your user object
+        const currentDate = new Date();
+      
+        // Calculate the time difference in milliseconds
+        const timeDifference = currentDate - userCreationDate;
+      
+        // Check if the time difference is less than 24 hours
+        return timeDifference <= 24 * 60 * 60 * 1000;
+      };
+
     const getAllUserDataWithoutFilter = async (data, type) => {
+        // setuserSignedUpIn
         const result = await authFunc.getAllUser({ filterStatus: [0, 1, 2, 3, 4, 5, 6, 7, 8] });
         if (result?.data?.data?.res1) {
             const udata = result?.data?.data?.res1;
@@ -93,6 +109,10 @@ function Adminhome(props) {
                     paymentNotCompleted.push(udata[i]);
                 }
             }
+            console.log("udata-->",udata)
+            const usersInLast24Hours = udata.filter(isUserCreatedInLast24Hours);
+            console.log("usersInLast24Hours-->",usersInLast24Hours)
+            setuserSignedUpIn(usersInLast24Hours.length)
             setUserPaymentData({ paymentNotCompleted, paymentCompleted });
             settotalClientCount(udata.length);
             setcompleteuserData(udata);
@@ -103,6 +123,14 @@ function Adminhome(props) {
             navigate("/");
         }
     };
+
+    const getCountAllUploadedDoc = async() => {
+        const result = await authFunc.getAllUploadedDocument( );
+        // console.log("resultttt",result.data.data[0].count)
+        // const [userUploadedDoc, setuserUploadedDoc] = useState(0);
+        setuserUploadedDoc(result?.data?.data[0]?.count ? result?.data?.data[0]?.count : 0)
+    }
+
 
     const exportToExcel = () => {
         const filteredData = userData.map(user => ({
@@ -160,24 +188,24 @@ function Adminhome(props) {
                     <div className="card dashboard">
                         <h3>Dashboard</h3>
                         <div className="row">
-                            <div className="col-md-4">
+                            <div className="col-md-6">
                                 <div className="innerCard">
-                                    <h4>Payments Completed</h4>
-                                    <p>{userPaymentData?.paymentCompleted?.length}</p>
+                                    <h4>Users joined in the last 24 hours</h4>
+                                    <p>{userSignedUpIn}</p>
                                 </div>
                             </div>
-                            <div className="col-md-4">
+                            <div className="col-md-6">
                                 <div className="innerCard">
-                                    <h4>Client Count</h4>
-                                    <p>{totalClientCount}</p>
+                                    <h4>Documents uploaded in the last 24 hours.</h4>
+                                    <p>{userUploadedDoc}</p>
                                 </div>
                             </div>
-                            <div className="col-md-4">
+                            {/* <div className="col-md-4">
                                 <div className="innerCard">
                                     <h4>Payments Pending</h4>
                                     <p>{userPaymentData?.paymentNotCompleted?.length}</p>
                                 </div>
-                            </div>
+                            </div> */}
                         </div>
                         <div className=" export-btn-container " style={{
                             "display": "flex",

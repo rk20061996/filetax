@@ -2,8 +2,8 @@
 
 import Axios from "axios"
 
-const apiUrl = "http://localhost:9000/api/"
-//  const apiUrl = "http://195.35.45.11:9000/api/"
+// const apiUrl = "http://localhost:9000/api/"
+ const apiUrl = "http://195.35.45.11:9000/api/"
 
 
 const getAllUser = async (data) => {
@@ -276,6 +276,33 @@ const rejectUploadedDoc = async (data) =>{
         return err
     }
 } 
+
+const getAllUploadedDocument = async () =>{
+    
+    try {
+        const config = {
+            headers: { Authorization: `${localStorage.getItem('token')}` }
+        };
+        const result = await Axios.post(apiUrl + "admin/getAllUploadedDocument", {}, config)
+        return result
+    } catch (err) {
+        return err
+    }
+} 
+
+const getAllNotification = async () =>{
+    
+    try {
+        const config = {
+            headers: { Authorization: `${localStorage.getItem('token')}` }
+        };
+        const result = await Axios.post(apiUrl + "admin/getAllNotification", {}, config)
+        return result
+    } catch (err) {
+        return err
+    }
+} 
+
 const authFunc = {
     getAllUser,
     getSingleUser,
@@ -296,6 +323,8 @@ const authFunc = {
     deleteTaxDocument,
     updateStatus,
     updateDynamicUserId,
-    rejectUploadedDoc
+    rejectUploadedDoc,
+    getAllUploadedDocument,
+    getAllNotification
 }
 export default authFunc

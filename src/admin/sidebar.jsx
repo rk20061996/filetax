@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { NavLink } from 'react-router-dom';
 import { Modal, Button } from 'react-bootstrap';
 import { useLocation } from 'react-router-dom';
+import authFunc from '../serviceApi/admin';
 
 function Sidebar(props) {
     const [sessionCheck, setsessionCheck] = useState('')
@@ -11,6 +12,8 @@ function Sidebar(props) {
     let navigate = useNavigate();
     const [selectedStatus, setSelectedStatus] = useState([0]);
     const [showLogoutModal, setShowLogoutModal] = useState(false);
+    const [fileData, setfileData] = useState(0);
+
     // completeuserData
     // props.completeuserData
     // const showLeft = ['/admin/home'].indexOf(url) > -1;
@@ -35,7 +38,7 @@ function Sidebar(props) {
         // setSelectedStatus([0, 1, 2, 3, 4, 5, 6, 7, 8])
         props.setfirstLoad(false)
         // }
-
+        getAllNotification()
     }, []);
     useEffect(() => {
         setSelectedStatus(props.filterStatus)
@@ -137,6 +140,23 @@ function Sidebar(props) {
 
     }
 
+    const getAllNotification = async () => {
+        try {
+          const result = await authFunc.getAllNotification();
+          console.log("result----11", result?.data?.data);
+          const data = result?.data?.data ? result?.data?.data : []
+          let count = 0
+          for(let  i = 0 ; i <data.length ; i++){
+            if(!data[i].is_read){
+                count++
+            }
+          }
+          setfileData(count)
+        //   setfileData(result?.data?.data ? result?.data?.data : []);
+        } catch (error) {
+          console.error("Error fetching notifications:", error);
+        }
+      };
     return (
         <div className="SlideNav">
             <div className="logo">
@@ -221,7 +241,9 @@ function Sidebar(props) {
                         </details>
                     </fieldset>
                 </li>
-                 } 
+                 }
+                 <li><NavLink to="/admin/notification" activeClassName="active" className="nav-link"><span className="material-symbols-outlined"> notifications </span>Notification {fileData ? <span className="notification-badge">{fileData}</span> : ""}</NavLink></li>
+                 
                 <li style={{ "backgroundColor": "wheat", "cursor": "pointer" }}>
                     <a onClick={handleLogout}>
                         <span className="material-symbols-outlined"> logout </span> Log Out

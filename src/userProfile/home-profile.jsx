@@ -63,14 +63,14 @@ function HomeProfile(props) {
                 <NavLink onClick={downloadTaxNotes} activeClassName="active">
                   <span className="material-symbols-outlined"> download </span>
                 </NavLink>
-                <p>Download Document</p>
+                <p>Download Tax Notes</p>
               </li>
               <li>
                 <h6>Step 2</h6>
-                <NavLink to="/profile/tax-documentaion" activeClassName="active">
+                <NavLink to="/profile/upload-document" activeClassName="active">
                   <span className="material-symbols-outlined"> upload </span>
                 </NavLink>
-                <p>Upload Documents</p>
+                <p>Upload Tax Notes</p>
               </li>
               
               <li>
@@ -78,7 +78,28 @@ function HomeProfile(props) {
                 <NavLink to="/profile/tax-return" activeClassName="active">
                   <span className="material-symbols-outlined"> phone_enabled </span>
                 </NavLink>
-                <p>Tax Returns</p>
+                <p>Summary and Draft</p>
+              </li>
+              <li>
+                <h6>Step 4</h6>
+                {/* <NavLink to="/profile/tax-return" activeClassName="active"> */}
+                  <span className="material-symbols-outlined"> payment </span>
+                {/* </NavLink> */}
+                <p>Payment</p>
+              </li>
+              <li>
+                <h6>Step 5</h6>
+                <NavLink to="/profile/tax-return" activeClassName="active">
+                  <span className="material-symbols-outlined"> preview </span>
+                </NavLink>
+                <p>Review Draft</p>
+              </li>
+              <li>
+                <h6>Step 6</h6>
+                {/* <NavLink to="/profile/tax-return" activeClassName="active"> */}
+                  <span className="material-symbols-outlined"> inventory </span>
+                {/* </NavLink> */}
+                <p>Filed</p>
               </li>
             </ul>
           </div>

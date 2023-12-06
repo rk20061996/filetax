@@ -1,13 +1,14 @@
 const db = require('../config/db.config');
-const { getDcoumentData: getDcoumentData, uploadDocument: uploadDocument, getUploAdedDocument:getUploAdedDocument, deleteDocument:deleteDocument ,getUserDataByToken:getUserDataByToken, updateProfile:updateProfile, updateDocumentQuery:updateDocumentQuery,getAllTaxReturnDocument:getAllTaxReturnDocument,changeStatusTaxReturnDocument:changeStatusTaxReturnDocument} = require('../database/documentqueries');
+const { getDcoumentData: getDcoumentData, uploadDocument: uploadDocument, getUploAdedDocument: getUploAdedDocument, deleteDocument: deleteDocument, getUserDataByToken: getUserDataByToken, updateProfile: updateProfile, updateDocumentQuery: updateDocumentQuery, getAllTaxReturnDocument: getAllTaxReturnDocument, changeStatusTaxReturnDocument: changeStatusTaxReturnDocument } = require('../database/documentqueries');
 const { logger } = require('../utils/logger');
 
 class Document {
-    constructor(document_type_id, user_id, filename,selectedTaxcomment) {
+    constructor(document_type_id, user_id, filename, selectedTaxcomment , user_type) {
         this.document_type_id = document_type_id;
         this.user_id = user_id;
         this.filename = filename;
         this.selectedTaxcomment = selectedTaxcomment
+        this.user_type = user_type
     }
     static getAllData(cb) {
         db.query(getDcoumentData, (err, res) => {
@@ -26,6 +27,7 @@ class Document {
 
     static uploadDocumentQuery(data, cb) {
         console.log("herererere", data)
+        const query1 = "INSERT INTO notification VALUES(null, ?, ? ,NOW(),false,?)"
         db.query(uploadDocument,
             [
                 data.user_id,
@@ -38,10 +40,33 @@ class Document {
                     cb(err, null);
                     return;
                 }
-                cb(null, {
-                    data,
-                    
-                });
+                console.log("datacheck",data)
+                if (data.user_type) {
+                    db.query(query1,
+                        [
+                            data.user_id,
+                            data.filename,
+                            parseInt(data.document_type_id)
+                        ], (err, res) => {
+                            if (err) {
+                                logger.error(err.message);
+                                cb(err, null);
+                                return;
+                            }
+
+                            cb(null, {
+                                data,
+        
+                            });
+                            // cb({ kind: "not_found" }, null);
+                        })
+                } else {
+                    cb(null, {
+                        data,
+
+                    });
+                }
+
                 // cb({ kind: "not_found" }, null);
             })
     }
@@ -60,15 +85,15 @@ class Document {
                 }
                 cb(null, {
                     data,
-                    
+
                 });
                 // cb({ kind: "not_found" }, null);
             })
     }
 
-    
 
-    static getUploAdedDocumentApi(data, cb){
+
+    static getUploAdedDocumentApi(data, cb) {
         console.log("herererere", data)
         db.query(getUploAdedDocument,
             [
@@ -83,7 +108,7 @@ class Document {
             })
     }
 
-    static getAllTaxReturnDocument(data, cb){
+    static getAllTaxReturnDocument(data, cb) {
         // console.log("herererere", data)
         db.query(getAllTaxReturnDocument,
             [
@@ -98,7 +123,7 @@ class Document {
             })
     }
 
-    static changeStatusTaxReturnDocument(data, cb){
+    static changeStatusTaxReturnDocument(data, cb) {
         // console.log("herererere", data)
         db.query(changeStatusTaxReturnDocument,
             [
@@ -115,9 +140,9 @@ class Document {
             })
     }
 
-    
 
-    static deleteDocument(data, cb){
+
+    static deleteDocument(data, cb) {
         console.log("hererererdde", data)
         db.query(deleteDocument,
             [
@@ -132,7 +157,7 @@ class Document {
             })
     }
 
-    static getUserDataByToken(data, cb){
+    static getUserDataByToken(data, cb) {
         console.log("hererererdde", data)
         db.query(getUserDataByToken,
             [
@@ -147,7 +172,7 @@ class Document {
             })
     }
 
-    static updateProfile(data, cb){
+    static updateProfile(data, cb) {
         console.log("herererere--->updateprofile", data)
         db.query(updateProfile,
             [
@@ -164,12 +189,12 @@ class Document {
                 }
                 cb(null, {
                     data,
-                    
+
                 });
                 // cb({ kind: "not_found" }, null);
             })
     }
-    
+
 
 }
 module.exports = Document;
