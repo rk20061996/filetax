@@ -87,7 +87,8 @@ function Uploaddocumentmodel(props) {
             <div >
               <div style={{ display: 'block' }} className="form-group">
                 <label>Upload Document</label>
-                <input style={{ width: '100%' }} type="file" className="input-file" value={imageValue} onChange={handleFileChange} />
+                <input style={{ width: '100%' }}   accept=".pdf, .xls, .doc, .docx, image/*"
+ type="file" className="input-file" value={imageValue} onChange={handleFileChange} />
               </div>
             </div>
             <div >

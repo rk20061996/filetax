@@ -170,7 +170,8 @@ function UploadDocument(props) {
             <div className="col-sm-12 col-md-6">
               <div style={{ display: 'block' }} className="form-group">
                 <label>Upload Document</label>
-                <input style={{ width: '100%' }} type="file" className="input-file" value={imageValue} onChange={handleFileChange} />
+                <input accept=".pdf, .xls, .doc, .docx, image/*"
+                  style={{ width: '100%' }} type="file" className="input-file" value={imageValue} onChange={handleFileChange} />
               </div>
             </div>
             <div className="col-sm-12 col-md-6">
@@ -214,10 +215,10 @@ function UploadDocument(props) {
                 <tr key={index}>
                   <td>{doc.document_name ? doc.document_name : "Not Selected"}</td>
                   <td>
-                  
-                  {doc.filename.split(/\d{13}-/)[1]} {"  "} {" "}
+
+                    {doc.filename.split(/\d{13}-/)[1]} {"  "} {" "}
                     <a href={"uploads/" + doc.filename} target="_blank" rel="noopener noreferrer">
-                       <span className="material-symbols-outlined"> download </span>
+                      <span className="material-symbols-outlined"> download </span>
                     </a>
                   </td>
                   <td>{new Date(doc.created_at).toLocaleDateString()}</td>
@@ -236,7 +237,7 @@ function UploadDocument(props) {
                       <span className="material-symbols-outlined"> upload </span>
                     </a> */}
                     <a style={deleteStyle} onClick={() => handleDelete(doc.document_id)}> <span className="material-symbols-outlined"> delete </span> </a>
-                    {doc.is_deleted == 2 && <button style={{ "marginLeft": "5px" }} className="btn btn-danger" >Rejected</button> } 
+                    {doc.is_deleted == 2 && <button style={{ "marginLeft": "5px" }} className="btn btn-danger" >Rejected</button>}
                   </td>
                 </tr>
               ))}

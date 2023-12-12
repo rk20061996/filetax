@@ -67,6 +67,7 @@ function TaxReturn(props) {
                 <th>Document View</th>
                 <th>Document Status</th>
                 <th>Comment</th>
+                <th>Tax Draft Type</th>
                 <th>Date</th>
               </tr>
             </thead>
@@ -98,6 +99,9 @@ function TaxReturn(props) {
                   </td>
                   <td>
                     <p>{doc.comment === '' ? '-' : doc.comment}</p>
+                  </td>
+                  <td>
+                    <p>{doc.tax_draft_type}</p>
                   </td>
                   <td>
                     {new Date(doc.created_at).getDate() +

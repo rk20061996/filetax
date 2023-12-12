@@ -104,11 +104,12 @@ exports.uploadTaxDraft = (req,res) =>{
         // const { taxType, user_id, email, password, phone } = req.body;
         // const document_type_id = req.body.taxType
         const user_id = req.body.id
+        const tax_draft_type = req.body.taxType
         const filename = req.file.filename
         // const selectedTaxcomment = req.body.selectedTaxcomment
         // const data = new document(document_type_id.trim(), user_id, filename.trim(), selectedTaxcomment);
 
-        admin.uploadTaxDraft({user_id,filename}, (err, dat) => {
+        admin.uploadTaxDraft({user_id,filename,tax_draft_type}, (err, dat) => {
             // console.log("user---?1", user)
             if (err) {
                 res.status(200).send({

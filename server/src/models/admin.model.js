@@ -90,8 +90,8 @@ class Admin {
     static uploadTaxDraft(data, cb) {
         // INSERT INTO users VALUES(null, ?, ?, ?, ?,?, NOW(),'',0,?,2)
 
-        const query1 = 'INSERT INTO tax_draft VALUES(null, ?,?,? , 0, 0, NOW())';
-        db.query(query1, [data.filename, "", data.user_id], (err1, res1) => {
+        const query1 = 'INSERT INTO tax_draft VALUES(null, ?,?,? , 0, 0, NOW(),?)';
+        db.query(query1, [data.filename, "", data.user_id,data.tax_draft_type], (err1, res1) => {
             if (err1) {
                 logger.error(err1.message);
                 cb(err1, null);

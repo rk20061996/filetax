@@ -48,6 +48,12 @@ function Adminprofile(props) {
     const [rejectionConfirmModel, setrejectionConfirmModel] = useState(false);
     const [rejectionComment, setrejectionComment] = useState('');
     const [dynamicUserIdArray, setdynamicUserIdArray] = useState([]);
+    const [showErrMsg, setshowErrMsg] = useState(false);
+
+    const [showTaxDraft, setshowTaxDraft] = useState('');
+    const [taxTypeDropDown, settaxTypeDropDown] = useState('');
+
+    const [imageValue, setImageValue] = useState(null);
 
     const [formData, setFormData] = useState({
         primaryTaxPayer: {
@@ -108,7 +114,27 @@ function Adminprofile(props) {
                 setSelectedStatus(status[1])
                 setselectedStatusDisabled([1])
             }
-            console.log("result?.data?.data?.res1", result?.data?.data?.res1)
+            // console.log("result?.data?.data?.res1", result?.data?.data?.res1)
+            const resultss = await authFunc.getAllUser({ filterStatus: [0, 1, 2, 3, 4, 5, 6, 7, 8] });
+            if (resultss?.data?.data?.res1) {
+                const udata = resultss?.data?.data?.res1;
+                const dynamicIdArray = udata.map(e => e.dynamicUser_id);
+                const cleanedArray = dynamicIdArray
+                    .filter(value => value !== null && value !== undefined && value !== '') // Remove null and empty strings
+                    .map(value => typeof value === 'string' ? value.toLowerCase() : value); // Convert strings to lowercase
+
+                // console.log("cleanedArray",cleanedArray);
+                const valuesToRemove = [dataResult[0].dynamicUser_id];
+
+                // Remove specific values from the cleaned array
+                const filteredArray = cleanedArray.filter(value => !valuesToRemove.includes(value));
+
+                console.log(filteredArray);
+                setdynamicUserIdArray(filteredArray)
+
+                // const [dynamicUserIdArray, setdynamicUserIdArray] = useState([]);
+                // console.log("udata--->", udata, dynamicIdArray)
+            }
         } else {
             localStorage.removeItem('token');
             localStorage.removeItem('admin');
@@ -189,24 +215,29 @@ function Adminprofile(props) {
     const handleCloseModal3 = () => {
         setShowModal3(false)
     };
-    const handleFileChange2 = async (event) => {
-        event.preventDefault(); // Prevent form submission behavior
+    // const handleFileChange2 = async (event) => {
+    //     event.preventDefault(); // Prevent form submission behavior
 
-        const formData = new FormData();
-        formData.append('file', event.target.files[0]);
-        formData.append('id', id);
-        event.target.value = '';
-        getTaxDraftDocument()
-        event.target.value = '';
-        try {
-            const response = await authFunc.uploadTaxDraft(formData);
-            getTaxDraftDocument()
+    //     const formData = new FormData();
+    //     formData.append('file', event.target.files[0]);
+    //     formData.append('id', id);
+    //     event.target.value = '';
+    //     getTaxDraftDocument()
+    //     event.target.value = '';
+    //     try {
+    //         const response = await authFunc.uploadTaxDraft(formData);
+    //         getTaxDraftDocument()
 
-            event.preventDefault(); // Prevent form submission behavior
-            console.log("File uploaded:", response);
-        } catch (error) {
-            console.error("Error uploading file:", error);
-        }
+    //         event.preventDefault(); // Prevent form submission behavior
+    //         console.log("File uploaded:", response);
+    //     } catch (error) {
+    //         console.error("Error uploading file:", error);
+    //     }
+    // };
+    const handleFileChange2 = (event) => {
+        // Handle file change and update state
+        const file = event.target.files[0];
+        setImageValue(file);
     };
 
     const downloadTaxDraft = async (type, id) => {
@@ -262,19 +293,7 @@ function Adminprofile(props) {
             dependent: data3.data.data.res,
             residency: data4.data.data.res
         })
-        const result = await authFunc.getAllUser({ filterStatus: [0, 1, 2, 3, 4, 5, 6, 7, 8] });
-        if (result?.data?.data?.res1) {
-            const udata = result?.data?.data?.res1;
-            const dynamicIdArray = udata.map(e => e.dynamicUser_id);
-            const cleanedArray = dynamicIdArray
-                .filter(value => value !== null && value !== undefined && value !== '') // Remove null and empty strings
-                .map(value => typeof value === 'string' ? value.toLowerCase() : value); // Convert strings to lowercase
 
-            // console.log("cleanedArray",cleanedArray);
-            setdynamicUserIdArray(cleanedArray)
-            // const [dynamicUserIdArray, setdynamicUserIdArray] = useState([]);
-            // console.log("udata--->", udata, dynamicIdArray)
-        }
     }
     useEffect(() => {
         getTaxData()
@@ -326,11 +345,14 @@ function Adminprofile(props) {
     }
     const submitForm = async () => {
         const newDynamicUserId = dynamicUserId.toLowerCase()
-        if(dynamicUserIdArray.includes(newDynamicUserId)){
-            alert("already taken user id")
+        if (dynamicUserIdArray.includes(newDynamicUserId)) {
+            // alert("already taken user id")
+            // const [showErrMsg, setshowErrMsg] = useState(false);
+            setshowErrMsg(true);
             return;
         }
-        
+        setshowErrMsg(false)
+
         const data = { id, dynamicUserId }
         const result = await authFunc.updateDynamicUserId(data);
 
@@ -353,10 +375,73 @@ function Adminprofile(props) {
         const response = await authFunc.deleteTaxDocument({ id });
         getTaxDraftDocument()
     }
+    const handleTaxTypeChange = (event) => {
+        settaxTypeDropDown(event.target.value);
+    };
+    const handleUpload = async () => {
+        // Use imageValue and taxTypeDropDown in your API call
+        console.log('Uploading:', imageValue, taxTypeDropDown);
+        const formData = new FormData();
+        formData.append('file', imageValue);
+        formData.append('id', id);
+        formData.append('taxType', taxTypeDropDown);
+        getTaxDraftDocument()
+        try {
+            const response = await authFunc.uploadTaxDraft(formData);
+            getTaxDraftDocument()
+            console.log("File uploaded:", response);
+            setImageValue(null);
+            settaxTypeDropDown('');
+            setshowTaxDraft(false);
+        } catch (error) {
+            console.error("Error uploading file:", error);
+        }
+        // After the upload, clear the input fields
+
+    };
     return (
         <>
             {/* <Header /> */}
             <div className="main d-flex w-100 h-100">
+                <Modal show={showTaxDraft} onHide={() => setshowTaxDraft(false)}>
+                    <Modal.Header closeButton>
+                        <Modal.Title>Upload Tax Draft</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                        <div className="row">
+                            <div className="col-sm-12 col-md-12">
+                                <label>Upload Document</label>
+                                <div style={{ display: 'block' }} className="form-group">
+                                    <input accept=".pdf, .xls, .doc, .docx, image/*"
+                                        onChange={(event) => handleFileChange2(event)} className="input-file" type="file" name="file-upload" />
+                                </div>
+                            </div>
+                            <div className="col-sm-12 col-md-12">
+                                <div style={{ display: 'block', width: "100%" }} >
+                                    <label>Choose Tax Type</label>
+                                    <select
+                                        value={taxTypeDropDown} onChange={handleTaxTypeChange}
+                                    >
+                                        <option value="">Choose Taxtype</option>
+                                        <option value="Initial Draft">Initial Draft</option>
+                                        <option value="Review Draft">Review Draft</option>
+                                        <option value="Filed Return">Filed Return</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </Modal.Body>
+                    <Modal.Footer>
+                        <Button variant="secondary" onClick={() => setshowTaxDraft(false)}>
+                            Cancel
+                        </Button>
+                        <Button variant="danger" onClick={handleUpload}>
+                            Upload
+                        </Button>
+                    </Modal.Footer>
+                </Modal>
+
+
                 <Modal show={showConfirmationModal} onHide={() => setShowConfirmationModal(false)}>
                     <Modal.Header closeButton>
                         <Modal.Title>Confirm Deletion</Modal.Title>
@@ -471,6 +556,9 @@ function Adminprofile(props) {
                                     </span>}
 
                                 </div>
+                                {showErrMsg && <div>
+                                    <p style={{ color: "red" }}>This User ID is already taken</p>
+                                </div>}
                                 {editClient &&
                                     <button style={{ "marginTop": "5px" }} type="button" onClick={submitForm} className="btn btn-primary w-auto">Submit</button>
                                 }
@@ -603,8 +691,10 @@ function Adminprofile(props) {
                                 <h3 className="mb-3">Tax Draft </h3>
                                 {!taxDraft.length &&
                                     <div className="file-upload">
-                                        <label for="upload" className="file-upload__label">Upload tax draft</label>
-                                        <input id="upload" onChange={(event) => handleFileChange2(event)} className="file-upload__input" type="file" name="file-upload" />
+                                        <span for="upload" onClick={() => {
+                                            setshowTaxDraft(true)
+                                        }} className="file-upload__label">Upload tax draft</span>
+                                        {/* <input id="upload" onChange={(event) => handleFileChange2(event)} className="file-upload__input" type="file" name="file-upload" /> */}
                                     </div>
                                 }
                                 {taxDraft.length ? (
@@ -634,8 +724,10 @@ function Adminprofile(props) {
                                                     <button className="btn btn-primary" onClick={() => deleteTaxDraft('delete', taxDraft[0].id)}>Delete</button>
                                                 </div>
                                                 <div className="file-upload">
-                                                    <label htmlFor="upload" className="file-upload__label">Upload tax draft</label>
-                                                    <input id="upload" onChange={(event) => handleFileChange2(event)} className="file-upload__input" type="file" name="file-upload" />
+                                                    <span htmlFor="upload" onClick={() => {
+                                                        setshowTaxDraft(true)
+                                                    }} className="file-upload__label">Upload tax draft</span>
+                                                    {/* <input id="upload" onChange={(event) => handleFileChange2(event)} className="file-upload__input" type="file" name="file-upload" /> */}
                                                 </div>
                                             </>
                                         )}

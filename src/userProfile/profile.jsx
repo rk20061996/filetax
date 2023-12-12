@@ -293,6 +293,8 @@ function Profile(props) {
                     className="input-file"
                     placeholder=""
                     onChange={handleFileChange}
+                    accept=".pdf, .xls, .doc, .docx, image/*"
+
                   />
                 </div>
                 <button onClick={handleSubmit} type="button" className="btn btn-green mt-2">
