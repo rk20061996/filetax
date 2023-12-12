@@ -22,7 +22,7 @@ function Profile(props) {
     confirmPassword: { value: "", error: "" },
   });
 
-  const [isEditing, setIsEditing] = useState(true);
+  const [isEditing, setIsEditing] = useState(false);
   const [isChangingPassword, setIsChangingPassword] = useState(false);
   const [profileDetails, setProfileDetails] = useState(null);
   const [updatedUserData, setupdatedUserData] = useState([]);

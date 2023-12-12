@@ -66,6 +66,7 @@ function TaxReturn(props) {
                 <th>S.No</th>
                 <th>Document View</th>
                 <th>Document Status</th>
+                <th>Comment</th>
                 <th>Date</th>
               </tr>
             </thead>
@@ -74,6 +75,7 @@ function TaxReturn(props) {
                 <tr key={index}>
                   <td>{index + 1}</td>
                   <td>
+                    <p>{doc.file.split(/\d{13}-/)[1]}</p>
                     <a href={"uploads/" + doc.file} target="_blank" rel="noopener noreferrer">
                       Download <span className="material-symbols-outlined"> download </span>
                     </a>
@@ -93,6 +95,9 @@ function TaxReturn(props) {
                     ) : (
                       <button className="btn btn-danger">Rejected</button>
                     )}
+                  </td>
+                  <td>
+                    <p>{doc.comment === '' ? '-' : doc.comment}</p>
                   </td>
                   <td>
                     {new Date(doc.created_at).getDate() +

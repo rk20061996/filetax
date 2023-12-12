@@ -70,7 +70,7 @@ function HomeProfile(props) {
                 <NavLink to="/profile/upload-document" activeClassName="active">
                   <span className="material-symbols-outlined"> upload </span>
                 </NavLink>
-                <p>Upload Tax Notes</p>
+                <p>Upload Tax Notes and Other Tax Documents</p>
               </li>
               
               <li>
