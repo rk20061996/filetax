@@ -245,12 +245,14 @@ input[type="search"] {
 }
 .progressWrap li {
     text-align: center;
-    width: 19%;
+    width: 16%;
     display: inline-block;
     padding: 20px 10px;
     background-color: #f3f6f9;
     margin: 0 4px;
     border-radius: 5px;
+    min-height: 210px;
+    vertical-align: middle;
 }
 .progressWrap li:first-child{
     margin-left: 0;
