@@ -17,46 +17,40 @@ function Pricing(props) {
             <section className="pricingWrap">
                 <div className="container">
                     <div className="row">
-                        <div className="col-sm-12 col-md-4">
+                        <div className="col-sm-12 col-md-3">
                             <div className="pricingContent">
-                                <h2>Starter</h2>
-                                <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit.</p>
-                                <h2>$250</h2>
-                                <p>Billed anually</p>
-                                <button className="btn btn-primary">Start free trial</button>
-                                <ul className="list-unstyled">
-                                    <li>Lorem, ipsum dolor sit amet adipisicing elit.</li>
-                                    <li>Lorem, ipsum dolor sit amet adipisicing elit.</li>
-                                    <li>Lorem, ipsum dolor sit amet adipisicing elit.</li>  
-                                </ul>
+                                <h2>Individual Tax</h2>
+                                <p>for individuals</p>
+                                <h3>Federal - $35</h3>
+                                <h3>State - $30</h3>
+                                <h3>Itemized(Sch-A) - $75</h3>
+                                <p>Refer a friend and earn $10</p>
+                                <button className="btn btn-primary">Get Started</button>
                             </div>
                         </div>
-                        <div className="col-sm-12 col-md-4">
+                        <div className="col-sm-12 col-md-3">
                             <div className="pricingContent active">
-                                <h2>Starter</h2>
-                                <p>Lorem ipsum dolor, sit amet consectetur adipisicing consectetur elit.</p>
-                                <h2>$250</h2>
-                                <p>Billed anually</p>
-                                <button className="btn btn-primary">Start free trial</button>
-                                <ul className="list-unstyled">
-                                    <li>Lorem, ipsum dolor sit amet adipisicing elit.</li>
-                                    <li>Lorem, ipsum dolor sit amet adipisicing elit.</li>
-                                    <li>Lorem, ipsum dolor sit amet adipisicing elit.</li>  
-                                </ul>
+                                <h2>Business Tax</h2>
+                                <p>for businesses and organizations</p>
+                                <h3>$499.99</h3>
+                                <p>Refer a friend and earn $40</p>
+                                <button className="btn btn-primary">Get Started</button>
                             </div>
                         </div>
-                        <div className="col-sm-12 col-md-4">
+                        <div className="col-sm-12 col-md-3">
                             <div className="pricingContent">
-                                <h2>Starter</h2>
-                                <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit.</p>
-                                <h2>$250</h2>
-                                <p>Billed anually</p>
+                                <h2>Payroll Processing</h2>
+                                <p>for paying employees</p>
+                                <h3>Contact us to know more..</h3>
+                                <button className="btn btn-primary">Get Started</button>
+                            </div>
+                        </div>
+                        <div className="col-sm-12 col-md-3">
+                            <div className="pricingContent">
+                                <h2>Book Keeping</h2>
+                                <p>for book keeping services</p>
+                                <h3>Contact us to know more..</h3>
                                 <button className="btn btn-primary">Start free trial</button>
-                                <ul className="list-unstyled">
-                                    <li>Lorem, ipsum dolor sit amet adipisicing elit.</li>
-                                    <li>Lorem, ipsum dolor sit amet adipisicing elit.</li>
-                                    <li>Lorem, ipsum dolor sit amet adipisicing elit.</li>  
-                                </ul>
                             </div>
                         </div>
                     </div>

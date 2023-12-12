@@ -42,6 +42,9 @@ function Contactus(props) {
                                     <textarea placeholder="Enter your Message Here..."></textarea>
                                 </div>
                             </div>
+                            <div className="col-sm-12">
+                                <button className="btn btn-primary">Submit</button>
+                            </div>
                         </div>
                     </form>
                 </div>
