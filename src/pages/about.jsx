@@ -20,10 +20,9 @@ function about(props) {
                     </div>
                 </div>
             </section>
-            <section className="aboutSection">
+            <section className="aboutSection aboutPage">
                 <div className="container">
-                    <h3 className="mb-2">Our dedicated team of US tax specialists advises clients on US tax <br /> 
-                    issues and also helps file US tax returns.</h3>
+                    <h3 className="mb-2">Our dedicated team of US tax specialists advises clients on US tax issues and also helps file US tax returns.</h3>
                     <p className="text-center mb-5">Our team of experts with 15 plus years of experience provide you the best solutions for all your
                         tax compliance including Individual & Business tax returns.<br></br> Individual tax services include ITIN
                         application FBAR & FATCA filings. Our process is 100% online, secured, convenient & affordable.</p>

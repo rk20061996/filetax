@@ -352,7 +352,7 @@ header .dropdown-item:hover {
     border: 1px solid var(--text-color);
     border-radius: 0;
     outline: none;
-    color: var(--bs-white);
+    color: var(--bs-black);
 }
 .contactWrap form textarea{
     height: 100px;
@@ -435,11 +435,14 @@ footer p, footer a{
 .aboutSection {
     padding: 50px 0;
 }
+.aboutPage{
+    padding: 70px 0 0 0;
+}
 .successtories .item {
     padding-bottom: 40px;
 }
 .aboutSection li {
-    margin-bottom: 25px;
+    margin-bottom: 60px;
 }
 .aboutSection li h5 {
     text-align: center;
@@ -449,14 +452,24 @@ footer p, footer a{
     text-align: center;
     margin-bottom: 30px;
 }
+.aboutPage h3 {
+    font-size: 16px;
+    text-align: center;
+    margin-bottom: 12px !important;
+}
 .aboutSection ul {
     column-count: 3;
+    gap: 40px;
 }
 .listWrap li {
     padding: 3px 0;
     position: relative;
     padding-left: 18px;
     font-size: 14px;
+    margin-bottom: 5px;
+}
+.largeFont{
+    font-size: 16px;
 }
 .listWrap li:before {
     content: '';
@@ -527,6 +540,7 @@ footer li a span{
 .servicesBanner{
     background-image: url(../images/service-banner.jpg);
     position: relative;
+    margin-bottom: 0;
 }
 .servicesBanner:before{
     content: '';
@@ -543,7 +557,7 @@ footer li a span{
     margin-bottom: 0;
 }
 .outerTaxReturn {
-    padding-bottom: 60px;
+    padding: 60px 0;
 }
 .taxReturn {
     padding-bottom: 60px;
@@ -577,13 +591,13 @@ footer li a span{
     padding-bottom: 10px;
 }
 .itinWrap{
-    padding-bottom: 60px;
+    padding: 60px 0;
 }
 .itinWrap p {
     margin-bottom: 15px;
 }
 .fbarWrap {
-    padding-bottom: 60px;
+    padding: 60px 0;
 }
 .financialWrap {
     margin-top: 50px;
@@ -657,7 +671,18 @@ footer li a span{
     text-align: center;
     padding: 40px 15px;
     border-radius: 8px;
-    min-height: 330px;
+    min-height: 375px;
+    border: 1px solid #ccc;
+}
+.pricingTag {
+    border: 2px solid #ccc;
+    font-weight: 700;
+    width: 90%;
+    margin: 0 auto;
+    text-transform: capitalize;
+    padding: 6px 10px;
+    border-radius: 2px;
+    margin-bottom: 10px;
 }
 .aboutSection li img {
     width: 100%;
@@ -669,17 +694,20 @@ footer li a span{
 }
 
 .pricingContent h3 {
-    margin-bottom: 20px;
+    margin-bottom: 4px !important;
+    font-size: 15px !important;
+    color: var(--primary-color);
+    display: inline-block;
+    padding: 0 25px;
+    line-height: 26px;
+}
+.innerPricingContent {
+    min-height: 230px;
 }
 .pricingContent h2 {
     margin: 15px 0;
     color: var(--primary-color);
     font-size: 32px;
-}
-.pricingContent h3 {
-    margin-bottom: 4px !important;
-    font-size: 20px !important;
-    color: var(--primary-color);
 }
 .pricingContent ul {
     margin: 30px 0;

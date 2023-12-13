@@ -19,7 +19,10 @@ function Taxextension(props) {
                     <div className="row">
                         <div className="col-sm-12 col-md-8">
                             <h3>Tax Extension Filing</h3>
-                            <p>Embrace flexibility and peace of mind with our Tax Extension Filing Services at File tax. We understand that life can get busy, and sometimes meeting tax deadlines can be challenging. Our specialized team simplifies the process, ensuring you can request an extension without stress. With our expertise, you can avoid penalties and gain the extra time you need to complete your tax return accurately. Trust us to provide the convenience and assurance that comes with a well-managed tax extension."</p>
+                            <p>If you are not ready with tax filing by due date? Then first you need to file an extension with
+                                the IRS to avoid any (late payment) We cannot avoid late payment penalties by filing an 
+                                extension or late-filing penalties.</p>
+                                <h3>Automatic Out of Country Tax Extension Until June 15th</h3>
                             <p>If you are living abroad, you are granted an automatic two-month out of country tax extension to file your US. income tax returns, which pushes the deadline to June 15th. This applies if, as of April 15th, you are living, have your main place of business, or are on military/naval service duty outside the United States and Puerto Rico. It’s important to note if you’re currently living in the US., the automatic extension does not apply to you. Your tax return and any payments due need to be submitted by April 15th. Extension By Request Until October 15th If, however, you are not ready to file by June 15th, you can request another extension by timely filing Form 4868 with the Internal Revenue Service. The deadline would then be October 15th.</p>
                         </div>
                         <div className="col-sm-12 col-md-4">

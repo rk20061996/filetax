@@ -17,14 +17,7 @@ function Taxplanning(props) {
             <section class="aboutSection listWrap">
                 <div class="container">
                     <h3>Free Tax Planning/Advisory Services</h3>
-                    <p>Unlock the path to financial success with our Free Tax Planning and Advisory
-                         Services. At File tax, we believe that financial well-being should be
-                          accessible to all. That's why we are excited to offer our expertise
-                           and guidance at no cost to you. Our seasoned tax professionals are here
-                            to help you navigate the complexities of tax planning, ensuring you make
-                             the most of your money and secure your financial future. Join us in this
-                              journey toward financial empowerment – it's time to take control of your
-                               financial destiny.</p>
+                    <p>The global economy drives growth. But every market presents complex planning and compliance challenges that must be understood individually but addressed collectively. FILETAX offers the local knowledge and global perspective to help with a broad range of issues.</p>
                     <ul class="list-unstyled mt-4">
                         <li> Worldwide tax minimization planning</li>
                         <li> Outbound and inbound structure planning</li>
@@ -38,8 +31,8 @@ function Taxplanning(props) {
                     </ul>
                     <div class="row pt-5">
                         <div class="col-sm-12 col-md-7">
-                            <p>Effective tax planning for high net-worth individuals requires both technical resources and in-depth knowledge of each client’s unique financial situation. It is not a once-a-year activity. Strategies must be maintained and reassessed, with constant monitoring of changing financial positions and evolving tax regulations, as well as new legislation – federal, state.<br />At FILETAX, our methods are immersive and holistic, factoring in all sources of income with charitable interests and short- and long-term goals, both personal and professional. We approach every client situation first with a focus on their objectives, then with awareness of the total tax and At FILETAX, we make sure you are able to save time, avoid penalties, maximize your returns and interest on both federal and state taxes; as well as help you to inform you about several other important deadlines. Our goal is to put more money in your pocket. If you are not currently a client, send copies of your prior year tax returns by scanning and
-e-mailing us at contact@FILETAX.us We will review and respond to you FREE OF ANY CHARGES! We always believe in offering value added services to our clients.
+                            <p className="largeFont">Effective tax planning for high net-worth individuals requires both technical resources and in-depth knowledge of each client’s unique financial situation. It is not a once-a-year activity. Strategies must be maintained and reassessed, with constant monitoring of changing financial positions and evolving tax regulations, as well as new legislation – federal, state.<br /> <br></br>At FILETAX, our methods are immersive and holistic, factoring in all sources of income with charitable interests and short- and long-term goals, both personal and professional. We approach every client situation first with a focus on their objectives, then with awareness of the total tax and At FILETAX, we make sure you are able to save time, avoid penalties, maximize your returns and interest on both federal and state taxes; as well as help you to inform you about several other important deadlines. Our goal is to put more money in your pocket. If you are not currently a client, send copies of your prior year tax returns by scanning and
+e-mailing us at contact@FILETAX.us We will review and respond to you FREE OF ANY CHARGES! We always believe in offering value added services to our clients. <br></br> <br></br> Preparing Personal Tax Returns can be a worrying commitment. FILETAX can relieve you of this burden by preparing your Personal Tax Returns for you. Our comprehensive Personal Tax Return Service is a natural complement to our Corporation Tax Return Service. With a team of highly qualified and experienced Tax Accountants, we do everything to minimize your tax while making the overall taxation process efficient, easy and cost-effective as possible. 
 </p>
                         </div>
                         <div class="col-sm-12 col-md-5">

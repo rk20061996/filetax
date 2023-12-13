@@ -32,11 +32,10 @@ arrow_right_alt
                         <div className="mainHeading">
                             <h2>Who we are</h2>
                         </div>
-                        <p>Welcome to File Tax, our company is a trusted partner in international tax compliance.
-                            We specialize in ITIN application, FBAR<br></br> (Foreign Bank Account Report) filing, and FATCA
-                            (Foreign Account Tax Compliance Act) reporting. Our expert team simplifies<br></br> the complexities
-                            of global tax obligations, ensuring efficient, accurate, and hassle-free solutions.<br></br> With us,
-                            you're in capable hands for seamless international tax compliance.</p>
+                        <p>Our team of experts with 15 plus years of experience provide you the best 
+                            solutions for all your tax compliance <br></br>including Individual & Business tax 
+                            returns. Individual tax services include ITIN application <br></br>FBAR & FATCA
+                             filings. Our process is 100% online, secured, convenient & affordable.</p>
                         <div className="text-center mt-5">
                             <img src="https://qxglobalgroup.com/wp-content/uploads/2023/07/QX-GTPL-2023.jpg" alt="" class="w-100" />
                         </div>
@@ -51,9 +50,8 @@ arrow_right_alt
                                 <span className="material-symbols-outlined">
                                     person
                                 </span>
-                                <h3>Expert Advisor</h3>
-                                <p>We help our clients stay out of trouble with the
-                                    IRS and stay in compliance with US. tax laws.</p>
+                                <h3>Your Expert tax consultant</h3>
+                                <p> let’s connect</p>
                             </div>
                         </div>
                         <div className="col-sm-12 col-md-4">
@@ -61,8 +59,8 @@ arrow_right_alt
                                 <span className="material-symbols-outlined">
                                     trending_up
                                 </span>
-                                <h3>Tax Consulting</h3>
-                                <p>Our firm is dedicated to the needs of businesses and to achieve their ambitions</p>
+                                <h3>Expert Advisor</h3>
+                                <p>We help our clients stay out of trouble with the IRS and stay in compliance with the US. tax laws.</p>
                             </div>
                         </div>
                         <div className="col-sm-12 col-md-4">
@@ -71,7 +69,7 @@ arrow_right_alt
                                     attach_money
                                 </span>
                                 <h3>Financial Planning</h3>
-                                <p>Advanced databases and analytical tools simplify processes. Our customized tools ensure accurate Financial Planning analysis.</p>
+                                <p>The advert of databases and modern analytical tools have smoothen the entire process. We have its own customized tools to get accurate analysis for your Financial Planning.</p>
                             </div>
                         </div>
                     </div>
@@ -95,7 +93,7 @@ arrow_right_alt
                             <div className="item">
                                 <img src="images/student.png" class="srvicesImg" alt="" />
                                 <h4>Student Tax Filing</h4>
-                                <p>We specialize in assisting students with their tax returns, ensuring they take advantage of applicable deductions and credits.<a href="#">Read more</a></p>
+                                <p>Student Tax Filing: We specialize in assisting students with their tax returns, ensuring they take advantage of applicable deductions and credits.<a href="#">Read more</a></p>
                             </div>
                         </div>
                         <div className="col-sm-6 col-md-6 col-lg-3">
@@ -109,7 +107,7 @@ arrow_right_alt
                             <div className="item">
                                 <img src="images/calculators.png" class="srvicesImg" alt="" />
                                 <h4>ITIN Processing</h4>
-                                <p>We help individuals obtain an Individual Taxpayer Identification Number (ITIN) for tax compliance. <a href="#">Read more</a></p>
+                                <p>ITIN Processing: We help individuals obtain an Individual Taxpayer Identification Number (ITIN) for tax compliance.<a href="#">Read more</a></p>
                             </div>
                         </div>
                         <div className="col-sm-6 col-md-6 col-lg-3">
@@ -123,7 +121,7 @@ arrow_right_alt
                             <div className="item">
                                 <img src="images/financial.png" class="srvicesImg" alt="" />
                                 <h4>FATCA (Foreign Account Tax Compliance Act)</h4>
-                                <p>We offer expertise in FATCA reporting, helping you navigate international tax regulations. <a href="#">Read more</a></p>
+                                <p>We offer expertise in FATCA reporting, helping you navigate international tax regulations.<a href="#">Read more</a></p>
                             </div>
                         </div>
                         <div className="col-sm-6 col-md-6 col-lg-3">
@@ -137,7 +135,7 @@ arrow_right_alt
                             <div className="item">
                                 <img src="images/tax3.png" class="srvicesImg" alt="" />
                                 <h4>Tax Extension</h4>
-                                <p>File for a tax extension with confidence, and avoid penalties by trusting our experienced professionals. <a href="#">Read more</a></p>
+                                <p> File for a tax extension with confidence, and avoid penalties by trusting our experienced professionals. <a href="#">Read more</a></p>
                             </div>
                         </div>
                     </div>
@@ -157,15 +155,9 @@ arrow_right_alt
                         <div className="itemContent">
                             <div>
                                 <h5>Maximizing Savings for a Small Business Owner</h5>
-                                <p>John, a small business owner, struggled with tax planning and often paid 
-                                    more than necessary in taxes. He sought the assistance of our tax 
-                                    planning company. Our experts analyzed his financial situation,
-                                        identified deductions he had overlooked, and implemented a tax
-                                        strategy that saved him thousands of dollars annually. John's 
-                                        business is now more profitable, and he can invest in growth with
-                                        confidence.</p>
+                                <p>John, a small business owner, struggled with tax planning and often paid more than necessary in taxes. He sought the assistance of our tax planning company. Our experts analyzed his financial situation, identified deductions he had overlooked, and implemented a tax strategy that saved him thousands of dollars annually. John's business is now more profitable, and he can invest in growth with confidence.</p>
                             </div>
-                                    <a href="#" className="btn btn-primary mt-3">Read More</a>
+                            <a href="#" className="btn btn-primary mt-3">Read More</a>
                         </div>
                     </div>
                     <div class="item">

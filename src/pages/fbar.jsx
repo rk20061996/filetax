@@ -18,7 +18,7 @@ function Fbar(props) {
                 <div className="container">
                     <div className="row">
                         <div className="col-sm-12 col-md-7">
-                                <p>Navigate international financial compliance effortlessly with our FBAR (Foreign Bank Account Report) Filing services atFile tax. We recognize the importance of transparency and adherence to tax regulations when it comes to foreign financial accounts. Our experienced team simplifies the complex FBAR filing process, ensuring that you fulfill your reporting obligations accurately and on time. Trust us to provide you with the peace of mind that comes from knowing your international financial assets are in compliance with U.S. tax laws."</p>
+                                <p>The FBAR(Foreign Bank Account Report) is an annual report, due April 15 following the calendar year reported.</p>
                                 <p>You’re allowed an automatic extension to October 15 if you fail to meet the FBAR annual due date of April 15. You don’t need to request an extension to file the FBAR.</p>
                                 <p>A United States person, including a citizen, resident, corporation, partnership, limited liability company, trust and estate, must file an FBAR to report:</p>
                                 <p>A financial interest in or signature or other authority over at least one financial account located outside the United States if The aggregate value of those foreign financial accounts exceeded $10,000 at any time during the calendar year reported.</p>
