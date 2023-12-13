@@ -119,17 +119,17 @@ function Adminprofile(props) {
             if (resultss?.data?.data?.res1) {
                 const udata = resultss?.data?.data?.res1;
                 const dynamicIdArray = udata.map(e => e.dynamicUser_id);
+                const mainIdArray = udata.map(e => (e.user_idMain).toString());
                 const cleanedArray = dynamicIdArray
                     .filter(value => value !== null && value !== undefined && value !== '') // Remove null and empty strings
                     .map(value => typeof value === 'string' ? value.toLowerCase() : value); // Convert strings to lowercase
 
                 // console.log("cleanedArray",cleanedArray);
-                const valuesToRemove = [dataResult[0].dynamicUser_id];
-
+                const valuesToRemove = [dataResult[0].dynamicUser_id, id];
+                const finalArray = cleanedArray.concat(mainIdArray)
                 // Remove specific values from the cleaned array
                 const filteredArray = cleanedArray.filter(value => !valuesToRemove.includes(value));
-
-                console.log(filteredArray);
+                console.log("filteredArray-->", finalArray);
                 setdynamicUserIdArray(filteredArray)
 
                 // const [dynamicUserIdArray, setdynamicUserIdArray] = useState([]);
@@ -689,50 +689,73 @@ function Adminprofile(props) {
                         <div className="row mt-5 ">
                             <div className="col-sm-12">
                                 <h3 className="mb-3">Tax Draft </h3>
-                                {!taxDraft.length &&
-                                    <div className="file-upload">
-                                        <span for="upload" onClick={() => {
-                                            setshowTaxDraft(true)
-                                        }} className="file-upload__label">Upload tax draft</span>
-                                        {/* <input id="upload" onChange={(event) => handleFileChange2(event)} className="file-upload__input" type="file" name="file-upload" /> */}
-                                    </div>
-                                }
-                                {taxDraft.length ? (
-                                    <>
-                                        {lastUploadedDoc?.status === 0 ? (
-                                            <div style={{
-                                                "marginLeft": "auto",
-                                                "marginRight": 0
-                                            }} className="d-flex viewBtns">
-                                                <p>Document Already Updated waiting for Client review</p>
-                                                <button className="btn btn-primary" onClick={() => handleFileAction('download', taxDraft[0].file)}>View</button>
-                                                <button className="btn btn-primary" onClick={() => deleteTaxDraft('delete', taxDraft[0].id)}>Delete</button>
-                                                {/* <button className="btn btn-primary" onClick={() => downloadTaxDraft('download2', taxDraft[0].file)}>Download</button> */}
-                                            </div>
-                                        ) : lastUploadedDoc?.status === 1 ? (
-                                            <div style={{ "marginLeft": "auto", "marginRight": 0 }} className="d-flex viewBtns">
-                                                <p style={{ "color": "green" }}>Document Approved By Client</p>
-                                                <button className="btn btn-primary" onClick={() => handleFileAction('download', taxDraft[0].file)}>View</button>
-                                            </div>
-                                        ) : (
-                                            <>
-                                                <div style={{ "marginLeft": "auto", "marginRight": 0 }} className="d-flex viewBtns">
-                                                    <p>Document Rejected By Client</p>
-                                                    <p style={{ "color": "red" }}>{lastUploadedDoc.comment}</p>
-                                                    <button className="btn btn-primary" onClick={() => handleFileAction('download', taxDraft[0].file)}>View</button>
-                                                    {/* <button className="btn btn-primary" onClick={() => downloadTaxDraft('download2', taxDraft[0].file)}>Download</button> */}
-                                                    <button className="btn btn-primary" onClick={() => deleteTaxDraft('delete', taxDraft[0].id)}>Delete</button>
-                                                </div>
-                                                <div className="file-upload">
-                                                    <span htmlFor="upload" onClick={() => {
-                                                        setshowTaxDraft(true)
-                                                    }} className="file-upload__label">Upload tax draft</span>
-                                                    {/* <input id="upload" onChange={(event) => handleFileChange2(event)} className="file-upload__input" type="file" name="file-upload" /> */}
-                                                </div>
-                                            </>
-                                        )}
-                                    </>
-                                ) : ""}
+                                {/* {!taxDraft.length && */}
+
+
+                                <table style={{ "width": "100%" }}>
+                                    {taxDraft.length !== 0 && <thead>
+                                        <tr>
+                                            <th>S.No</th>
+                                            <th>Tax Return Document</th>
+                                            <th>Document Status</th>
+                                            <th>Comment</th>
+                                            <th>Tax Draft Type</th>
+                                            <th>Date</th>
+                                        </tr>
+
+                                    </thead>
+                                    }
+                                    <tbody>
+                                        {taxDraft.map((doc, index) => (
+                                            // <div className="container">
+
+
+                                            <tr key={index}>
+                                                <td>{index + 1}</td>
+                                                <td>
+                                                    <p>{doc.file.split(/\d{13}-/)[1]}</p>
+                                                    <a href={"uploads/" + doc.file} target="_blank" rel="noopener noreferrer">
+                                                        Download <span className="material-symbols-outlined"> download </span>
+                                                    </a>
+                                                </td>
+                                                <td>
+                                                    {doc.status != 0 ? doc.status === 1 ? (
+                                                        <button className="btn btn-success">Accepted</button>
+                                                    ) : (
+                                                        <button className="btn btn-danger">Rejected</button>
+                                                    ) : "Waiting For Approval"}
+                                                </td>
+                                                <td>
+                                                    <p>{doc.comment === '' ? '-' : doc.comment}</p>
+                                                </td>
+                                                <td>
+                                                    <p>{doc.tax_draft_type}</p>
+                                                </td>
+                                                <td>
+                                                    {new Date(doc.created_at).getDate() +
+                                                        "-" +
+                                                        (parseInt(new Date(doc.created_at).getMonth()) + 1) +
+                                                        "-" +
+                                                        new Date(doc.created_at).getFullYear()}
+                                                </td>
+                                            </tr>
+
+
+                                            // </div>
+                                        ))}
+                                    </tbody>
+                                </table>
+
+
+                                <div style={{marginTop:"5px"}} className="file-upload">
+                                    <span for="upload" onClick={() => {
+                                        setshowTaxDraft(true)
+                                    }} className="file-upload__label">Upload tax draft</span>
+                                    {/* <input id="upload" onChange={(event) => handleFileChange2(event)} className="file-upload__input" type="file" name="file-upload" /> */}
+                                </div>
+                                {/* } */}
+
+
 
 
 

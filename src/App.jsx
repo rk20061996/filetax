@@ -36,12 +36,14 @@ import Adminprofile from './admin/admin-profile'
 import Notification from './admin/notification'
 
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { browserHistory } from 'react-router';
 
 function App() {
   const [sessionCheck, setsessionCheck] = useState('')
   const [isLoggedIn, setisLoggedIn] = useState(false)
   const [firstLoad, setfirstLoad] = useState(true)
   const [filterStatus, setfilterStatus] = useState([0, 1, 2, 3, 4, 5, 6, 7, 8]);
+  // const history = createHashHistory({ queryKey: false });
 
   let navigate = useNavigate();
   const location = useLocation();
@@ -81,7 +83,7 @@ function App() {
 
   }, []);
   return (
-    <Routes>
+    <Routes >
       <Route
         path="/"
         element={<Home isLoggedIn={isLoggedIn} setisLoggedIn={setisLoggedIn} />} // <-- passed as JSX

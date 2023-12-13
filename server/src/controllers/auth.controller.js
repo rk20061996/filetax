@@ -5,16 +5,20 @@ const { v4: uuidv4 } = require('uuid');
 const { hash: hashPassword, compare: comparePassword } = require('../utils/password');
 const { generate: generateToken, decode } = require('../utils/token');
 
-let logo = 'http://195.35.45.11:9000/images/logo.png'
+let logo = 'https://filetax.us/images/logo.png'
 const WEB_URL = process.env.WEB_URL + "confirm-account"
 
 let emailVerificationLink = "";
 
 let transporter = nodemailer.createTransport({
     service: 'Gmail',
+    // auth: {
+    //     user: 'testemail007filetax@gmail.com', // Your email address
+    //     pass: 'pobd fvnb hvqz isvh' // Your email password or App Password //pzip sdjt ecfm wfxv
+    // }
     auth: {
-        user: 'testemail007filetax@gmail.com', // Your email address
-        pass: 'pobd fvnb hvqz isvh' // Your email password or App Password
+        user: 'noreplyfiletax@gmail.com', // Your email address
+        pass: 'vuyj jfia zmdf eylv' // Your email password or App Password //pzip sdjt ecfm wfxv
     }
 });
 
@@ -122,11 +126,12 @@ const sendEmail = (userName, emailVerificationLink, email) => {
     const link = WEB_URL + '?id=' + emailVerificationLink;
 
     let signupMail = {
-        from: 'testemail007filetax@gmail.com',
+        from: 'no-replyFiletax@gmail.com',
         to: email,
         subject: 'Account Verification Email',
-        html: `<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><title>Welcome to Our Platform</title><style>body{font-family:Arial,sans-serif;margin:0;padding:0;background-color:#f4f4f4}.container{max-width:600px;margin:0 auto;padding:20px;background-color:#fff;border-radius:8px;box-shadow:0 2px 4px rgba(0,0,0,.1)}.header{text-align:center;padding:20px 0}.logo{text-align:center;margin-bottom:20px}.message{margin:20px 0;font-size:16px;color:#333}.button{text-align:center;margin-top:20px}.button a{display:inline-block;padding:10px 20px;background-color:#007bff;color:#fff;text-decoration:none;border-radius:5px}</style></head><body><div class="container"><div class="header"><div class="logo"><img src="${logo}"  width="150"></div></div><div class="message"><p>Hello ${userName},</p><p>Thank you for registering on our platform! Please click the button below to confirm your email address and complete the registration process.</p></div><div class="button"><a href="${link}" target="_blank">Confirm Email Address</a></div></div></body></html>`
+        html: `<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><title>Welcome to Our Platform</title><style>body{font-family:Arial,sans-serif;margin:0;padding:0;background-color:#f4f4f4}.container{max-width:600px;margin:0 auto;padding:20px;background-color:#fff;border-radius:8px;box-shadow:0 2px 4px rgba(0,0,0,.1)}.header{text-align:center;padding:20px 0}.logo{text-align:center;margin-bottom:20px}.message{margin:20px 0;font-size:16px;color:#333}.button{text-align:center;margin-top:20px}.button a{display:inline-block;padding:10px 20px;background-color:#007bff;color:#fff;text-decoration:none;border-radius:5px}.footer {text-align: center;}</style></head><body><div class="container"><div class="header"><div class="logo"><img alt="filetax display picture" src="${logo}"  width="150"></div></div><div class="message"><p>Hello ${userName},</p><p>Thank you for registering on our platform! Please click the button below to confirm your email address and complete the registration process.</p></div><div class="button"><a href="${link}" target="_blank">Confirm Email Address</a></div></div><div class="footer"><p class="signature">© 2023 filetax</p></body></html>`
     };
+
     transporter.sendMail(signupMail, function (error, info) {
         if (error) {
             console.log(error);
@@ -140,10 +145,10 @@ const sendForgotEmail = (userName, emailVerificationLink, email) => {
     const link = process.env.WEB_URL + 'reset-password?id=' + emailVerificationLink;
 
     let signupMail = {
-        from: 'testemail007filetax@gmail.com',
+        from: 'no-replyFiletax@gmail.com',
         to: email,
         subject: 'Forgot Password Email',
-        html: `<!DOCTYPE html><html><head><title>Password Change Request</title><style>body{font-family:Arial,sans-serif;margin:0;padding:0;background-color:#f4f4f4}.container{max-width:600px;margin:0 auto;padding:20px;background-color:#fff;border-radius:8px;box-shadow:0 2px 4px rgba(0,0,0,.1)}.header{text-align:center;padding:20px 0}.message{margin:20px 0;font-size:16px;color:#333}.button{text-align:center;margin-top:20px}.button a{display:inline-block;padding:10px 20px;background-color:#007bff;color:#fff;text-decoration:none;border-radius:5px}</style></head><body><div class="container"><div class="header"><img src="${logo}" ></div><div class="message"><p>Hello ${userName},</p><p>We've received a request to change your password. If this wasn't you, please ignore this email or contact support immediately.</p><p>If you made this request, please click the button below to confirm the password change.</p></div><div class="button"><a href="${link}" target="_blank">Confirm Password Change</a></div></div></body></html>`
+        html: `<!DOCTYPE html><html><head><title>Password Change Request</title><style>body{font-family:Arial,sans-serif;margin:0;padding:0;background-color:#f4f4f4}.container{max-width:600px;margin:0 auto;padding:20px;background-color:#fff;border-radius:8px;box-shadow:0 2px 4px rgba(0,0,0,.1)}.header{text-align:center;padding:20px 0}.message{margin:20px 0;font-size:16px;color:#333}.button{text-align:center;margin-top:20px}.button a{display:inline-block;padding:10px 20px;background-color:#007bff;color:#fff;text-decoration:none;border-radius:5px}.footer {text-align: center;}</style></head><body><div class="container"><div class="header"><img src="${logo}" alt="filetax display picture"></div><div class="message"><p>Hello ${userName},</p><p>We've received a request to change your password. If this wasn't you, please ignore this email or contact support immediately.</p><p>If you made this request, please click the button below to confirm the password change.</p></div><div class="button"><a href="${link}" target="_blank">Confirm Password Change</a></div></div><div class="footer"><p class="signature">© 2023 filetax</p></body></html>`
     };
     transporter.sendMail(signupMail, function (error, info) {
         if (error) {

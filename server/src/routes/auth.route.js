@@ -10,7 +10,7 @@ router.route('/signup')
     .post(signupValidator, asyncHandler(checkEmail), asyncHandler(authController.signup));
 
 router.route('/signin')
-    .post(signinValidator, asyncHandler(authController.signin));
+    .post(asyncHandler(authController.signin));
 
 router.route('/check')
     .post(asyncHandler(authController.check));

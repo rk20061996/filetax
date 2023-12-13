@@ -57,7 +57,7 @@ function Uploaddocumentmodel(props) {
       if (selectedFile ) {
         const formData = new FormData();
         formData.append('file', selectedFile);
-        formData.append('taxType', selectedTaxType);
+        formData.append('taxType', parseInt(selectedTaxType));
         formData.append('selectedTaxcomment', selectedTaxcomment);
         formData.append('id', id);
   
@@ -95,7 +95,7 @@ function Uploaddocumentmodel(props) {
               <div style={{ display: 'block' }} className="form-group">
                 <label>Choose Tax Type</label>
                 <select value={selectedTaxType} onChange={handleTaxTypeChange}>
-                  <option value="">Choose Taxtype</option>
+                  <option value="0">Choose Taxtype</option>
                   {documentData.map((object, i) => (
                     <option key={object.id} value={object.id}>{object.document_name}</option>
                   ))}

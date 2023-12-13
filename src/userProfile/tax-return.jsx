@@ -17,7 +17,11 @@ function TaxReturn(props) {
   const fetchData = async () => {
     try {
       const getAllUploadedDocument = await userProfile.getAllTaxReturnDocument();
-      setuploadedDocument(getAllUploadedDocument?.data?.data);
+      const data = getAllUploadedDocument?.data?.data
+      const filteredArray = data.filter(item => item.is_deleted !== 1);
+
+      console.log(filteredArray);
+      setuploadedDocument(filteredArray);
     } catch (error) {
       console.error("Error fetching data:", error);
     }
@@ -64,7 +68,7 @@ function TaxReturn(props) {
             <thead>
               <tr>
                 <th>S.No</th>
-                <th>Document View</th>
+                <th>Tax Return Document</th>
                 <th>Document Status</th>
                 <th>Comment</th>
                 <th>Tax Draft Type</th>
