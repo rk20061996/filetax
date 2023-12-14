@@ -24,7 +24,7 @@ h2{
     font-weight: 700;
 }
 h3 {
-    font-size: 26px;
+    font-size: 30px;
     font-weight: 700;
 }
 h4 {
@@ -42,7 +42,8 @@ a{
     text-decoration: none;
 }
 p {
-    font-size: 14px;
+    font-size: 18px;
+    line-height: 32px;
     color: var(--text-color);
     margin: 0;
 }
@@ -318,9 +319,6 @@ header .dropdown-item:hover {
     font-size: 55px;
     color: #292759;
 }
-.whyUs p {
-    font-size: 16px;
-}
 .whyUs h2 {
     margin-bottom: 20px;
 }
@@ -453,7 +451,7 @@ footer p, footer a{
     margin-bottom: 30px;
 }
 .aboutPage h3 {
-    font-size: 16px;
+    font-size: 20px;
     text-align: center;
     margin-bottom: 12px !important;
 }
@@ -465,7 +463,8 @@ footer p, footer a{
     padding: 3px 0;
     position: relative;
     padding-left: 18px;
-    font-size: 14px;
+    font-size: 18px;
+    line-height: 30px;
     margin-bottom: 5px;
 }
 .largeFont{
@@ -524,9 +523,16 @@ footer li a span{
 .innerPageBanner.taxExtention{
     background-image: url(../images/taxExtention.jpg);
 }
-
-
-
+.fatcaWrap img {
+    min-height: 350px !important;
+}
+.taxConsultimgWrap .serviceImg {
+    min-height: 620px;
+}
+.itinWrap .serviceImg {
+    min-height: 520px;
+    object-fit: cover;
+}
 .innerPageBanner{
     padding: 60px 0;
     background-repeat: no-repeat;
@@ -624,14 +630,14 @@ footer li a span{
     margin: 0 auto;
 }
 .fbarWrap img {
-    min-height: 400px;
+    min-height: 450px;
     object-fit: cover;
 }
 .heightAuto{
     min-height: auto !important;
 }
 .tax-extension img {
-    min-height: 320px !important;
+    min-height: 400px !important;
 }
 .whyBg {
     background-image: url(../images/bannerImg.jpg);
@@ -682,7 +688,18 @@ footer li a span{
     text-transform: capitalize;
     padding: 6px 10px;
     border-radius: 2px;
+    font-size: 14px !important;
     margin-bottom: 10px;
+}
+.innerPricingContent p {
+    font-size: 16px;
+}
+.serviceImg{
+    border-radius: 12px;
+}
+.heightLarge {
+    min-height: 400px;
+    object-fit: cover;
 }
 .aboutSection li img {
     width: 100%;
@@ -691,6 +708,8 @@ footer li a span{
 }
 .pricingContent.active {
     box-shadow: 0px 0px 15px 0px #0000004f;
+    transform: scale(1.1);
+    background-color: #ffffff;
 }
 
 .pricingContent h3 {
@@ -733,8 +752,12 @@ footer li a span{
 }
 .pricingWrap {
     margin-bottom: 80px;
+    margin-top: 60px;
 }
-
+.pricingContent.active .btn.btn-outline-primary {
+    background-color: #292759;
+    color: #ffffff;
+}
 
 
 /********************/

@@ -14,11 +14,11 @@ function Taxconsulting(props) {
                     </div>
                 </div>
             </section>
-            <section className="fbarWrap">
+            <section className="fbarWrap taxConsultimgWrap">
                 <div className="container">
                     <div className="row">
                         <div className="col-sm-12 col-md-4">
-                            <img src="images/taxExtention.jpg" alt="" width="100%" />
+                            <img src="images/taxExtention.jpg" alt="" width="100%" className="serviceImg" />
                         </div>
                         <div className="col-sm-12 col-md-8">
                             <h3>Tax Consulting Services</h3>

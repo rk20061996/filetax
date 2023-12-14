@@ -25,7 +25,7 @@ function Fbar(props) {
                                 <p>Generally, an account at a financial institution located outside the United States is a foreign financial account. Whether the account produced taxable income has no effect on whether the account is a “foreign financial account” for FBAR purposes.</p>
                         </div>
                         <div className="col-sm-12 col-md-5">
-                            <img src="images/fbar.jpg" alt="" width="100%" />
+                            <img src="images/fbar.jpg" alt="" width="100%" className="serviceImg" />
                         </div>
                     </div>
                     <div className="row financialWrap listWrap">

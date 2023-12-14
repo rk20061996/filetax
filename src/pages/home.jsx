@@ -36,9 +36,9 @@ arrow_right_alt
                             solutions for all your tax compliance <br></br>including Individual & Business tax 
                             returns. Individual tax services include ITIN application <br></br>FBAR & FATCA
                              filings. Our process is 100% online, secured, convenient & affordable.</p>
-                        <div className="text-center mt-5">
+                        {/* <div className="text-center mt-5">
                             <img src="https://qxglobalgroup.com/wp-content/uploads/2023/07/QX-GTPL-2023.jpg" alt="" class="w-100" />
-                        </div>
+                        </div> */}
                     </div>
                 </div>
             </section>
@@ -219,7 +219,7 @@ arrow_right_alt
             <section className="visionFiletax">
                 <div className="container">
                     <div className="row justify-content-center">
-                        <div className="col-md-12 col-lg-7">
+                        <div className="col-md-12 col-lg-8">
                             <h2>Vision of File tax</h2>
                             <p>Our vision is to be the trusted catalyst for financial prosperity. We aim to provide innovative, personalized tax planning solutions that empower individuals and businesses to minimize tax burdens, achieve financial security, and unlock their full financial potential. Together, we build a brighter financial future.</p>
                         </div>
