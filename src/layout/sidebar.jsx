@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom';
 import { useNavigate } from "react-router-dom";
 import { useSelector } from 'react-redux';
 import { Modal, Button } from 'react-bootstrap';
-import MessageModal from './MessageModal';
+import MessageModal from './Message';
 
 function Sidebar(props) {
     const [loggedIn, setLoggedIn] = useState(true);
@@ -104,11 +104,11 @@ function Sidebar(props) {
                         <span className="material-symbols-outlined"> attach_money </span> Payment
                     </NavLink>
                 </li> */}
-                {/* <li className="bgColorChange">
-                    <a onClick={handleMessages}>
+                <li className="bgColorChange">
+                    <NavLink to="/profile/message" activeClassName="active">
                         <span className="material-symbols-outlined"> mail </span> Messages
-                    </a>
-                </li> */}
+                    </NavLink>
+                </li>
                 <li className="bgColorChange">
                     <a style={{ "cursor": "pointer" }} onClick={() => {
                         handleLogout()
@@ -137,9 +137,9 @@ function Sidebar(props) {
                     </Button>
                 </Modal.Footer>
             </Modal>
-            {showMessageModal && (
+            {/* {showMessageModal && (
                 <MessageModal onClose={handleMessageModalClose} />
-            )}
+            )} */}
             {/* ... (previous code) */}
         </div>
     );

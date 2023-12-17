@@ -20,6 +20,7 @@ import Taxconsulting from './pages/tax-consulting'
 import Fatca from './pages/fatca'
 import Fbar from './pages/fbar'
 import Taxextension from './pages/tax-extension'
+import MessageModal from './layout/Message';
 
 import HomeProfile from './userProfile/home-profile'
 import UploadDocument from './userProfile/upload-document'
@@ -193,6 +194,14 @@ function App() {
 
             <TaxDocument isLoggedIn={isLoggedIn} setisLoggedIn={setisLoggedIn} /></>} // <-- passed as JSX
       />
+            <Route
+        path="/profile/message"
+        element={
+          <><link rel="stylesheet" href="css/profile.css" />
+
+            <MessageModal isLoggedIn={isLoggedIn} setisLoggedIn={setisLoggedIn} /></>} // <-- passed as JSX
+      />
+      
 {/*   const [firstLoad, setfirstLoad] = useState(true)
   const [filterStatus, setfilterStatus] = useState([0]);
 

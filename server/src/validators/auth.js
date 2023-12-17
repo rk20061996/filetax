@@ -21,7 +21,7 @@ const signup = (req, res, next) => {
             .required(),
         password: Joi.string()
             .trim()
-            .pattern(new RegExp('^[a-zA-Z0-9]{6,30}$'))
+            // .pattern(new RegExp('^[a-zA-Z0-9]{6,30}$'))
             .required(),
         phone: Joi.string().length(10).pattern(/^[0-9]+$/).required(),
 
@@ -37,7 +37,7 @@ const signin = (req, res, next) => {
             .required(),
         password: Joi.string()
             .trim()
-            .pattern(new RegExp('^[a-zA-Z0-9]{6,30}$'))
+            // .pattern(new RegExp('^[a-zA-Z0-9]{6,30}$'))
             .required()
     });
     validatorHandler(req, res, next, schema);

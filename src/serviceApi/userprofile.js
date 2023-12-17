@@ -2,8 +2,8 @@
 
 import Axios from "axios"
 
-// const apiUrl = "http://localhost:9000/api/"
-const apiUrl = "https://filetax.us/api/"
+const apiUrl = "http://localhost:9000/api/"
+// const apiUrl = "https://filetax.us/api/"
 
 const getAllDocument = async (data) => {
     try {

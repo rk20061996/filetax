@@ -12,7 +12,7 @@ Update document_upload set is_deleted = 1 where id = ?`;
 
 
 const getUserDataByToken=`
-select firstname,lastname,email,phone,user_type from users  where id = ?`;
+select firstname,lastname,email,phone,user_type,id from users  where id = ?`;
 
 const updateProfile=`Update users set firstname=?, lastname=?, phone= ?, image=?  where id = ?`;
 

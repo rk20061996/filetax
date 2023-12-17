@@ -5,9 +5,9 @@ const { v4: uuidv4 } = require('uuid');
 const { hash: hashPassword, compare: comparePassword } = require('../utils/password');
 const { generate: generateToken, decode } = require('../utils/token');
 
-let logo = 'https://filetax.us/images/logo.png'
+let logo = process.env.IMAGE_URL+'images/logo.png'
 const WEB_URL = process.env.WEB_URL + "confirm-account"
-
+console.log("logo",logo,WEB_URL)
 let emailVerificationLink = "";
 
 let transporter = nodemailer.createTransport({
@@ -17,8 +17,10 @@ let transporter = nodemailer.createTransport({
     //     pass: 'pobd fvnb hvqz isvh' // Your email password or App Password //pzip sdjt ecfm wfxv
     // }
     auth: {
-        user: 'noreplyfiletax@gmail.com', // Your email address
-        pass: 'vuyj jfia zmdf eylv' // Your email password or App Password //pzip sdjt ecfm wfxv
+        // user: 'noreplyfiletax@gmail.com', // Your email address
+        // pass: 'vuyj jfia zmdf eylv' // Your email password or App Password //pzip sdjt ecfm wfxv4
+         user: 'noreplyfiletax@gmail.com', // Your email address
+        pass: 'vuyj jfia zmdf eylv' 
     }
 });
 
