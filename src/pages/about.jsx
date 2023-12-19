@@ -15,7 +15,7 @@ function about(props) {
                             <h2>We provide you the best tax services in most<br /> convenient & affordable way.</h2>
                         </div>
                         <div className="text-center mt-4">
-                            <a href="#" className="btn btn-primary">Read More</a>
+                            {/* <a href="#" className="btn btn-primary">Read More</a> */}
                         </div>
                     </div>
                 </div>

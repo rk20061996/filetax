@@ -36,9 +36,10 @@ arrow_right_alt
                             solutions for all your tax compliance <br></br>including Individual & Business tax 
                             returns. Individual tax services include ITIN application <br></br>FBAR & FATCA
                              filings. Our process is 100% online, secured, convenient & affordable.</p>
-                        {/* <div className="text-center mt-5">
-                            <img src="https://qxglobalgroup.com/wp-content/uploads/2023/07/QX-GTPL-2023.jpg" alt="" class="w-100" />
-                        </div> */}
+                        <div className="text-center mt-5">
+                                <img src="images/whoImg.jpg" alt="" class="w-100" />
+                            {/* <img src="https://qxglobalgroup.com/wp-content/uploads/2023/07/QX-GTPL-2023.jpg" alt="" class="w-100" /> */}
+                        </div>
                     </div>
                 </div>
             </section>
@@ -146,7 +147,7 @@ arrow_right_alt
                 <div className="mainHeading">
                     <div className="d-flex justify-content-between">
                         <h2>Success stories</h2>
-                        <a href="#" className="btn btn-outline-primary">View More</a>
+                        {/* <a href="#" className="btn btn-outline-primary">View More</a> */}
                     </div>
                 </div>
                 <div class="successtories owl-carousel owl-theme">
@@ -157,7 +158,7 @@ arrow_right_alt
                                 <h5>Maximizing Savings for a Small Business Owner</h5>
                                 <p>John, a small business owner, struggled with tax planning and often paid more than necessary in taxes. He sought the assistance of our tax planning company. Our experts analyzed his financial situation, identified deductions he had overlooked, and implemented a tax strategy that saved him thousands of dollars annually. John's business is now more profitable, and he can invest in growth with confidence.</p>
                             </div>
-                            <a href="#" className="btn btn-primary mt-3">Read More</a>
+                            {/* <a href="#" className="btn btn-primary mt-3">Read More</a> */}
                         </div>
                     </div>
                     <div class="item">
@@ -167,7 +168,7 @@ arrow_right_alt
                                 <h5>Securing Retirement for a Middle-Aged Couple</h5>
                                 <p>Sarah and Michael, a middle-aged couple, were concerned about their retirement savings. They turned to us for tax-efficient retirement planning. Our team optimized their investment portfolio and retirement accounts, allowing them to retire comfortably while minimizing their tax burden. With our guidance, they now enjoy their golden years without financial stress.</p>
                             </div>
-                            <a href="#" className="btn btn-primary mt-3">Read More</a>
+                            {/* <a href="#" className="btn btn-primary mt-3">Read More</a> */}
                         </div>
                     </div>
                     <div class="item">
@@ -177,7 +178,7 @@ arrow_right_alt
                                 <h5>Helping a Young Professional Build Wealth</h5>
                                 <p>Emily, a young professional, wanted to build wealth but was unsure where to start. We provided her with a comprehensive financial plan that included tax-efficient investment strategies and long-term financial goals. As a result, Emily has seen her wealth grow steadily over the years and is on track to meet her financial objectives.</p>
                             </div>
-                            <a href="#" className="btn btn-primary mt-3">Read More</a>
+                            {/* <a href="#" className="btn btn-primary mt-3">Read More</a> */}
                         </div>
                     </div>
                     <div class="item">
@@ -187,7 +188,7 @@ arrow_right_alt
                                 <h5>Resolving IRS Audit Successfully</h5>
                                 <p>Mark, a self-employed contractor, faced a challenging IRS audit. He reached out to us for assistance. Our tax experts meticulously reviewed his financial records, liaised with the IRS on his behalf, and resolved the audit with minimal penalties. Mark was relieved to have the audit behind him and to continue his business operations without disruptions.</p>
                             </div>
-                            <a href="#" className="btn btn-primary mt-3">Read More</a>
+                            {/* <a href="#" className="btn btn-primary mt-3">Read More</a> */}
                         </div>
                     </div>
                     <div class="item">
@@ -197,7 +198,7 @@ arrow_right_alt
                             <h5>Estate Planning for a High-Net-Worth Family</h5>
                             <p>The Andersons, a high-net-worth family, sought our services for estate planning. Our specialists crafted a comprehensive estate plan, which not only minimized estate taxes but also ensured the seamless transfer of assets to the next generation. The Andersons now have peace of mind knowing their legacy is secure.</p>
                             </div>
-                            <a href="#" className="btn btn-primary mt-3">Read More</a>
+                            {/* <a href="#" className="btn btn-primary mt-3">Read More</a> */}
                         </div>
                     </div>
                 </div>

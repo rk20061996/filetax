@@ -61,30 +61,65 @@ function Message(props) {
       <div className="main d-flex w-100 h-100">
         <Sidebar isLoggedIn={props.isLoggedIn} setisLoggedIn={props.setisLoggedIn} />
         <div className="mainContent container-fluid">
+          <div className="outerChat">
+            <div className="chatProfile">
+                <a href="#">
+                  <img src="images/img2.png" />
+                  <div>
+                    <h6>Minakshi</h6>
+                    <p>Hello i'am meruu</p>
+                  </div>
+                </a>
+                <a href="#">
+                  <img src="images/img2.png" />
+                  <div>
+                    <h6>Minakshi</h6>
+                    <p>Hello i'am meruu</p>
+                  </div>
+                </a>
+                <a href="#">
+                  <img src="images/img2.png" />
+                  <div>
+                    <h6>Minakshi</h6>
+                    <p>Hello i'am meruu</p>
+                  </div>
+                </a>
+                <a href="#">
+                  <img src="images/img2.png" />
+                  <div>
+                    <h6>Minakshi</h6>
+                    <p>Hello i'am meruu</p>
+                  </div>
+                </a>
+            </div>
+            <div className="chat">
+              <div className="day">Hoy</div>
+              <ol className="outer_chat">
+                <li className="self">
+                  <div className="avatar"><img src="https://i.imgur.com/HYcn9xO.png" draggable="false" /></div>
+                  <div className="msg">
+                    <p>Te apetece jugar a Minecraft?</p>
+                    <time>18:03</time>
+                  </div>
+                </li>
+                <li className="other">
+                  <div className="avatar"><img src="https://i.imgur.com/DY6gND0.png" draggable="false" /></div>
+                  <div className="msg">
+                    <p>Venga va, hace ya mucho que no juego...</p>
+                    <time>18:07</time>
+                  </div>
+                </li>
+              </ol>
+              <div className="typeMessage">
+                <input className="textarea" type="text" value={message} onChange={handleInputChange} placeholder="Type here!"  onKeyPress={(event) => {
+              event.key === "Enter" && sendMessage();
+            }}/>
+            <button type="button" className="btn btn-primary" onClick={sendMessage}>Send</button> 
+            </div>  
+            </div>
+            
+          </div>
           
-          <ol className="chat">
-            
-            <div className="day">Hoy</div>
-            <li className="self">
-              <div className="avatar"><img src="https://i.imgur.com/HYcn9xO.png" draggable="false" /></div>
-              <div className="msg">
-                <p>Te apetece jugar a Minecraft?</p>
-                <time>18:03</time>
-              </div>
-            </li>
-            <li className="other">
-              <div className="avatar"><img src="https://i.imgur.com/DY6gND0.png" draggable="false" /></div>
-              <div className="msg">
-                <p>Venga va, hace ya mucho que no juego...</p>
-                <time>18:07</time>
-              </div>
-            </li>
-            
-          </ol>
-          <input className="textarea" type="text" value={message} onChange={handleInputChange} placeholder="Type here!"  onKeyPress={(event) => {
-            event.key === "Enter" && sendMessage();
-          }}/>
-          <button type="button" onClick={sendMessage}>Send</button>
           {/* <div className="emojis"></div> */}
         </div>
       </div>

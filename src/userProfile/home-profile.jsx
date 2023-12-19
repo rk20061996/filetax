@@ -43,11 +43,11 @@ function HomeProfile(props) {
         <div className="card">
           <h3>Welcome Back</h3>
           <div className="row">
-            <div className="col-sm-8">
+            <div className="col-sm-7 pe-5">
               <p>FILETAX personally welcomes you as our esteemed client, and we are anxious to assist you in achieving your taxation and accounting objectives. We love getting new clients because it allows us the opportunity to describe the FILETAX Philosophy. Our years of success are due to this philosophy, which includes helping our clients meet their taxation needs.</p>
             </div>
-            <div className="col-sm-4">
-              <img src="images/home-img.png" alt="" className="w-100" />
+            <div className="col-sm-5">
+              <img src="images/home-img.png" alt="" className="profileDiffImg w-100" />
             </div>
           </div>
            {/* Status indicator */}

@@ -108,7 +108,7 @@ form a, form a:hover{
 .topHeader p{
     color: var(--text-color);
     margin-right: 20px;
-    font-size: 13px;
+    font-size: 16px;
 }
 .topHeader p:last-child{
     margin-right: 0;
@@ -295,6 +295,11 @@ header .dropdown-item:hover {
 }
 .serviceSlider .row {
     padding-top: 30px;
+}
+.profileDiffImg.w-100 {
+    max-height: 200px;
+    object-fit: cover;
+    border-radius: 20px;
 }
 .itemContent {
     display: flex;
@@ -843,4 +848,64 @@ form .form-group label{
 }
 .innerCard p svg {
     width: 22px;
+}
+
+/* chat Css */
+.outerChat {
+    display: flex;
+}
+.chatProfile {
+    width: 400px;
+    padding-right: 15px;
+}
+.chat {
+    width: calc(100% - 400px);
+    margin: 0 !important;
+    padding: 20px 40px !important;
+    background-color: #ffffff !important;
+    border-radius: 10px;
+    height: 90vh;
+    position: relative;
+    padding-bottom: 80px !important;
+}
+.chatProfile a:hover{
+    color: #333333;
+}
+.outer_chat {
+    height: 100%;
+    margin-bottom: 80px !important;
+    overflow-y: scroll;
+}
+.typeMessage {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    align-items: center;
+    background-color: #ffffff;
+    padding: 15px;
+    z-index: 2;
+}
+.typeMessage input {
+    background-color: #f3f6f9;
+    padding: 0 15px !important;
+    margin-right: 10px;
+}
+.chatProfile a img {
+    width: 60px;
+    height: 60px;
+    border-radius: 100px;
+    margin-right: 10px;
+}
+.chatProfile a {
+    display: flex;
+    align-items: center;
+    background-color: #ffffff;
+    padding: 12px 10px;
+    border-radius: 4px;
+    border-bottom: 1px solid #eee;
+}
+.chatProfile h6 {
+    margin: 0;
 }

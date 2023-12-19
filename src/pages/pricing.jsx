@@ -27,18 +27,18 @@ function Pricing(props) {
                                         <h3>Itemized(Sch-A) - $75</h3>
                                     <p>Refer a friend and earn $10</p>
                                 </div>
-                                <button className="btn btn-outline-primary">Get Started</button>
+                                <a href="#" className="btn btn-outline-primary">Get Started</a>
                             </div>
                         </div>
                         <div className="col-sm-12 col-md-3">
-                            <div className="pricingContent active">
+                            <div className="pricingContent">
                             <div className="innerPricingContent">
                                 <h2>Business Tax</h2>
                                 <p className="pricingTag">for businesses and organizations</p>
                                 <h3>$499.99</h3>
                                 <p>Refer a friend and earn $40</p>
                             </div>
-                                <button className="btn btn-outline-primary">Get Started</button>
+                                <a href="#" className="btn btn-outline-primary">Get Started</a>
                             </div>
                         </div>
                         <div className="col-sm-12 col-md-3">
@@ -48,17 +48,17 @@ function Pricing(props) {
                                 <p className="pricingTag">for paying employees</p>
                                 <h3>Contact us to know more..</h3>
                             </div>
-                                <button className="btn btn-outline-primary">Get Started</button>
+                                <a href="#" className="btn btn-outline-primary">Get Started</a>
                             </div>
                         </div>
                         <div className="col-sm-12 col-md-3">
                             <div className="pricingContent">
                             <div className="innerPricingContent">
-                                <h2>Book Keeping</h2>
+                                <h2>Book keeping</h2>
                                 <p className="pricingTag">for book keeping services</p>
                                 <h3>Contact us to know more..</h3>
                             </div>
-                                <button className="btn btn-outline-primary">Start free trial</button>
+                                <a href="#" className="btn btn-outline-primary">Get Started</a>
                             </div>
                         </div>
                     </div>
