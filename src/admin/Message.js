@@ -74,6 +74,25 @@ function Message(props) {
                 scrollToBottom();
             }, 0);
             setMessage("");
+            setuserIdData((prevuserIdData) => {
+                const userIdToMove = activeChatUserId; // Replace with the actual ID you want to move
+                const indexToMove = prevuserIdData.findIndex(item => item.id_main === userIdToMove);
+              
+                if (indexToMove !== -1) {
+                  // Item found, move it to the top
+                  const movedItem = prevuserIdData[indexToMove];
+                  const updateduserIdData = [
+                    movedItem,
+                    ...prevuserIdData.slice(0, indexToMove),
+                    ...prevuserIdData.slice(indexToMove + 1)
+                  ];
+              
+                  return updateduserIdData;
+                }
+              
+                // If the item with the specified ID is not found, return the current array
+                return prevuserIdData;
+              });
         }
     };
 
