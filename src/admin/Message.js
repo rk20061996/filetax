@@ -130,6 +130,27 @@ function Message(props) {
                             return newArray;
                         });
                         updatedGroupedMessage[data.user_id] = [];
+                    }else{
+                        console.log(updatedGroupedMessage)
+                        setuserIdData((prevuserIdData) => {
+                            const userIdToMove = data.user_id; // Replace with the actual ID you want to move
+                            const indexToMove = prevuserIdData.findIndex(item => item.id_main === userIdToMove);
+                          
+                            if (indexToMove !== -1) {
+                              // Item found, move it to the top
+                              const movedItem = prevuserIdData[indexToMove];
+                              const updateduserIdData = [
+                                movedItem,
+                                ...prevuserIdData.slice(0, indexToMove),
+                                ...prevuserIdData.slice(indexToMove + 1)
+                              ];
+                          
+                              return updateduserIdData;
+                            }
+                          
+                            // If the item with the specified ID is not found, return the current array
+                            return prevuserIdData;
+                          });
                     }
                     updatedGroupedMessage[data.user_id].push(obj);
                     return updatedGroupedMessage;
@@ -223,6 +244,7 @@ function Message(props) {
                             <div className="chatProfile">
                                 {userIdData.map((user, index) => (
                                     <a
+                                        className={activeChatUserId === user.id_main ? "activeChat" : ""}
                                         key={index}
                                         onClick={() => {
                                             setactiveChatUserId(user.id_main);

@@ -104,3 +104,6 @@
 .submitButton {
   cursor: pointer;
 }
+.activeChat{
+  background-color: lightblue !important
+}

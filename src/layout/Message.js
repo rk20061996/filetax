@@ -8,6 +8,7 @@ const socket = io.connect("http://195.35.45.11:3001/");
 
 function Message(props) {
   const chatContainerRef = useRef(null);
+  const idRef = useRef(props.id);
 
   const [id, setUserId] = useState(props?.id);
   const [message, setMessage] = useState('');
@@ -19,6 +20,11 @@ function Message(props) {
   useEffect(() => {
     fetchUserDate()
   }, [])
+  useEffect(() => {
+    // Update the refs when the corresponding state values change
+    idRef.current = props.id;
+}, [props.id]);
+
 
   const scrollToBottom = () => {
     if (chatContainerRef.current) {
@@ -38,7 +44,6 @@ function Message(props) {
       };
 
       await socket.emit("send_message", messageData);
-      const chat =JSON.parse(JSON.stringify( showChatMessage))
       const obj = {
         date: new Date(),
         is_read: 1,
@@ -47,11 +52,12 @@ function Message(props) {
         sender_id: id,
         is_read_admin: false,
         is_read_user: true,
-        firstname:userData.firstname,
-        lastname:userData.lastname
-      }
-      chat.push(obj)
-      setShowChatMessage(chat);
+        firstname: userData.firstname,
+        lastname: userData.lastname
+      };
+      
+      // Use the functional form of setState to ensure correct updates
+      setShowChatMessage(prevMessages => [...prevMessages, obj]);
       const setMessagess = await userProfile.setMessage(obj);
       setTimeout(() => {
         scrollToBottom();
@@ -71,27 +77,36 @@ function Message(props) {
 
     socket.on('receive_message', (data) => {
       console.log('Received message:', data);
-      const obj = {
-        date: new Date(),
-        is_read: 1,
-        message: data.message,
-        user_id: data.user_id,
-        sender_id: data.sender_id,
-        is_read_admin: false,
-        is_read_user: true,
-      };
-      if(data.sender_id != data.user_id && data.user_id === id){
-        // alert(id)
-        setShowChatMessage(prevState => [...prevState, obj]);
+    
+      const currentId = idRef.current;
+    
+      // Check if the message is for the current user
+      if (data.user_id === currentId && data.user_id !== data.sender_id ) {
+        // alert()
+        // Update the state using the functional form of setState
+        setShowChatMessage((prevMessages) => {
+          const obj = {
+            date: new Date(),
+            is_read: 1,
+            message: data.message,
+            user_id: data.user_id,
+            sender_id: data.sender_id,
+            is_read_admin: false,
+            is_read_user: true,
+          };
+    
+          // Use the spread operator to create a new array with the new message
+          return [...prevMessages, obj];
+        });
       }
-      // Update the state using the functional form of setState to ensure correct updates
     });
+    
 
     return () => {
       // Clean up the socket connection on component unmount
       socket.disconnect();
     };
-  }, [socket,id]);
+  }, [socket]);
 
   useEffect(() => {
     scrollToBottom();

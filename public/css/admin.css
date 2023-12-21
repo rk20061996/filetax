@@ -762,4 +762,6 @@ fieldset li > label input {
     position: relative;
     display: flex;
   }
-  
+  .activeChat{
+    background-color: lightblue
+  }
