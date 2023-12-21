@@ -244,6 +244,13 @@ function Sidebar(props) {
                  }
                  <li><NavLink to="/admin/notification" activeClassName="active" className="nav-link"><span className="material-symbols-outlined"> notifications </span>Notification {fileData ? <span className="notification-badge">{fileData}</span> : ""}</NavLink></li>
                  
+                 <li style={{ "backgroundColor": "wheat", "cursor": "pointer" }}>
+                    {/* <a >
+                        <span className="material-symbols-outlined"> logout </span> Message
+                    </a> */}
+                    <NavLink to="/admin/message" activeClassName="active" className="nav-link"><span className="material-symbols-outlined"> chat </span>Message </NavLink>
+                </li>
+
                 <li style={{ "backgroundColor": "wheat", "cursor": "pointer" }}>
                     <a onClick={handleLogout}>
                         <span className="material-symbols-outlined"> logout </span> Log Out

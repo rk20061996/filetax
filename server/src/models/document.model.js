@@ -195,6 +195,65 @@ class Document {
             })
     }
 
+    static getMessage(data, cb) {
+        console.log("herererere--->updateprofile", data)
+        const query1 = 'select * from chat where user_id = ?';
+        const query2 = 'update chat set is_read_user = true where user_id = ?'
+        db.query(query1, [data.user_id], (err, res) => {
+                if (err) {
+                    logger.error(err.message);
+                    cb(err, null);
+                    return;
+                }
+                db.query(query2, [data.user_id], (err, res2) => {
+                    if (err) {
+                        logger.error(err.message);
+                        cb(err, null);
+                        return;
+                    }
+                    cb(null, res);
+                    // cb({ kind: "not_found" }, null);
+                })
+                // cb({ kind: "not_found" }, null);
+            })
+    }
+
+    static setMessage(data, cb) {
+        console.log("herererere--->updateprofile", data)
+        // const query1 = 'Insert into chat where user_id = ?';
+        const query1 = "INSERT INTO chat VALUES(null, ?, ? ,?,NOW(),?,?)"
+
+        db.query(query1, [data.user_id,data.sender_id,data.message,data.is_read_admin,data.is_read_user], (err, res) => {
+                if (err) {
+                    logger.error(err.message);
+                    cb(err, null);
+                    return;
+                }
+                cb(null, res);
+                // cb({ kind: "not_found" }, null);
+            })
+    }
+
+    static setOnRead(data, cb) {
+        console.log("herererere--->updateprofile", data)
+        // const query1 = 'Insert into chat where user_id = ?';
+        const query1 = "update chat set is_read_user = true where user_id = ?"
+
+        db.query(query1, [data.user_id,data.user_id,data.message], (err, res) => {
+                if (err) {
+                    logger.error(err.message);
+                    cb(err, null);
+                    return;
+                }
+                cb(null, {
+                    data,
+
+                });
+                // cb({ kind: "not_found" }, null);
+            })
+    }
+    
+    
 
 }
 module.exports = Document;

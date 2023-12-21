@@ -6,7 +6,7 @@ class Admin {
         // console.log("herererere--->updateprofile", data);
 
         let query1 = ""
-        if (data.status_id.includes(0) ) {
+        if (data.status_id.includes(0)) {
             query1 = 'Select *,users.id as user_idMain,users.id as id from users left join user_status on user_status.user_id = users.id where user_type != 1';
         } else if (data.status_id.includes(1) && data.status_id.length === 1) {
             query1 = 'Select *,users.id as user_idMain,users.id as id from users left join user_status on user_status.user_id = users.id where user_type != 1 AND user_status.user_id IS NULL';
@@ -15,10 +15,10 @@ class Admin {
             var formatted = `(${data.status_id.map(v => JSON.stringify(v.toString())).join(', ')})`;
 
             query1 = 'Select *,users.id as user_idMain,users.id as id from users inner join user_status on user_status.user_id = users.id where user_type != 1 and user_status.status_type in ' + formatted;
-            if(data.status_id.includes(1)){
+            if (data.status_id.includes(1)) {
                 query1 = 'Select *,users.id as user_idMain,users.id as id from users left join user_status on user_status.user_id = users.id where user_type != 1 and (user_status.status_type in ' + formatted + ' OR user_status.user_id IS NULL)';
             }
-            console.log("mainQuery22",query1)
+            console.log("mainQuery22", query1)
 
         }
 
@@ -46,9 +46,9 @@ class Admin {
         });
     }
 
-    static updateDynamicUserId(data, cb){
+    static updateDynamicUserId(data, cb) {
         const query1 = 'update users set dynamicUser_id = ? where users.id = ?';
-        db.query(query1, [data.dynamicUserId,data.id], (err1, res1) => {
+        db.query(query1, [data.dynamicUserId, data.id], (err1, res1) => {
             if (err1) {
                 logger.error(err1.message);
                 cb(err1, null);
@@ -91,7 +91,7 @@ class Admin {
         // INSERT INTO users VALUES(null, ?, ?, ?, ?,?, NOW(),'',0,?,2)
 
         const query1 = 'INSERT INTO tax_draft VALUES(null, ?,?,? , 0, 0, NOW(),?)';
-        db.query(query1, [data.filename, "", data.user_id,data.tax_draft_type], (err1, res1) => {
+        db.query(query1, [data.filename, "", data.user_id, data.tax_draft_type], (err1, res1) => {
             if (err1) {
                 logger.error(err1.message);
                 cb(err1, null);
@@ -155,7 +155,7 @@ class Admin {
     }
 
     static rejectUploadedDoc(data, cb) {
-        let query1 = 'update document_upload set comment_rejected= ?  ,is_deleted = 2 where id = ?' 
+        let query1 = 'update document_upload set comment_rejected= ?  ,is_deleted = 2 where id = ?'
 
         // const query1 = 'update tax_draft set is_deleted = 1 where id = ?';
         db.query(query1, [data.comment, data.id], (err1, res1) => {
@@ -170,7 +170,7 @@ class Admin {
     }
 
     static getAllUploadedDocument(data, cb) {
-        let query1 = 'SELECT COUNT(*) AS count FROM document_upload WHERE created_at >= NOW() - INTERVAL 24 HOUR ' 
+        let query1 = 'SELECT COUNT(*) AS count FROM document_upload WHERE created_at >= NOW() - INTERVAL 24 HOUR '
 
         // const query1 = 'update tax_draft set is_deleted = 1 where id = ?';
         db.query(query1, [], (err1, res1) => {
@@ -185,8 +185,8 @@ class Admin {
     }
 
     static getAllNotification(data, cb) {
-        let query1 = 'SELECT *, users.id as id_main from  notification left join users on users.id = notification.user_id ' 
-        let query2 = 'update  notification set is_read = true ' 
+        let query1 = 'SELECT *, users.id as id_main from  notification left join users on users.id = notification.user_id '
+        let query2 = 'update  notification set is_read = true '
         // const query1 = 'update tax_draft set is_deleted = 1 where id = ?';
         db.query(query1, [], (err1, res1) => {
             if (err1) {
@@ -201,12 +201,40 @@ class Admin {
                     cb(err1, null);
                     return;
                 }
-    
+
                 cb(null, res1);
             });
         });
     }
 
+    static getAllMessage(data, cb) {
+        let query1 = 'SELECT *, users.id as id_main from  chat left join users on users.id = chat.user_id '
+        // let query2 = 'update  notification set is_read = true '
+        // const query1 = 'update tax_draft set is_deleted = 1 where id = ?';
+        db.query(query1, [], (err1, res1) => {
+            if (err1) {
+                logger.error(err1.message);
+                cb(err1, null);
+                return;
+            }
+
+            // db.query(query2, [], (err1, res2) => {
+            //     if (err1) {
+            //         logger.error(err1.message);
+            //         cb(err1, null);
+            //         return;
+            //     }
+
+            cb(null, res1);
+            // });
+        });
+    }
+
 }
+
+
+
+
+
 
 module.exports = Admin;

@@ -35,6 +35,18 @@ console.log("here we come")
     router.route('/updateProfile')
     .post(asyncHandler(checkUserauth),asyncHandler(documentController.updateProfile));
     
+    router.route('/getMessage')
+    .post(asyncHandler(checkUserauth),asyncHandler(documentController.getMessage));
+
+    router.route('/setMessage')
+    .post(asyncHandler(checkUserauth),asyncHandler(documentController.setMessage));
+
+    router.route('/setOnRead')
+    .post(asyncHandler(checkUserauth),asyncHandler(documentController.setOnRead));
+
+    // router.route('/getAllMessage')
+    // .post(asyncHandler(documentController.getAllMessage));
     
+        
     
 module.exports = router;

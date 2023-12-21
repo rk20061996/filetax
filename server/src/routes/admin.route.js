@@ -64,6 +64,8 @@ router.route('/getAllUploadedDocument')
 router.route('/getAllNotification')
     .post(asyncHandler(checkAdminauth), asyncHandler(adminController.getAllNotification));
 
+router.route('/getAllMessage')
+    .post(asyncHandler(checkAdminauth), asyncHandler(adminController.getAllMessage));
 
 
 module.exports = router;

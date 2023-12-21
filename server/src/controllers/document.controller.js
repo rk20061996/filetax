@@ -29,7 +29,7 @@ const generateStorage = (type) => {
             }
             // console.log("type---check.",type)
             if (type === 'profilePicture') {
-                    destinationFolder = 'public/uploads/profile/'; // Default destination
+                destinationFolder = 'public/uploads/profile/'; // Default destination
 
                 if (build_type === 'prod') {
                     destinationFolder = 'build/uploads/profile/';
@@ -63,6 +63,7 @@ exports.getDocumentName = (req, res) => {
         }
     });
 };
+
 exports.uploadDocument = (req, res) => {
     upload.single('file')(req, res, function (err) {
         if (err instanceof multer.MulterError) {
@@ -82,7 +83,7 @@ exports.uploadDocument = (req, res) => {
         const filename = req.file.filename
         const selectedTaxcomment = req.body.selectedTaxcomment
         const user_type = 'client'
-        const data = new document(document_type_id.trim(), user_id, filename.trim(), selectedTaxcomment,user_type);
+        const data = new document(document_type_id.trim(), user_id, filename.trim(), selectedTaxcomment, user_type);
 
         document.uploadDocumentQuery(data, (err, dat) => {
             // console.log("user---?1", user)
@@ -122,7 +123,7 @@ exports.updateDocument = (req, res) => {
         // const selectedTaxcomment = req.body.selectedTaxcomment
         const document_id = req.body.id
 
-        const data = {filename, document_id};
+        const data = { filename, document_id };
 
         document.updateDocumentQuery(data, (err, dat) => {
             // console.log("user---?1", user)
@@ -179,7 +180,7 @@ exports.getAllTaxReturnDocument = (req, res) => {
 };
 
 exports.changeStatusTaxReturnDocument = (req, res) => {
-    document.changeStatusTaxReturnDocument({ user_id: req.user_id,id:req.body.id,status:req.body.status,comment:req.body.comment }, (err, data) => {
+    document.changeStatusTaxReturnDocument({ user_id: req.user_id, id: req.body.id, status: req.body.status, comment: req.body.comment }, (err, data) => {
         // console.log("user---?1", user)
         if (err) {
             res.status(200).send({
@@ -245,18 +246,18 @@ exports.updateProfile = (req, res) => {
         // console.log("reqData",req.body.taxType,req.user_id)
         // const { taxType, user_id, email, password, phone } = req.body;
         let profilePic
-        if(req.file && req.file.filename){
+        if (req.file && req.file.filename) {
             profilePic = req.file.filename
-        }else{
+        } else {
             profilePic = ""
         }
-         
+
         const user_id = req.user_id
         const firstname = req.body.firstName
         const lastname = req.body.firstName
         const phone = req.body.mobileNumber
         console.log("profilePic----", profilePic)
-        const data = {"image":profilePic,user_id,firstname,lastname,phone}
+        const data = { "image": profilePic, user_id, firstname, lastname, phone }
 
         document.updateProfile(data, (err, dat) => {
             // console.log("user---?1", user)
@@ -275,3 +276,67 @@ exports.updateProfile = (req, res) => {
         });
     });
 };
+
+exports.getMessage = (req, res) => {
+
+    document.getMessage({ user_id: req.user_id }, (err, dat) => {
+        console.log("user---?1!", req.user_id)
+        if (err) {
+            res.status(200).send({
+                status: 500,
+                message: err.message
+            });
+        } else {
+            // console.log("reqData",req.body)
+            res.status(200).send({
+                status: 200,
+                data: dat
+            });
+        }
+    });
+};
+
+exports.setMessage = (req, res) => {
+
+    document.setMessage({ 
+        message:req.body.message,
+        user_id:req.body.user_id,
+        sender_id:req.body.sender_id,
+        is_read_admin:req.body.is_read_admin,
+        is_read_user:req.body.is_read_user }, (err, dat) => {
+        // console.log("user---?1", user)
+        if (err) {
+            res.status(200).send({
+                status: 500,
+                message: err.message
+            });
+        } else {
+            // console.log("reqData",req.body)
+            res.status(200).send({
+                status: 200,
+                data: dat
+            });
+        }
+    });
+};
+
+exports.setOnRead = (req, res) => {
+
+    document.setOnRead(data, (err, dat) => {
+        // console.log("user---?1", user)
+        if (err) {
+            res.status(200).send({
+                status: 500,
+                message: err.message
+            });
+        } else {
+            // console.log("reqData",req.body)
+            res.status(200).send({
+                status: 200,
+                data: dat
+            });
+        }
+    });
+};
+
+

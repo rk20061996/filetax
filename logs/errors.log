@@ -7,3 +7,5 @@
 {"level":"error","message":"jwt malformed","name":"JsonWebTokenError"}
 {"level":"error","message":"jwt malformed","name":"JsonWebTokenError"}
 {"level":"error","message":"jwt malformed","name":"JsonWebTokenError"}
+{"level":"error","message":"ER_BAD_NULL_ERROR: Column 'sender_id' cannot be null"}
+{"level":"error","message":"ER_BAD_NULL_ERROR: Column 'sender_id' cannot be null"}

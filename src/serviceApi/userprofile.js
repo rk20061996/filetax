@@ -2,8 +2,8 @@
 
 import Axios from "axios"
 
-// const apiUrl = "http://localhost:9000/api/"
-const apiUrl = "https://filetax.us/api/"
+const apiUrl = "http://localhost:9000/api/"
+// const apiUrl = "https://filetax.us/api/"
 
 const getAllDocument = async (data) => {
     try {
@@ -267,6 +267,46 @@ const rejectDocument = async (data) => {
     }
 };
 
+const getMessage = async (data) => {
+    const config = {
+        headers: { Authorization: `${localStorage.getItem('token')}` }
+    };
+    try {
+        const result = await Axios.post(apiUrl + "data/getMessage", data, config)
+        return result
+    } catch (err) {
+        return err
+    }
+};
+
+const setMessage = async (data) => {
+    const config = {
+        headers: { Authorization: `${localStorage.getItem('token')}` }
+    };
+    try {
+        const result = await Axios.post(apiUrl + "data/setMessage", data, config)
+        return result
+    } catch (err) {
+        return err
+    }
+};
+
+const getAllMessage = async (data) => {
+    const config = {
+        headers: { Authorization: `${localStorage.getItem('token')}` }
+    };
+    try {
+        const result = await Axios.post(apiUrl + "admin/getAllMessage", data, config)
+        return result
+    } catch (err) {
+        return err
+    }
+};
+
+
+
+
+
 const userProfile = {
     getAllDocument,
     uploadDocument,
@@ -287,5 +327,8 @@ const userProfile = {
     getAllTaxReturnDocument,
     rejectDocument,
     approveDocument,
+    getMessage,
+    setMessage,
+    getAllMessage
 }
 export default userProfile

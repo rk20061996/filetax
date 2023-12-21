@@ -36,6 +36,8 @@ import Adminhome from './admin/admin-home'
 import Adminprofile from './admin/admin-profile'
 import Notification from './admin/notification'
 
+import Message from './admin/Message'
+
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { browserHistory } from 'react-router';
 
@@ -45,7 +47,7 @@ function App() {
   const [firstLoad, setfirstLoad] = useState(true)
   const [filterStatus, setfilterStatus] = useState([0, 1, 2, 3, 4, 5, 6, 7, 8]);
   // const history = createHashHistory({ queryKey: false });
-
+  const[loggedInUserId , SetloggedInUserId] = useState(null)
   let navigate = useNavigate();
   const location = useLocation();
 
@@ -57,6 +59,7 @@ function App() {
       const fetchData = async () => {
         const tokenCheckApi = await authFunc.tokenCheck(localSession);
         console.log("tokenCheckApi", tokenCheckApi.data)
+        SetloggedInUserId(tokenCheckApi?.data?.message?.id)
         if (tokenCheckApi.data.status === 200) {
           setisLoggedIn(true)
           // navigate("/");
@@ -194,15 +197,15 @@ function App() {
 
             <TaxDocument isLoggedIn={isLoggedIn} setisLoggedIn={setisLoggedIn} /></>} // <-- passed as JSX
       />
-            <Route
+      <Route
         path="/profile/message"
         element={
           <><link rel="stylesheet" href="css/profile.css" />
 
-            <MessageModal isLoggedIn={isLoggedIn} setisLoggedIn={setisLoggedIn} /></>} // <-- passed as JSX
+            <MessageModal id={loggedInUserId} isLoggedIn={isLoggedIn} setisLoggedIn={setisLoggedIn} /></>} // <-- passed as JSX
       />
-      
-{/*   const [firstLoad, setfirstLoad] = useState(true)
+
+      {/*   const [firstLoad, setfirstLoad] = useState(true)
   const [filterStatus, setfilterStatus] = useState([0]);
 
  */}
@@ -210,20 +213,27 @@ function App() {
         path="/admin/home"
         element={
           <><link rel="stylesheet" href="css/admin.css" />
-            <Adminhome filterStatus={filterStatus} setfilterStatus= {setfilterStatus}  firstLoad={firstLoad} setfirstLoad={setfirstLoad} isLoggedIn={isLoggedIn} setisLoggedIn={setisLoggedIn} /></>} // <-- passed as JSX
+            <Adminhome filterStatus={filterStatus} setfilterStatus={setfilterStatus} firstLoad={firstLoad} setfirstLoad={setfirstLoad} isLoggedIn={isLoggedIn} setisLoggedIn={setisLoggedIn} /></>} // <-- passed as JSX
       />
       <Route
         path="/admin/profile/:id"
         element={
           <><link rel="stylesheet" href="css/admin.css" />
-            <Adminprofile filterStatus={filterStatus} setfilterStatus= {setfilterStatus} firstLoad={firstLoad} setfirstLoad={setfirstLoad} isLoggedIn={isLoggedIn} setisLoggedIn={setisLoggedIn} /></>} // <-- passed as JSX
+            <Adminprofile filterStatus={filterStatus} setfilterStatus={setfilterStatus} firstLoad={firstLoad} setfirstLoad={setfirstLoad} isLoggedIn={isLoggedIn} setisLoggedIn={setisLoggedIn} /></>} // <-- passed as JSX
       />
       <Route
         path="/admin/notification"
         element={
           <><link rel="stylesheet" href="css/admin.css" /><link rel="stylesheet" href="css/notification.css" />
-            <Notification filterStatus={filterStatus} setfilterStatus= {setfilterStatus}  firstLoad={firstLoad} setfirstLoad={setfirstLoad} isLoggedIn={isLoggedIn} setisLoggedIn={setisLoggedIn} /></>} // <-- passed as JSX
+            <Notification filterStatus={filterStatus} setfilterStatus={setfilterStatus} firstLoad={firstLoad} setfirstLoad={setfirstLoad} isLoggedIn={isLoggedIn} setisLoggedIn={setisLoggedIn} /></>} // <-- passed as JSX
       />
+      <Route
+        path="/admin/message"
+        element={
+          <><link rel="stylesheet" href="css/admin.css" /><link rel="stylesheet" href="css/notification.css" /><link rel="stylesheet" href="css/profile.css" />
+            <Message id={loggedInUserId} filterStatus={filterStatus} setfilterStatus={setfilterStatus} firstLoad={firstLoad} setfirstLoad={setfirstLoad} isLoggedIn={isLoggedIn} setisLoggedIn={setisLoggedIn} /></>} // <-- passed as JSX
+      />
+
     </Routes>
 
 
