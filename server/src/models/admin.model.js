@@ -207,6 +207,22 @@ class Admin {
         });
     }
 
+    static getAllContactUs(data, cb) {
+        let query1 = 'SELECT * from  contact_us  '
+        // let query2 = 'update  notification set is_read = true '
+        // const query1 = 'update tax_draft set is_deleted = 1 where id = ?';
+        db.query(query1, [], (err1, res2) => {
+            if (err1) {
+                logger.error(err1.message);
+                cb(err1, null);
+                return;
+            }
+
+            cb(null, res2);
+        });
+    }
+    
+
     static getAllMessage(data, cb) {
         let query1 = 'SELECT *, users.id as id_main from  chat left join users on users.id = chat.user_id '
         // let query2 = 'update  notification set is_read = true '

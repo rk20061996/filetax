@@ -4,8 +4,10 @@ import io from "socket.io-client";
 import Sidebar from "./sidebar";
 import './MessageModal.css'; // Import your CSS file for styling
 import userProfile from '../serviceApi/userprofile';
-const socket = io.connect("http://195.35.45.11:3001/");
+const socket = io.connect("https://filetax.us/");
 
+// const socket = io.connect("http://localhost:9000/");
+// http://localhost:9000/api/
 function Message(props) {
   const chatContainerRef = useRef(null);
   const idRef = useRef(props.id);
@@ -14,7 +16,7 @@ function Message(props) {
   const [message, setMessage] = useState('');
   // const [room, setRoom] = useState("");
   const [showChat, setShowChat] = useState(false);
-  const [userData,setUserDate] = useState([])
+  const [userData, setUserDate] = useState([])
   const [showChatMessage, setShowChatMessage] = useState([]);
 
   useEffect(() => {
@@ -23,7 +25,7 @@ function Message(props) {
   useEffect(() => {
     // Update the refs when the corresponding state values change
     idRef.current = props.id;
-}, [props.id]);
+  }, [props.id]);
 
 
   const scrollToBottom = () => {
@@ -39,8 +41,8 @@ function Message(props) {
         time: new Date(),
         user_id: id,
         sender_id: id,
-        firstname:userData.firstname,
-        lastname:userData.lastname
+        firstname: userData.firstname,
+        lastname: userData.lastname
       };
 
       await socket.emit("send_message", messageData);
@@ -55,7 +57,7 @@ function Message(props) {
         firstname: userData.firstname,
         lastname: userData.lastname
       };
-      
+
       // Use the functional form of setState to ensure correct updates
       setShowChatMessage(prevMessages => [...prevMessages, obj]);
       const setMessagess = await userProfile.setMessage(obj);
@@ -77,11 +79,11 @@ function Message(props) {
 
     socket.on('receive_message', (data) => {
       console.log('Received message:', data);
-    
+
       const currentId = idRef.current;
-    
+
       // Check if the message is for the current user
-      if (data.user_id === currentId && data.user_id !== data.sender_id ) {
+      if (data.user_id === currentId && data.user_id !== data.sender_id) {
         // alert()
         // Update the state using the functional form of setState
         setShowChatMessage((prevMessages) => {
@@ -94,13 +96,13 @@ function Message(props) {
             is_read_admin: false,
             is_read_user: true,
           };
-    
+
           // Use the spread operator to create a new array with the new message
           return [...prevMessages, obj];
         });
       }
     });
-    
+
 
     return () => {
       // Clean up the socket connection on component unmount
@@ -116,7 +118,7 @@ function Message(props) {
     const getAllData = await userProfile.getUserDataByToken();
     setUserId(getAllData?.data?.data[0]?.id);
     setUserDate(getAllData?.data?.data[0])
-// alert(getAllData?.data?.data[0]?.id)
+    // alert(getAllData?.data?.data[0]?.id)
     const getMessage = await userProfile.getMessage();
     setShowChatMessage(getMessage?.data?.data ? getMessage?.data?.data : [])
     console.log("getMessage?.data", getMessage?.data?.data)
@@ -136,15 +138,18 @@ function Message(props) {
           <div className="chat">
             {/* <div className="day">Hoy</div> */}
             <ol className="outer_chat">
-              {showChatMessage.map((chat, index) => (
-                <li key={index} className={chat.sender_id === id ? "self" : "other"}>
-                  <div className="avatar"><img src="images/dummyImage.jpg" alt="User Avatar" draggable="false" /></div>
-                  <div className="msg" style={{ border: "1px solid black" }}>
-                    <p>{chat.message}</p>
-                    <time>{new Date(chat.date).toLocaleString()}</time>
-                  </div>
-                </li>
-              ))}
+              {showChatMessage.length ?
+                showChatMessage.map((chat, index) => (
+                  <li key={index} className={chat.sender_id === id ? "self" : "other"}>
+                    <div className="avatar"><img src="images/dummyImage.jpg" alt="User Avatar" draggable="false" /></div>
+                    <div className="msg" style={{ border: "1px solid black" }}>
+                      <p>{chat.message}</p>
+                      <time>{new Date(chat.date).toLocaleString()}</time>
+                    </div>
+                  </li>
+                )) : <div class="message-container">
+                  <p>Get Help from Support.</p>
+                </div>}
               <div ref={chatContainerRef}></div>
 
             </ol>

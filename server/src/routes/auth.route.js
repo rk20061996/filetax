@@ -28,12 +28,15 @@ router.route('/resetPassword')
     .post(asyncHandler(authController.resetPassword));
 
 router.route('/updatePassword')
-    .post(asyncHandler(checkUserauth),asyncHandler(authController.updatePassword));
+    .post(asyncHandler(checkUserauth), asyncHandler(authController.updatePassword));
 
-    router.route('/getUserRecords')
+router.route('/getUserRecords')
     .get(asyncHandler(authController.getUserRecords));
 
+router.route('/contactUs')
+    .post(asyncHandler(authController.contactUs));
 
-    
-    
+
+
+
 module.exports = router;

@@ -2,8 +2,8 @@
 
 import Axios from "axios"
 
-const apiUrl = "http://localhost:9000/api/"
-//  const apiUrl = "https://filetax.us/api/"
+// const apiUrl = "http://localhost:9000/api/"
+ const apiUrl = "https://filetax.us/api/"
 
 
 const getAllUser = async (data) => {
@@ -303,6 +303,19 @@ const getAllNotification = async () =>{
     }
 } 
 
+const getAllContactUs = async () =>{
+    
+    try {
+        const config = {
+            headers: { Authorization: `${localStorage.getItem('token')}` }
+        };
+        const result = await Axios.post(apiUrl + "admin/getAllContactUs", {}, config)
+        return result
+    } catch (err) {
+        return err
+    }
+} 
+
 const authFunc = {
     getAllUser,
     getSingleUser,
@@ -325,6 +338,7 @@ const authFunc = {
     updateDynamicUserId,
     rejectUploadedDoc,
     getAllUploadedDocument,
-    getAllNotification
+    getAllNotification,
+    getAllContactUs
 }
 export default authFunc

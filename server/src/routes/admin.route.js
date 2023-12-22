@@ -67,5 +67,8 @@ router.route('/getAllNotification')
 router.route('/getAllMessage')
     .post(asyncHandler(checkAdminauth), asyncHandler(adminController.getAllMessage));
 
+    router.route('/getAllContactUs')
+    .post(asyncHandler(checkAdminauth), asyncHandler(adminController.getAllContactUs));
+    
 
 module.exports = router;

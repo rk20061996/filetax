@@ -1,16 +1,15 @@
 const express = require('express');
+const http = require('http');
+const cors = require('cors');
+const { Server } = require('socket.io');
 const path = require('path');
 
 const morgan = require('morgan');
-const cors = require('cors');
 
 const authRoute = require('./server/src/routes/auth.route');
 const dataRoute = require('./server/src/routes/dataRoute.route');
 const taxInformation = require('./server/src/routes/taxInformation.route');
 const adminRoute = require('./server/src/routes/admin.route');
-
-// const confirmRoute = require('./server/src/routes/confirmRoute.route');
-
 
 const { httpLogStream } = require('./server/src/utils/logger');
 
@@ -33,16 +32,38 @@ app.use('/api/data', dataRoute);
 app.use('/api/taxInformation', taxInformation);
 app.use('/api/admin', adminRoute);
 
-// app.use('/api/confirm-password', confirmRoute);
+const server = http.createServer(app);
 
-
-app.use((err, req, res, next) => {
-    res.status(err.statusCode || 500).send({
-        status: "error",
-        message: err.message
-    });
-    next();
+const io = new Server(server, {
+  cors: {
+    origin: "http://localhost:3000",
+    methods: ["GET", "POST"],
+  },
 });
 
+io.on('connection', (socket) => {
+  console.log(`User Connected: ${socket.id}`);
 
-app.listen(9000);
+  socket.on('send_message', (data) => {
+    console.log('data-->', data);
+    io.emit('receive_message', data);
+  });
+
+  socket.on('disconnect', () => {
+    console.log('User Disconnected', socket.id);
+  });
+});
+
+app.use((err, req, res, next) => {
+  res.status(err.statusCode || 500).send({
+    status: 'error',
+    message: err.message,
+  });
+  next();
+});
+
+const PORT = process.env.PORT || 9000;
+
+server.listen(PORT, () => {
+  console.log(`Server is running on http://localhost:${PORT}`);
+});

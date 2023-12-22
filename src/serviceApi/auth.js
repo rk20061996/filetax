@@ -2,8 +2,8 @@
 
 import Axios from "axios"
 
-const apiUrl = "http://localhost:9000/api/"
-// const apiUrl = "https://filetax.us/api/"
+// const apiUrl = "http://localhost:9000/api/"
+const apiUrl = "https://filetax.us/api/"
 const signup = async (data) => {
     // alert(API_URL)
     // console.log("baseUri",baseUri)
@@ -88,6 +88,16 @@ const updatePassword = async (data) => {
     }
 }
 
+
+const contactUs = async (data) => {
+    try {
+        const result = await Axios.post(apiUrl + "auth/contactUs", data, {})
+        return result
+    } catch (err) {
+        return err
+    }
+}
+
 const authFunc = {
     signup,
     login,
@@ -96,7 +106,8 @@ const authFunc = {
     forgotPassword,
     checkForgotToken,
     resetPassword,
-    updatePassword
+    updatePassword,
+    contactUs
     
 }
 export default authFunc

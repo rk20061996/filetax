@@ -5,9 +5,9 @@ const { v4: uuidv4 } = require('uuid');
 const { hash: hashPassword, compare: comparePassword } = require('../utils/password');
 const { generate: generateToken, decode } = require('../utils/token');
 
-let logo = process.env.IMAGE_URL+'images/logo.png'
+let logo = process.env.IMAGE_URL + 'images/logo.png'
 const WEB_URL = process.env.WEB_URL + "confirm-account"
-console.log("logo",logo,WEB_URL)
+console.log("logo", logo, WEB_URL)
 let emailVerificationLink = "";
 
 let transporter = nodemailer.createTransport({
@@ -19,8 +19,8 @@ let transporter = nodemailer.createTransport({
     auth: {
         // user: 'noreplyfiletax@gmail.com', // Your email address
         // pass: 'vuyj jfia zmdf eylv' // Your email password or App Password //pzip sdjt ecfm wfxv4
-         user: 'noreplyfiletax@gmail.com', // Your email address
-        pass: 'vuyj jfia zmdf eylv' 
+        user: 'noreplyfiletax@gmail.com', // Your email address
+        pass: 'vuyj jfia zmdf eylv'
     }
 });
 
@@ -108,8 +108,8 @@ exports.signin = (req, res) => {
                         email: data.email,
                         image: data.image,
                         status: data.status,
-                        user_type:data.user_type,
-                        user_status_type:data.status_type
+                        user_type: data.user_type,
+                        user_status_type: data.status_type
                         // unique: data.status
                     }
                 });
@@ -183,7 +183,7 @@ exports.forgotPassword = (req, res) => {
         }
         if (data) {
             const uniqueString = uuidv4();;
-            const dataFormat = {email,uniqueString};
+            const dataFormat = { email, uniqueString };
 
             User.createForgotToken(dataFormat, (err, dat) => {
                 if (err) {
@@ -252,7 +252,7 @@ exports.confirmAccount = (req, res) => {
 
 };
 
-exports.checkForgotToken= (req, res) => {
+exports.checkForgotToken = (req, res) => {
     const id = req.query.id;
     console.log("id-->", id)
     User.checkForgotToken(id, (err, data) => {
@@ -281,7 +281,7 @@ exports.checkForgotToken= (req, res) => {
                     data
                 }
             });
-        }else{
+        } else {
             res.status(400).send({
                 status: 'error',
                 message: `Token expired or invalid`
@@ -291,10 +291,10 @@ exports.checkForgotToken= (req, res) => {
     })
 }
 
-exports.resetPassword= (req,res) =>{
+exports.resetPassword = (req, res) => {
     const { email, id, password } = req.body;
     const hashedPassword = hashPassword(password.trim());
-    User.resetPassword({hashedPassword,email}, (err, data) => {
+    User.resetPassword({ hashedPassword, email }, (err, data) => {
         // console.log("user---?1", user)
         if (err) {
             res.status(500).send({
@@ -313,7 +313,7 @@ exports.resetPassword= (req,res) =>{
 }
 
 
-exports.updatePassword= (req,res) =>{
+exports.updatePassword = (req, res) => {
     const { oldPassword, newPassword } = req.body;
     User.findById(req.user_id, (err, data) => {
         if (err) {
@@ -336,7 +336,7 @@ exports.updatePassword= (req,res) =>{
             if (comparePassword(oldPassword.trim(), data.password)) {
                 const hashedPassword = hashPassword(newPassword.trim());
                 const email = data.email
-                User.resetPassword({hashedPassword,email}, (err, dat) => {
+                User.resetPassword({ hashedPassword, email }, (err, dat) => {
                     // console.log("user---?1", user)
                     if (err) {
                         res.status(500).send({
@@ -364,15 +364,15 @@ exports.updatePassword= (req,res) =>{
 }
 
 
-exports.getUserRecords= (req,res) =>{
-    
+exports.getUserRecords = (req, res) => {
+
     User.getUserRecords("", (err, data) => {
         if (err) {
             if (err.kind === "not_found") {
                 res.status(404).send({
                     status: 'error',
                     // message: `User with id ${req.user_id} was not found`
-                     type: "email"
+                    type: "email"
                 });
                 return;
             }
@@ -386,3 +386,48 @@ exports.getUserRecords= (req,res) =>{
     });
 
 }
+
+exports.contactUs = (req, res) => {
+
+    User.contactUs({ fullname: req.body.fullname, email: req.body.email, phone: req.body.phone, message: req.body.message }, (err, data) => {
+        if (err) {
+            if (err.kind === "not_found") {
+                res.status(404).send({
+                    status: 'error',
+                    // message: `User with id ${req.user_id} was not found`
+                    type: "email"
+                });
+                return;
+            }
+        }
+        res.status(200).send({
+            status: 'error',
+            message: "Cleaned",
+            type: "email"
+        });
+        return;
+
+    });
+
+}
+
+
+// exports.contactUs = (req, res) => {
+//     var authorization = req.headers.authorization;
+//     // console.log("authorization++++",authorization)
+//     var data = decode(authorization)
+//     console.log("data", data)
+//     if (data) {
+//         res.status(200).send({
+//             status: 200,
+//             message: data
+//         });
+//     } else {
+//         res.status(200).send({
+//             status: 500,
+//             message: "session expired"
+//         });
+//     }
+
+
+// };

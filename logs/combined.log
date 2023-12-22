@@ -82,3 +82,51 @@
 {"level":"info","message":"Database connected"}
 {"level":"info","message":"Database connected"}
 {"level":"info","message":"Database connected"}
+{"level":"info","message":"Database connected"}
+{"expiredAt":"2023-12-22T17:08:25.000Z","level":"error","message":"jwt expired","name":"TokenExpiredError"}
+{"expiredAt":"2023-12-22T17:08:25.000Z","level":"error","message":"jwt expired","name":"TokenExpiredError"}
+{"expiredAt":"2023-12-22T17:08:25.000Z","level":"error","message":"jwt expired","name":"TokenExpiredError"}
+{"level":"info","message":"Database connected"}
+{"level":"info","message":"Database connected"}
+{"level":"info","message":"Database connected"}
+{"level":"info","message":"Database connected"}
+{"level":"info","message":"Database connected"}
+{"level":"error","message":"ER_PARSE_ERROR: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '?, ?, ?, ?, NOW())' at line 1"}
+{"level":"error","message":"ER_PARSE_ERROR: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '?, ?, ?, ?, NOW())' at line 1"}
+{"level":"info","message":"Database connected"}
+{"level":"error","message":"ER_PARSE_ERROR: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '?, ?, ?, ?, NOW())' at line 1"}
+{"level":"info","message":"Database connected"}
+{"level":"error","message":"ER_PARSE_ERROR: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '?, ?, ?, NOW())' at line 1"}
+{"level":"info","message":"Database connected"}
+{"level":"info","message":"Database connected"}
+{"level":"info","message":"Database connected"}
+{"level":"info","message":"Database connected"}
+{"level":"info","message":"Database connected"}
+{"level":"info","message":"Database connected"}
+{"level":"info","message":"Database connected"}
+{"expiredAt":"2023-12-22T19:01:35.000Z","level":"error","message":"jwt expired","name":"TokenExpiredError"}
+{"expiredAt":"2023-12-22T19:01:35.000Z","level":"error","message":"jwt expired","name":"TokenExpiredError"}
+{"expiredAt":"2023-12-22T18:50:37.000Z","level":"error","message":"jwt expired","name":"TokenExpiredError"}
+{"level":"info","message":"Database connected"}
+{"level":"info","message":"Database connected"}
+{"level":"info","message":"Database connected"}
+{"level":"info","message":"Database connected"}
+{"level":"error","message":"ER_BAD_FIELD_ERROR: Unknown column 'notification.user_id' in 'on clause'"}
+{"level":"info","message":"Database connected"}
+{"level":"error","message":"ER_BAD_FIELD_ERROR: Unknown column 'contact_us.user_id' in 'on clause'"}
+{"level":"error","message":"ER_BAD_FIELD_ERROR: Unknown column 'contact_us.user_id' in 'on clause'"}
+{"level":"error","message":"ER_BAD_FIELD_ERROR: Unknown column 'contact_us.user_id' in 'on clause'"}
+{"level":"info","message":"Database connected"}
+{"level":"info","message":"Database connected"}
+{"level":"info","message":"Database connected"}
+{"level":"error","message":"ER_WRONG_VALUE_COUNT_ON_ROW: Column count doesn't match value count at row 1"}
+{"level":"error","message":"ER_WRONG_VALUE_COUNT_ON_ROW: Column count doesn't match value count at row 1"}
+{"level":"error","message":"ER_BAD_NULL_ERROR: Column 'comment_rejected' cannot be null"}
+{"level":"error","message":"ER_WRONG_VALUE_COUNT_ON_ROW: Column count doesn't match value count at row 1"}
+{"level":"info","message":"Database connected"}
+{"level":"info","message":"Database connected"}
+{"level":"info","message":"Database connected"}
+{"level":"info","message":"Database connected"}
+{"level":"info","message":"Database connected"}
+{"level":"info","message":"Database connected"}
+{"level":"info","message":"Database connected"}

@@ -4,7 +4,8 @@ import io from "socket.io-client";
 import Sidebar from "./sidebar";
 // import './MessageModal.css'; // Import your CSS file for styling
 import userProfile from '../serviceApi/userprofile';
-const socket = io.connect("http://195.35.45.11:3001/");
+const socket = io.connect("https://filetax.us/");
+// const socket = io.connect("http://localhost:9000/");
 
 
 // ... (existing imports)
@@ -77,22 +78,22 @@ function Message(props) {
             setuserIdData((prevuserIdData) => {
                 const userIdToMove = activeChatUserId; // Replace with the actual ID you want to move
                 const indexToMove = prevuserIdData.findIndex(item => item.id_main === userIdToMove);
-              
+
                 if (indexToMove !== -1) {
-                  // Item found, move it to the top
-                  const movedItem = prevuserIdData[indexToMove];
-                  const updateduserIdData = [
-                    movedItem,
-                    ...prevuserIdData.slice(0, indexToMove),
-                    ...prevuserIdData.slice(indexToMove + 1)
-                  ];
-              
-                  return updateduserIdData;
+                    // Item found, move it to the top
+                    const movedItem = prevuserIdData[indexToMove];
+                    const updateduserIdData = [
+                        movedItem,
+                        ...prevuserIdData.slice(0, indexToMove),
+                        ...prevuserIdData.slice(indexToMove + 1)
+                    ];
+
+                    return updateduserIdData;
                 }
-              
+
                 // If the item with the specified ID is not found, return the current array
                 return prevuserIdData;
-              });
+            });
         }
     };
 
@@ -134,42 +135,42 @@ function Message(props) {
                 setgroupedMessage((prevGroupedMessage) => {
                     const updatedGroupedMessage = { ...prevGroupedMessage };
                     if (!updatedGroupedMessage[data.user_id]) {
-                        
+
                         setuserIdData((prevuserIdData) => {
                             let userObj = {
                                 id_main: data.user_id,
                                 firstname: data.firstname,
                                 lastname: data.lastname
                             };
-                        
+
                             // Use an array, not an object
                             const updateduserIdData = [...prevuserIdData];
-                        
+
                             let newArray = [userObj, ...updateduserIdData];
                             return newArray;
                         });
                         updatedGroupedMessage[data.user_id] = [];
-                    }else{
+                    } else {
                         console.log(updatedGroupedMessage)
                         setuserIdData((prevuserIdData) => {
                             const userIdToMove = data.user_id; // Replace with the actual ID you want to move
                             const indexToMove = prevuserIdData.findIndex(item => item.id_main === userIdToMove);
-                          
+
                             if (indexToMove !== -1) {
-                              // Item found, move it to the top
-                              const movedItem = prevuserIdData[indexToMove];
-                              const updateduserIdData = [
-                                movedItem,
-                                ...prevuserIdData.slice(0, indexToMove),
-                                ...prevuserIdData.slice(indexToMove + 1)
-                              ];
-                          
-                              return updateduserIdData;
+                                // Item found, move it to the top
+                                const movedItem = prevuserIdData[indexToMove];
+                                const updateduserIdData = [
+                                    movedItem,
+                                    ...prevuserIdData.slice(0, indexToMove),
+                                    ...prevuserIdData.slice(indexToMove + 1)
+                                ];
+
+                                return updateduserIdData;
                             }
-                          
+
                             // If the item with the specified ID is not found, return the current array
                             return prevuserIdData;
-                          });
+                        });
                     }
                     updatedGroupedMessage[data.user_id].push(obj);
                     return updatedGroupedMessage;
@@ -199,10 +200,10 @@ function Message(props) {
     }, [showChatMessage, userIdData]);
 
     useEffect(() => {
-       console.log("groupedMessage-->",groupedMessage)
+        console.log("groupedMessage-->", groupedMessage)
     }, [groupedMessage]);
 
-    
+
     const fetchUserDate = async () => {
         const getAllData = await userProfile.getUserDataByToken();
         setUserId(getAllData?.data?.data[0]?.id);
@@ -261,37 +262,46 @@ function Message(props) {
                     <div className="outerChat">
                         {user_type === 1 ? (
                             <div className="chatProfile">
-                                {userIdData.map((user, index) => (
-                                    <a
-                                        className={activeChatUserId === user.id_main ? "activeChat" : ""}
-                                        key={index}
-                                        onClick={() => {
-                                            setactiveChatUserId(user.id_main);
-                                            setShowChatMessage(groupedMessage[user.id_main]);
-                                        }}
-                                    >
-                                        <img src="images/dummyImage.jpg" alt={`Avatar for ${user.firstname} ${user.lastname}`} />
-                                        <div>
-                                            <h6>{user.firstname} {user.lastname}</h6>
-                                        </div>
-                                    </a>
-                                ))}
+                                {userIdData.length ?
+                                    userIdData.map((user, index) => (
+                                        <a
+                                            style={{ cursor: "pointer" }}
+                                            className={activeChatUserId === user.id_main ? "activeChat" : ""}
+                                            key={index}
+                                            onClick={() => {
+                                                setactiveChatUserId(user.id_main);
+                                                setShowChatMessage(groupedMessage[user.id_main]);
+                                            }}
+                                        >
+                                            <img src="images/dummyImage.jpg" alt={`Avatar for ${user.firstname} ${user.lastname}`} />
+                                            <div>
+                                                <h6>{user.firstname} {user.lastname}</h6>
+                                            </div>
+                                        </a>
+                                    ))
+                                    : <div class="message-container">
+                                        <p>Client hasn't sent you a message as of now.</p>
+                                    </div>}
                             </div>
                         ) : null}
                         {activeChatUserId ? (
                             <div className="chat">
                                 <ol className="outer_chat">
-                                    {showChatMessage.map((chat, index) => (
-                                        <li key={index} className={chat.sender_id === id ? "self" : "other"}>
-                                            <div className="avatar">
-                                                <img src="images/dummyImage.jpg" alt="User Avatar" draggable="false" />
-                                            </div>
-                                            <div className="msg" style={{ border: "1px solid black" }}>
-                                                <p>{chat.message}</p>
-                                                <time>{new Date(chat.date).toLocaleString()}</time>
-                                            </div>
-                                        </li>
-                                    ))}
+                                    {showChatMessage.length ?
+                                        showChatMessage.map((chat, index) => (
+                                            <li key={index} className={chat.sender_id === id ? "self" : "other"}>
+                                                <div className="avatar">
+                                                    <img src="images/dummyImage.jpg" alt="User Avatar" draggable="false" />
+                                                </div>
+                                                <div className="msg" style={{ border: "1px solid black" }}>
+                                                    <p>{chat.message}</p>
+                                                    <time>{new Date(chat.date).toLocaleString()}</time>
+                                                </div>
+                                            </li>
+                                        ))
+                                        : userIdData.length ? (<div class="message-container">
+                                            <p>Select chat to show Messages.</p>
+                                        </div>) : ""}
                                     <div ref={chatContainerRef}></div>
                                 </ol>
                                 <div className="typeMessage">

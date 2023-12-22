@@ -106,7 +106,7 @@ function Sidebar(props) {
                 </li> */}
                 <li className="bgColorChange">
                     <NavLink to="/profile/message" activeClassName="active">
-                        <span className="material-symbols-outlined"> mail </span> Messages
+                        <span className="material-symbols-outlined"> mail </span> Admin Support
                     </NavLink>
                 </li>
                 <li className="bgColorChange">

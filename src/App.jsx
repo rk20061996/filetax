@@ -27,7 +27,7 @@ import UploadDocument from './userProfile/upload-document'
 import TaxReturn from './userProfile/tax-return'
 import Profile from './userProfile/profile'
 import TaxDocument from './userProfile/tax-documentation'
-import authFunc from './serviceApi/auth'
+import authFunc from './serviceApi/userprofile'
 import { useNavigate } from "react-router-dom";
 import { useLocation } from 'react-router-dom'
 
@@ -36,6 +36,7 @@ import Adminhome from './admin/admin-home'
 import Adminprofile from './admin/admin-profile'
 import Notification from './admin/notification'
 
+import Contactus2 from './admin/Contactus'
 import Message from './admin/Message'
 
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
@@ -47,7 +48,9 @@ function App() {
   const [firstLoad, setfirstLoad] = useState(true)
   const [filterStatus, setfilterStatus] = useState([0, 1, 2, 3, 4, 5, 6, 7, 8]);
   // const history = createHashHistory({ queryKey: false });
-  const[loggedInUserId , SetloggedInUserId] = useState(null)
+  const [loggedInUserId, SetloggedInUserId] = useState(null)
+  const [userType, SetuserType] = useState(null)
+
   let navigate = useNavigate();
   const location = useLocation();
 
@@ -57,10 +60,15 @@ function App() {
     setsessionCheck(localSession)
     if (localSession) {
       const fetchData = async () => {
-        const tokenCheckApi = await authFunc.tokenCheck(localSession);
-        console.log("tokenCheckApi", tokenCheckApi.data)
-        SetloggedInUserId(tokenCheckApi?.data?.message?.id)
-        if (tokenCheckApi.data.status === 200) {
+        const tokenCheckApi = await authFunc.getUserDataByToken(localSession);
+        console.log("tokenCheckApi", tokenCheckApi?.data?.data[0]?.id)
+        SetloggedInUserId(tokenCheckApi?.data?.data[0]?.id)
+        SetuserType(tokenCheckApi?.data?.data[0]?.user_type)
+        if(tokenCheckApi?.data?.data[0]?.user_type === 1){
+          navigate("/admin/home");
+
+        }
+        if (tokenCheckApi?.data?.status === 200) {
           setisLoggedIn(true)
           // navigate("/");
         }
@@ -233,6 +241,13 @@ function App() {
           <><link rel="stylesheet" href="css/admin.css" /><link rel="stylesheet" href="css/notification.css" /><link rel="stylesheet" href="css/profile.css" />
             <Message id={loggedInUserId} filterStatus={filterStatus} setfilterStatus={setfilterStatus} firstLoad={firstLoad} setfirstLoad={setfirstLoad} isLoggedIn={isLoggedIn} setisLoggedIn={setisLoggedIn} /></>} // <-- passed as JSX
       />
+      <Route
+        path="/admin/contact-us"
+        element={
+          <><link rel="stylesheet" href="css/admin.css" /><link rel="stylesheet" href="css/notification.css" /><link rel="stylesheet" href="css/profile.css" />
+            <Contactus2 id={loggedInUserId} filterStatus={filterStatus} setfilterStatus={setfilterStatus} firstLoad={firstLoad} setfirstLoad={setfirstLoad} isLoggedIn={isLoggedIn} setisLoggedIn={setisLoggedIn} /></>} // <-- passed as JSX
+      />
+
 
     </Routes>
 
