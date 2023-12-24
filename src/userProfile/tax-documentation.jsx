@@ -63,7 +63,7 @@ function TaxDocument(props) {
 
     return (
         <div className="main d-flex w-100 h-100">
-            <Sidebar setisLoggedIn={props.setisLoggedIn} />
+            <Sidebar socket={props.socket} id={props.id} setisLoggedIn={props.setisLoggedIn} />
             <div className="mainContent container-fluid">
                 <div className="card">
                     <div className="tagDocumentation">

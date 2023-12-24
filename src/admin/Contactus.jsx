@@ -107,7 +107,7 @@ function Contactus(props) {
 
                 <div className="notification-ui_dd-content">
                   {fileData.slice(0, visibleNotifications).map((notification, index) => (
-                    <div style={{cursor:'pointer'}} className={!notification.is_read?"notification-list notification-list--unread":"notification-list" } key={index} onClick={() => { navigate('/admin/profile/'+notification.id_main) }}>
+                    <div style={{cursor:'pointer'}} className={!notification.is_read?"notification-list notification-list--unread":"notification-list" } key={index} >
                       <div className="notification-list_content">
                         <div className="notification-list_img">
                           {/* <img src={notification.image ? "uploads/profile/"+notification.image :"images/dummyImage.jpg"} alt="user" /> */}

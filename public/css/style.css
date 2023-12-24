@@ -27,6 +27,9 @@ h3 {
     font-size: 30px;
     font-weight: 700;
 }
+a{
+    cursor:pointer !important
+}
 h4 {
     font-size: 22px;
     font-weight: 600;

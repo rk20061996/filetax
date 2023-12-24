@@ -50,6 +50,7 @@ io.on('connection', (socket) => {
   });
 
   socket.on('disconnect', () => {
+    io.emit('disconnect');
     console.log('User Disconnected', socket.id);
   });
 });

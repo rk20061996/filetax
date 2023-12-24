@@ -4,14 +4,15 @@ import io from "socket.io-client";
 import Sidebar from "./sidebar";
 // import './MessageModal.css'; // Import your CSS file for styling
 import userProfile from '../serviceApi/userprofile';
-const socket = io.connect("https://filetax.us/");
+// const socket = io.connect("https://filetax.us/");
 // const socket = io.connect("http://localhost:9000/");
-
 
 // ... (existing imports)
 
 function Message(props) {
+    const socket = props.socket
     const chatContainerRef = useRef(null);
+    // alert(props.id)
     const idRef = useRef(props.id);
     const activeChatUserIdRef = useRef(null);
 
@@ -26,6 +27,9 @@ function Message(props) {
 
     useEffect(() => {
         fetchUserDate();
+        // return () => {
+        //     socket.disconnect();
+        //   };
     }, []);
 
     const scrollToBottom = () => {
@@ -108,10 +112,13 @@ function Message(props) {
 
         socket.on('receive_message', (data) => {
             // Use the refs to capture the current values
+            // alert()
+            console.log('Received message:', data, data.user_id);
+
             const currentId = idRef.current;
             const currentActiveChatUserId = activeChatUserIdRef.current;
-
-            if (data.sender_id !== currentId) {
+            // alert(props.id)
+            if (data.sender_id !== currentId && currentId) {
                 console.log('Received message:', data, data.user_id, groupedMessage);
 
                 const obj = {
@@ -182,11 +189,10 @@ function Message(props) {
             }
         });
 
-        return () => {
-            // Clean up the socket connection on component unmount
-            socket.disconnect();
-        };
-    }, [socket]);
+        // return () => {
+        //     socket.disconnect();
+        //   };
+    }, [socket,idRef.current]);
 
     useEffect(() => {
         // Update the refs when the corresponding state values change

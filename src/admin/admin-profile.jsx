@@ -39,6 +39,8 @@ function Adminprofile(props) {
     const [documentToDelete, setDocumentToDelete] = useState(null);
 
     const status = { 1: "Ready for preparation", 2: "In Progress", 3: "Summary Sent", 4: "Pending Recieved", 5: "Draft", 6: "Ready for e-file", 7: "Accepted" }
+    const status2 = { 1: "To be started", 2: "Pending for documents", 3: "In preperation", 4: "Draft sent (Payment pending)", 5: "Client review (Payment received)", 6: "Ready for Filing", 7: "Filing completed" }
+
     const [filterStatus, setfilterStatus] = useState(0);
 
     const [editClient, seteditClient] = useState(false);
@@ -88,7 +90,7 @@ function Adminprofile(props) {
             dataArray.push(i)
         }
         setselectedStatusDisabled(dataArray)
-        setSelectedStatus(status[event]);
+        setSelectedStatus(status2[event]);
         const result = await authFunc.updateStatus({ id, event, selectedStatus });
 
         // Perform any other actions needed when the status changes
@@ -109,9 +111,9 @@ function Adminprofile(props) {
                     dataArray.push(i)
                 }
                 setselectedStatusDisabled(dataArray)
-                setSelectedStatus(status[dataResult[0].status_type]);
+                setSelectedStatus(status2[dataResult[0].status_type]);
             } else {
-                setSelectedStatus(status[1])
+                setSelectedStatus(status2[1])
                 setselectedStatusDisabled([1])
             }
             // console.log("result?.data?.data?.res1", result?.data?.data?.res1)
@@ -497,13 +499,13 @@ function Adminprofile(props) {
                             </Dropdown.Toggle>
 
                             <Dropdown.Menu>
-                                <Dropdown.Item disabled={selectedStatusDisabled.includes(1)} eventKey="1">Ready for preparation</Dropdown.Item>
-                                <Dropdown.Item eventKey="2">In Progress</Dropdown.Item>
-                                <Dropdown.Item eventKey="3">Summary Sent</Dropdown.Item>
-                                <Dropdown.Item eventKey="4">Pending Recieved</Dropdown.Item>
-                                <Dropdown.Item eventKey="5">Draft</Dropdown.Item>
-                                <Dropdown.Item eventKey="6">Ready for e-file</Dropdown.Item>
-                                <Dropdown.Item eventKey="7">Accepted</Dropdown.Item>
+                                <Dropdown.Item disabled={selectedStatusDisabled.includes(1)} eventKey="1">To be started</Dropdown.Item>
+                                <Dropdown.Item eventKey="2">Pending for documents</Dropdown.Item>
+                                <Dropdown.Item eventKey="3">In preperation</Dropdown.Item>
+                                <Dropdown.Item eventKey="4">Draft sent (Payment pending)</Dropdown.Item>
+                                <Dropdown.Item eventKey="5">Client review (Payment received)</Dropdown.Item>
+                                <Dropdown.Item eventKey="6">Ready for Filing</Dropdown.Item>
+                                <Dropdown.Item eventKey="7">Filing completed</Dropdown.Item>
 
                                 {/* Add other status options here */}
                             </Dropdown.Menu>

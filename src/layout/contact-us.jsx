@@ -3,11 +3,11 @@ import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 // import userProfile from '../serviceApi/userprofile';
 import { useNavigate } from "react-router-dom";
-import { useHistory } from "react-router-dom";
+// import { useHistory } from "react-router-dom";
 
 function ContactUs() {
     let navigate = useNavigate();
-    const history = useHistory();
+    // const history = useHistory();
 
     const [formData, setFormData] = useState({
         fullname: "",

@@ -20,7 +20,7 @@ import Taxconsulting from './pages/tax-consulting'
 import Fatca from './pages/fatca'
 import Fbar from './pages/fbar'
 import Taxextension from './pages/tax-extension'
-import MessageModal from './layout/Message';
+// import MessageModal from './layout/Message';
 
 import HomeProfile from './userProfile/home-profile'
 import UploadDocument from './userProfile/upload-document'
@@ -41,6 +41,13 @@ import Message from './admin/Message'
 
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { browserHistory } from 'react-router';
+import io from "socket.io-client";
+
+const socket = io.connect("https://filetax.us/", {
+  reconnection: true,
+  reconnectionDelay: 2500, // 1 second delay between each attempt
+  reconnectionAttempts: Infinity, // Infinite attempts
+});
 
 function App() {
   const [sessionCheck, setsessionCheck] = useState('')
@@ -54,6 +61,11 @@ function App() {
   let navigate = useNavigate();
   const location = useLocation();
 
+  useEffect(() => {
+return () => {
+            socket.disconnect();
+          };
+  },[socket])
   useEffect(() => {
     // alert("rk")
     let localSession = localStorage.getItem('token')
@@ -176,42 +188,42 @@ function App() {
         path="/profile/home"
         element={
           <><link rel="stylesheet" href="css/profile.css" />
-            <HomeProfile isLoggedIn={isLoggedIn} setisLoggedIn={setisLoggedIn} /></>} // <-- passed as JSX
+            <HomeProfile socket={socket} id={loggedInUserId} isLoggedIn={isLoggedIn} setisLoggedIn={setisLoggedIn} /></>} // <-- passed as JSX
       />
       <Route
         path="/profile/upload-document"
         element={
           <><link rel="stylesheet" href="css/profile.css" />
-            <UploadDocument isLoggedIn={isLoggedIn} setisLoggedIn={setisLoggedIn} /></>} // <-- passed as JSX
+            <UploadDocument socket={socket} id={loggedInUserId} isLoggedIn={isLoggedIn} setisLoggedIn={setisLoggedIn} /></>} // <-- passed as JSX
       />
       <Route
         path="/profile/tax-return"
         element={
           <><link rel="stylesheet" href="css/profile.css" />
 
-            <TaxReturn isLoggedIn={isLoggedIn} setisLoggedIn={setisLoggedIn} /></>} // <-- passed as JSX
+            <TaxReturn socket={socket} id={loggedInUserId} isLoggedIn={isLoggedIn} setisLoggedIn={setisLoggedIn} /></>} // <-- passed as JSX
       />
       <Route
         path="/profile/Profile"
         element={
           <><link rel="stylesheet" href="css/profile.css" />
 
-            <Profile isLoggedIn={isLoggedIn} setisLoggedIn={setisLoggedIn} /></>} // <-- passed as JSX
+            <Profile socket={socket} id={loggedInUserId} isLoggedIn={isLoggedIn} setisLoggedIn={setisLoggedIn} /></>} // <-- passed as JSX
       />
       <Route
         path="/profile/tax-documentaion"
         element={
           <><link rel="stylesheet" href="css/profile.css" />
 
-            <TaxDocument isLoggedIn={isLoggedIn} setisLoggedIn={setisLoggedIn} /></>} // <-- passed as JSX
+            <TaxDocument socket={socket} id={loggedInUserId} isLoggedIn={isLoggedIn} setisLoggedIn={setisLoggedIn} /></>} // <-- passed as JSX
       />
-      <Route
+      {/* <Route
         path="/profile/message"
         element={
           <><link rel="stylesheet" href="css/profile.css" />
 
             <MessageModal id={loggedInUserId} isLoggedIn={isLoggedIn} setisLoggedIn={setisLoggedIn} /></>} // <-- passed as JSX
-      />
+      /> */}
 
       {/*   const [firstLoad, setfirstLoad] = useState(true)
   const [filterStatus, setfilterStatus] = useState([0]);
@@ -239,7 +251,7 @@ function App() {
         path="/admin/message"
         element={
           <><link rel="stylesheet" href="css/admin.css" /><link rel="stylesheet" href="css/notification.css" /><link rel="stylesheet" href="css/profile.css" />
-            <Message id={loggedInUserId} filterStatus={filterStatus} setfilterStatus={setfilterStatus} firstLoad={firstLoad} setfirstLoad={setfirstLoad} isLoggedIn={isLoggedIn} setisLoggedIn={setisLoggedIn} /></>} // <-- passed as JSX
+            <Message socket={socket} id={loggedInUserId} filterStatus={filterStatus} setfilterStatus={setfilterStatus} firstLoad={firstLoad} setfirstLoad={setfirstLoad} isLoggedIn={isLoggedIn} setisLoggedIn={setisLoggedIn} /></>} // <-- passed as JSX
       />
       <Route
         path="/admin/contact-us"

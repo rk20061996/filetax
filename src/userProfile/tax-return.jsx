@@ -59,7 +59,7 @@ function TaxReturn(props) {
 
   return (
     <div className="main d-flex w-100 h-100">
-      <Sidebar isLoggedIn={props.isLoggedIn} setisLoggedIn={props.setisLoggedIn} />
+      <Sidebar socket={props.socket} id={props.id} isLoggedIn={props.isLoggedIn} setisLoggedIn={props.setisLoggedIn} />
       <div className="mainContent container-fluid">
         <div className="card">
           <h3>Tax Return</h3>

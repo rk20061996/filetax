@@ -18,7 +18,7 @@ function Adminhome(props) {
 
     const [currentPage, setCurrentPage] = useState(1);
     const [usersPerPage] = useState(10);
-    const status = { 1: "Ready for preparation", 2: "In Progress", 3: "Summary Sent", 4: "Pending Recieved", 5: "Draft", 6: "Ready for e-file", 7: "Accepted" }
+    const status = { 1: "To be started", 2: "Pending for documents", 3: "In preperation", 4: "Draft sent (Payment pending)", 5: "Client review (Payment received)", 6: "Ready for Filing", 7: "Filing completed" }
 
     const [sortColumn, setSortColumn] = useState("user_idMain");
     const [sortDirection, setSortDirection] = useState("asc");
@@ -252,7 +252,7 @@ function Adminhome(props) {
                                             <td>{user.firstname} {user.lastname}</td>
                                             <td>{user.phone}</td>
                                             <td>{user.email}</td>
-                                            <td>{user.status_type ? status[user.status_type] : "Ready for preparation"}</td>
+                                            <td>{user.status_type ? status[user.status_type] : "To be started"}</td>
                                             <td><Link to={`/admin/profile/${user.user_idMain}`} className="btn btn-primary">View Client</Link></td>
                                         </tr>
                                     ))}

@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux';
 
 function HomeProfile(props) {
   const user = useSelector(state => state.user); // Assuming 'user' is a slice of your Redux state
-  const status = { 1: "Ready for preparation", 2: "In Progress", 3: "Summary Sent", 4: "Pending Recieved", 5: "Draft", 6: "Ready for e-file", 7: "Accepted" }
+  const status = { 1: "To be started", 2: "Pending for documents", 3: "In preperation", 4: "Draft sent (Payment pending)", 5: "Client review (Payment received)", 6: "Ready for Filing", 7: "Filing completed" }
 
   const downloadTaxNotes = async() =>{
     const baseUrl = window.location.protocol + '//' + window.location.host;
@@ -38,7 +38,7 @@ function HomeProfile(props) {
   }
   return (
     <div className="main d-flex w-100 h-100">
-      <Sidebar isLoggedIn={props.isLoggedIn} setisLoggedIn={props.setisLoggedIn} />
+      <Sidebar socket={props.socket} id={props.id} isLoggedIn={props.isLoggedIn} setisLoggedIn={props.setisLoggedIn} />
       <div className="mainContent container-fluid">
         <div className="card">
           <h3>Welcome Back</h3>
@@ -52,7 +52,7 @@ function HomeProfile(props) {
           </div>
            {/* Status indicator */}
            <div className="status-indicator">
-              <h3>Status {" "}<button style={{"marginLeft": "50px"}} className="status-ready btn btn-primary">{user?.userData?.user_status_type?status[user?.userData?.user_status_type]:"Ready for preparation"}</button></h3>
+              <h3>Status {" "}<button style={{"marginLeft": "50px"}} className="status-ready btn btn-primary">{user?.userData?.user_status_type? status[user?.userData?.user_status_type]:"To be started"}</button></h3>
               {/* <p>Your tax preparation status is {" "}</p> */}
             </div>
           <div className="progressWrap">

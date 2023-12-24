@@ -161,7 +161,7 @@ function UploadDocument(props) {
       </Modal>
       {/* ... (remaining code) */}
       {/* </div> */}
-      <Sidebar isLoggedIn={props.isLoggedIn} setisLoggedIn={props.setisLoggedIn} />
+      <Sidebar socket={props.socket} id={props.id} isLoggedIn={props.isLoggedIn} setisLoggedIn={props.setisLoggedIn} />
       <div className="mainContent container-fluid">
         <div className="card">
           <h3>Uploaded Tax Document</h3>

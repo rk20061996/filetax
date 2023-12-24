@@ -221,7 +221,7 @@ function Profile(props) {
           </Button>
         </Modal.Footer>
       </Modal>
-      <Sidebar updatedImage={updatedImage} isLoggedIn={props.isLoggedIn} setisLoggedIn={props.setisLoggedIn} updatedUserData={updatedUserData} />
+      <Sidebar socket={props.socket} id={props.id} updatedImage={updatedImage} isLoggedIn={props.isLoggedIn} setisLoggedIn={props.setisLoggedIn} updatedUserData={updatedUserData} />
       <div className="mainContent container-fluid">
         <div className="card">
           <h3>My Profile</h3>

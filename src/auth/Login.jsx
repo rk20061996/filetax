@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from 'react-router-dom';
 import Header from '../layout/header';
 import Footer from '../layout/footer';
@@ -12,6 +12,7 @@ function Login(props) {
     let navigate = useNavigate();
     const dispatch = useDispatch();
     const [showModal, setShowModal] = useState(false);
+
 
     const [formData, setFormData] = useState({
         password: "",
@@ -43,9 +44,9 @@ function Login(props) {
                 console.log("token--->", submitInfo, submitInfo.data.data.token, submitInfo)
                 props.setisLoggedIn(true);
                 dispatch(setUser(submitInfo.data.data)); // Dispatch action to save user details
-                if(submitInfo.data.data.user_type == 2){
+                if (submitInfo.data.data.user_type == 2) {
                     navigate("/profile/home");
-                }else{
+                } else {
                     navigate("/admin/home");
                     localStorage.setItem("admin", "yes");
 
@@ -71,48 +72,48 @@ function Login(props) {
         setShowModal(false)
         // navigate('/profile/home')
     }
-        return (
-            <>
-                <Header />
-                <div className="formWrapper marginTopBottom" >
-                    <Modal show={showModal} onHide={handleCloseModal}>
-                        <Modal.Header closeButton>
-                            <Modal.Title>Your email is not verified.</Modal.Title>
-                        </Modal.Header>
-                        <Modal.Body>
-                            <p>Please verify your email address to access all features of our platform.</p>
-                        </Modal.Body>
-                        <Modal.Footer>
-                            <Button variant="secondary" onClick={handleCloseModal}>
-                                OK
-                            </Button>
-                        </Modal.Footer>
-                    </Modal>
-                    <form>
-                        <div className="form-label mb-3">
-                            <label>Email </label>
-                            <input type="text" onChange={handleEmailChange} value={formData.email} />
-                            {validation.email && validation.email !== '' &&
-                                <span style={{ color: "red" }}>{validation.email}</span>
-                            }
-                        </div>
-                        <div className="form-label mb-3">
-                            <label>Password</label>
-                            <input type="password" onChange={handlePasswordChange} value={formData.password} />
-                            {validation.password && validation.password !== '' &&
-                                <span style={{ color: "red" }}>{validation.password}</span>
-                            }
-                        </div>
-                        <div className="d-flex">
-                            <button onClick={submitForm} type="button" className="btn btn-primary">Login</button>
-                            <Link to="/forgot-password"> Forgot Password?</Link>
-                        </div>
-                        <p className="text-start">Don't Have an Account? <Link to="/signup"> Create an account</Link></p>
-                    </form>
-                </div>
-                <Footer />
-            </>
-        );
-    }
+    return (
+        <>
+            <Header />
+            <div className="formWrapper marginTopBottom" >
+                <Modal show={showModal} onHide={handleCloseModal}>
+                    <Modal.Header closeButton>
+                        <Modal.Title>Your email is not verified.</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                        <p>Please verify your email address to access all features of our platform.</p>
+                    </Modal.Body>
+                    <Modal.Footer>
+                        <Button variant="secondary" onClick={handleCloseModal}>
+                            OK
+                        </Button>
+                    </Modal.Footer>
+                </Modal>
+                <form>
+                    <div className="form-label mb-3">
+                        <label>Email </label>
+                        <input type="text" onChange={handleEmailChange} value={formData.email} />
+                        {validation.email && validation.email !== '' &&
+                            <span style={{ color: "red" }}>{validation.email}</span>
+                        }
+                    </div>
+                    <div className="form-label mb-3">
+                        <label>Password</label>
+                        <input type="password" onChange={handlePasswordChange} value={formData.password} />
+                        {validation.password && validation.password !== '' &&
+                            <span style={{ color: "red" }}>{validation.password}</span>
+                        }
+                    </div>
+                    <div className="d-flex">
+                        <button onClick={submitForm} type="button" className="btn btn-primary">Login</button>
+                        <Link to="/forgot-password"> Forgot Password?</Link>
+                    </div>
+                    <p className="text-start">Don't Have an Account? <Link to="/signup"> Create an account</Link></p>
+                </form>
+            </div>
+            <Footer />
+        </>
+    );
+}
 
-    export default Login;
+export default Login;

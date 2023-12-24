@@ -130,3 +130,6 @@
 {"level":"info","message":"Database connected"}
 {"level":"info","message":"Database connected"}
 {"level":"info","message":"Database connected"}
+{"level":"error","message":"connect ECONNREFUSED 127.0.0.1:3306"}
+{"level":"info","message":"Database connected"}
+{"level":"info","message":"Database connected"}

@@ -191,7 +191,7 @@ function Sidebar(props) {
                                     <label><input type="checkbox" name="fc" value="1"
                                         checked={selectedStatus?.includes(1)}
                                         onChange={() => handleCheckboxChange(1)}
-                                    />Ready for preparation {props?.completeuserData &&  props?.completeuserData.length ? (
+                                    />To be started{props?.completeuserData &&  props?.completeuserData.length ? (
                                         <span className="notification-badge">{checkStatus(1)}</span>
                                     ) : ""}</label>
                                 </li>
@@ -199,42 +199,42 @@ function Sidebar(props) {
                                     <label><input type="checkbox" name="fc" value="2"
                                         checked={selectedStatus?.includes(2)}
                                         onChange={() => handleCheckboxChange(2)}
-                                    />In Progress {props?.completeuserData &&   props?.completeuserData.length ?(
+                                    />Pending for documents {props?.completeuserData &&   props?.completeuserData.length ?(
                                         <span className="notification-badge">{checkStatus(2)} </span>) : ""}</label>
                                 </li>
                                 <li>
                                     <label><input type="checkbox" name="fc" value="3"
                                         checked={selectedStatus?.includes(3)}
                                         onChange={() => handleCheckboxChange(3)}
-                                    />Summary Sent {props?.completeuserData &&   props?.completeuserData.length ? (
+                                    />In preperation {props?.completeuserData &&   props?.completeuserData.length ? (
                                         <span className="notification-badge">{checkStatus(3)} </span>):""}</label>
                                 </li>
                                 <li>
                                     <label><input type="checkbox" name="fc" value="4"
                                         checked={selectedStatus?.includes(4)}
                                         onChange={() => handleCheckboxChange(4)}
-                                    />Pending Recieved {props?.completeuserData &&   props?.completeuserData.length ? (
+                                    />Draft sent (Payment pending) {props?.completeuserData &&   props?.completeuserData.length ? (
                                         <span className="notification-badge">{checkStatus(4)} </span>):""}</label>
                                 </li>
                                 <li>
                                     <label><input type="checkbox" name="fc" value="5"
                                         checked={selectedStatus?.includes(5)}
                                         onChange={() => handleCheckboxChange(5)}
-                                    />Draft{props?.completeuserData &&   props?.completeuserData.length ? (
+                                    />Client review (Payment received){props?.completeuserData &&   props?.completeuserData.length ? (
                                         <span className="notification-badge">{checkStatus(5)} </span>):""}</label>
                                 </li>
                                 <li>
                                     <label><input type="checkbox" name="fc" value="6"
                                         checked={selectedStatus?.includes(6)}
                                         onChange={() => handleCheckboxChange(6)}
-                                    />Ready for e-file{props?.completeuserData &&   props?.completeuserData.length ? (
+                                    />Ready for Filing{props?.completeuserData &&   props?.completeuserData.length ? (
                                         <span className="notification-badge">{checkStatus(6)} </span>):""}</label>
                                 </li>
                                 <li>
                                     <label><input type="checkbox" name="fc" value="7"
                                         checked={selectedStatus?.includes(7)}
                                         onChange={() => handleCheckboxChange(7)}
-                                    />Accepted{props?.completeuserData &&   props?.completeuserData.length ? (
+                                    />Filing completed{props?.completeuserData &&   props?.completeuserData.length ? (
                                         <span className="notification-badge">{checkStatus(7)} </span>):""}</label>
                                 </li>
                             </ul>

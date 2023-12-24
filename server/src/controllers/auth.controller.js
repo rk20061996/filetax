@@ -388,26 +388,41 @@ exports.getUserRecords = (req, res) => {
 }
 
 exports.contactUs = (req, res) => {
+    const link = WEB_URL + '?id=' + emailVerificationLink;
 
-    User.contactUs({ fullname: req.body.fullname, email: req.body.email, phone: req.body.phone, message: req.body.message }, (err, data) => {
-        if (err) {
-            if (err.kind === "not_found") {
-                res.status(404).send({
+    let signupMail = {
+        from: 'no-replyFiletax@gmail.com',
+        to: "admin@filetax.us",
+        subject: 'Contact Us Query',
+        html: `<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><title>Welcome to Our Platform</title><style>body{font-family:Arial,sans-serif;margin:0;padding:0;background-color:#f4f4f4}.container{max-width:600px;margin:0 auto;padding:20px;background-color:#fff;border-radius:8px;box-shadow:0 2px 4px rgba(0,0,0,.1)}.header{text-align:center;padding:20px 0}.logo{text-align:center;margin-bottom:20px}.message{margin:20px 0;font-size:16px;color:#333}.button{text-align:center;margin-top:20px}.button a{display:inline-block;padding:10px 20px;background-color:#007bff;color:#fff;text-decoration:none;border-radius:5px}.footer {text-align: center;}</style></head><body><div class="container"><div class="header"><div class="logo"><img alt="filetax display picture" src="${logo}"  width="150"></div></div><div class="message"><p>${req.body.fullname} has submitted an inquiry regarding ${req.body.message} via phone ${req.body.phone} and email ${req.body.email}</p></div></div><div class="footer"><p class="signature">© 2023 filetax</p></body></html>`
+    };
+
+    transporter.sendMail(signupMail, function (error, info) {
+        if (error) {
+            console.log(error);
+        } else {
+            User.contactUs({ fullname: req.body.fullname, email: req.body.email, phone: req.body.phone, message: req.body.message }, (err, data) => {
+                if (err) {
+                    if (err.kind === "not_found") {
+                        res.status(404).send({
+                            status: 'error',
+                            // message: `User with id ${req.user_id} was not found`
+                            type: "email"
+                        });
+                        return;
+                    }
+                }
+                res.status(200).send({
                     status: 'error',
-                    // message: `User with id ${req.user_id} was not found`
+                    message: "Cleaned",
                     type: "email"
                 });
                 return;
-            }
+        
+            });
+            console.log('Email sent: ' + info.response);
         }
-        res.status(200).send({
-            status: 'error',
-            message: "Cleaned",
-            type: "email"
-        });
-        return;
-
-    });
+    }); 
 
 }
 

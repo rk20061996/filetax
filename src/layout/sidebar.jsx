@@ -4,8 +4,8 @@ import { NavLink } from 'react-router-dom';
 import { useNavigate } from "react-router-dom";
 import { useSelector } from 'react-redux';
 import { Modal, Button } from 'react-bootstrap';
-import MessageModal from './Message';
-
+import Chatpopup from './Chatpopup';
+// Chatpopup
 function Sidebar(props) {
     const [loggedIn, setLoggedIn] = useState(true);
     const user = useSelector(state => state.user); // Assuming 'user' is a slice of your Redux state
@@ -13,6 +13,9 @@ function Sidebar(props) {
     const [updatedImage, setUpdatedImage] = useState('');
     const [showLogoutModal, setShowLogoutModal] = useState(false);
     const [showMessageModal, setShowMessageModal] = useState(false);
+    const [showChat, setshowChat] = useState(false);
+    const [notificationCount, setnotificationCount] = useState(0);
+
 
     const navigate = useNavigate();
 
@@ -104,11 +107,11 @@ function Sidebar(props) {
                         <span className="material-symbols-outlined"> attach_money </span> Payment
                     </NavLink>
                 </li> */}
-                <li className="bgColorChange">
+                {/* <li className="bgColorChange">
                     <NavLink to="/profile/message" activeClassName="active">
                         <span className="material-symbols-outlined"> mail </span> Admin Support
                     </NavLink>
-                </li>
+                </li> */}
                 <li className="bgColorChange">
                     <a style={{ "cursor": "pointer" }} onClick={() => {
                         handleLogout()
@@ -137,10 +140,18 @@ function Sidebar(props) {
                     </Button>
                 </Modal.Footer>
             </Modal>
-            {/* {showMessageModal && (
-                <MessageModal onClose={handleMessageModalClose} />
-            )} */}
-            {/* ... (previous code) */}
+            {/* <button className="open-button" onClick={() => setshowChat(true)}>
+                <span className="button-text">Chat</span>
+                {notificationCount ?<span className="notification-count">{notificationCount}</span> : ""}
+            </button> */}
+            <button class="open-button notification-button" onClick={() => setshowChat(true)}>
+                Chat
+                {notificationCount ?<span class="notification-icon"></span> : ""}
+            </button>
+
+            <div className={showChat ? "chat-popup blokShow" : "chat-popup "} id="myForm" >
+                <Chatpopup socket={props.socket} setnotificationCount={setnotificationCount} id={props.id} showChat={showChat} setshowChat={setshowChat} />
+            </div>
         </div>
     );
 }
